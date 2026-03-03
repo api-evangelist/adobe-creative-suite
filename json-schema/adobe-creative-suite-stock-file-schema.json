@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.adobe.com/ns/creative-suite/schemas/stock-file",
+  "title": "Adobe Stock File",
+  "description": "Schema for an Adobe Stock file record as returned by the Adobe Stock Search API. Represents a stock asset such as a photo, illustration, vector, video, or template including its metadata, creator information, dimensions, thumbnail URLs, and licensing status.",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique Adobe Stock content identifier assigned to this file",
+      "examples": [123456789]
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the stock file as provided by the contributor",
+      "examples": ["Beautiful mountain landscape at sunrise with fog in the valley"]
+    },
+    "creator_name": {
+      "type": "string",
+      "description": "Display name of the contributor who created and uploaded this stock file",
+      "examples": ["PhotoContributor123"]
+    },
+    "creator_id": {
+      "type": "integer",
+      "description": "Unique identifier of the contributor on Adobe Stock",
+      "examples": [987654]
+    },
+    "country_name": {
+      "type": "string",
+      "description": "Country of origin of the contributor as listed in their Adobe Stock profile",
+      "examples": ["United States", "Germany", "Japan"]
+    },
+    "width": {
+      "type": "integer",
+      "description": "Original width of the stock file in pixels (for images and video)",
+      "minimum": 1,
+      "examples": [6000]
+    },
+    "height": {
+      "type": "integer",
+      "description": "Original height of the stock file in pixels (for images and video)",
+      "minimum": 1,
+      "examples": [4000]
+    },
+    "media_type_id": {
+      "type": "integer",
+      "description": "Numeric identifier for the media type: 1=photo, 2=illustration, 3=vector, 4=video, 6=3D, 7=template",
+      "enum": [1, 2, 3, 4, 6, 7],
+      "examples": [1]
+    },
+    "content_type": {
+      "type": "string",
+      "description": "MIME type of the stock file",
+      "examples": ["image/jpeg", "image/svg+xml", "video/mp4", "application/postscript"]
+    },
+    "keywords": {
+      "type": "array",
+      "description": "List of keyword objects describing the content and subject matter of the file",
+      "items": {
+        "type": "object",
+        "description": "A single keyword associated with this stock file",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Keyword text",
+            "examples": ["mountain", "landscape", "sunrise", "nature"]
+          }
+        },
+        "additionalProperties": false
+      },
+      "examples": [
+        [
+          {"name": "mountain"},
+          {"name": "landscape"},
+          {"name": "sunrise"},
+          {"name": "nature"},
+          {"name": "fog"}
+        ]
+      ]
+    },
+    "comp_url": {
+      "type": "string",
+      "description": "URL of the watermarked comp image for preview and design mockup purposes. The comp is a lower-resolution, watermarked version of the full file.",
+      "examples": ["https://t3.ftcdn.net/jpg/01/23/45/67/240_F_123456789_abc.jpg"]
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "URL of the small thumbnail image used in search result lists",
+      "examples": ["https://t3.ftcdn.net/jpg/01/23/45/67/160_F_123456789_abc.jpg"]
+    },
+    "thumbnail_width": {
+      "type": "integer",
+      "description": "Width of the thumbnail image in pixels",
+      "minimum": 1,
+      "examples": [160]
+    },
+    "thumbnail_height": {
+      "type": "integer",
+      "description": "Height of the thumbnail image in pixels",
+      "minimum": 1,
+      "examples": [107]
+    },
+    "thumbnail_500_url": {
+      "type": "string",
+      "description": "URL of a medium-size (500px) preview image",
+      "examples": ["https://t3.ftcdn.net/jpg/01/23/45/67/500_F_123456789_abc.jpg"]
+    },
+    "thumbnail_1000_url": {
+      "type": "string",
+      "description": "URL of a larger (1000px) preview image",
+      "examples": ["https://t3.ftcdn.net/jpg/01/23/45/67/1000_F_123456789_abc.jpg"]
+    },
+    "is_licensed": {
+      "type": "string",
+      "description": "Licensing status of this file for the authenticated user. Empty string if not licensed.",
+      "enum": ["Standard", "Extended", "Video_HD", "Video_4K", ""],
+      "examples": ["Standard", ""]
+    },
+    "vector_type": {
+      "type": "string",
+      "description": "Vector file subtype for vector and illustration assets. Empty string for non-vector assets.",
+      "enum": ["svg", "zip", ""],
+      "examples": ["svg", ""]
+    },
+    "category": {
+      "type": "object",
+      "description": "Primary category classification of this stock file",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of the category",
+          "examples": [1043]
+        },
+        "name": {
+          "type": "string",
+          "description": "Localized display name of the category",
+          "examples": ["Nature", "Business", "Technology", "Animals"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "premium_level_id": {
+      "type": "integer",
+      "description": "Premium content level: 0=standard, 1=premium, 2=premium+",
+      "enum": [0, 1, 2],
+      "examples": [0]
+    },
+    "is_editorial": {
+      "type": "boolean",
+      "description": "Whether this asset is editorial use only (not for commercial purposes)",
+      "examples": [false]
+    },
+    "has_releases": {
+      "type": "boolean",
+      "description": "Whether this asset has model or property releases on file",
+      "examples": [true]
+    },
+    "nb_results": {
+      "type": "integer",
+      "description": "Total number of results matching the search query. Only present on the first result in a search response.",
+      "minimum": 0,
+      "examples": [4521]
+    }
+  },
+  "additionalProperties": true,
+  "examples": [
+    {
+      "id": 123456789,
+      "title": "Beautiful mountain landscape at sunrise with fog in the valley",
+      "creator_name": "PhotoContributor123",
+      "creator_id": 987654,
+      "country_name": "United States",
+      "width": 6000,
+      "height": 4000,
+      "media_type_id": 1,
+      "content_type": "image/jpeg",
+      "keywords": [
+        {"name": "mountain"},
+        {"name": "landscape"},
+        {"name": "sunrise"},
+        {"name": "nature"},
+        {"name": "fog"}
+      ],
+      "comp_url": "https://t3.ftcdn.net/jpg/01/23/45/67/240_F_123456789_abc.jpg",
+      "thumbnail_url": "https://t3.ftcdn.net/jpg/01/23/45/67/160_F_123456789_abc.jpg",
+      "thumbnail_width": 160,
+      "thumbnail_height": 107,
+      "is_licensed": "",
+      "vector_type": "",
+      "category": {
+        "id": 1043,
+        "name": "Nature"
+      },
+      "premium_level_id": 0,
+      "is_editorial": false,
+      "has_releases": true,
+      "nb_results": 4521
+    }
+  ]
+}

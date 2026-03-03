@@ -1,0 +1,342 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "acs": "https://developer.adobe.com/ns/creative-suite/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+
+    "@vocab": "https://developer.adobe.com/ns/creative-suite/",
+
+    "ImageJob": {
+      "@id": "acs:ImageJob",
+      "@type": "@id",
+      "@context": {
+        "jobId": {
+          "@id": "acs:jobId",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "acs:status",
+          "@type": "xsd:string"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "input": {
+          "@id": "acs:input",
+          "@type": "@id"
+        },
+        "output": {
+          "@id": "acs:output",
+          "@type": "@id"
+        },
+        "outputs": {
+          "@id": "acs:outputs",
+          "@container": "@set"
+        },
+        "errors": {
+          "@id": "acs:errors",
+          "@container": "@set"
+        },
+        "href": {
+          "@id": "schema:url",
+          "@type": "xsd:anyURI"
+        },
+        "storage": {
+          "@id": "acs:storageProvider",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "FireflyGeneration": {
+      "@id": "acs:FireflyGeneration",
+      "@type": "@id",
+      "@context": {
+        "prompt": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "negativePrompt": {
+          "@id": "acs:negativePrompt",
+          "@type": "xsd:string"
+        },
+        "contentClass": {
+          "@id": "acs:contentClass",
+          "@type": "xsd:string"
+        },
+        "numVariations": {
+          "@id": "acs:numVariations",
+          "@type": "xsd:integer"
+        },
+        "size": {
+          "@id": "acs:outputSize"
+        },
+        "width": {
+          "@id": "schema:width",
+          "@type": "xsd:integer"
+        },
+        "height": {
+          "@id": "schema:height",
+          "@type": "xsd:integer"
+        },
+        "style": {
+          "@id": "acs:styleOptions"
+        },
+        "presets": {
+          "@id": "acs:stylePresets",
+          "@container": "@set"
+        },
+        "strength": {
+          "@id": "acs:styleStrength",
+          "@type": "xsd:integer"
+        },
+        "seeds": {
+          "@id": "acs:seeds",
+          "@container": "@set",
+          "@type": "xsd:integer"
+        },
+        "jobId": {
+          "@id": "acs:jobId",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "acs:status",
+          "@type": "xsd:string"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "outputs": {
+          "@id": "acs:generatedOutputs",
+          "@container": "@set"
+        },
+        "image": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "url": {
+          "@id": "schema:url",
+          "@type": "xsd:anyURI"
+        },
+        "seed": {
+          "@id": "acs:seed",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "StockFile": {
+      "@id": "acs:StockFile",
+      "@type": "@id",
+      "@context": {
+        "id": {
+          "@id": "schema:identifier",
+          "@type": "xsd:integer"
+        },
+        "title": {
+          "@id": "dcterms:title",
+          "@type": "xsd:string"
+        },
+        "creator_name": {
+          "@id": "schema:author",
+          "@type": "xsd:string"
+        },
+        "creator_id": {
+          "@id": "acs:creatorId",
+          "@type": "xsd:integer"
+        },
+        "country_name": {
+          "@id": "schema:addressCountry",
+          "@type": "xsd:string"
+        },
+        "width": {
+          "@id": "schema:width",
+          "@type": "xsd:integer"
+        },
+        "height": {
+          "@id": "schema:height",
+          "@type": "xsd:integer"
+        },
+        "media_type_id": {
+          "@id": "acs:mediaTypeId",
+          "@type": "xsd:integer"
+        },
+        "content_type": {
+          "@id": "dcterms:format",
+          "@type": "xsd:string"
+        },
+        "keywords": {
+          "@id": "schema:keywords",
+          "@container": "@set"
+        },
+        "comp_url": {
+          "@id": "acs:compUrl",
+          "@type": "xsd:anyURI"
+        },
+        "thumbnail_url": {
+          "@id": "schema:thumbnailUrl",
+          "@type": "xsd:anyURI"
+        },
+        "thumbnail_width": {
+          "@id": "acs:thumbnailWidth",
+          "@type": "xsd:integer"
+        },
+        "thumbnail_height": {
+          "@id": "acs:thumbnailHeight",
+          "@type": "xsd:integer"
+        },
+        "is_licensed": {
+          "@id": "acs:licenseStatus",
+          "@type": "xsd:string"
+        },
+        "vector_type": {
+          "@id": "acs:vectorType",
+          "@type": "xsd:string"
+        },
+        "category": {
+          "@id": "schema:about"
+        },
+        "is_editorial": {
+          "@id": "acs:isEditorial",
+          "@type": "xsd:boolean"
+        },
+        "has_releases": {
+          "@id": "acs:hasReleases",
+          "@type": "xsd:boolean"
+        },
+        "nb_results": {
+          "@id": "acs:totalResults",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "PDFOperation": {
+      "@id": "acs:PDFOperation",
+      "@type": "@id",
+      "@context": {
+        "assetID": {
+          "@id": "acs:assetId",
+          "@type": "xsd:string"
+        },
+        "mediaType": {
+          "@id": "dcterms:format",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "acs:operationStatus",
+          "@type": "xsd:string"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "downloadUri": {
+          "@id": "acs:downloadUri",
+          "@type": "xsd:anyURI"
+        },
+        "uploadUri": {
+          "@id": "acs:uploadUri",
+          "@type": "xsd:anyURI"
+        },
+        "targetFormat": {
+          "@id": "acs:targetFormat",
+          "@type": "xsd:string"
+        },
+        "outputFormat": {
+          "@id": "acs:outputFormat",
+          "@type": "xsd:string"
+        },
+        "compressionLevel": {
+          "@id": "acs:compressionLevel",
+          "@type": "xsd:string"
+        },
+        "asset": {
+          "@id": "acs:resultAsset"
+        }
+      }
+    },
+
+    "LibraryAsset": {
+      "@id": "acs:LibraryAsset",
+      "@type": "@id",
+      "@context": {
+        "id": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "dcterms:type",
+          "@type": "xsd:string"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "libraryId": {
+          "@id": "acs:libraryId",
+          "@type": "xsd:string"
+        },
+        "thumbnail": {
+          "@id": "schema:thumbnailUrl",
+          "@type": "xsd:anyURI"
+        }
+      }
+    },
+
+    "ImageObject": "schema:ImageObject",
+    "VideoObject": "schema:VideoObject",
+    "CreativeWork": "schema:CreativeWork",
+    "Person": "schema:Person",
+    "Organization": "schema:Organization",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": {
+      "@id": "schema:url",
+      "@type": "xsd:anyURI"
+    },
+    "identifier": "schema:identifier",
+    "dateCreated": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "dateModified": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "author": "schema:author",
+    "keywords": "schema:keywords",
+    "contentUrl": {
+      "@id": "schema:contentUrl",
+      "@type": "xsd:anyURI"
+    },
+    "encodingFormat": "schema:encodingFormat",
+    "thumbnailUrl": {
+      "@id": "schema:thumbnailUrl",
+      "@type": "xsd:anyURI"
+    }
+  }
+}
