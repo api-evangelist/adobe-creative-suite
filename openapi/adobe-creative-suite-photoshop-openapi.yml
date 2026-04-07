@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Adobe Photoshop API
+  title: Adobe Creative Suite Adobe Photoshop API
   description: >-
     The Adobe Photoshop API provides programmatic access to Photoshop image manipulation
     capabilities including automated editing, masking, compositing, layer management, and
@@ -16,40 +16,40 @@ info:
     name: Adobe Developer Terms
     url: https://www.adobe.com/legal/developer-terms.html
 servers:
-- url: https://image.adobe.io
-  description: Adobe Photoshop API production server
+  - url: https://image.adobe.io
+    description: Adobe Photoshop API production server
 security:
-- bearerAuth: []
+  - bearerAuth: []
 tags:
-- name: Cutout
-  description: Background removal and masking operations
-- name: Mask
-  description: Alpha mask creation operations
-- name: Layers
-  description: PSD layer management operations
-- name: Text
-  description: Text layer editing operations
-- name: Document
-  description: Document-level operations
-- name: Rendition
-  description: Rendition and export operations
-- name: Smart Object
-  description: Smart object editing operations
-- name: Artboard
-  description: Artboard creation and management
-- name: Status
-  description: Asynchronous job status operations
+  - name: Cutout
+    description: Background removal and masking operations
+  - name: Mask
+    description: Alpha mask creation operations
+  - name: Layers
+    description: PSD layer management operations
+  - name: Text
+    description: Text layer editing operations
+  - name: Document
+    description: Document-level operations
+  - name: Rendition
+    description: Rendition and export operations
+  - name: Smart Object
+    description: Smart object editing operations
+  - name: Artboard
+    description: Artboard creation and management
+  - name: Status
+    description: Asynchronous job status operations
 paths:
   /sensei/cutout:
     post:
       operationId: removeBackground
-      summary: Remove background
+      summary: Adobe Creative Suite Remove background
       description: >-
         Removes the background from an image using Adobe Sensei AI. Accepts an input image
         stored in cloud storage and produces a cutout image with the background removed.
         The operation is asynchronous; poll the returned job URL for completion.
       tags:
-      - Cutout
+        - Cutout
       requestBody:
         required: true
         content:
@@ -84,13 +84,13 @@ paths:
   /sensei/mask:
     post:
       operationId: createMask
-      summary: Create alpha mask
+      summary: Adobe Creative Suite Create alpha mask
       description: >-
         Creates an alpha mask for an image using Adobe Sensei AI. The mask isolates the
         foreground subject from the background and is returned as a separate grayscale
         image that can be applied as a layer mask in compositing workflows.
       tags:
-      - Mask
+        - Mask
       requestBody:
         required: true
         content:
@@ -119,13 +119,13 @@ paths:
   /sensei/product_crop:
     post:
       operationId: productCrop
-      summary: Product crop
+      summary: Adobe Creative Suite Product crop
       description: >-
         Automatically crops an image to focus on the primary product subject using Adobe
         Sensei AI. Useful for e-commerce workflows where product images need to be
         consistently cropped and centered.
       tags:
-      - Cutout
+        - Cutout
       requestBody:
         required: true
         content:
@@ -154,13 +154,13 @@ paths:
   /sensei/straighten:
     post:
       operationId: straightenImage
-      summary: Straighten image
+      summary: Adobe Creative Suite Straighten image
       description: >-
         Automatically detects and corrects the rotation of an image so that horizontal and
         vertical lines are properly aligned. Uses Adobe Sensei AI to analyze the image
         content and apply the appropriate rotation correction.
       tags:
-      - Cutout
+        - Cutout
       requestBody:
         required: true
         content:
@@ -189,13 +189,13 @@ paths:
   /pie/psdService/text:
     post:
       operationId: editTextLayers
-      summary: Edit text layers
+      summary: Adobe Creative Suite Edit text layers
       description: >-
         Edits text content, font properties, and styling of text layers within a PSD
         document. Supports changing text content, font family, size, color, alignment,
         and other text attributes across one or more named text layers.
       tags:
-      - Text
+        - Text
       requestBody:
         required: true
         content:
@@ -224,14 +224,14 @@ paths:
   /pie/psdService/layers:
     post:
       operationId: manageLayers
-      summary: Manage layers
+      summary: Adobe Creative Suite Manage layers
       description: >-
         Reads, adds, modifies, or deletes layers within a PSD document. Supports pixel,
         adjustment, fill, shape, text, and group layer types. Layer operations include
         visibility changes, opacity adjustments, blend mode changes, and positional
         transformations.
       tags:
-      - Layers
+        - Layers
       requestBody:
         required: true
         content:
@@ -260,13 +260,13 @@ paths:
   /pie/psdService/documentOperations:
     post:
       operationId: applyDocumentOperations
-      summary: Apply document operations
+      summary: Adobe Creative Suite Apply document operations
       description: >-
         Applies one or more operations to a PSD document such as image resizing, canvas
         size changes, image flattening, and color mode conversions. Multiple operations
         can be chained together in a single request to produce a modified output document.
       tags:
-      - Document
+        - Document
       requestBody:
         required: true
         content:
@@ -295,13 +295,13 @@ paths:
   /pie/psdService/renditionCreate:
     post:
       operationId: createRendition
-      summary: Create rendition
+      summary: Adobe Creative Suite Create rendition
       description: >-
         Generates one or more renditions from a PSD or image file in formats such as
         JPEG, PNG, or TIFF at specified dimensions. Supports generating multiple
         renditions in a single request for different sizes or formats simultaneously.
       tags:
-      - Rendition
+        - Rendition
       requestBody:
         required: true
         content:
@@ -330,13 +330,13 @@ paths:
   /pie/psdService/smartObject:
     post:
       operationId: editSmartObject
-      summary: Edit smart objects
+      summary: Adobe Creative Suite Edit smart objects
       description: >-
         Replaces the content of a smart object layer within a PSD document with new
         image content. Smart object replacement preserves the layer's transform, blend
         mode, and effects while substituting the embedded image data.
       tags:
-      - Smart Object
+        - Smart Object
       requestBody:
         required: true
         content:
@@ -365,13 +365,13 @@ paths:
   /pie/psdService/artboard:
     post:
       operationId: createArtboard
-      summary: Create artboards
+      summary: Adobe Creative Suite Create artboards
       description: >-
         Creates one or more artboards within a PSD document at specified sizes and
         positions. Artboards allow multiple design variations or screen sizes to be
         organized within a single PSD file.
       tags:
-      - Artboard
+        - Artboard
       requestBody:
         required: true
         content:
@@ -400,20 +400,20 @@ paths:
   /pie/psdService/status/{jobId}:
     get:
       operationId: getJobStatus
-      summary: Get job status
+      summary: Adobe Creative Suite Get job status
       description: >-
         Retrieves the current status of an asynchronous Photoshop API job. Poll this
         endpoint after submitting an operation to check if the job is pending, running,
         succeeded, or failed. On success, the response includes output file locations.
       tags:
-      - Status
+        - Status
       parameters:
-      - name: jobId
-        in: path
-        required: true
-        description: The unique identifier of the job to check
-        schema:
-          type: string
+        - name: jobId
+          in: path
+          required: true
+          description: The unique identifier of the job to check
+          schema:
+            type: string
       responses:
         '200':
           description: Job status retrieved successfully
@@ -445,8 +445,8 @@ components:
       type: object
       description: Reference to an input file stored in cloud storage
       required:
-      - href
-      - storage
+        - href
+        - storage
       properties:
         href:
           type: string
@@ -456,10 +456,10 @@ components:
           type: string
           description: Cloud storage provider type
           enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
+            - adobe
+            - external
+            - azure
+            - dropbox
           example: external
         type:
           type: string
@@ -469,9 +469,9 @@ components:
       type: object
       description: Reference to an output file location in cloud storage
       required:
-      - href
-      - storage
-      - type
+        - href
+        - storage
+        - type
       properties:
         href:
           type: string
@@ -481,10 +481,10 @@ components:
           type: string
           description: Cloud storage provider type
           enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
+            - adobe
+            - external
+            - azure
+            - dropbox
           example: external
         type:
           type: string
@@ -535,10 +535,10 @@ components:
           type: string
           description: Current job status
           enum:
-          - pending
-          - running
-          - succeeded
-          - failed
+            - pending
+            - running
+            - succeeded
+            - failed
           example: succeeded
         created:
           type: string
@@ -569,10 +569,10 @@ components:
           type: string
           description: Status of this specific output
           enum:
-          - pending
-          - running
-          - succeeded
-          - failed
+            - pending
+            - running
+            - succeeded
+            - failed
         details:
           type: string
           description: Additional detail message for this output
@@ -612,13 +612,13 @@ components:
           type: string
           description: Layer type
           enum:
-          - layer
-          - textLayer
-          - adjustmentLayer
-          - fillLayer
-          - smartObject
-          - backgroundLayer
-          - groupLayer
+            - layer
+            - textLayer
+            - adjustmentLayer
+            - fillLayer
+            - smartObject
+            - backgroundLayer
+            - groupLayer
         visible:
           type: boolean
           description: Whether the layer is visible
@@ -666,15 +666,15 @@ components:
             unit:
               type: string
               enum:
-              - pixel
-              - percent
+                - pixel
+                - percent
             resampleMethod:
               type: string
               enum:
-              - bicubic
-              - bilinear
-              - nearestNeighbor
-              - preserve
+                - bicubic
+                - bilinear
+                - nearestNeighbor
+                - preserve
         flatten:
           type: boolean
           description: Whether to flatten all layers into a single layer
@@ -685,15 +685,15 @@ components:
             basedOn:
               type: string
               enum:
-              - transparentPixels
-              - topLeftPixelColor
-              - bottomRightPixelColor
+                - transparentPixels
+                - topLeftPixelColor
+                - bottomRightPixelColor
     CutoutRequest:
       type: object
       description: Request to remove the background from an image
       required:
-      - input
-      - output
+        - input
+        - output
       properties:
         input:
           $ref: '#/components/schemas/JobInput'
@@ -703,8 +703,8 @@ components:
       type: object
       description: Request to create an alpha mask for an image
       required:
-      - input
-      - output
+        - input
+        - output
       properties:
         input:
           $ref: '#/components/schemas/JobInput'
@@ -717,14 +717,14 @@ components:
               type: string
               description: Optimization mode for mask generation
               enum:
-              - performance
-              - batch
+                - performance
+                - batch
     ProductCropRequest:
       type: object
       description: Request to automatically crop an image to the primary product
       required:
-      - input
-      - output
+        - input
+        - output
       properties:
         input:
           $ref: '#/components/schemas/JobInput'
@@ -736,8 +736,8 @@ components:
             unit:
               type: string
               enum:
-              - pixel
-              - percent
+                - pixel
+                - percent
             padding:
               type: number
               description: Padding to add around the product crop
@@ -745,8 +745,8 @@ components:
       type: object
       description: Request to automatically straighten an image
       required:
-      - input
-      - output
+        - input
+        - output
       properties:
         input:
           $ref: '#/components/schemas/JobInput'
@@ -756,9 +756,9 @@ components:
       type: object
       description: Request to edit text layer content and properties in a PSD
       required:
-      - inputs
-      - outputs
-      - options
+        - inputs
+        - outputs
+        - options
       properties:
         inputs:
           type: array
@@ -808,8 +808,8 @@ components:
       type: object
       description: Request to read or modify layers within a PSD document
       required:
-      - inputs
-      - outputs
+        - inputs
+        - outputs
       properties:
         inputs:
           type: array
@@ -831,8 +831,8 @@ components:
       type: object
       description: Request to apply document-level operations to a PSD
       required:
-      - inputs
-      - outputs
+        - inputs
+        - outputs
       properties:
         inputs:
           type: array
@@ -848,8 +848,8 @@ components:
       type: object
       description: Request to create one or more renditions from a PSD or image
       required:
-      - inputs
-      - outputs
+        - inputs
+        - outputs
       properties:
         inputs:
           type: array
@@ -861,28 +861,28 @@ components:
           items:
             type: object
             allOf:
-            - $ref: '#/components/schemas/JobOutput'
-            - type: object
-              properties:
-                quality:
-                  type: integer
-                  description: JPEG quality (1-100)
-                  minimum: 1
-                  maximum: 100
-                compression:
-                  type: string
-                  description: PNG compression level
-                  enum:
-                  - small
-                  - medium
-                  - large
+              - $ref: '#/components/schemas/JobOutput'
+              - type: object
+                properties:
+                  quality:
+                    type: integer
+                    description: JPEG quality (1-100)
+                    minimum: 1
+                    maximum: 100
+                  compression:
+                    type: string
+                    description: PNG compression level
+                    enum:
+                      - small
+                      - medium
+                      - large
     SmartObjectRequest:
       type: object
       description: Request to replace smart object content within a PSD
       required:
-      - inputs
-      - outputs
-      - options
+        - inputs
+        - outputs
+        - options
       properties:
         inputs:
           type: array
@@ -910,9 +910,9 @@ components:
       type: object
       description: Request to create artboards within a PSD document
       required:
-      - inputs
-      - outputs
-      - options
+        - inputs
+        - outputs
+        - options
       properties:
         inputs:
           type: array

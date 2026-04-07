@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Adobe PDF Services API
+  title: Adobe Creative Suite Adobe PDF Services API
   description: >-
     The Adobe PDF Services API provides cloud-based tools for creating, converting,
     combining, compressing, and extracting content from PDF documents. Part of the
@@ -17,42 +17,42 @@ info:
     name: Adobe Developer Terms
     url: https://www.adobe.com/legal/developer-terms.html
 servers:
-- url: https://pdf-services.adobe.io
-  description: Adobe PDF Services API production server
+  - url: https://pdf-services.adobe.io
+    description: Adobe PDF Services API production server
 security:
-- bearerAuth: []
+  - bearerAuth: []
 tags:
-- name: Assets
-  description: Upload and manage input/output assets for PDF operations
-- name: Create PDF
-  description: Create PDF documents from other formats
-- name: Export PDF
-  description: Export PDF documents to other formats
-- name: Combine PDF
-  description: Combine multiple PDFs into one
-- name: Compress PDF
-  description: Reduce PDF file size
-- name: Linearize PDF
-  description: Optimize PDFs for fast web viewing
-- name: OCR
-  description: Apply optical character recognition to scanned PDFs
-- name: Accessibility
-  description: Auto-tag PDFs for accessibility compliance
-- name: Document Generation
-  description: Generate documents from templates and data
-- name: Operations
-  description: Check operation job status
+  - name: Assets
+    description: Upload and manage input/output assets for PDF operations
+  - name: Create PDF
+    description: Create PDF documents from other formats
+  - name: Export PDF
+    description: Export PDF documents to other formats
+  - name: Combine PDF
+    description: Combine multiple PDFs into one
+  - name: Compress PDF
+    description: Reduce PDF file size
+  - name: Linearize PDF
+    description: Optimize PDFs for fast web viewing
+  - name: OCR
+    description: Apply optical character recognition to scanned PDFs
+  - name: Accessibility
+    description: Auto-tag PDFs for accessibility compliance
+  - name: Document Generation
+    description: Generate documents from templates and data
+  - name: Operations
+    description: Check operation job status
 paths:
   /assets:
     post:
       operationId: uploadAsset
-      summary: Upload asset
+      summary: Adobe Creative Suite Upload asset
       description: >-
         Initiates an asset upload by returning a pre-signed upload URI and an asset ID.
         The caller must then PUT the file content to the returned upload URI. Once the
         upload is complete, the asset ID can be referenced as input to PDF operations.
       tags:
-      - Assets
+        - Assets
       requestBody:
         required: true
         content:
@@ -81,21 +81,21 @@ paths:
   /assets/{assetID}:
     get:
       operationId: getAsset
-      summary: Get asset
+      summary: Adobe Creative Suite Get asset
       description: >-
         Retrieves metadata and a temporary download URI for a previously uploaded asset.
         The download URI is time-limited and can be used to download the asset content
         directly.
       tags:
-      - Assets
+        - Assets
       parameters:
-      - name: assetID
-        in: path
-        required: true
-        description: Unique identifier of the asset to retrieve
-        schema:
-          type: string
-          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        - name: assetID
+          in: path
+          required: true
+          description: Unique identifier of the asset to retrieve
+          schema:
+            type: string
+            example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
       responses:
         '200':
           description: Asset metadata and download URI retrieved successfully
@@ -117,21 +117,21 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     delete:
       operationId: deleteAsset
-      summary: Delete asset
+      summary: Adobe Creative Suite Delete asset
       description: >-
         Permanently deletes an uploaded asset. Assets are automatically deleted after
         24 hours, but this endpoint allows immediate deletion when the asset is no
         longer needed.
       tags:
-      - Assets
+        - Assets
       parameters:
-      - name: assetID
-        in: path
-        required: true
-        description: Unique identifier of the asset to delete
-        schema:
-          type: string
-          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        - name: assetID
+          in: path
+          required: true
+          description: Unique identifier of the asset to delete
+          schema:
+            type: string
+            example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
       responses:
         '200':
           description: Asset deleted successfully
@@ -150,13 +150,13 @@ paths:
   /operation/createpdf:
     post:
       operationId: createPDF
-      summary: Create PDF
+      summary: Adobe Creative Suite Create PDF
       description: >-
         Creates a PDF document from a source file in formats such as Microsoft Word,
         Excel, PowerPoint, or HTML. The source file must be uploaded first using the
         asset upload endpoint. Returns a job ID for polling the operation status.
       tags:
-      - Create PDF
+        - Create PDF
       requestBody:
         required: true
         content:
@@ -190,13 +190,13 @@ paths:
   /operation/exportpdf:
     post:
       operationId: exportPDF
-      summary: Export PDF
+      summary: Adobe Creative Suite Export PDF
       description: >-
         Exports a PDF document to a target format such as Microsoft Word (.docx),
         Excel (.xlsx), PowerPoint (.pptx), RTF, or plain text. The source PDF must
         be uploaded first. Returns a job ID for polling the operation status.
       tags:
-      - Export PDF
+        - Export PDF
       requestBody:
         required: true
         content:
@@ -230,13 +230,13 @@ paths:
   /operation/combinepdf:
     post:
       operationId: combinePDFs
-      summary: Combine PDFs
+      summary: Adobe Creative Suite Combine PDFs
       description: >-
         Combines two or more PDF documents into a single output PDF. The source PDFs
         are specified in order and merged sequentially. Page ranges from each source
         can optionally be specified to include only specific pages.
       tags:
-      - Combine PDF
+        - Combine PDF
       requestBody:
         required: true
         content:
@@ -270,13 +270,13 @@ paths:
   /operation/compressPDF:
     post:
       operationId: compressPDF
-      summary: Compress PDF
+      summary: Adobe Creative Suite Compress PDF
       description: >-
         Reduces the file size of a PDF document by applying compression to embedded
         images and removing redundant data. Compression level can be set to balance
         between file size and output quality.
       tags:
-      - Compress PDF
+        - Compress PDF
       requestBody:
         required: true
         content:
@@ -310,13 +310,13 @@ paths:
   /operation/linearizePDF:
     post:
       operationId: linearizePDF
-      summary: Linearize PDF
+      summary: Adobe Creative Suite Linearize PDF
       description: >-
         Linearizes (web-optimizes) a PDF document so that the first page can be
         displayed in a browser before the entire file has downloaded. This is also
         known as fast web view optimization.
       tags:
-      - Linearize PDF
+        - Linearize PDF
       requestBody:
         required: true
         content:
@@ -350,13 +350,13 @@ paths:
   /operation/ocr:
     post:
       operationId: ocrPDF
-      summary: OCR PDF
+      summary: Adobe Creative Suite OCR PDF
       description: >-
         Applies optical character recognition (OCR) to a scanned or image-based PDF,
         making the text content searchable and selectable. Supports multiple locales
         for improved recognition accuracy with non-English documents.
       tags:
-      - OCR
+        - OCR
       requestBody:
         required: true
         content:
@@ -390,14 +390,14 @@ paths:
   /operation/autotagpdf:
     post:
       operationId: autoTagPDF
-      summary: Auto-tag PDF for accessibility
+      summary: Adobe Creative Suite Auto-tag PDF for accessibility
       description: >-
         Automatically adds accessibility tags to a PDF document to make it compliant
         with PDF/UA and WCAG standards. Tags identify headings, paragraphs, tables,
         figures, and other document structure elements for screen readers and assistive
         technologies.
       tags:
-      - Accessibility
+        - Accessibility
       requestBody:
         required: true
         content:
@@ -431,13 +431,13 @@ paths:
   /operation/documentgeneration:
     post:
       operationId: generateDocument
-      summary: Generate document from template
+      summary: Adobe Creative Suite Generate document from template
       description: >-
         Generates a PDF or Word document by merging JSON data into a Word document
         template. Template tags in the document are replaced with corresponding data
         values. Supports tables, lists, conditional sections, and images in templates.
       tags:
-      - Document Generation
+        - Document Generation
       requestBody:
         required: true
         content:
@@ -471,21 +471,21 @@ paths:
   /operation/{jobId}:
     get:
       operationId: getOperationStatus
-      summary: Get operation status
+      summary: Adobe Creative Suite Get operation status
       description: >-
         Retrieves the current status of a PDF Services operation job. Poll this
         endpoint after submitting any operation to check progress. On success, the
         response contains a reference to the output asset.
       tags:
-      - Operations
+        - Operations
       parameters:
-      - name: jobId
-        in: path
-        required: true
-        description: Unique identifier of the operation job to check
-        schema:
-          type: string
-          example: urn:aaid:AS:UE1:operation:abc123
+        - name: jobId
+          in: path
+          required: true
+          description: Unique identifier of the operation job to check
+          schema:
+            type: string
+            example: urn:aaid:AS:UE1:operation:abc123
       responses:
         '200':
           description: Operation status retrieved successfully
@@ -537,7 +537,7 @@ components:
       type: object
       description: Request to initiate an asset upload
       required:
-      - mediaType
+        - mediaType
       properties:
         mediaType:
           type: string
@@ -559,7 +559,7 @@ components:
       type: object
       description: Reference to an existing uploaded asset
       required:
-      - assetID
+        - assetID
       properties:
         assetID:
           type: string
@@ -593,9 +593,9 @@ components:
           type: string
           description: Current status of the operation
           enum:
-          - in progress
-          - done
-          - failed
+            - in progress
+            - done
+            - failed
           example: done
         asset:
           $ref: '#/components/schemas/Asset'
@@ -613,7 +613,7 @@ components:
       type: object
       description: Request body for creating a PDF from another format
       required:
-      - assetID
+        - assetID
       properties:
         assetID:
           type: string
@@ -627,8 +627,8 @@ components:
       type: object
       description: Request body for exporting a PDF to another format
       required:
-      - assetID
-      - targetFormat
+        - assetID
+        - targetFormat
       properties:
         assetID:
           type: string
@@ -638,11 +638,11 @@ components:
           type: string
           description: Target output format for the exported file
           enum:
-          - docx
-          - xlsx
-          - pptx
-          - rtf
-          - txt
+            - docx
+            - xlsx
+            - pptx
+            - rtf
+            - txt
           example: docx
         exportOCRLocale:
           type: string
@@ -652,7 +652,7 @@ components:
       type: object
       description: Request body for combining multiple PDFs
       required:
-      - assets
+        - assets
       properties:
         assets:
           type: array
@@ -661,7 +661,7 @@ components:
           items:
             type: object
             required:
-            - assetID
+              - assetID
             properties:
               assetID:
                 type: string
@@ -675,7 +675,7 @@ components:
       type: object
       description: Request body for compressing a PDF
       required:
-      - assetID
+        - assetID
       properties:
         assetID:
           type: string
@@ -685,15 +685,15 @@ components:
           type: string
           description: Compression level to apply
           enum:
-          - LOW
-          - MEDIUM
-          - HIGH
+            - LOW
+            - MEDIUM
+            - HIGH
           default: MEDIUM
     LinearizePDFRequest:
       type: object
       description: Request body for linearizing a PDF for fast web view
       required:
-      - assetID
+        - assetID
       properties:
         assetID:
           type: string
@@ -703,7 +703,7 @@ components:
       type: object
       description: Request body for applying OCR to a PDF
       required:
-      - assetID
+        - assetID
       properties:
         assetID:
           type: string
@@ -717,7 +717,7 @@ components:
       type: object
       description: Request body for auto-tagging a PDF for accessibility
       required:
-      - assetID
+        - assetID
       properties:
         assetID:
           type: string
@@ -735,9 +735,9 @@ components:
       type: object
       description: Request body for generating a document from a template
       required:
-      - assetID
-      - outputFormat
-      - jsonDataForMerge
+        - assetID
+        - outputFormat
+        - jsonDataForMerge
       properties:
         assetID:
           type: string
@@ -747,8 +747,8 @@ components:
           type: string
           description: Output format of the generated document
           enum:
-          - pdf
-          - docx
+            - pdf
+            - docx
           example: pdf
         jsonDataForMerge:
           type: object

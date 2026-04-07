@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Adobe Firefly API
+  title: Adobe Creative Suite Adobe Firefly API
   description: >-
     The Adobe Firefly API provides access to Adobe's generative AI capabilities for
     creating and editing images, vectors, and video from natural language prompts. Built
@@ -17,35 +17,35 @@ info:
     name: Adobe Developer Terms
     url: https://www.adobe.com/legal/developer-terms.html
 servers:
-- url: https://firefly-api.adobe.io/v3
-  description: Adobe Firefly API v3 production server
+  - url: https://firefly-api.adobe.io/v3
+    description: Adobe Firefly API v3 production server
 security:
-- bearerAuth: []
+  - bearerAuth: []
 tags:
-- name: Image Generation
-  description: Text-to-image and image variation generation operations
-- name: Generative Fill
-  description: Fill selected regions of images with AI-generated content
-- name: Generative Expand
-  description: Expand images beyond their original boundaries
-- name: Object Composite
-  description: Composite AI-generated objects into existing images
-- name: Video Generation
-  description: Generate video from text prompts
-- name: Status
-  description: Asynchronous job status polling
+  - name: Image Generation
+    description: Text-to-image and image variation generation operations
+  - name: Generative Fill
+    description: Fill selected regions of images with AI-generated content
+  - name: Generative Expand
+    description: Expand images beyond their original boundaries
+  - name: Object Composite
+    description: Composite AI-generated objects into existing images
+  - name: Video Generation
+    description: Generate video from text prompts
+  - name: Status
+    description: Asynchronous job status polling
 paths:
   /images/generate-async:
     post:
       operationId: generateImagesAsync
-      summary: Generate images from text prompt
+      summary: Adobe Creative Suite Generate images from text prompt
       description: >-
         Generates one or more images from a text prompt using the Adobe Firefly generative
         AI model. Supports optional style presets, content class selection, negative
         prompts, and seed values for reproducibility. The operation is asynchronous;
         use the returned job ID to poll for completion and retrieve output image URLs.
       tags:
-      - Image Generation
+        - Image Generation
       requestBody:
         required: true
         content:
@@ -80,13 +80,13 @@ paths:
   /images/expand-async:
     post:
       operationId: expandImageAsync
-      summary: Generative expand image
+      summary: Adobe Creative Suite Generative expand image
       description: >-
         Expands an existing image beyond its original boundaries using generative AI
         to fill in the new regions. The expansion can be directional and supports
         specifying a prompt to guide the content generated in the expanded areas.
       tags:
-      - Generative Expand
+        - Generative Expand
       requestBody:
         required: true
         content:
@@ -115,13 +115,13 @@ paths:
   /images/fill-async:
     post:
       operationId: fillImageAsync
-      summary: Generative fill
+      summary: Adobe Creative Suite Generative fill
       description: >-
         Fills a masked region of an existing image with AI-generated content based on
         a text prompt. A mask image defines the area to be filled. The generative fill
         respects the surrounding context to produce seamlessly blended results.
       tags:
-      - Generative Fill
+        - Generative Fill
       requestBody:
         required: true
         content:
@@ -150,13 +150,13 @@ paths:
   /images/generate-similar-async:
     post:
       operationId: generateSimilarImagesAsync
-      summary: Generate similar images
+      summary: Adobe Creative Suite Generate similar images
       description: >-
         Generates images that are visually similar to a provided reference image while
         optionally being guided by a text prompt. Useful for producing variations of an
         existing image or exploring stylistic alternatives based on a visual reference.
       tags:
-      - Image Generation
+        - Image Generation
       requestBody:
         required: true
         content:
@@ -185,13 +185,13 @@ paths:
   /images/generate-object-composite-async:
     post:
       operationId: generateObjectCompositeAsync
-      summary: Generate object composite
+      summary: Adobe Creative Suite Generate object composite
       description: >-
         Generates an AI-rendered object and composites it into an existing scene image.
         The object is described via a text prompt and is placed into the scene with
         appropriate lighting, shadows, and perspective to appear naturally integrated.
       tags:
-      - Object Composite
+        - Object Composite
       requestBody:
         required: true
         content:
@@ -220,14 +220,14 @@ paths:
   /videos/generate-async:
     post:
       operationId: generateVideoAsync
-      summary: Generate video from text prompt
+      summary: Adobe Creative Suite Generate video from text prompt
       description: >-
         Generates a short video clip from a text prompt using the Adobe Firefly video
         generation model. Generally Available as of June 2025. Supports specifying
         duration, aspect ratio, and motion style through the request parameters. The
         operation is asynchronous and may take several minutes to complete.
       tags:
-      - Video Generation
+        - Video Generation
       requestBody:
         required: true
         content:
@@ -256,22 +256,22 @@ paths:
   /status/{jobId}:
     get:
       operationId: getGenerationStatus
-      summary: Get async job status
+      summary: Adobe Creative Suite Get async job status
       description: >-
         Retrieves the current status of an asynchronous Firefly generation job. Poll
         this endpoint after submitting a generation request to determine if the job
         is pending, running, succeeded, or failed. On success, the response includes
         URLs to the generated output images or video.
       tags:
-      - Status
+        - Status
       parameters:
-      - name: jobId
-        in: path
-        required: true
-        description: Unique identifier of the generation job to check
-        schema:
-          type: string
-          example: urn:firefly:jobs:abc123def456
+        - name: jobId
+          in: path
+          required: true
+          description: Unique identifier of the generation job to check
+          schema:
+            type: string
+            example: urn:firefly:jobs:abc123def456
       responses:
         '200':
           description: Job status retrieved successfully
@@ -303,7 +303,7 @@ components:
       type: object
       description: Request body for text-to-image generation
       required:
-      - prompt
+        - prompt
       properties:
         prompt:
           type: string
@@ -319,8 +319,8 @@ components:
           type: string
           description: Broad content category to guide the generation model
           enum:
-          - photo
-          - art
+            - photo
+            - art
           example: photo
         numVariations:
           type: integer
@@ -341,8 +341,8 @@ components:
           items:
             type: integer
           example:
-          - 42
-          - 1337
+            - 42
+            - 1337
         locale:
           type: string
           description: BCP 47 language locale for prompt interpretation
@@ -351,7 +351,7 @@ components:
       type: object
       description: Request body for generative image expansion
       required:
-      - image
+        - image
       properties:
         prompt:
           type: string
@@ -393,8 +393,8 @@ components:
       type: object
       description: Request body for generative fill operation
       required:
-      - image
-      - mask
+        - image
+        - mask
       properties:
         prompt:
           type: string
@@ -421,7 +421,7 @@ components:
       type: object
       description: Request body for generating images similar to a reference image
       required:
-      - image
+        - image
       properties:
         prompt:
           type: string
@@ -444,9 +444,9 @@ components:
       type: object
       description: Request body for generating an object composite in a scene
       required:
-      - prompt
-      - image
-      - mask
+        - prompt
+        - image
+        - mask
       properties:
         prompt:
           type: string
@@ -459,8 +459,8 @@ components:
         contentClass:
           type: string
           enum:
-          - photo
-          - art
+            - photo
+            - art
         image:
           $ref: '#/components/schemas/InputImageReference'
         mask:
@@ -478,7 +478,7 @@ components:
       type: object
       description: Request body for text-to-video generation
       required:
-      - prompt
+        - prompt
       properties:
         prompt:
           type: string
@@ -527,10 +527,10 @@ components:
           type: string
           description: Current status of the generation job
           enum:
-          - pending
-          - running
-          - succeeded
-          - failed
+            - pending
+            - running
+            - succeeded
+            - failed
           example: succeeded
         created:
           type: string
@@ -575,13 +575,13 @@ components:
           type: string
           description: Content class detected or applied during generation
           enum:
-          - photo
-          - art
+            - photo
+            - art
     InputImageReference:
       type: object
       description: Reference to an input image for generative operations
       required:
-      - source
+        - source
       properties:
         source:
           type: object
@@ -616,23 +616,23 @@ components:
           items:
             type: string
             enum:
-            - photo
-            - art
-            - graphic
-            - bw
-            - cool_colors
-            - warm_tone
-            - muted_color
-            - vibrant_color
-            - pastel_color
-            - golden_hour
-            - closeup_portrait
-            - wide_angle
-            - aerial_view
-            - landscape_photography
+              - photo
+              - art
+              - graphic
+              - bw
+              - cool_colors
+              - warm_tone
+              - muted_color
+              - vibrant_color
+              - pastel_color
+              - golden_hour
+              - closeup_portrait
+              - wide_angle
+              - aerial_view
+              - landscape_photography
           example:
-          - photo
-          - golden_hour
+            - photo
+            - golden_hour
         strength:
           type: integer
           description: Style influence strength from 1 (subtle) to 100 (strong)
@@ -645,16 +645,16 @@ components:
       type: string
       description: Available style preset identifiers for Firefly generation
       enum:
-      - photo
-      - art
-      - graphic
-      - bw
-      - cool_colors
-      - warm_tone
-      - muted_color
-      - vibrant_color
-      - pastel_color
-      - golden_hour
+        - photo
+        - art
+        - graphic
+        - bw
+        - cool_colors
+        - warm_tone
+        - muted_color
+        - vibrant_color
+        - pastel_color
+        - golden_hour
     ErrorResponse:
       type: object
       description: Standard error response body
