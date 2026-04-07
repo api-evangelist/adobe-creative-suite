@@ -21,24 +21,24 @@ servers:
 security:
   - bearerAuth: []
 tags:
+  - name: Artboard
+    description: Artboard creation and management
   - name: Cutout
     description: Background removal and masking operations
-  - name: Mask
-    description: Alpha mask creation operations
-  - name: Layers
-    description: PSD layer management operations
-  - name: Text
-    description: Text layer editing operations
   - name: Document
     description: Document-level operations
+  - name: Layers
+    description: PSD layer management operations
+  - name: Mask
+    description: Alpha mask creation operations
   - name: Rendition
     description: Rendition and export operations
   - name: Smart Object
     description: Smart object editing operations
-  - name: Artboard
-    description: Artboard creation and management
   - name: Status
     description: Asynchronous job status operations
+  - name: Text
+    description: Text layer editing operations
 paths:
   /sensei/cutout:
     post:

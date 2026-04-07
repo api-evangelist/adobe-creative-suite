@@ -22,24 +22,24 @@ servers:
 security:
   - bearerAuth: []
 tags:
+  - name: Accessibility
+    description: Auto-tag PDFs for accessibility compliance
   - name: Assets
     description: Upload and manage input/output assets for PDF operations
-  - name: Create PDF
-    description: Create PDF documents from other formats
-  - name: Export PDF
-    description: Export PDF documents to other formats
   - name: Combine PDF
     description: Combine multiple PDFs into one
   - name: Compress PDF
     description: Reduce PDF file size
+  - name: Create PDF
+    description: Create PDF documents from other formats
+  - name: Document Generation
+    description: Generate documents from templates and data
+  - name: Export PDF
+    description: Export PDF documents to other formats
   - name: Linearize PDF
     description: Optimize PDFs for fast web viewing
   - name: OCR
     description: Apply optical character recognition to scanned PDFs
-  - name: Accessibility
-    description: Auto-tag PDFs for accessibility compliance
-  - name: Document Generation
-    description: Generate documents from templates and data
   - name: Operations
     description: Check operation job status
 paths:

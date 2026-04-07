@@ -22,18 +22,18 @@ servers:
 security:
   - bearerAuth: []
 tags:
-  - name: Image Generation
-    description: Text-to-image and image variation generation operations
-  - name: Generative Fill
-    description: Fill selected regions of images with AI-generated content
   - name: Generative Expand
     description: Expand images beyond their original boundaries
+  - name: Generative Fill
+    description: Fill selected regions of images with AI-generated content
+  - name: Image Generation
+    description: Text-to-image and image variation generation operations
   - name: Object Composite
     description: Composite AI-generated objects into existing images
-  - name: Video Generation
-    description: Generate video from text prompts
   - name: Status
     description: Asynchronous job status polling
+  - name: Video Generation
+    description: Generate video from text prompts
 paths:
   /images/generate-async:
     post:

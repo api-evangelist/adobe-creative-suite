@@ -23,12 +23,12 @@ security:
   - bearerAuth: []
   - apiKeyAuth: []
 tags:
-  - name: Search
-    description: Search and discover stock content
-  - name: Member
-    description: Member profile and licensing operations
   - name: License
     description: License stock assets for use in projects
+  - name: Member
+    description: Member profile and licensing operations
+  - name: Search
+    description: Search and discover stock content
 paths:
   /Media/1/Search/Files:
     get:
