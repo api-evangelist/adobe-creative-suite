@@ -1,0 +1,278 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe Stock Asset Sourcing"
+  description: "Stock asset discovery, licensing, and management workflow using the Adobe Stock API. Used by content curators, marketing teams, and creative directors to search for stock photos, illustrations, vectors, and videos, license them for projects, and manage licensing history and quotas."
+  tags:
+    - Adobe
+    - Stock
+    - Digital Assets
+    - Licensing
+    - Content Sourcing
+    - Search
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_STOCK_TOKEN: ADOBE_STOCK_TOKEN
+      ADOBE_STOCK_API_KEY: ADOBE_STOCK_API_KEY
+
+capability:
+  consumes:
+    - import: stock
+      location: ./shared/stock.yaml
+
+  exposes:
+    - type: rest
+      port: 8084
+      namespace: stock-asset-sourcing-api
+      description: "Unified REST API for stock asset discovery, licensing, and management using Adobe Stock."
+      resources:
+        - path: /v1/stock-files
+          name: stock-files
+          description: "Stock content search"
+          operations:
+            - method: GET
+              name: search-stock-files
+              description: "Search the Adobe Stock library"
+              call: "stock.search-stock-files"
+              with:
+                search_parameters[words]: "rest.keywords"
+                search_parameters[limit]: "rest.limit"
+                search_parameters[offset]: "rest.offset"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/stock-files/{content_id}
+          name: stock-file-detail
+          description: "Stock file metadata"
+          operations:
+            - method: GET
+              name: get-stock-file-metadata
+              description: "Get metadata for a specific stock file"
+              call: "stock.get-stock-file-metadata"
+              with:
+                content_id: "rest.content_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/categories
+          name: categories
+          description: "Stock content categories"
+          operations:
+            - method: GET
+              name: get-category-tree
+              description: "Get the stock content category tree"
+              call: "stock.get-category-tree"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/members/profile
+          name: member-profile
+          description: "Member profile and quota"
+          operations:
+            - method: GET
+              name: get-member-profile
+              description: "Get the authenticated member profile"
+              call: "stock.get-member-profile"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/licenses
+          name: licenses
+          description: "License history"
+          operations:
+            - method: GET
+              name: get-license-history
+              description: "Get license history for the member"
+              call: "stock.get-license-history"
+              with:
+                search_parameters[limit]: "rest.limit"
+                search_parameters[offset]: "rest.offset"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/licenses/images
+          name: license-images
+          description: "Image licensing"
+          operations:
+            - method: POST
+              name: license-image
+              description: "License a stock photo"
+              call: "stock.license-image"
+              with:
+                content_id: "rest.content_id"
+                license: "rest.license"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/licenses/vectors
+          name: license-vectors
+          description: "Vector and illustration licensing"
+          operations:
+            - method: POST
+              name: license-vector
+              description: "License a vector or illustration"
+              call: "stock.license-vector"
+              with:
+                content_id: "rest.content_id"
+                license: "rest.license"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/licenses/videos
+          name: license-videos
+          description: "Video licensing"
+          operations:
+            - method: POST
+              name: license-video
+              description: "License a stock video clip"
+              call: "stock.license-video"
+              with:
+                content_id: "rest.content_id"
+                license: "rest.license"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/licenses/stats
+          name: license-stats
+          description: "Licensing statistics"
+          operations:
+            - method: POST
+              name: get-license-stats
+              description: "Get licensing statistics"
+              call: "stock.get-license-stats"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9094
+      namespace: stock-asset-sourcing-mcp
+      transport: http
+      description: "MCP server for AI-assisted stock asset discovery and licensing using Adobe Stock."
+      tools:
+        - name: search-stock-files
+          description: "Search the Adobe Stock library for photos, illustrations, vectors, and videos"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stock.search-stock-files"
+          with:
+            search_parameters[words]: "tools.keywords"
+            search_parameters[limit]: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-stock-file-metadata
+          description: "Get detailed metadata for a specific stock file by content ID"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stock.get-stock-file-metadata"
+          with:
+            content_id: "tools.content_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-category-tree
+          description: "Get the hierarchical category tree for Adobe Stock content"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stock.get-category-tree"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-member-profile
+          description: "Get the authenticated Adobe Stock member profile and quota information"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stock.get-member-profile"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-license-history
+          description: "Get the license history for the authenticated member"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stock.get-license-history"
+          with:
+            search_parameters[limit]: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: license-image
+          description: "License a stock photo for use in a project"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stock.license-image"
+          with:
+            content_id: "tools.content_id"
+            license: "tools.license"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: license-vector
+          description: "License a vector or illustration for use in a project"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stock.license-vector"
+          with:
+            content_id: "tools.content_id"
+            license: "tools.license"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: license-video
+          description: "License a stock video clip for use in a project"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stock.license-video"
+          with:
+            content_id: "tools.content_id"
+            license: "tools.license"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-license-stats
+          description: "Get licensing statistics for the authenticated member"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stock.get-license-stats"
+          outputParameters:
+            - type: object
+              mapping: "$."

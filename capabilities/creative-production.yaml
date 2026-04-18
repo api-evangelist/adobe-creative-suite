@@ -1,0 +1,740 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe Creative Production"
+  description: "End-to-end creative asset production workflow combining AI content generation (Firefly), image editing and manipulation (Photoshop), and stock asset sourcing and licensing (Stock). Used by creative directors, production designers, and marketing teams to find, generate, edit, and finalize visual assets."
+  tags:
+    - Adobe
+    - Creative Production
+    - Generative AI
+    - Image Editing
+    - Stock Assets
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_FIREFLY_TOKEN: ADOBE_FIREFLY_TOKEN
+      ADOBE_PHOTOSHOP_TOKEN: ADOBE_PHOTOSHOP_TOKEN
+      ADOBE_STOCK_TOKEN: ADOBE_STOCK_TOKEN
+      ADOBE_STOCK_API_KEY: ADOBE_STOCK_API_KEY
+
+capability:
+  consumes:
+    - import: firefly
+      location: ./shared/firefly.yaml
+    - import: photoshop
+      location: ./shared/photoshop.yaml
+    - import: stock
+      location: ./shared/stock.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: creative-production-api
+      description: "Unified REST API for end-to-end creative asset production combining AI generation, image editing, and stock sourcing."
+      resources:
+        # AI Generation
+        - path: /v1/generations
+          name: generations
+          description: "AI image generation from text prompts"
+          operations:
+            - method: POST
+              name: generate-images
+              description: "Generate images from a text prompt using Firefly"
+              call: "firefly.generate-images-async"
+              with:
+                prompt: "rest.prompt"
+                negative_prompt: "rest.negative_prompt"
+                content_class: "rest.content_class"
+                num_variations: "rest.num_variations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/generations/similar
+          name: similar-generations
+          description: "Generate similar image variations"
+          operations:
+            - method: POST
+              name: generate-similar-images
+              description: "Generate images similar to a reference image"
+              call: "firefly.generate-similar-images-async"
+              with:
+                prompt: "rest.prompt"
+                image: "rest.image"
+                num_variations: "rest.num_variations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/expansions
+          name: expansions
+          description: "AI-powered image expansion"
+          operations:
+            - method: POST
+              name: expand-image
+              description: "Expand an image beyond its boundaries using Firefly"
+              call: "firefly.expand-image-async"
+              with:
+                prompt: "rest.prompt"
+                image: "rest.image"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/fills
+          name: fills
+          description: "AI-powered generative fill"
+          operations:
+            - method: POST
+              name: fill-image
+              description: "Fill a masked region with AI-generated content"
+              call: "firefly.fill-image-async"
+              with:
+                prompt: "rest.prompt"
+                image: "rest.image"
+                mask: "rest.mask"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/composites
+          name: composites
+          description: "AI object compositing"
+          operations:
+            - method: POST
+              name: generate-composite
+              description: "Generate and composite an AI object into a scene"
+              call: "firefly.generate-object-composite-async"
+              with:
+                prompt: "rest.prompt"
+                image: "rest.image"
+                mask: "rest.mask"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/videos
+          name: videos
+          description: "AI video generation"
+          operations:
+            - method: POST
+              name: generate-video
+              description: "Generate a video from a text prompt using Firefly"
+              call: "firefly.generate-video-async"
+              with:
+                prompt: "rest.prompt"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        # Image Editing
+        - path: /v1/cutouts
+          name: cutouts
+          description: "Background removal"
+          operations:
+            - method: POST
+              name: remove-background
+              description: "Remove background from an image using Photoshop"
+              call: "photoshop.remove-background"
+              with:
+                input: "rest.input"
+                output: "rest.output"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/masks
+          name: masks
+          description: "Alpha mask creation"
+          operations:
+            - method: POST
+              name: create-mask
+              description: "Create an alpha mask for an image"
+              call: "photoshop.create-mask"
+              with:
+                input: "rest.input"
+                output: "rest.output"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/product-crops
+          name: product-crops
+          description: "Product cropping"
+          operations:
+            - method: POST
+              name: product-crop
+              description: "Auto-crop an image to the primary product"
+              call: "photoshop.product-crop"
+              with:
+                input: "rest.input"
+                output: "rest.output"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/renditions
+          name: renditions
+          description: "Image rendition creation"
+          operations:
+            - method: POST
+              name: create-rendition
+              description: "Create renditions from a PSD or image"
+              call: "photoshop.create-rendition"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/layers
+          name: layers
+          description: "PSD layer management"
+          operations:
+            - method: POST
+              name: manage-layers
+              description: "Manage layers in a PSD document"
+              call: "photoshop.manage-layers"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+                options: "rest.options"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/text-edits
+          name: text-edits
+          description: "PSD text layer editing"
+          operations:
+            - method: POST
+              name: edit-text-layers
+              description: "Edit text layers in a PSD document"
+              call: "photoshop.edit-text-layers"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+                options: "rest.options"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/smart-objects
+          name: smart-objects
+          description: "Smart object replacement"
+          operations:
+            - method: POST
+              name: edit-smart-object
+              description: "Replace smart object content in a PSD"
+              call: "photoshop.edit-smart-object"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+                options: "rest.options"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/document-operations
+          name: document-operations
+          description: "PSD document operations"
+          operations:
+            - method: POST
+              name: apply-document-operations
+              description: "Apply resize, flatten, or trim operations to a PSD"
+              call: "photoshop.apply-document-operations"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+                options: "rest.options"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/artboards
+          name: artboards
+          description: "PSD artboard creation"
+          operations:
+            - method: POST
+              name: create-artboard
+              description: "Create artboards in a PSD document"
+              call: "photoshop.create-artboard"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+                options: "rest.options"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/straighten-jobs
+          name: straighten-jobs
+          description: "Image straightening"
+          operations:
+            - method: POST
+              name: straighten-image
+              description: "Automatically straighten a rotated image"
+              call: "photoshop.straighten-image"
+              with:
+                input: "rest.input"
+                output: "rest.output"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        # Stock Assets
+        - path: /v1/stock-files
+          name: stock-files
+          description: "Stock asset search"
+          operations:
+            - method: GET
+              name: search-stock-files
+              description: "Search the Adobe Stock library"
+              call: "stock.search-stock-files"
+              with:
+                search_parameters[words]: "rest.keywords"
+                search_parameters[limit]: "rest.limit"
+                search_parameters[offset]: "rest.offset"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/stock-files/{content_id}
+          name: stock-file-detail
+          description: "Stock file metadata"
+          operations:
+            - method: GET
+              name: get-stock-file-metadata
+              description: "Get metadata for a specific stock file"
+              call: "stock.get-stock-file-metadata"
+              with:
+                content_id: "rest.content_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/licenses/images
+          name: license-images
+          description: "Stock image licensing"
+          operations:
+            - method: POST
+              name: license-image
+              description: "License a stock photo"
+              call: "stock.license-image"
+              with:
+                content_id: "rest.content_id"
+                license: "rest.license"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/licenses/vectors
+          name: license-vectors
+          description: "Stock vector licensing"
+          operations:
+            - method: POST
+              name: license-vector
+              description: "License a vector or illustration"
+              call: "stock.license-vector"
+              with:
+                content_id: "rest.content_id"
+                license: "rest.license"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/licenses/videos
+          name: license-videos
+          description: "Stock video licensing"
+          operations:
+            - method: POST
+              name: license-video
+              description: "License a stock video clip"
+              call: "stock.license-video"
+              with:
+                content_id: "rest.content_id"
+                license: "rest.license"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        # Job Status (unified across Firefly and Photoshop)
+        - path: /v1/firefly-jobs/{jobId}
+          name: firefly-jobs
+          description: "Firefly generation job status"
+          operations:
+            - method: GET
+              name: get-firefly-job-status
+              description: "Get the status of an async Firefly generation job"
+              call: "firefly.get-generation-status"
+              with:
+                jobId: "rest.jobId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/photoshop-jobs/{jobId}
+          name: photoshop-jobs
+          description: "Photoshop operation job status"
+          operations:
+            - method: GET
+              name: get-photoshop-job-status
+              description: "Get the status of an async Photoshop job"
+              call: "photoshop.get-job-status"
+              with:
+                jobId: "rest.jobId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: creative-production-mcp
+      transport: http
+      description: "MCP server for AI-assisted creative asset production combining generation, editing, and stock sourcing."
+      tools:
+        # Firefly - AI Generation
+        - name: firefly-generate-images
+          description: "Generate images from a text prompt using Adobe Firefly"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "firefly.generate-images-async"
+          with:
+            prompt: "tools.prompt"
+            negative_prompt: "tools.negative_prompt"
+            content_class: "tools.content_class"
+            num_variations: "tools.num_variations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: firefly-generate-similar-images
+          description: "Generate images similar to a reference image using Firefly"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "firefly.generate-similar-images-async"
+          with:
+            prompt: "tools.prompt"
+            image: "tools.image"
+            num_variations: "tools.num_variations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: firefly-expand-image
+          description: "Expand an image beyond its boundaries using Firefly generative AI"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "firefly.expand-image-async"
+          with:
+            prompt: "tools.prompt"
+            image: "tools.image"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: firefly-fill-image
+          description: "Fill a masked region of an image with AI-generated content using Firefly"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "firefly.fill-image-async"
+          with:
+            prompt: "tools.prompt"
+            image: "tools.image"
+            mask: "tools.mask"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: firefly-generate-composite
+          description: "Generate an AI object and composite it into a scene using Firefly"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "firefly.generate-object-composite-async"
+          with:
+            prompt: "tools.prompt"
+            image: "tools.image"
+            mask: "tools.mask"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: firefly-generate-video
+          description: "Generate a video from a text prompt using Firefly"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "firefly.generate-video-async"
+          with:
+            prompt: "tools.prompt"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: firefly-get-job-status
+          description: "Get the status of an async Firefly generation job"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "firefly.get-generation-status"
+          with:
+            jobId: "tools.jobId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        # Photoshop - Image Editing
+        - name: photoshop-remove-background
+          description: "Remove the background from an image using Photoshop Sensei AI"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.remove-background"
+          with:
+            input: "tools.input"
+            output: "tools.output"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: photoshop-create-mask
+          description: "Create an alpha mask for an image using Photoshop Sensei AI"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.create-mask"
+          with:
+            input: "tools.input"
+            output: "tools.output"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: photoshop-product-crop
+          description: "Auto-crop an image to focus on the primary product"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.product-crop"
+          with:
+            input: "tools.input"
+            output: "tools.output"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: photoshop-straighten-image
+          description: "Automatically straighten a rotated image"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.straighten-image"
+          with:
+            input: "tools.input"
+            output: "tools.output"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: photoshop-edit-text-layers
+          description: "Edit text content and styling in PSD text layers"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.edit-text-layers"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+            options: "tools.options"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: photoshop-manage-layers
+          description: "Read, add, modify, or delete layers in a PSD document"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.manage-layers"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+            options: "tools.options"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: photoshop-apply-document-operations
+          description: "Apply resize, flatten, or trim operations to a PSD document"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.apply-document-operations"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+            options: "tools.options"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: photoshop-create-rendition
+          description: "Create renditions from a PSD or image in JPEG, PNG, or TIFF"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.create-rendition"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: photoshop-edit-smart-object
+          description: "Replace smart object content in a PSD document"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.edit-smart-object"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+            options: "tools.options"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: photoshop-create-artboard
+          description: "Create artboards within a PSD document"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.create-artboard"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+            options: "tools.options"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: photoshop-get-job-status
+          description: "Get the status of an async Photoshop job"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "photoshop.get-job-status"
+          with:
+            jobId: "tools.jobId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        # Stock - Asset Sourcing
+        - name: stock-search-files
+          description: "Search the Adobe Stock library for photos, illustrations, vectors, and videos"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stock.search-stock-files"
+          with:
+            search_parameters[words]: "tools.keywords"
+            search_parameters[limit]: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: stock-get-file-metadata
+          description: "Get detailed metadata for a specific stock file"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stock.get-stock-file-metadata"
+          with:
+            content_id: "tools.content_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: stock-license-image
+          description: "License a stock photo for use in a project"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stock.license-image"
+          with:
+            content_id: "tools.content_id"
+            license: "tools.license"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: stock-license-vector
+          description: "License a vector or illustration for use in a project"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stock.license-vector"
+          with:
+            content_id: "tools.content_id"
+            license: "tools.license"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: stock-license-video
+          description: "License a stock video clip for use in a project"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "stock.license-video"
+          with:
+            content_id: "tools.content_id"
+            license: "tools.license"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: stock-get-categories
+          description: "Get the Adobe Stock content category tree"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "stock.get-category-tree"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,369 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe Document Management"
+  description: "PDF document lifecycle management workflow using Adobe PDF Services for creating, converting, combining, compressing, OCR processing, accessibility tagging, and template-based document generation. Used by document workflow teams, compliance officers, and developers building document processing pipelines."
+  tags:
+    - Adobe
+    - PDF
+    - Document Management
+    - Document Conversion
+    - OCR
+    - Accessibility
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_PDF_SERVICES_TOKEN: ADOBE_PDF_SERVICES_TOKEN
+
+capability:
+  consumes:
+    - import: pdf-services
+      location: ./shared/pdf-services.yaml
+
+  exposes:
+    - type: rest
+      port: 8083
+      namespace: document-management-api
+      description: "Unified REST API for PDF document lifecycle management using Adobe PDF Services."
+      resources:
+        - path: /v1/assets
+          name: assets
+          description: "Asset upload and management for PDF operations"
+          operations:
+            - method: POST
+              name: upload-asset
+              description: "Upload an asset for PDF operations"
+              call: "pdf-services.upload-asset"
+              with:
+                media_type: "rest.media_type"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/assets/{assetID}
+          name: asset-detail
+          description: "Individual asset operations"
+          operations:
+            - method: GET
+              name: get-asset
+              description: "Get asset metadata and download URI"
+              call: "pdf-services.get-asset"
+              with:
+                assetID: "rest.assetID"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-asset
+              description: "Delete an uploaded asset"
+              call: "pdf-services.delete-asset"
+              with:
+                assetID: "rest.assetID"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/pdfs
+          name: pdfs
+          description: "PDF creation from other formats"
+          operations:
+            - method: POST
+              name: create-pdf
+              description: "Create a PDF from Word, Excel, PowerPoint, or HTML"
+              call: "pdf-services.create-pdf"
+              with:
+                asset_id: "rest.asset_id"
+                document_language: "rest.document_language"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/exports
+          name: exports
+          description: "PDF export to other formats"
+          operations:
+            - method: POST
+              name: export-pdf
+              description: "Export a PDF to Word, Excel, PowerPoint, RTF, or text"
+              call: "pdf-services.export-pdf"
+              with:
+                asset_id: "rest.asset_id"
+                target_format: "rest.target_format"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/combinations
+          name: combinations
+          description: "PDF combination operations"
+          operations:
+            - method: POST
+              name: combine-pdfs
+              description: "Combine multiple PDFs into one"
+              call: "pdf-services.combine-pdfs"
+              with:
+                assets: "rest.assets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/compressions
+          name: compressions
+          description: "PDF compression operations"
+          operations:
+            - method: POST
+              name: compress-pdf
+              description: "Compress a PDF to reduce file size"
+              call: "pdf-services.compress-pdf"
+              with:
+                asset_id: "rest.asset_id"
+                compression_level: "rest.compression_level"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/linearizations
+          name: linearizations
+          description: "PDF linearization for web optimization"
+          operations:
+            - method: POST
+              name: linearize-pdf
+              description: "Linearize a PDF for fast web viewing"
+              call: "pdf-services.linearize-pdf"
+              with:
+                asset_id: "rest.asset_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/ocr-jobs
+          name: ocr-jobs
+          description: "OCR processing operations"
+          operations:
+            - method: POST
+              name: ocr-pdf
+              description: "Apply OCR to a scanned PDF"
+              call: "pdf-services.ocr-pdf"
+              with:
+                asset_id: "rest.asset_id"
+                ocr_lang: "rest.ocr_lang"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/accessibility-tags
+          name: accessibility-tags
+          description: "Accessibility tagging operations"
+          operations:
+            - method: POST
+              name: auto-tag-pdf
+              description: "Auto-tag a PDF for accessibility compliance"
+              call: "pdf-services.auto-tag-pdf"
+              with:
+                asset_id: "rest.asset_id"
+                generate_report: "rest.generate_report"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/document-generations
+          name: document-generations
+          description: "Template-based document generation"
+          operations:
+            - method: POST
+              name: generate-document
+              description: "Generate a document from a template and data"
+              call: "pdf-services.generate-document"
+              with:
+                asset_id: "rest.asset_id"
+                output_format: "rest.output_format"
+                json_data: "rest.json_data"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/operations/{jobId}
+          name: operations
+          description: "Operation status polling"
+          operations:
+            - method: GET
+              name: get-operation-status
+              description: "Get the status of a PDF operation"
+              call: "pdf-services.get-operation-status"
+              with:
+                jobId: "rest.jobId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9093
+      namespace: document-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted PDF document management using Adobe PDF Services."
+      tools:
+        - name: upload-asset
+          description: "Upload an asset for use in PDF operations"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.upload-asset"
+          with:
+            media_type: "tools.media_type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-asset
+          description: "Get metadata and download URI for an uploaded asset"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "pdf-services.get-asset"
+          with:
+            assetID: "tools.assetID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: delete-asset
+          description: "Permanently delete an uploaded asset"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "pdf-services.delete-asset"
+          with:
+            assetID: "tools.assetID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-pdf
+          description: "Create a PDF from Word, Excel, PowerPoint, or HTML"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.create-pdf"
+          with:
+            asset_id: "tools.asset_id"
+            document_language: "tools.document_language"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: export-pdf
+          description: "Export a PDF to Word, Excel, PowerPoint, RTF, or text"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.export-pdf"
+          with:
+            asset_id: "tools.asset_id"
+            target_format: "tools.target_format"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: combine-pdfs
+          description: "Combine multiple PDFs into a single document"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.combine-pdfs"
+          with:
+            assets: "tools.assets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: compress-pdf
+          description: "Compress a PDF to reduce its file size"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.compress-pdf"
+          with:
+            asset_id: "tools.asset_id"
+            compression_level: "tools.compression_level"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: linearize-pdf
+          description: "Linearize a PDF for fast web viewing"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.linearize-pdf"
+          with:
+            asset_id: "tools.asset_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: ocr-pdf
+          description: "Apply OCR to a scanned PDF to make text searchable"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.ocr-pdf"
+          with:
+            asset_id: "tools.asset_id"
+            ocr_lang: "tools.ocr_lang"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: auto-tag-pdf
+          description: "Auto-tag a PDF for accessibility compliance (PDF/UA and WCAG)"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.auto-tag-pdf"
+          with:
+            asset_id: "tools.asset_id"
+            generate_report: "tools.generate_report"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: generate-document
+          description: "Generate a document by merging JSON data into a template"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.generate-document"
+          with:
+            asset_id: "tools.asset_id"
+            output_format: "tools.output_format"
+            json_data: "tools.json_data"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-operation-status
+          description: "Get the status of a PDF Services operation job"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "pdf-services.get-operation-status"
+          with:
+            jobId: "tools.jobId"
+          outputParameters:
+            - type: object
+              mapping: "$."

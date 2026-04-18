@@ -1,0 +1,454 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe PDF Services API"
+  description: "Cloud-based tools for creating, converting, combining, compressing, and extracting content from PDF documents. Supports Office-to-PDF, HTML-to-PDF, PDF-to-Word, PDF-to-Excel, OCR, accessibility auto-tagging, and document generation from templates."
+  tags:
+    - Adobe
+    - PDF
+    - Document Management
+    - Conversion
+    - Accessibility
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_PDF_SERVICES_TOKEN: ADOBE_PDF_SERVICES_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: pdf-services
+      baseUri: https://pdf-services.adobe.io
+      description: "Adobe PDF Services API for PDF document operations"
+      authentication:
+        type: bearer
+        token: "{{ADOBE_PDF_SERVICES_TOKEN}}"
+      resources:
+        - name: assets
+          path: /assets
+          description: "Upload and manage input/output assets for PDF operations"
+          operations:
+            - name: upload-asset
+              method: POST
+              description: "Initiates an asset upload by returning a pre-signed upload URI and an asset ID"
+              body:
+                type: json
+                data:
+                  mediaType: "{{tools.media_type}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-asset
+              method: GET
+              path: /{assetID}
+              description: "Retrieves metadata and a temporary download URI for a previously uploaded asset"
+              inputParameters:
+                - name: assetID
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the asset to retrieve"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: delete-asset
+              method: DELETE
+              path: /{assetID}
+              description: "Permanently deletes an uploaded asset"
+              inputParameters:
+                - name: assetID
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the asset to delete"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: pdf-creation
+          path: /operation
+          description: "Create PDF documents from other formats"
+          operations:
+            - name: create-pdf
+              method: POST
+              path: /createpdf
+              description: "Creates a PDF document from a source file in formats such as Word, Excel, PowerPoint, or HTML"
+              body:
+                type: json
+                data:
+                  assetID: "{{tools.asset_id}}"
+                  documentLanguage: "{{tools.document_language}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: pdf-export
+          path: /operation
+          description: "Export PDF documents to other formats"
+          operations:
+            - name: export-pdf
+              method: POST
+              path: /exportpdf
+              description: "Exports a PDF document to Word, Excel, PowerPoint, RTF, or plain text"
+              body:
+                type: json
+                data:
+                  assetID: "{{tools.asset_id}}"
+                  targetFormat: "{{tools.target_format}}"
+                  exportOCRLocale: "{{tools.export_ocr_locale}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: pdf-combine
+          path: /operation
+          description: "Combine multiple PDFs into one"
+          operations:
+            - name: combine-pdfs
+              method: POST
+              path: /combinepdf
+              description: "Combines two or more PDF documents into a single output PDF"
+              body:
+                type: json
+                data:
+                  assets: "{{tools.assets}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: pdf-compress
+          path: /operation
+          description: "Reduce PDF file size"
+          operations:
+            - name: compress-pdf
+              method: POST
+              path: /compressPDF
+              description: "Reduces the file size of a PDF document by applying compression"
+              body:
+                type: json
+                data:
+                  assetID: "{{tools.asset_id}}"
+                  compressionLevel: "{{tools.compression_level}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: pdf-linearize
+          path: /operation
+          description: "Optimize PDFs for fast web viewing"
+          operations:
+            - name: linearize-pdf
+              method: POST
+              path: /linearizePDF
+              description: "Linearizes a PDF document for fast web view optimization"
+              body:
+                type: json
+                data:
+                  assetID: "{{tools.asset_id}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: pdf-ocr
+          path: /operation
+          description: "Apply optical character recognition to scanned PDFs"
+          operations:
+            - name: ocr-pdf
+              method: POST
+              path: /ocr
+              description: "Applies OCR to a scanned or image-based PDF making text searchable and selectable"
+              body:
+                type: json
+                data:
+                  assetID: "{{tools.asset_id}}"
+                  ocrLang: "{{tools.ocr_lang}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: pdf-accessibility
+          path: /operation
+          description: "Auto-tag PDFs for accessibility compliance"
+          operations:
+            - name: auto-tag-pdf
+              method: POST
+              path: /autotagpdf
+              description: "Automatically adds accessibility tags to a PDF document for PDF/UA and WCAG compliance"
+              body:
+                type: json
+                data:
+                  assetID: "{{tools.asset_id}}"
+                  generateReport: "{{tools.generate_report}}"
+                  shiftHeadings: "{{tools.shift_headings}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: document-generation
+          path: /operation
+          description: "Generate documents from templates and data"
+          operations:
+            - name: generate-document
+              method: POST
+              path: /documentgeneration
+              description: "Generates a PDF or Word document by merging JSON data into a Word document template"
+              body:
+                type: json
+                data:
+                  assetID: "{{tools.asset_id}}"
+                  outputFormat: "{{tools.output_format}}"
+                  jsonDataForMerge: "{{tools.json_data}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: operations
+          path: /operation
+          description: "Check operation job status"
+          operations:
+            - name: get-operation-status
+              method: GET
+              path: /{jobId}
+              description: "Retrieves the current status of a PDF Services operation job"
+              inputParameters:
+                - name: jobId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier of the operation job to check"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: pdf-services-api
+      resources:
+        - path: /v1/assets
+          name: assets
+          description: "Asset upload and management"
+          operations:
+            - method: POST
+              name: upload-asset
+              description: "Upload an asset for PDF operations"
+              call: "pdf-services.upload-asset"
+            - method: GET
+              name: get-asset
+              description: "Get asset metadata and download URI"
+              call: "pdf-services.get-asset"
+            - method: DELETE
+              name: delete-asset
+              description: "Delete an uploaded asset"
+              call: "pdf-services.delete-asset"
+
+        - path: /v1/pdfs
+          name: pdfs
+          description: "PDF creation operations"
+          operations:
+            - method: POST
+              name: create-pdf
+              description: "Create a PDF from another format"
+              call: "pdf-services.create-pdf"
+
+        - path: /v1/exports
+          name: exports
+          description: "PDF export operations"
+          operations:
+            - method: POST
+              name: export-pdf
+              description: "Export a PDF to another format"
+              call: "pdf-services.export-pdf"
+
+        - path: /v1/combinations
+          name: combinations
+          description: "PDF combination operations"
+          operations:
+            - method: POST
+              name: combine-pdfs
+              description: "Combine multiple PDFs into one"
+              call: "pdf-services.combine-pdfs"
+
+        - path: /v1/compressions
+          name: compressions
+          description: "PDF compression operations"
+          operations:
+            - method: POST
+              name: compress-pdf
+              description: "Compress a PDF to reduce file size"
+              call: "pdf-services.compress-pdf"
+
+        - path: /v1/linearizations
+          name: linearizations
+          description: "PDF linearization operations"
+          operations:
+            - method: POST
+              name: linearize-pdf
+              description: "Linearize a PDF for fast web viewing"
+              call: "pdf-services.linearize-pdf"
+
+        - path: /v1/ocr-jobs
+          name: ocr-jobs
+          description: "OCR operations"
+          operations:
+            - method: POST
+              name: ocr-pdf
+              description: "Apply OCR to a scanned PDF"
+              call: "pdf-services.ocr-pdf"
+
+        - path: /v1/accessibility-tags
+          name: accessibility-tags
+          description: "Accessibility tagging operations"
+          operations:
+            - method: POST
+              name: auto-tag-pdf
+              description: "Auto-tag a PDF for accessibility"
+              call: "pdf-services.auto-tag-pdf"
+
+        - path: /v1/document-generations
+          name: document-generations
+          description: "Document generation operations"
+          operations:
+            - method: POST
+              name: generate-document
+              description: "Generate a document from a template"
+              call: "pdf-services.generate-document"
+
+        - path: /v1/operations/{jobId}
+          name: operations
+          description: "Operation status polling"
+          operations:
+            - method: GET
+              name: get-operation-status
+              description: "Get the status of a PDF operation"
+              call: "pdf-services.get-operation-status"
+
+    - type: mcp
+      port: 9101
+      namespace: pdf-services-mcp
+      transport: http
+      tools:
+        - name: upload-asset
+          description: "Upload an asset for use in PDF operations"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.upload-asset"
+
+        - name: get-asset
+          description: "Get metadata and download URI for an uploaded asset"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "pdf-services.get-asset"
+
+        - name: delete-asset
+          description: "Permanently delete an uploaded asset"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "pdf-services.delete-asset"
+
+        - name: create-pdf
+          description: "Create a PDF from Word, Excel, PowerPoint, or HTML"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.create-pdf"
+
+        - name: export-pdf
+          description: "Export a PDF to Word, Excel, PowerPoint, RTF, or text"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.export-pdf"
+
+        - name: combine-pdfs
+          description: "Combine multiple PDFs into a single document"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.combine-pdfs"
+
+        - name: compress-pdf
+          description: "Compress a PDF to reduce its file size"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.compress-pdf"
+
+        - name: linearize-pdf
+          description: "Linearize a PDF for fast web viewing"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.linearize-pdf"
+
+        - name: ocr-pdf
+          description: "Apply OCR to a scanned PDF to make text searchable"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.ocr-pdf"
+
+        - name: auto-tag-pdf
+          description: "Auto-tag a PDF for accessibility compliance"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.auto-tag-pdf"
+
+        - name: generate-document
+          description: "Generate a document by merging data into a template"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "pdf-services.generate-document"
+
+        - name: get-operation-status
+          description: "Get the status of a PDF Services operation job"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "pdf-services.get-operation-status"

@@ -1,0 +1,363 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe Image Editing"
+  description: "Automated image editing and processing workflow using the Adobe Photoshop API for background removal, masking, layer management, rendition creation, document operations, and smart object editing. Used by production designers, e-commerce teams, and digital asset managers who need to automate image processing at scale."
+  tags:
+    - Adobe
+    - Photoshop
+    - Image Editing
+    - Image Processing
+    - Layer Management
+    - Automation
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_PHOTOSHOP_TOKEN: ADOBE_PHOTOSHOP_TOKEN
+
+capability:
+  consumes:
+    - import: photoshop
+      location: ./shared/photoshop.yaml
+
+  exposes:
+    - type: rest
+      port: 8082
+      namespace: image-editing-api
+      description: "Unified REST API for automated image editing and processing using Adobe Photoshop."
+      resources:
+        - path: /v1/cutouts
+          name: cutouts
+          description: "Background removal operations"
+          operations:
+            - method: POST
+              name: remove-background
+              description: "Remove the background from an image"
+              call: "photoshop.remove-background"
+              with:
+                input: "rest.input"
+                output: "rest.output"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/masks
+          name: masks
+          description: "Alpha mask creation"
+          operations:
+            - method: POST
+              name: create-mask
+              description: "Create an alpha mask for an image"
+              call: "photoshop.create-mask"
+              with:
+                input: "rest.input"
+                output: "rest.output"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/product-crops
+          name: product-crops
+          description: "Product cropping operations"
+          operations:
+            - method: POST
+              name: product-crop
+              description: "Auto-crop an image to the primary product"
+              call: "photoshop.product-crop"
+              with:
+                input: "rest.input"
+                output: "rest.output"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/straighten-jobs
+          name: straighten-jobs
+          description: "Image straightening"
+          operations:
+            - method: POST
+              name: straighten-image
+              description: "Straighten a rotated image"
+              call: "photoshop.straighten-image"
+              with:
+                input: "rest.input"
+                output: "rest.output"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/text-edits
+          name: text-edits
+          description: "Text layer editing"
+          operations:
+            - method: POST
+              name: edit-text-layers
+              description: "Edit text layers in a PSD"
+              call: "photoshop.edit-text-layers"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+                options: "rest.options"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/layers
+          name: layers
+          description: "Layer management"
+          operations:
+            - method: POST
+              name: manage-layers
+              description: "Manage layers in a PSD document"
+              call: "photoshop.manage-layers"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+                options: "rest.options"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/document-operations
+          name: document-operations
+          description: "Document-level operations"
+          operations:
+            - method: POST
+              name: apply-document-operations
+              description: "Apply resize, flatten, or trim operations to a PSD"
+              call: "photoshop.apply-document-operations"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+                options: "rest.options"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/renditions
+          name: renditions
+          description: "Rendition creation"
+          operations:
+            - method: POST
+              name: create-rendition
+              description: "Create renditions from a PSD or image"
+              call: "photoshop.create-rendition"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/smart-objects
+          name: smart-objects
+          description: "Smart object editing"
+          operations:
+            - method: POST
+              name: edit-smart-object
+              description: "Replace smart object content in a PSD"
+              call: "photoshop.edit-smart-object"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+                options: "rest.options"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/artboards
+          name: artboards
+          description: "Artboard creation"
+          operations:
+            - method: POST
+              name: create-artboard
+              description: "Create artboards in a PSD document"
+              call: "photoshop.create-artboard"
+              with:
+                inputs: "rest.inputs"
+                outputs: "rest.outputs"
+                options: "rest.options"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/jobs/{jobId}
+          name: jobs
+          description: "Job status polling"
+          operations:
+            - method: GET
+              name: get-job-status
+              description: "Get the status of an async Photoshop job"
+              call: "photoshop.get-job-status"
+              with:
+                jobId: "rest.jobId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9092
+      namespace: image-editing-mcp
+      transport: http
+      description: "MCP server for AI-assisted image editing and processing using Adobe Photoshop."
+      tools:
+        - name: remove-background
+          description: "Remove the background from an image using Adobe Sensei AI"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.remove-background"
+          with:
+            input: "tools.input"
+            output: "tools.output"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-mask
+          description: "Create an alpha mask for an image using Adobe Sensei AI"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.create-mask"
+          with:
+            input: "tools.input"
+            output: "tools.output"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: product-crop
+          description: "Auto-crop an image to focus on the primary product"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.product-crop"
+          with:
+            input: "tools.input"
+            output: "tools.output"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: straighten-image
+          description: "Automatically straighten a rotated image"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.straighten-image"
+          with:
+            input: "tools.input"
+            output: "tools.output"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: edit-text-layers
+          description: "Edit text content and styling in PSD text layers"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.edit-text-layers"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+            options: "tools.options"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: manage-layers
+          description: "Read, add, modify, or delete layers in a PSD document"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.manage-layers"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+            options: "tools.options"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: apply-document-operations
+          description: "Apply resize, flatten, or trim operations to a PSD document"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.apply-document-operations"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+            options: "tools.options"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-rendition
+          description: "Create renditions from a PSD or image in JPEG, PNG, or TIFF"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.create-rendition"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: edit-smart-object
+          description: "Replace smart object content in a PSD document"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.edit-smart-object"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+            options: "tools.options"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-artboard
+          description: "Create artboards within a PSD document"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "photoshop.create-artboard"
+          with:
+            inputs: "tools.inputs"
+            outputs: "tools.outputs"
+            options: "tools.options"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-job-status
+          description: "Get the status of an asynchronous Photoshop API job"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "photoshop.get-job-status"
+          with:
+            jobId: "tools.jobId"
+          outputParameters:
+            - type: object
+              mapping: "$."
