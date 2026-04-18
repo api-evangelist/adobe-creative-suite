@@ -1,0 +1,9 @@
+{
+  "prompt": "example_value",
+  "image": "example_value",
+  "numVariations": 1920,
+  "size": "example_value",
+  "seeds": [
+    1920
+  ]
+}

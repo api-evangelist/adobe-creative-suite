@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-stock-license-request-structure.json",
+  "name": "LicenseRequest",
+  "description": "Request body for licensing a stock asset",
+  "type": "object",
+  "properties": {
+    "content_id": {
+      "type": "int32",
+      "description": "Adobe Stock content ID of the asset to license",
+      "example": 123456789
+    },
+    "license": {
+      "type": "string",
+      "description": "License type to apply",
+      "enum": [
+        "Standard",
+        "Extended",
+        "Video_HD",
+        "Video_4K"
+      ],
+      "example": "Standard"
+    },
+    "locale": {
+      "type": "string",
+      "description": "BCP 47 locale for localized response data",
+      "example": "en_US"
+    },
+    "purchase_params": {
+      "type": "object",
+      "description": "Optional purchase parameters and reference metadata",
+      "properties": {
+        "references": {
+          "type": "array",
+          "description": "List of reference key-value pairs for tracking the license",
+          "items": {
+            "$ref": "#/components/schemas/LicenseReference"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "content_id",
+    "license"
+  ]
+}

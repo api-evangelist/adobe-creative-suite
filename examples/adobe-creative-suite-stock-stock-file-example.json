@@ -1,0 +1,22 @@
+{
+  "id": 123456789,
+  "title": "Beautiful mountain landscape at sunrise",
+  "creator_name": "PhotoContributor123",
+  "creator_id": 987654,
+  "country_name": "United States",
+  "width": 6000,
+  "height": 4000,
+  "media_type_id": 1,
+  "content_type": "image/jpeg",
+  "keywords": [
+    {
+      "name": "mountain"
+    },
+    {
+      "name": "landscape"
+    },
+    {
+      "name": "sunrise"
+    }
+  ]
+}

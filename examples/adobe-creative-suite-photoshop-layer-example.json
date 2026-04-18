@@ -1,0 +1,19 @@
+{
+  "id": 1920,
+  "index": 1920,
+  "name": "Example Asset",
+  "type": "layer",
+  "visible": true,
+  "locked": true,
+  "opacity": 1920,
+  "blendMode": "normal",
+  "bounds": {
+    "top": 1920,
+    "left": 1920,
+    "bottom": 1920,
+    "right": 1920
+  },
+  "children": [
+    "example_value"
+  ]
+}

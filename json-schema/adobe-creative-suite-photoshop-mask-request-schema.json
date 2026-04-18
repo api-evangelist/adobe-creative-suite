@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-photoshop-mask-request-schema.json",
+  "title": "MaskRequest",
+  "description": "Request to create an alpha mask for an image",
+  "type": "object",
+  "properties": {
+    "input": {
+      "$ref": "#/components/schemas/JobInput"
+    },
+    "output": {
+      "$ref": "#/components/schemas/JobOutput"
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "optimize": {
+          "type": "string",
+          "description": "Optimization mode for mask generation",
+          "enum": [
+            "performance",
+            "batch"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "input",
+    "output"
+  ]
+}

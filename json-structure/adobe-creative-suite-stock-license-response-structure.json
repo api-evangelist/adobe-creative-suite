@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-stock-license-response-structure.json",
+  "name": "LicenseResponse",
+  "description": "Response returned after successfully licensing a stock asset",
+  "type": "object",
+  "properties": {
+    "content_id": {
+      "type": "int32",
+      "description": "Content ID of the licensed asset",
+      "example": 123456789
+    },
+    "purchase_details": {
+      "type": "object",
+      "description": "Details of the license purchase transaction",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State of the license purchase",
+          "enum": [
+            "just_purchased",
+            "already_purchased",
+            "overage"
+          ]
+        },
+        "license": {
+          "type": "string",
+          "description": "License type applied"
+        },
+        "nb_downloads": {
+          "type": "int32",
+          "description": "Number of times this asset has been downloaded by the member"
+        }
+      }
+    },
+    "download_url": {
+      "type": "string",
+      "description": "URL to download the licensed full-resolution file",
+      "example": "https://stock.adobe.com/Rest/Libraries/Download/123456789/1"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-photoshop-job-status-structure.json",
+  "name": "JobStatus",
+  "description": "Current status and result of an asynchronous job",
+  "type": "object",
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "description": "Unique identifier of the job",
+      "example": "f54e0fcb-260b-47c3-b520-de0d17dc2b67"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current job status",
+      "enum": [
+        "pending",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "example": "succeeded"
+    },
+    "created": {
+      "type": "datetime",
+      "description": "ISO 8601 timestamp when the job was created",
+      "example": "example_value"
+    },
+    "modified": {
+      "type": "datetime",
+      "description": "ISO 8601 timestamp when the job was last modified",
+      "example": "example_value"
+    },
+    "outputs": {
+      "type": "array",
+      "description": "List of output files produced by a successful job",
+      "items": {
+        "$ref": "#/components/schemas/RenderOutput"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "description": "List of errors if the job failed",
+      "items": {
+        "$ref": "#/components/schemas/JobError"
+      }
+    }
+  }
+}

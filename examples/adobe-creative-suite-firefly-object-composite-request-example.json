@@ -1,0 +1,11 @@
+{
+  "prompt": "example_value",
+  "negativePrompt": "example_value",
+  "contentClass": "photo",
+  "image": "example_value",
+  "mask": "example_value",
+  "numVariations": 1920,
+  "seeds": [
+    1920
+  ]
+}

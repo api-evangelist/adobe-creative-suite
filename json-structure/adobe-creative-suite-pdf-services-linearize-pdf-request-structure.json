@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-pdf-services-linearize-pdf-request-structure.json",
+  "name": "LinearizePDFRequest",
+  "description": "Request body for linearizing a PDF for fast web view",
+  "type": "object",
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "Asset ID of the PDF to linearize",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    }
+  },
+  "required": [
+    "assetID"
+  ]
+}

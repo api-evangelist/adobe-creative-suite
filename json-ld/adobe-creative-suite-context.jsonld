@@ -1,342 +1,469 @@
 {
   "@context": {
     "@version": 1.1,
-    "acs": "https://developer.adobe.com/ns/creative-suite/",
+    "adobe": "https://developer.adobe.com/schema/",
     "schema": "https://schema.org/",
-    "dcterms": "http://purl.org/dc/terms/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "skos": "http://www.w3.org/2004/02/skos/core#",
-
-    "@vocab": "https://developer.adobe.com/ns/creative-suite/",
-
-    "ImageJob": {
-      "@id": "acs:ImageJob",
-      "@type": "@id",
-      "@context": {
-        "jobId": {
-          "@id": "acs:jobId",
-          "@type": "xsd:string"
-        },
-        "status": {
-          "@id": "acs:status",
-          "@type": "xsd:string"
-        },
-        "created": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "modified": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
-        },
-        "input": {
-          "@id": "acs:input",
-          "@type": "@id"
-        },
-        "output": {
-          "@id": "acs:output",
-          "@type": "@id"
-        },
-        "outputs": {
-          "@id": "acs:outputs",
-          "@container": "@set"
-        },
-        "errors": {
-          "@id": "acs:errors",
-          "@container": "@set"
-        },
-        "href": {
-          "@id": "schema:url",
-          "@type": "xsd:anyURI"
-        },
-        "storage": {
-          "@id": "acs:storageProvider",
-          "@type": "xsd:string"
-        }
-      }
+    "Adobe Creative Suite Image Job": "adobe:Adobe Creative Suite Image Job",
+    "Adobe Firefly Generation Request and Response": "adobe:Adobe Firefly Generation Request and Response",
+    "Adobe Stock File": "adobe:Adobe Stock File",
+    "Asset": "adobe:Asset",
+    "AssetReference": "adobe:AssetReference",
+    "AssetUploadRequest": "adobe:AssetUploadRequest",
+    "AssetUploadResponse": "adobe:AssetUploadResponse",
+    "AsyncJobSubmitted": "adobe:AsyncJobSubmitted",
+    "AutoTagRequest": "adobe:AutoTagRequest",
+    "Category": "adobe:Category",
+    "CombinePDFRequest": "adobe:CombinePDFRequest",
+    "CompressPDFRequest": "adobe:CompressPDFRequest",
+    "CreatePDFRequest": "adobe:CreatePDFRequest",
+    "CutoutRequest": "adobe:CutoutRequest",
+    "DocumentGenerationRequest": "adobe:DocumentGenerationRequest",
+    "DocumentOperations": "adobe:DocumentOperations",
+    "DocumentOperationsRequest": "adobe:DocumentOperationsRequest",
+    "ErrorResponse": "adobe:ErrorResponse",
+    "ExportPDFRequest": "adobe:ExportPDFRequest",
+    "GenerateSimilarRequest": "adobe:GenerateSimilarRequest",
+    "GenerationStatus": "adobe:GenerationStatus",
+    "ImageExpandRequest": "adobe:ImageExpandRequest",
+    "ImageFillRequest": "adobe:ImageFillRequest",
+    "ImageGenerateRequest": "adobe:ImageGenerateRequest",
+    "ImageSize": "adobe:ImageSize",
+    "InputImageReference": "adobe:InputImageReference",
+    "JobInput": "adobe:JobInput",
+    "JobOutput": "adobe:JobOutput",
+    "JobStatus": "adobe:JobStatus",
+    "JobSubmitted": "adobe:JobSubmitted",
+    "Layer": "adobe:Layer",
+    "LayerManageRequest": "adobe:LayerManageRequest",
+    "LicenseHistoryResult": "adobe:LicenseHistoryResult",
+    "LicenseReference": "adobe:LicenseReference",
+    "LicenseRequest": "adobe:LicenseRequest",
+    "LicenseResponse": "adobe:LicenseResponse",
+    "LicenseStatsResponse": "adobe:LicenseStatsResponse",
+    "LinearizePDFRequest": "adobe:LinearizePDFRequest",
+    "MaskRequest": "adobe:MaskRequest",
+    "MemberProfile": "adobe:MemberProfile",
+    "OCRRequest": "adobe:OCRRequest",
+    "ObjectCompositeRequest": "adobe:ObjectCompositeRequest",
+    "OperationStatus": "adobe:OperationStatus",
+    "OperationSubmitted": "adobe:OperationSubmitted",
+    "OutputImage": "adobe:OutputImage",
+    "PageRange": "adobe:PageRange",
+    "ProductCropRequest": "adobe:ProductCropRequest",
+    "RenderOutput": "adobe:RenderOutput",
+    "RenditionCreateRequest": "adobe:RenditionCreateRequest",
+    "SearchResult": "adobe:SearchResult",
+    "StockFile": "adobe:StockFile",
+    "StockFileResponse": "adobe:StockFileResponse",
+    "StraightenRequest": "adobe:StraightenRequest",
+    "StyleOptions": "adobe:StyleOptions",
+    "TextEditRequest": "adobe:TextEditRequest",
+    "VideoGenerateRequest": "adobe:VideoGenerateRequest",
+    "_links": {
+      "@id": "adobe:_links",
+      "@type": "@id"
     },
-
-    "FireflyGeneration": {
-      "@id": "acs:FireflyGeneration",
-      "@type": "@id",
-      "@context": {
-        "prompt": {
-          "@id": "schema:description",
-          "@type": "xsd:string"
-        },
-        "negativePrompt": {
-          "@id": "acs:negativePrompt",
-          "@type": "xsd:string"
-        },
-        "contentClass": {
-          "@id": "acs:contentClass",
-          "@type": "xsd:string"
-        },
-        "numVariations": {
-          "@id": "acs:numVariations",
-          "@type": "xsd:integer"
-        },
-        "size": {
-          "@id": "acs:outputSize"
-        },
-        "width": {
-          "@id": "schema:width",
-          "@type": "xsd:integer"
-        },
-        "height": {
-          "@id": "schema:height",
-          "@type": "xsd:integer"
-        },
-        "style": {
-          "@id": "acs:styleOptions"
-        },
-        "presets": {
-          "@id": "acs:stylePresets",
-          "@container": "@set"
-        },
-        "strength": {
-          "@id": "acs:styleStrength",
-          "@type": "xsd:integer"
-        },
-        "seeds": {
-          "@id": "acs:seeds",
-          "@container": "@set",
-          "@type": "xsd:integer"
-        },
-        "jobId": {
-          "@id": "acs:jobId",
-          "@type": "xsd:string"
-        },
-        "status": {
-          "@id": "acs:status",
-          "@type": "xsd:string"
-        },
-        "created": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "modified": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
-        },
-        "outputs": {
-          "@id": "acs:generatedOutputs",
-          "@container": "@set"
-        },
-        "image": {
-          "@id": "schema:image",
-          "@type": "@id"
-        },
-        "url": {
-          "@id": "schema:url",
-          "@type": "xsd:anyURI"
-        },
-        "seed": {
-          "@id": "acs:seed",
-          "@type": "xsd:integer"
-        }
-      }
+    "asset": {
+      "@id": "adobe:asset",
+      "@type": "xsd:string"
     },
-
-    "StockFile": {
-      "@id": "acs:StockFile",
-      "@type": "@id",
-      "@context": {
-        "id": {
-          "@id": "schema:identifier",
-          "@type": "xsd:integer"
-        },
-        "title": {
-          "@id": "dcterms:title",
-          "@type": "xsd:string"
-        },
-        "creator_name": {
-          "@id": "schema:author",
-          "@type": "xsd:string"
-        },
-        "creator_id": {
-          "@id": "acs:creatorId",
-          "@type": "xsd:integer"
-        },
-        "country_name": {
-          "@id": "schema:addressCountry",
-          "@type": "xsd:string"
-        },
-        "width": {
-          "@id": "schema:width",
-          "@type": "xsd:integer"
-        },
-        "height": {
-          "@id": "schema:height",
-          "@type": "xsd:integer"
-        },
-        "media_type_id": {
-          "@id": "acs:mediaTypeId",
-          "@type": "xsd:integer"
-        },
-        "content_type": {
-          "@id": "dcterms:format",
-          "@type": "xsd:string"
-        },
-        "keywords": {
-          "@id": "schema:keywords",
-          "@container": "@set"
-        },
-        "comp_url": {
-          "@id": "acs:compUrl",
-          "@type": "xsd:anyURI"
-        },
-        "thumbnail_url": {
-          "@id": "schema:thumbnailUrl",
-          "@type": "xsd:anyURI"
-        },
-        "thumbnail_width": {
-          "@id": "acs:thumbnailWidth",
-          "@type": "xsd:integer"
-        },
-        "thumbnail_height": {
-          "@id": "acs:thumbnailHeight",
-          "@type": "xsd:integer"
-        },
-        "is_licensed": {
-          "@id": "acs:licenseStatus",
-          "@type": "xsd:string"
-        },
-        "vector_type": {
-          "@id": "acs:vectorType",
-          "@type": "xsd:string"
-        },
-        "category": {
-          "@id": "schema:about"
-        },
-        "is_editorial": {
-          "@id": "acs:isEditorial",
-          "@type": "xsd:boolean"
-        },
-        "has_releases": {
-          "@id": "acs:hasReleases",
-          "@type": "xsd:boolean"
-        },
-        "nb_results": {
-          "@id": "acs:totalResults",
-          "@type": "xsd:integer"
-        }
-      }
+    "assetID": {
+      "@id": "adobe:assetID",
+      "@type": "xsd:string"
     },
-
-    "PDFOperation": {
-      "@id": "acs:PDFOperation",
-      "@type": "@id",
-      "@context": {
-        "assetID": {
-          "@id": "acs:assetId",
-          "@type": "xsd:string"
-        },
-        "mediaType": {
-          "@id": "dcterms:format",
-          "@type": "xsd:string"
-        },
-        "status": {
-          "@id": "acs:operationStatus",
-          "@type": "xsd:string"
-        },
-        "created": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "downloadUri": {
-          "@id": "acs:downloadUri",
-          "@type": "xsd:anyURI"
-        },
-        "uploadUri": {
-          "@id": "acs:uploadUri",
-          "@type": "xsd:anyURI"
-        },
-        "targetFormat": {
-          "@id": "acs:targetFormat",
-          "@type": "xsd:string"
-        },
-        "outputFormat": {
-          "@id": "acs:outputFormat",
-          "@type": "xsd:string"
-        },
-        "compressionLevel": {
-          "@id": "acs:compressionLevel",
-          "@type": "xsd:string"
-        },
-        "asset": {
-          "@id": "acs:resultAsset"
-        }
-      }
+    "assets": {
+      "@id": "adobe:assets",
+      "@container": "@set",
+      "@type": "xsd:string"
     },
-
-    "LibraryAsset": {
-      "@id": "acs:LibraryAsset",
-      "@type": "@id",
-      "@context": {
-        "id": {
-          "@id": "schema:identifier",
-          "@type": "xsd:string"
-        },
-        "name": {
-          "@id": "schema:name",
-          "@type": "xsd:string"
-        },
-        "type": {
-          "@id": "dcterms:type",
-          "@type": "xsd:string"
-        },
-        "created": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "modified": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
-        },
-        "libraryId": {
-          "@id": "acs:libraryId",
-          "@type": "xsd:string"
-        },
-        "thumbnail": {
-          "@id": "schema:thumbnailUrl",
-          "@type": "xsd:anyURI"
-        }
-      }
+    "blendMode": {
+      "@id": "adobe:blendMode",
+      "@type": "xsd:string"
     },
-
-    "ImageObject": "schema:ImageObject",
-    "VideoObject": "schema:VideoObject",
-    "CreativeWork": "schema:CreativeWork",
-    "Person": "schema:Person",
-    "Organization": "schema:Organization",
-
-    "name": "schema:name",
-    "description": "schema:description",
-    "url": {
-      "@id": "schema:url",
-      "@type": "xsd:anyURI"
+    "bounds": {
+      "@id": "adobe:bounds",
+      "@type": "@id"
     },
-    "identifier": "schema:identifier",
-    "dateCreated": {
-      "@id": "schema:dateCreated",
+    "category": {
+      "@id": "adobe:category",
+      "@type": "@id"
+    },
+    "children": {
+      "@id": "adobe:children",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "code": {
+      "@id": "adobe:code",
+      "@type": "xsd:string"
+    },
+    "comp_url": {
+      "@id": "adobe:comp_url",
+      "@type": "xsd:string"
+    },
+    "compressionLevel": {
+      "@id": "adobe:compressionLevel",
+      "@type": "xsd:string"
+    },
+    "contentClass": {
+      "@id": "adobe:contentClass",
+      "@type": "xsd:string"
+    },
+    "content_id": {
+      "@id": "adobe:content_id",
+      "@type": "xsd:integer"
+    },
+    "content_type": {
+      "@id": "adobe:content_type",
+      "@type": "xsd:string"
+    },
+    "country_name": {
+      "@id": "adobe:country_name",
+      "@type": "xsd:string"
+    },
+    "created": {
+      "@id": "adobe:created",
       "@type": "xsd:dateTime"
     },
-    "dateModified": {
-      "@id": "schema:dateModified",
+    "creator_id": {
+      "@id": "adobe:creator_id",
+      "@type": "xsd:integer"
+    },
+    "creator_name": {
+      "@id": "adobe:creator_name",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "adobe:details",
+      "@type": "xsd:string"
+    },
+    "documentLanguage": {
+      "@id": "adobe:documentLanguage",
+      "@type": "xsd:string"
+    },
+    "downloadUri": {
+      "@id": "adobe:downloadUri",
+      "@type": "xsd:string"
+    },
+    "download_url": {
+      "@id": "adobe:download_url",
+      "@type": "xsd:string"
+    },
+    "duration": {
+      "@id": "adobe:duration",
+      "@type": "xsd:decimal"
+    },
+    "end": {
+      "@id": "adobe:end",
+      "@type": "xsd:integer"
+    },
+    "errors": {
+      "@id": "adobe:errors",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "exportOCRLocale": {
+      "@id": "adobe:exportOCRLocale",
+      "@type": "xsd:string"
+    },
+    "files": {
+      "@id": "adobe:files",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "flatten": {
+      "@id": "adobe:flatten",
+      "@type": "xsd:boolean"
+    },
+    "generateReport": {
+      "@id": "adobe:generateReport",
+      "@type": "xsd:boolean"
+    },
+    "has_releases": {
+      "@id": "adobe:has_releases",
+      "@type": "xsd:boolean"
+    },
+    "height": {
+      "@id": "adobe:height",
+      "@type": "xsd:integer"
+    },
+    "href": {
+      "@id": "adobe:href",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "adobe:id",
+      "@type": "xsd:integer"
+    },
+    "image": {
+      "@id": "adobe:image",
+      "@type": "xsd:string"
+    },
+    "index": {
+      "@id": "adobe:index",
+      "@type": "xsd:integer"
+    },
+    "input": {
+      "@id": "adobe:input",
+      "@type": "@id"
+    },
+    "inputs": {
+      "@id": "adobe:inputs",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "is_editorial": {
+      "@id": "adobe:is_editorial",
+      "@type": "xsd:boolean"
+    },
+    "is_licensed": {
+      "@id": "adobe:is_licensed",
+      "@type": "xsd:string"
+    },
+    "jobID": {
+      "@id": "adobe:jobID",
+      "@type": "xsd:string"
+    },
+    "jobId": {
+      "@id": "adobe:jobId",
+      "@type": "xsd:string"
+    },
+    "jsonDataForMerge": {
+      "@id": "adobe:jsonDataForMerge",
+      "@type": "@id"
+    },
+    "keywords": {
+      "@id": "adobe:keywords",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "license": {
+      "@id": "adobe:license",
+      "@type": "xsd:string"
+    },
+    "link": {
+      "@id": "adobe:link",
+      "@type": "xsd:string"
+    },
+    "locale": {
+      "@id": "adobe:locale",
+      "@type": "xsd:string"
+    },
+    "locked": {
+      "@id": "adobe:locked",
+      "@type": "xsd:boolean"
+    },
+    "mask": {
+      "@id": "adobe:mask",
+      "@type": "xsd:string"
+    },
+    "mediaType": {
+      "@id": "adobe:mediaType",
+      "@type": "xsd:string"
+    },
+    "media_type_id": {
+      "@id": "adobe:media_type_id",
+      "@type": "xsd:integer"
+    },
+    "message": {
+      "@id": "adobe:message",
+      "@type": "xsd:string"
+    },
+    "modified": {
+      "@id": "adobe:modified",
       "@type": "xsd:dateTime"
     },
-    "author": "schema:author",
-    "keywords": "schema:keywords",
-    "contentUrl": {
-      "@id": "schema:contentUrl",
-      "@type": "xsd:anyURI"
+    "name": {
+      "@id": "adobe:name",
+      "@type": "xsd:string"
     },
-    "encodingFormat": "schema:encodingFormat",
-    "thumbnailUrl": {
-      "@id": "schema:thumbnailUrl",
-      "@type": "xsd:anyURI"
+    "nb_results": {
+      "@id": "adobe:nb_results",
+      "@type": "xsd:integer"
+    },
+    "negativePrompt": {
+      "@id": "adobe:negativePrompt",
+      "@type": "xsd:string"
+    },
+    "notTaggedAdds": {
+      "@id": "adobe:notTaggedAdds",
+      "@type": "xsd:boolean"
+    },
+    "numVariations": {
+      "@id": "adobe:numVariations",
+      "@type": "xsd:integer"
+    },
+    "ocrLang": {
+      "@id": "adobe:ocrLang",
+      "@type": "xsd:string"
+    },
+    "opacity": {
+      "@id": "adobe:opacity",
+      "@type": "xsd:integer"
+    },
+    "options": {
+      "@id": "adobe:options",
+      "@type": "xsd:string"
+    },
+    "output": {
+      "@id": "adobe:output",
+      "@type": "@id"
+    },
+    "outputFormat": {
+      "@id": "adobe:outputFormat",
+      "@type": "xsd:string"
+    },
+    "outputs": {
+      "@id": "adobe:outputs",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "overwrite": {
+      "@id": "adobe:overwrite",
+      "@type": "xsd:boolean"
+    },
+    "placement": {
+      "@id": "adobe:placement",
+      "@type": "@id"
+    },
+    "premium_level_id": {
+      "@id": "adobe:premium_level_id",
+      "@type": "xsd:integer"
+    },
+    "presets": {
+      "@id": "adobe:presets",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "prompt": {
+      "@id": "adobe:prompt",
+      "@type": "xsd:string"
+    },
+    "purchase_details": {
+      "@id": "adobe:purchase_details",
+      "@type": "@id"
+    },
+    "purchase_params": {
+      "@id": "adobe:purchase_params",
+      "@type": "@id"
+    },
+    "referenceImage": {
+      "@id": "adobe:referenceImage",
+      "@type": "xsd:string"
+    },
+    "requestId": {
+      "@id": "adobe:requestId",
+      "@type": "xsd:string"
+    },
+    "resize": {
+      "@id": "adobe:resize",
+      "@type": "@id"
+    },
+    "seed": {
+      "@id": "adobe:seed",
+      "@type": "xsd:integer"
+    },
+    "seeds": {
+      "@id": "adobe:seeds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "shiftHeadings": {
+      "@id": "adobe:shiftHeadings",
+      "@type": "xsd:boolean"
+    },
+    "size": {
+      "@id": "adobe:size",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "adobe:source",
+      "@type": "@id"
+    },
+    "start": {
+      "@id": "adobe:start",
+      "@type": "xsd:integer"
+    },
+    "status": {
+      "@id": "adobe:status",
+      "@type": "xsd:string"
+    },
+    "statusUrl": {
+      "@id": "adobe:statusUrl",
+      "@type": "xsd:string"
+    },
+    "stock_user": {
+      "@id": "adobe:stock_user",
+      "@type": "@id"
+    },
+    "storage": {
+      "@id": "adobe:storage",
+      "@type": "xsd:string"
+    },
+    "strength": {
+      "@id": "adobe:strength",
+      "@type": "xsd:integer"
+    },
+    "style": {
+      "@id": "adobe:style",
+      "@type": "xsd:string"
+    },
+    "targetFormat": {
+      "@id": "adobe:targetFormat",
+      "@type": "xsd:string"
+    },
+    "thumbnail_1000_url": {
+      "@id": "adobe:thumbnail_1000_url",
+      "@type": "xsd:string"
+    },
+    "thumbnail_500_url": {
+      "@id": "adobe:thumbnail_500_url",
+      "@type": "xsd:string"
+    },
+    "thumbnail_height": {
+      "@id": "adobe:thumbnail_height",
+      "@type": "xsd:integer"
+    },
+    "thumbnail_url": {
+      "@id": "adobe:thumbnail_url",
+      "@type": "xsd:string"
+    },
+    "thumbnail_width": {
+      "@id": "adobe:thumbnail_width",
+      "@type": "xsd:integer"
+    },
+    "title": {
+      "@id": "adobe:title",
+      "@type": "xsd:string"
+    },
+    "trim": {
+      "@id": "adobe:trim",
+      "@type": "@id"
+    },
+    "type": {
+      "@id": "adobe:type",
+      "@type": "xsd:string"
+    },
+    "uploadUri": {
+      "@id": "adobe:uploadUri",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "adobe:value",
+      "@type": "xsd:string"
+    },
+    "vector_type": {
+      "@id": "adobe:vector_type",
+      "@type": "xsd:string"
+    },
+    "visible": {
+      "@id": "adobe:visible",
+      "@type": "xsd:boolean"
+    },
+    "width": {
+      "@id": "adobe:width",
+      "@type": "xsd:integer"
     }
   }
 }

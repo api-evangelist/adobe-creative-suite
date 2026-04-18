@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-stock-license-reference-structure.json",
+  "name": "LicenseReference",
+  "description": "Optional purchase reference metadata for a license transaction",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Reference ID provided by the API caller for tracking",
+      "example": 1001
+    },
+    "value": {
+      "type": "string",
+      "description": "Reference value such as a project name or purchase order number",
+      "example": "Project Alpha"
+    }
+  }
+}

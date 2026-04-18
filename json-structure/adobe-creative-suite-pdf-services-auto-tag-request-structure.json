@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-pdf-services-auto-tag-request-structure.json",
+  "name": "AutoTagRequest",
+  "description": "Request body for auto-tagging a PDF for accessibility",
+  "type": "object",
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "Asset ID of the PDF to auto-tag",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    },
+    "generateReport": {
+      "type": "boolean",
+      "description": "Whether to generate an accessibility report alongside the tagged PDF",
+      "default": false,
+      "example": true
+    },
+    "shiftHeadings": {
+      "type": "boolean",
+      "description": "Whether to shift heading levels in the output for better document structure",
+      "default": false,
+      "example": true
+    }
+  },
+  "required": [
+    "assetID"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-pdf-services-page-range-schema.json",
+  "title": "PageRange",
+  "description": "Specifies a range of pages from a PDF document",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "integer",
+      "description": "Starting page number (1-indexed)",
+      "example": 1
+    },
+    "end": {
+      "type": "integer",
+      "description": "Ending page number (1-indexed, inclusive)",
+      "example": 5
+    }
+  }
+}

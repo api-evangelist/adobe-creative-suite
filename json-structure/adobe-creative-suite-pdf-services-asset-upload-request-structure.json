@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-pdf-services-asset-upload-request-structure.json",
+  "name": "AssetUploadRequest",
+  "description": "Request to initiate an asset upload",
+  "type": "object",
+  "properties": {
+    "mediaType": {
+      "type": "string",
+      "description": "MIME type of the file to be uploaded",
+      "example": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    }
+  },
+  "required": [
+    "mediaType"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "resize": {
+    "width": 1920,
+    "height": 1920,
+    "unit": "pixel",
+    "resampleMethod": "bilinear"
+  },
+  "flatten": true,
+  "trim": {
+    "basedOn": "transparentPixels"
+  }
+}

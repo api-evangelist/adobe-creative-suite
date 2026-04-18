@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-stock-search-result-schema.json",
+  "title": "SearchResult",
+  "description": "Paginated search results from the Adobe Stock library",
+  "type": "object",
+  "properties": {
+    "nb_results": {
+      "type": "integer",
+      "description": "Total number of files matching the search query",
+      "example": 4521
+    },
+    "files": {
+      "type": "array",
+      "description": "List of matching stock files",
+      "items": {
+        "$ref": "#/components/schemas/StockFile"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "jobId": "f54e0fcb-260b-47c3-b520-de0d17dc2b67",
+  "status": "succeeded",
+  "created": "example_value",
+  "modified": "example_value",
+  "outputs": [
+    "example_value"
+  ],
+  "errors": [
+    "example_value"
+  ]
+}

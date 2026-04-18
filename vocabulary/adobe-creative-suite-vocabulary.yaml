@@ -1,0 +1,83 @@
+vocabulary: 1.0.0
+info:
+  provider: Adobe Creative Suite
+  description: Vocabulary for the Adobe Creative Suite APIs spanning image editing,
+    video, design, documents, fonts, and generative AI.
+  created: '2026-04-17'
+  modified: '2026-04-17'
+operational:
+  apis:
+  - name: Adobe Photoshop API
+    namespace: photoshop
+  - name: Adobe Lightroom API
+    namespace: lightroom
+  - name: Adobe Illustrator API
+    namespace: illustrator
+  - name: Adobe InDesign API
+    namespace: indesign
+  - name: Adobe Premiere Pro API
+    namespace: premiere
+  - name: Adobe Firefly API
+    namespace: firefly
+  - name: Adobe PDF Services API
+    namespace: pdf-services
+  - name: Acrobat Sign API
+    namespace: acrobat-sign
+  - name: Adobe Stock API
+    namespace: stock
+  - name: Adobe Fonts API
+    namespace: fonts
+  - name: CC Libraries API
+    namespace: cc-libraries
+  - name: Adobe Express Embed SDK
+    namespace: express-embed
+  - name: Adobe UXP
+    namespace: uxp
+  resources:
+  - name: images
+    description: Raster images for processing.
+  - name: documents
+    description: PSD, AI, INDD, and PDF documents.
+  - name: videos
+    description: Video projects and sequences.
+  - name: assets
+    description: Stock and library assets.
+  - name: fonts
+    description: Font families and kits.
+  - name: templates
+    description: Design templates.
+  - name: agreements
+    description: Electronic signature agreements.
+capability:
+  personas:
+  - id: designer
+    name: Graphic Designer
+  - id: photographer
+    name: Photographer
+  - id: video-editor
+    name: Video Editor
+  - id: developer
+    name: Integration Developer
+  - id: marketer
+    name: Marketing Professional
+  domains:
+  - name: image-editing
+    resources:
+    - images
+    - documents
+  - name: video-production
+    resources:
+    - videos
+  - name: design
+    resources:
+    - documents
+    - assets
+    - fonts
+  - name: documents
+    resources:
+    - documents
+    - agreements
+  - name: ai-generation
+    resources:
+    - images
+    - templates

@@ -1,0 +1,10 @@
+{
+  "assetID": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718",
+  "outputFormat": "pdf",
+  "jsonDataForMerge": {
+    "customerName": "John Doe",
+    "invoiceDate": "2026-03-02",
+    "totalAmount": 1500.0
+  },
+  "notTaggedAdds": true
+}

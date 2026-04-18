@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-pdf-services-asset-upload-request-schema.json",
+  "title": "AssetUploadRequest",
+  "description": "Request to initiate an asset upload",
+  "type": "object",
+  "properties": {
+    "mediaType": {
+      "type": "string",
+      "description": "MIME type of the file to be uploaded",
+      "example": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    }
+  },
+  "required": [
+    "mediaType"
+  ]
+}

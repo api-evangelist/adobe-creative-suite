@@ -1,0 +1,38 @@
+{
+  "jobId": "asset_abc123",
+  "status": "succeeded",
+  "created": "example_value",
+  "modified": "example_value",
+  "input": {
+    "href": "example_value",
+    "storage": "external",
+    "type": "image"
+  },
+  "output": {
+    "href": "example_value",
+    "storage": "azure",
+    "type": "image",
+    "width": 1920,
+    "height": 1920,
+    "overwrite": true
+  },
+  "outputs": [
+    {
+      "input": "example_value",
+      "status": "failed",
+      "details": "example_value",
+      "href": "example_value",
+      "storage": "dropbox",
+      "type": "image",
+      "width": 1920,
+      "height": 1920
+    }
+  ],
+  "errors": [
+    {
+      "code": "example_value",
+      "title": "example_value",
+      "description": "example_value"
+    }
+  ]
+}

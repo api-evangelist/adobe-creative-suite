@@ -1,0 +1,6 @@
+{
+  "source": {
+    "url": "https://my-bucket.s3.amazonaws.com/source-image.jpg",
+    "uploadId": "asset_abc123"
+  }
+}

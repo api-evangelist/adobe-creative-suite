@@ -1,0 +1,8 @@
+{
+  "presets": [
+    "photo",
+    "golden_hour"
+  ],
+  "strength": 60,
+  "referenceImage": "example_value"
+}

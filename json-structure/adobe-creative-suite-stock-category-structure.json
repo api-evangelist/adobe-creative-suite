@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-stock-category-structure.json",
+  "name": "Category",
+  "description": "A stock content category",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique category identifier",
+      "example": 1043
+    },
+    "name": {
+      "type": "string",
+      "description": "Localized category name",
+      "example": "Nature"
+    },
+    "link": {
+      "type": "string",
+      "description": "URL to browse this category on the Adobe Stock website",
+      "example": "example_value"
+    },
+    "children": {
+      "type": "array",
+      "description": "Child subcategories (present in category tree responses)",
+      "items": {
+        "$ref": "#/components/schemas/Category"
+      }
+    }
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://developer.adobe.com/ns/creative-suite/schemas/firefly-generation",
+  "name": "Adobe Firefly Generation Request and Response",
+  "description": "Schema for Adobe Firefly generative AI image generation requests and their asynchronous responses. Covers text-to-image generation, generative fill, generative expand, and similar image generation workflows. Includes request parameters such as prompt, style, and size, as well as response structures containing job identifiers and generated output image references.",
+  "type": "object",
+  "$defs": {
+    "ImageSize": {
+      "type": "object",
+      "description": "Dimensions for a generated output image",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "description": "Image width in pixels",
+          "minimum": 1,
+          "maximum": 8192,
+          "examples": [
+            1024,
+            1920
+          ]
+        },
+        "height": {
+          "type": "integer",
+          "description": "Image height in pixels",
+          "minimum": 1,
+          "maximum": 8192,
+          "examples": [
+            1024,
+            1080
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "StyleOptions": {
+      "type": "object",
+      "description": "Style guidance options for the Firefly generation model",
+      "properties": {
+        "presets": {
+          "type": "array",
+          "description": "List of style preset identifiers to apply to the generation",
+          "items": {
+            "type": "string",
+            "description": "A named style preset that influences the aesthetic of the output",
+            "enum": [
+              "photo",
+              "art",
+              "graphic",
+              "bw",
+              "cool_colors",
+              "warm_tone",
+              "muted_color",
+              "vibrant_color",
+              "pastel_color",
+              "golden_hour",
+              "closeup_portrait",
+              "wide_angle",
+              "aerial_view",
+              "landscape_photography"
+            ]
+          },
+          "maxItems": 10,
+          "examples": [
+            [
+              "photo",
+              "golden_hour"
+            ]
+          ]
+        },
+        "strength": {
+          "type": "integer",
+          "description": "Strength of style influence on the generated output, from 1 (subtle) to 100 (strong)",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 60,
+          "examples": [
+            60,
+            80
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "OutputImage": {
+      "type": "object",
+      "description": "A single generated image output from a Firefly generation job",
+      "required": [
+        "image"
+      ],
+      "properties": {
+        "image": {
+          "type": "object",
+          "description": "Reference to the generated image file",
+          "required": [
+            "url"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Temporary pre-signed URL to download the generated image. URLs expire after a short period.",
+              "examples": [
+                "https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "seed": {
+          "type": "integer",
+          "description": "The seed value used to produce this specific output variation. Reusing the same seed with the same prompt and parameters produces the same output.",
+          "examples": [
+            42,
+            1337
+          ]
+        },
+        "contentClass": {
+          "type": "string",
+          "description": "The content class applied or detected for this output",
+          "enum": [
+            "photo",
+            "art"
+          ],
+          "examples": [
+            "photo"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "title": "Firefly Generation Request",
+      "description": "Request body for submitting a Firefly image generation job",
+      "required": [
+        "prompt"
+      ],
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Natural language text description of the image to generate. Clear, descriptive prompts produce better results.",
+          "maxLength": 1024,
+          "examples": [
+            "A serene mountain lake at golden hour with reflections of pine trees"
+          ]
+        },
+        "negativePrompt": {
+          "type": "string",
+          "description": "Text description of visual elements or qualities to avoid in the generated image",
+          "maxLength": 1024,
+          "examples": [
+            "blurry, low quality, distorted, watermark"
+          ]
+        },
+        "contentClass": {
+          "type": "string",
+          "description": "Broad content category that guides the generation model toward a photographic or artistic style",
+          "enum": [
+            "photo",
+            "art"
+          ],
+          "examples": [
+            "photo"
+          ]
+        },
+        "numVariations": {
+          "type": "integer",
+          "description": "Number of distinct image variations to generate in a single request",
+          "minimum": 1,
+          "maximum": 4,
+          "default": 1,
+          "examples": [
+            2
+          ]
+        },
+        "size": {
+          "$ref": "#/$defs/ImageSize"
+        },
+        "style": {
+          "$ref": "#/$defs/StyleOptions"
+        },
+        "seeds": {
+          "type": "array",
+          "description": "Array of integer seed values for reproducible generation. Each seed corresponds to one variation. Providing the same seed and prompt produces the same output.",
+          "items": {
+            "type": "integer",
+            "description": "Integer seed value for a single generation variation"
+          },
+          "maxItems": 4,
+          "examples": [
+            [
+              42,
+              1337
+            ]
+          ]
+        },
+        "locale": {
+          "type": "string",
+          "description": "BCP 47 language locale to assist with multilingual prompt interpretation",
+          "examples": [
+            "en-US",
+            "fr-FR",
+            "de-DE"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "title": "Firefly Generation Response",
+      "description": "Response body containing the status and outputs of a Firefly generation job",
+      "required": [
+        "jobId",
+        "status"
+      ],
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "Unique identifier assigned to this generation job upon submission",
+          "examples": [
+            "urn:firefly:jobs:abc123def456"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "description": "Current lifecycle status of the generation job",
+          "enum": [
+            "pending",
+            "running",
+            "succeeded",
+            "failed"
+          ],
+          "examples": [
+            "succeeded"
+          ]
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when the generation job was submitted",
+          "examples": [
+            "2026-03-02T12:00:00.000Z"
+          ]
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when the generation job was last updated",
+          "examples": [
+            "2026-03-02T12:01:30.000Z"
+          ]
+        },
+        "outputs": {
+          "type": "array",
+          "description": "Array of generated image outputs produced by a successful job. Empty or absent if the job has not yet succeeded.",
+          "items": {
+            "$ref": "#/$defs/OutputImage"
+          },
+          "maxItems": 4,
+          "examples": [
+            [
+              {
+                "image": {
+                  "url": "https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123"
+                },
+                "seed": 42,
+                "contentClass": "photo"
+              }
+            ]
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors encountered if the generation job failed",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Machine-readable error code",
+                "examples": [
+                  "PROMPT_SAFETY_VIOLATION",
+                  "QUOTA_EXCEEDED"
+                ]
+              },
+              "message": {
+                "type": "string",
+                "description": "Human-readable explanation of the error"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "examples": [
+    {
+      "prompt": "A serene mountain lake at golden hour with reflections of pine trees",
+      "negativePrompt": "blurry, low quality, distorted",
+      "contentClass": "photo",
+      "numVariations": 2,
+      "size": {
+        "width": 1024,
+        "height": 1024
+      },
+      "style": {
+        "presets": [
+          "photo",
+          "golden_hour"
+        ],
+        "strength": 70
+      },
+      "seeds": [
+        42,
+        1337
+      ]
+    },
+    {
+      "jobId": "urn:firefly:jobs:abc123def456",
+      "status": "succeeded",
+      "created": "2026-03-02T12:00:00.000Z",
+      "modified": "2026-03-02T12:01:30.000Z",
+      "outputs": [
+        {
+          "image": {
+            "url": "https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:img001"
+          },
+          "seed": 42,
+          "contentClass": "photo"
+        },
+        {
+          "image": {
+            "url": "https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:img002"
+          },
+          "seed": 1337,
+          "contentClass": "photo"
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

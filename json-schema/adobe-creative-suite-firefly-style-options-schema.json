@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-firefly-style-options-schema.json",
+  "title": "StyleOptions",
+  "description": "Style guidance for image generation",
+  "type": "object",
+  "properties": {
+    "presets": {
+      "type": "array",
+      "description": "List of style preset identifiers to apply",
+      "items": {
+        "type": "string",
+        "enum": [
+          "photo",
+          "art",
+          "graphic",
+          "bw",
+          "cool_colors",
+          "warm_tone",
+          "muted_color",
+          "vibrant_color",
+          "pastel_color",
+          "golden_hour",
+          "closeup_portrait",
+          "wide_angle",
+          "aerial_view",
+          "landscape_photography"
+        ]
+      },
+      "example": [
+        "photo",
+        "golden_hour"
+      ]
+    },
+    "strength": {
+      "type": "integer",
+      "description": "Style influence strength from 1 (subtle) to 100 (strong)",
+      "minimum": 1,
+      "maximum": 100,
+      "example": 60
+    },
+    "referenceImage": {
+      "$ref": "#/components/schemas/InputImageReference"
+    }
+  }
+}

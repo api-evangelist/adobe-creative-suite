@@ -1,0 +1,7 @@
+{
+  "input": "example_value",
+  "output": "example_value",
+  "options": {
+    "optimize": "batch"
+  }
+}

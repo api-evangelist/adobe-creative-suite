@@ -1,0 +1,4 @@
+{
+  "jobId": "urn:firefly:jobs:abc123def456",
+  "statusUrl": "https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456"
+}

@@ -1,0 +1,9 @@
+{
+  "prompt": "A slow camera pan over a misty forest at dawn",
+  "negativePrompt": "example_value",
+  "size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "duration": 5.0
+}

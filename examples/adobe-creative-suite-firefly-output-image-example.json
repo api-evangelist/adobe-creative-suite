@@ -1,0 +1,7 @@
+{
+  "image": {
+    "url": "https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123"
+  },
+  "seed": 42,
+  "contentClass": "photo"
+}

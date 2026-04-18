@@ -1,0 +1,16 @@
+{
+  "input": "example_value",
+  "status": "pending",
+  "details": "example_value",
+  "_links": {
+    "renditions": [
+      {
+        "href": {},
+        "storage": {},
+        "type": {},
+        "width": {},
+        "height": {}
+      }
+    ]
+  }
+}

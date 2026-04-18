@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-stock-error-response-schema.json",
+  "title": "ErrorResponse",
+  "description": "Standard error response",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "Numeric error code",
+      "example": 1920
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable error description",
+      "example": "example_value"
+    }
+  }
+}

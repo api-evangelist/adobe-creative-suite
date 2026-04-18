@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-photoshop-document-operations-request-structure.json",
+  "name": "DocumentOperationsRequest",
+  "description": "Request to apply document-level operations to a PSD",
+  "type": "object",
+  "properties": {
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobInput"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobOutput"
+      }
+    },
+    "options": {
+      "$ref": "#/components/schemas/DocumentOperations"
+    }
+  },
+  "required": [
+    "inputs",
+    "outputs"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "status": "done",
+  "asset": "example_value",
+  "errors": [
+    {
+      "code": "example_value",
+      "message": "example_value"
+    }
+  ]
+}

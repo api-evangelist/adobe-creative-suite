@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-stock-member-profile-schema.json",
+  "title": "MemberProfile",
+  "description": "Adobe Stock member profile and account details",
+  "type": "object",
+  "properties": {
+    "stock_user": {
+      "type": "object",
+      "description": "Core user account information",
+      "properties": {
+        "nb_downloads": {
+          "type": "integer",
+          "description": "Total number of downloads by this member"
+        },
+        "nb_standard_downloads": {
+          "type": "integer",
+          "description": "Number of standard license downloads"
+        },
+        "nb_standard_downloads_remaining": {
+          "type": "integer",
+          "description": "Remaining standard download quota"
+        },
+        "nb_standard_downloads_limit": {
+          "type": "integer",
+          "description": "Total standard download limit for the current period"
+        },
+        "purchase_options": {
+          "type": "object",
+          "description": "Available purchase and licensing options for the member"
+        }
+      }
+    }
+  }
+}

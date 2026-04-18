@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-photoshop-layer-schema.json",
+  "title": "Layer",
+  "description": "Representation of a Photoshop document layer",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique layer identifier within the document",
+      "example": 1920
+    },
+    "index": {
+      "type": "integer",
+      "description": "Layer stack index (0 = bottom)",
+      "example": 1920
+    },
+    "name": {
+      "type": "string",
+      "description": "Layer name as shown in the Layers panel",
+      "example": "Example Asset"
+    },
+    "type": {
+      "type": "string",
+      "description": "Layer type",
+      "enum": [
+        "layer",
+        "textLayer",
+        "adjustmentLayer",
+        "fillLayer",
+        "smartObject",
+        "backgroundLayer",
+        "groupLayer"
+      ],
+      "example": "layer"
+    },
+    "visible": {
+      "type": "boolean",
+      "description": "Whether the layer is visible",
+      "example": true
+    },
+    "locked": {
+      "type": "boolean",
+      "description": "Whether the layer is locked",
+      "example": true
+    },
+    "opacity": {
+      "type": "integer",
+      "description": "Layer opacity from 0 to 255",
+      "minimum": 0,
+      "maximum": 255,
+      "example": 1920
+    },
+    "blendMode": {
+      "type": "string",
+      "description": "Blend mode of the layer",
+      "example": "normal"
+    },
+    "bounds": {
+      "type": "object",
+      "description": "Layer bounding box in pixels",
+      "properties": {
+        "top": {
+          "type": "integer"
+        },
+        "left": {
+          "type": "integer"
+        },
+        "bottom": {
+          "type": "integer"
+        },
+        "right": {
+          "type": "integer"
+        }
+      }
+    },
+    "children": {
+      "type": "array",
+      "description": "Child layers for group layers",
+      "items": {
+        "$ref": "#/components/schemas/Layer"
+      }
+    }
+  }
+}

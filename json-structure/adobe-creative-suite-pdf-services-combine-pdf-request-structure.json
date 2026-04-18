@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-pdf-services-combine-pdf-request-structure.json",
+  "name": "CombinePDFRequest",
+  "description": "Request body for combining multiple PDFs",
+  "type": "object",
+  "properties": {
+    "assets": {
+      "type": "array",
+      "description": "Ordered list of PDF assets to combine",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "assetID"
+        ],
+        "properties": {
+          "assetID": {
+            "type": "string",
+            "description": "Asset ID of the PDF to include"
+          },
+          "pageRanges": {
+            "type": "array",
+            "description": "Optional page ranges to extract from this PDF",
+            "items": {
+              "$ref": "#/components/schemas/PageRange"
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "assets"
+  ]
+}

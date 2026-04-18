@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-firefly-output-image-schema.json",
+  "title": "OutputImage",
+  "description": "A single generated image output from a Firefly generation job",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "description": "Generated image reference",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Temporary signed URL to download the generated image",
+          "example": "https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123"
+        }
+      }
+    },
+    "seed": {
+      "type": "integer",
+      "description": "Seed value used to produce this particular output",
+      "example": 42
+    },
+    "contentClass": {
+      "type": "string",
+      "description": "Content class detected or applied during generation",
+      "enum": [
+        "photo",
+        "art"
+      ],
+      "example": "photo"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "prompt": "example_value",
+  "negativePrompt": "example_value",
+  "image": "example_value",
+  "size": "example_value",
+  "placement": {
+    "inset": {
+      "left": 1920,
+      "top": 1920,
+      "right": 1920,
+      "bottom": 1920
+    }
+  },
+  "numVariations": 1920,
+  "seeds": [
+    1920
+  ]
+}

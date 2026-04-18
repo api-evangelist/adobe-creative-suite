@@ -1,0 +1,9 @@
+{
+  "content_id": 123456789,
+  "purchase_details": {
+    "state": "just_purchased",
+    "license": "example_value",
+    "nb_downloads": 1920
+  },
+  "download_url": "https://stock.adobe.com/Rest/Libraries/Download/123456789/1"
+}

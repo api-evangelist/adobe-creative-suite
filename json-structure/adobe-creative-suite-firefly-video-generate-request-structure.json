@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-firefly-video-generate-request-structure.json",
+  "name": "VideoGenerateRequest",
+  "description": "Request body for text-to-video generation",
+  "type": "object",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Text description of the video to generate",
+      "maxLength": 1024,
+      "example": "A slow camera pan over a misty forest at dawn"
+    },
+    "negativePrompt": {
+      "type": "string",
+      "description": "Text describing what to avoid in the generated video",
+      "maxLength": 1024,
+      "example": "example_value"
+    },
+    "size": {
+      "type": "object",
+      "description": "Output video dimensions",
+      "properties": {
+        "width": {
+          "type": "int32",
+          "example": 1920
+        },
+        "height": {
+          "type": "int32",
+          "example": 1080
+        }
+      }
+    },
+    "duration": {
+      "type": "double",
+      "description": "Requested video duration in seconds",
+      "example": 5.0
+    }
+  },
+  "required": [
+    "prompt"
+  ]
+}

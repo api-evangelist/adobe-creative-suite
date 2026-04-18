@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-pdf-services-operation-submitted-schema.json",
+  "title": "OperationSubmitted",
+  "description": "Response returned when an operation has been accepted",
+  "type": "object",
+  "properties": {
+    "jobID": {
+      "type": "string",
+      "description": "Unique identifier for the submitted operation job",
+      "example": "urn:aaid:AS:UE1:operation:abc123"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-photoshop-cutout-request-structure.json",
+  "name": "CutoutRequest",
+  "description": "Request to remove the background from an image",
+  "type": "object",
+  "properties": {
+    "input": {
+      "$ref": "#/components/schemas/JobInput"
+    },
+    "output": {
+      "$ref": "#/components/schemas/JobOutput"
+    }
+  },
+  "required": [
+    "input",
+    "output"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-firefly-generation-status-schema.json",
+  "title": "GenerationStatus",
+  "description": "Current status and results of a Firefly generation job",
+  "type": "object",
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "description": "Unique identifier of the generation job",
+      "example": "urn:firefly:jobs:abc123def456"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the generation job",
+      "enum": [
+        "pending",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "example": "succeeded"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the job was created",
+      "example": "example_value"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the job was last modified",
+      "example": "example_value"
+    },
+    "outputs": {
+      "type": "array",
+      "description": "Generated output images or videos (present on success)",
+      "items": {
+        "$ref": "#/components/schemas/OutputImage"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "description": "Errors encountered during generation (present on failure)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

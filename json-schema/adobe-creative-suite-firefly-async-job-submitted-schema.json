@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-firefly-async-job-submitted-schema.json",
+  "title": "AsyncJobSubmitted",
+  "description": "Response returned immediately after an async generation job is submitted",
+  "type": "object",
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "description": "Unique identifier for the generation job",
+      "example": "urn:firefly:jobs:abc123def456"
+    },
+    "statusUrl": {
+      "type": "string",
+      "description": "URL to poll for job status updates",
+      "example": "https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456"
+    }
+  }
+}

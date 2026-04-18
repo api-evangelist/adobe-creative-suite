@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-pdf-services-ocr-request-schema.json",
+  "title": "OCRRequest",
+  "description": "Request body for applying OCR to a PDF",
+  "type": "object",
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "Asset ID of the scanned PDF to OCR",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    },
+    "ocrLang": {
+      "type": "string",
+      "description": "BCP 47 locale for OCR language model selection",
+      "example": "en-US"
+    }
+  },
+  "required": [
+    "assetID"
+  ]
+}

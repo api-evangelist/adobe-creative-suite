@@ -1,0 +1,10 @@
+{
+  "content_id": 123456789,
+  "license": "Standard",
+  "locale": "en_US",
+  "purchase_params": {
+    "references": [
+      "example_value"
+    ]
+  }
+}

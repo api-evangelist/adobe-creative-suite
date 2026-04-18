@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-photoshop-product-crop-request-schema.json",
+  "title": "ProductCropRequest",
+  "description": "Request to automatically crop an image to the primary product",
+  "type": "object",
+  "properties": {
+    "input": {
+      "$ref": "#/components/schemas/JobInput"
+    },
+    "output": {
+      "$ref": "#/components/schemas/JobOutput"
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "pixel",
+            "percent"
+          ]
+        },
+        "padding": {
+          "type": "number",
+          "description": "Padding to add around the product crop"
+        }
+      }
+    }
+  },
+  "required": [
+    "input",
+    "output"
+  ]
+}

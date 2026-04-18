@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-photoshop-rendition-create-request-structure.json",
+  "name": "RenditionCreateRequest",
+  "description": "Request to create one or more renditions from a PSD or image",
+  "type": "object",
+  "properties": {
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobInput"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "description": "List of rendition outputs to generate",
+      "items": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobOutput"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "quality": {
+                "type": "integer",
+                "description": "JPEG quality (1-100)",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "compression": {
+                "type": "string",
+                "description": "PNG compression level",
+                "enum": [
+                  "small",
+                  "medium",
+                  "large"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "inputs",
+    "outputs"
+  ]
+}

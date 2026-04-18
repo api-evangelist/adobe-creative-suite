@@ -1,0 +1,8 @@
+{
+  "href": "https://my-storage.blob.core.windows.net/images/output.png",
+  "storage": "external",
+  "type": "image/png",
+  "width": 1920,
+  "height": 1080,
+  "overwrite": true
+}

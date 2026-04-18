@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-pdf-services-asset-upload-response-structure.json",
+  "name": "AssetUploadResponse",
+  "description": "Response containing the upload URI and asset ID",
+  "type": "object",
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "Asset ID to reference in subsequent operations",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    },
+    "uploadUri": {
+      "type": "string",
+      "description": "Pre-signed URI to PUT the file content to",
+      "example": "https://dcplatformstorageservice-us-east-1.s3-accelerate.amazonaws.com/..."
+    }
+  }
+}

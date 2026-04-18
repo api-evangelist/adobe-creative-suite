@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-photoshop-mask-request-structure.json",
+  "name": "MaskRequest",
+  "description": "Request to create an alpha mask for an image",
+  "type": "object",
+  "properties": {
+    "input": {
+      "$ref": "#/components/schemas/JobInput"
+    },
+    "output": {
+      "$ref": "#/components/schemas/JobOutput"
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "optimize": {
+          "type": "string",
+          "description": "Optimization mode for mask generation",
+          "enum": [
+            "performance",
+            "batch"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "input",
+    "output"
+  ]
+}

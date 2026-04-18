@@ -1,0 +1,9 @@
+{
+  "jobId": "f54e0fcb-260b-47c3-b520-de0d17dc2b67",
+  "statusUrl": "https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67",
+  "_links": {
+    "self": {
+      "href": "https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67"
+    }
+  }
+}

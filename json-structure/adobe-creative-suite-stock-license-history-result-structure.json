@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-stock-license-history-result-structure.json",
+  "name": "LicenseHistoryResult",
+  "description": "Paginated license history for the authenticated member",
+  "type": "object",
+  "properties": {
+    "nb_results": {
+      "type": "int32",
+      "description": "Total number of licensing events in the history",
+      "example": 87
+    },
+    "files": {
+      "type": "array",
+      "description": "List of previously licensed stock files",
+      "items": {
+        "$ref": "#/components/schemas/StockFile"
+      }
+    }
+  }
+}

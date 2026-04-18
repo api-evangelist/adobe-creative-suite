@@ -1,0 +1,15 @@
+{
+  "jobId": "urn:firefly:jobs:abc123def456",
+  "status": "succeeded",
+  "created": "example_value",
+  "modified": "example_value",
+  "outputs": [
+    "example_value"
+  ],
+  "errors": [
+    {
+      "code": "example_value",
+      "message": "example_value"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-firefly-image-generate-request-schema.json",
+  "title": "ImageGenerateRequest",
+  "description": "Request body for text-to-image generation",
+  "type": "object",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Text description of the image to generate",
+      "maxLength": 1024,
+      "example": "A serene mountain lake at golden hour with reflections of pine trees"
+    },
+    "negativePrompt": {
+      "type": "string",
+      "description": "Text description of elements to avoid in the generated image",
+      "maxLength": 1024,
+      "example": "blurry, low quality, distorted"
+    },
+    "contentClass": {
+      "type": "string",
+      "description": "Broad content category to guide the generation model",
+      "enum": [
+        "photo",
+        "art"
+      ],
+      "example": "photo"
+    },
+    "numVariations": {
+      "type": "integer",
+      "description": "Number of image variations to generate (1 to 4)",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 1,
+      "example": 2
+    },
+    "size": {
+      "$ref": "#/components/schemas/ImageSize"
+    },
+    "style": {
+      "$ref": "#/components/schemas/StyleOptions"
+    },
+    "seeds": {
+      "type": "array",
+      "description": "Array of integer seed values for reproducible generation. Providing the same seed with the same prompt produces the same output.",
+      "items": {
+        "type": "integer"
+      },
+      "example": [
+        42,
+        1337
+      ]
+    },
+    "locale": {
+      "type": "string",
+      "description": "BCP 47 language locale for prompt interpretation",
+      "example": "en-US"
+    }
+  },
+  "required": [
+    "prompt"
+  ]
+}

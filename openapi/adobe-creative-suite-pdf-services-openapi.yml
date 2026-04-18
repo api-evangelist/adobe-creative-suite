@@ -17,42 +17,42 @@ info:
     name: Adobe Developer Terms
     url: https://www.adobe.com/legal/developer-terms.html
 servers:
-  - url: https://pdf-services.adobe.io
-    description: Adobe PDF Services API production server
+- url: https://pdf-services.adobe.io
+  description: Adobe PDF Services API production server
 security:
-  - bearerAuth: []
+- bearerAuth: []
 tags:
-  - name: Accessibility
-    description: Auto-tag PDFs for accessibility compliance
-  - name: Assets
-    description: Upload and manage input/output assets for PDF operations
-  - name: Combine PDF
-    description: Combine multiple PDFs into one
-  - name: Compress PDF
-    description: Reduce PDF file size
-  - name: Create PDF
-    description: Create PDF documents from other formats
-  - name: Document Generation
-    description: Generate documents from templates and data
-  - name: Export PDF
-    description: Export PDF documents to other formats
-  - name: Linearize PDF
-    description: Optimize PDFs for fast web viewing
-  - name: OCR
-    description: Apply optical character recognition to scanned PDFs
-  - name: Operations
-    description: Check operation job status
+- name: Accessibility
+  description: Auto-tag PDFs for accessibility compliance
+- name: Assets
+  description: Upload and manage input/output assets for PDF operations
+- name: Combine PDF
+  description: Combine multiple PDFs into one
+- name: Compress PDF
+  description: Reduce PDF file size
+- name: Create PDF
+  description: Create PDF documents from other formats
+- name: Document Generation
+  description: Generate documents from templates and data
+- name: Export PDF
+  description: Export PDF documents to other formats
+- name: Linearize PDF
+  description: Optimize PDFs for fast web viewing
+- name: OCR
+  description: Apply optical character recognition to scanned PDFs
+- name: Operations
+  description: Check operation job status
 paths:
   /assets:
     post:
       operationId: uploadAsset
-      summary: Adobe Creative Suite Upload asset
+      summary: Adobe Creative Suite Upload Asset
       description: >-
         Initiates an asset upload by returning a pre-signed upload URI and an asset ID.
         The caller must then PUT the file content to the returned upload URI. Once the
         upload is complete, the asset ID can be referenced as input to PDF operations.
       tags:
-        - Assets
+      - Assets
       requestBody:
         required: true
         content:
@@ -78,24 +78,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /assets/{assetID}:
     get:
       operationId: getAsset
-      summary: Adobe Creative Suite Get asset
+      summary: Adobe Creative Suite Get Asset
       description: >-
         Retrieves metadata and a temporary download URI for a previously uploaded asset.
         The download URI is time-limited and can be used to download the asset content
         directly.
       tags:
-        - Assets
+      - Assets
       parameters:
-        - name: assetID
-          in: path
-          required: true
-          description: Unique identifier of the asset to retrieve
-          schema:
-            type: string
-            example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+      - name: assetID
+        in: path
+        required: true
+        description: Unique identifier of the asset to retrieve
+        schema:
+          type: string
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
       responses:
         '200':
           description: Asset metadata and download URI retrieved successfully
@@ -115,23 +119,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteAsset
-      summary: Adobe Creative Suite Delete asset
+      summary: Adobe Creative Suite Delete Asset
       description: >-
         Permanently deletes an uploaded asset. Assets are automatically deleted after
         24 hours, but this endpoint allows immediate deletion when the asset is no
         longer needed.
       tags:
-        - Assets
+      - Assets
       parameters:
-        - name: assetID
-          in: path
-          required: true
-          description: Unique identifier of the asset to delete
-          schema:
-            type: string
-            example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+      - name: assetID
+        in: path
+        required: true
+        description: Unique identifier of the asset to delete
+        schema:
+          type: string
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
       responses:
         '200':
           description: Asset deleted successfully
@@ -147,6 +155,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /operation/createpdf:
     post:
       operationId: createPDF
@@ -156,7 +167,7 @@ paths:
         Excel, PowerPoint, or HTML. The source file must be uploaded first using the
         asset upload endpoint. Returns a job ID for polling the operation status.
       tags:
-        - Create PDF
+      - Create PDF
       requestBody:
         required: true
         content:
@@ -187,6 +198,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /operation/exportpdf:
     post:
       operationId: exportPDF
@@ -196,7 +210,7 @@ paths:
         Excel (.xlsx), PowerPoint (.pptx), RTF, or plain text. The source PDF must
         be uploaded first. Returns a job ID for polling the operation status.
       tags:
-        - Export PDF
+      - Export PDF
       requestBody:
         required: true
         content:
@@ -227,6 +241,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /operation/combinepdf:
     post:
       operationId: combinePDFs
@@ -236,7 +253,7 @@ paths:
         are specified in order and merged sequentially. Page ranges from each source
         can optionally be specified to include only specific pages.
       tags:
-        - Combine PDF
+      - Combine PDF
       requestBody:
         required: true
         content:
@@ -267,6 +284,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /operation/compressPDF:
     post:
       operationId: compressPDF
@@ -276,7 +296,7 @@ paths:
         images and removing redundant data. Compression level can be set to balance
         between file size and output quality.
       tags:
-        - Compress PDF
+      - Compress PDF
       requestBody:
         required: true
         content:
@@ -307,6 +327,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /operation/linearizePDF:
     post:
       operationId: linearizePDF
@@ -316,7 +339,7 @@ paths:
         displayed in a browser before the entire file has downloaded. This is also
         known as fast web view optimization.
       tags:
-        - Linearize PDF
+      - Linearize PDF
       requestBody:
         required: true
         content:
@@ -347,6 +370,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /operation/ocr:
     post:
       operationId: ocrPDF
@@ -356,7 +382,7 @@ paths:
         making the text content searchable and selectable. Supports multiple locales
         for improved recognition accuracy with non-English documents.
       tags:
-        - OCR
+      - OCR
       requestBody:
         required: true
         content:
@@ -387,17 +413,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /operation/autotagpdf:
     post:
       operationId: autoTagPDF
-      summary: Adobe Creative Suite Auto-tag PDF for accessibility
+      summary: Adobe Creative Suite Auto-tag PDF for Accessibility
       description: >-
         Automatically adds accessibility tags to a PDF document to make it compliant
         with PDF/UA and WCAG standards. Tags identify headings, paragraphs, tables,
         figures, and other document structure elements for screen readers and assistive
         technologies.
       tags:
-        - Accessibility
+      - Accessibility
       requestBody:
         required: true
         content:
@@ -428,16 +457,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /operation/documentgeneration:
     post:
       operationId: generateDocument
-      summary: Adobe Creative Suite Generate document from template
+      summary: Adobe Creative Suite Generate Document from Template
       description: >-
         Generates a PDF or Word document by merging JSON data into a Word document
         template. Template tags in the document are replaced with corresponding data
         values. Supports tables, lists, conditional sections, and images in templates.
       tags:
-        - Document Generation
+      - Document Generation
       requestBody:
         required: true
         content:
@@ -468,24 +500,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /operation/{jobId}:
     get:
       operationId: getOperationStatus
-      summary: Adobe Creative Suite Get operation status
+      summary: Adobe Creative Suite Get Operation Status
       description: >-
         Retrieves the current status of a PDF Services operation job. Poll this
         endpoint after submitting any operation to check progress. On success, the
         response contains a reference to the output asset.
       tags:
-        - Operations
+      - Operations
       parameters:
-        - name: jobId
-          in: path
-          required: true
-          description: Unique identifier of the operation job to check
-          schema:
-            type: string
-            example: urn:aaid:AS:UE1:operation:abc123
+      - name: jobId
+        in: path
+        required: true
+        description: Unique identifier of the operation job to check
+        schema:
+          type: string
+          example: urn:aaid:AS:UE1:operation:abc123
+        example: urn:aaid:AS:UE1:operation:abc123
       responses:
         '200':
           description: Operation status retrieved successfully
@@ -505,6 +541,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -537,7 +576,7 @@ components:
       type: object
       description: Request to initiate an asset upload
       required:
-        - mediaType
+      - mediaType
       properties:
         mediaType:
           type: string
@@ -559,7 +598,7 @@ components:
       type: object
       description: Reference to an existing uploaded asset
       required:
-        - assetID
+      - assetID
       properties:
         assetID:
           type: string
@@ -593,9 +632,9 @@ components:
           type: string
           description: Current status of the operation
           enum:
-            - in progress
-            - done
-            - failed
+          - in progress
+          - done
+          - failed
           example: done
         asset:
           $ref: '#/components/schemas/Asset'
@@ -613,7 +652,7 @@ components:
       type: object
       description: Request body for creating a PDF from another format
       required:
-        - assetID
+      - assetID
       properties:
         assetID:
           type: string
@@ -627,8 +666,8 @@ components:
       type: object
       description: Request body for exporting a PDF to another format
       required:
-        - assetID
-        - targetFormat
+      - assetID
+      - targetFormat
       properties:
         assetID:
           type: string
@@ -638,11 +677,11 @@ components:
           type: string
           description: Target output format for the exported file
           enum:
-            - docx
-            - xlsx
-            - pptx
-            - rtf
-            - txt
+          - docx
+          - xlsx
+          - pptx
+          - rtf
+          - txt
           example: docx
         exportOCRLocale:
           type: string
@@ -652,7 +691,7 @@ components:
       type: object
       description: Request body for combining multiple PDFs
       required:
-        - assets
+      - assets
       properties:
         assets:
           type: array
@@ -661,7 +700,7 @@ components:
           items:
             type: object
             required:
-              - assetID
+            - assetID
             properties:
               assetID:
                 type: string
@@ -675,7 +714,7 @@ components:
       type: object
       description: Request body for compressing a PDF
       required:
-        - assetID
+      - assetID
       properties:
         assetID:
           type: string
@@ -685,15 +724,16 @@ components:
           type: string
           description: Compression level to apply
           enum:
-            - LOW
-            - MEDIUM
-            - HIGH
+          - LOW
+          - MEDIUM
+          - HIGH
           default: MEDIUM
+          example: LOW
     LinearizePDFRequest:
       type: object
       description: Request body for linearizing a PDF for fast web view
       required:
-        - assetID
+      - assetID
       properties:
         assetID:
           type: string
@@ -703,7 +743,7 @@ components:
       type: object
       description: Request body for applying OCR to a PDF
       required:
-        - assetID
+      - assetID
       properties:
         assetID:
           type: string
@@ -717,7 +757,7 @@ components:
       type: object
       description: Request body for auto-tagging a PDF for accessibility
       required:
-        - assetID
+      - assetID
       properties:
         assetID:
           type: string
@@ -727,17 +767,19 @@ components:
           type: boolean
           description: Whether to generate an accessibility report alongside the tagged PDF
           default: false
+          example: true
         shiftHeadings:
           type: boolean
           description: Whether to shift heading levels in the output for better document structure
           default: false
+          example: true
     DocumentGenerationRequest:
       type: object
       description: Request body for generating a document from a template
       required:
-        - assetID
-        - outputFormat
-        - jsonDataForMerge
+      - assetID
+      - outputFormat
+      - jsonDataForMerge
       properties:
         assetID:
           type: string
@@ -747,8 +789,8 @@ components:
           type: string
           description: Output format of the generated document
           enum:
-            - pdf
-            - docx
+          - pdf
+          - docx
           example: pdf
         jsonDataForMerge:
           type: object
@@ -762,6 +804,7 @@ components:
           type: boolean
           description: Whether to include non-tagged content as plain text additions
           default: false
+          example: true
     ErrorResponse:
       type: object
       description: Standard error response
@@ -769,9 +812,12 @@ components:
         code:
           type: string
           description: Machine-readable error code
+          example: example_value
         message:
           type: string
           description: Human-readable error message
+          example: example_value
         requestId:
           type: string
           description: Unique identifier for the failed request
+          example: asset_abc123

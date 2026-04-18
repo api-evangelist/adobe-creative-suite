@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-photoshop-job-submitted-structure.json",
+  "name": "JobSubmitted",
+  "description": "Response returned immediately after a job is submitted",
+  "type": "object",
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "description": "Unique identifier for the submitted job",
+      "example": "f54e0fcb-260b-47c3-b520-de0d17dc2b67"
+    },
+    "statusUrl": {
+      "type": "string",
+      "description": "URL to poll for job status",
+      "example": "https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67"
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "example": "https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67"
+            }
+          }
+        }
+      }
+    }
+  }
+}

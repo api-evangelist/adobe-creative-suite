@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-firefly-input-image-reference-structure.json",
+  "name": "InputImageReference",
+  "description": "Reference to an input image for generative operations",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "object",
+      "description": "Source of the input image",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Publicly accessible URL of the input image",
+          "example": "https://my-bucket.s3.amazonaws.com/source-image.jpg"
+        },
+        "uploadId": {
+          "type": "string",
+          "description": "Upload ID for a previously uploaded image via the Firefly upload API"
+        }
+      }
+    }
+  },
+  "required": [
+    "source"
+  ]
+}

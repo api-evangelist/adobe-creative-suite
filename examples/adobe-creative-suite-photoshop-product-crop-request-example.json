@@ -1,0 +1,8 @@
+{
+  "input": "example_value",
+  "output": "example_value",
+  "options": {
+    "unit": "percent",
+    "padding": 72.0
+  }
+}

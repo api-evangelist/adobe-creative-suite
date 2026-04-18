@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-photoshop-job-output-structure.json",
+  "name": "JobOutput",
+  "description": "Reference to an output file location in cloud storage",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "description": "URL or path where the output file will be stored",
+      "example": "https://my-storage.blob.core.windows.net/images/output.png"
+    },
+    "storage": {
+      "type": "string",
+      "description": "Cloud storage provider type",
+      "enum": [
+        "adobe",
+        "external",
+        "azure",
+        "dropbox"
+      ],
+      "example": "external"
+    },
+    "type": {
+      "type": "string",
+      "description": "MIME type of the output file",
+      "example": "image/png"
+    },
+    "width": {
+      "type": "int32",
+      "description": "Output width in pixels",
+      "example": 1920
+    },
+    "height": {
+      "type": "int32",
+      "description": "Output height in pixels",
+      "example": 1080
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Whether to overwrite the output file if it already exists",
+      "default": true,
+      "example": true
+    }
+  },
+  "required": [
+    "href",
+    "storage",
+    "type"
+  ]
+}

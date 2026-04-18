@@ -1,0 +1,16 @@
+{
+  "id": 1920,
+  "title": "example_value",
+  "creator_name": "Example Asset",
+  "creator_id": 1920,
+  "country_name": "Example Asset",
+  "width": 1920,
+  "height": 1920,
+  "media_type_id": 7,
+  "content_type": "image",
+  "keywords": [
+    {
+      "name": "Example Asset"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-stock-stock-file-response-structure.json",
+  "name": "StockFileResponse",
+  "description": "Response wrapper for a single stock file metadata request",
+  "type": "object",
+  "properties": {
+    "files": {
+      "type": "array",
+      "description": "Array containing the requested file (always contains one item)",
+      "items": {
+        "$ref": "#/components/schemas/StockFile"
+      }
+    }
+  }
+}

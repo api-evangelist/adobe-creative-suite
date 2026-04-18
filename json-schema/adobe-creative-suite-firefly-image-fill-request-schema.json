@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-firefly-image-fill-request-schema.json",
+  "title": "ImageFillRequest",
+  "description": "Request body for generative fill operation",
+  "type": "object",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Text prompt describing what to fill in the masked area",
+      "maxLength": 1024,
+      "example": "example_value"
+    },
+    "negativePrompt": {
+      "type": "string",
+      "description": "Text describing what to avoid in the filled area",
+      "maxLength": 1024,
+      "example": "example_value"
+    },
+    "image": {
+      "$ref": "#/components/schemas/InputImageReference"
+    },
+    "mask": {
+      "$ref": "#/components/schemas/InputImageReference"
+    },
+    "numVariations": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 1,
+      "example": 1920
+    },
+    "seeds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    }
+  },
+  "required": [
+    "image",
+    "mask"
+  ]
+}

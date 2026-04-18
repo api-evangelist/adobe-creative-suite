@@ -17,35 +17,35 @@ info:
     name: Adobe Developer Terms
     url: https://www.adobe.com/legal/developer-terms.html
 servers:
-  - url: https://firefly-api.adobe.io/v3
-    description: Adobe Firefly API v3 production server
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
 security:
-  - bearerAuth: []
+- bearerAuth: []
 tags:
-  - name: Generative Expand
-    description: Expand images beyond their original boundaries
-  - name: Generative Fill
-    description: Fill selected regions of images with AI-generated content
-  - name: Image Generation
-    description: Text-to-image and image variation generation operations
-  - name: Object Composite
-    description: Composite AI-generated objects into existing images
-  - name: Status
-    description: Asynchronous job status polling
-  - name: Video Generation
-    description: Generate video from text prompts
+- name: Generative Expand
+  description: Expand images beyond their original boundaries
+- name: Generative Fill
+  description: Fill selected regions of images with AI-generated content
+- name: Image Generation
+  description: Text-to-image and image variation generation operations
+- name: Object Composite
+  description: Composite AI-generated objects into existing images
+- name: Status
+  description: Asynchronous job status polling
+- name: Video Generation
+  description: Generate video from text prompts
 paths:
   /images/generate-async:
     post:
       operationId: generateImagesAsync
-      summary: Adobe Creative Suite Generate images from text prompt
+      summary: Adobe Creative Suite Generate Images from Text Prompt
       description: >-
         Generates one or more images from a text prompt using the Adobe Firefly generative
         AI model. Supports optional style presets, content class selection, negative
         prompts, and seed values for reproducibility. The operation is asynchronous;
         use the returned job ID to poll for completion and retrieve output image URLs.
       tags:
-        - Image Generation
+      - Image Generation
       requestBody:
         required: true
         content:
@@ -77,16 +77,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /images/expand-async:
     post:
       operationId: expandImageAsync
-      summary: Adobe Creative Suite Generative expand image
+      summary: Adobe Creative Suite Generative Expand Image
       description: >-
         Expands an existing image beyond its original boundaries using generative AI
         to fill in the new regions. The expansion can be directional and supports
         specifying a prompt to guide the content generated in the expanded areas.
       tags:
-        - Generative Expand
+      - Generative Expand
       requestBody:
         required: true
         content:
@@ -112,16 +115,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /images/fill-async:
     post:
       operationId: fillImageAsync
-      summary: Adobe Creative Suite Generative fill
+      summary: Adobe Creative Suite Generative Fill
       description: >-
         Fills a masked region of an existing image with AI-generated content based on
         a text prompt. A mask image defines the area to be filled. The generative fill
         respects the surrounding context to produce seamlessly blended results.
       tags:
-        - Generative Fill
+      - Generative Fill
       requestBody:
         required: true
         content:
@@ -147,16 +153,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /images/generate-similar-async:
     post:
       operationId: generateSimilarImagesAsync
-      summary: Adobe Creative Suite Generate similar images
+      summary: Adobe Creative Suite Generate Similar Images
       description: >-
         Generates images that are visually similar to a provided reference image while
         optionally being guided by a text prompt. Useful for producing variations of an
         existing image or exploring stylistic alternatives based on a visual reference.
       tags:
-        - Image Generation
+      - Image Generation
       requestBody:
         required: true
         content:
@@ -182,16 +191,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /images/generate-object-composite-async:
     post:
       operationId: generateObjectCompositeAsync
-      summary: Adobe Creative Suite Generate object composite
+      summary: Adobe Creative Suite Generate Object Composite
       description: >-
         Generates an AI-rendered object and composites it into an existing scene image.
         The object is described via a text prompt and is placed into the scene with
         appropriate lighting, shadows, and perspective to appear naturally integrated.
       tags:
-        - Object Composite
+      - Object Composite
       requestBody:
         required: true
         content:
@@ -217,17 +229,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /videos/generate-async:
     post:
       operationId: generateVideoAsync
-      summary: Adobe Creative Suite Generate video from text prompt
+      summary: Adobe Creative Suite Generate Video from Text Prompt
       description: >-
         Generates a short video clip from a text prompt using the Adobe Firefly video
         generation model. Generally Available as of June 2025. Supports specifying
         duration, aspect ratio, and motion style through the request parameters. The
         operation is asynchronous and may take several minutes to complete.
       tags:
-        - Video Generation
+      - Video Generation
       requestBody:
         required: true
         content:
@@ -253,25 +268,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /status/{jobId}:
     get:
       operationId: getGenerationStatus
-      summary: Adobe Creative Suite Get async job status
+      summary: Adobe Creative Suite Get Async Job Status
       description: >-
         Retrieves the current status of an asynchronous Firefly generation job. Poll
         this endpoint after submitting a generation request to determine if the job
         is pending, running, succeeded, or failed. On success, the response includes
         URLs to the generated output images or video.
       tags:
-        - Status
+      - Status
       parameters:
-        - name: jobId
-          in: path
-          required: true
-          description: Unique identifier of the generation job to check
-          schema:
-            type: string
-            example: urn:firefly:jobs:abc123def456
+      - name: jobId
+        in: path
+        required: true
+        description: Unique identifier of the generation job to check
+        schema:
+          type: string
+          example: urn:firefly:jobs:abc123def456
+        example: urn:firefly:jobs:abc123def456
       responses:
         '200':
           description: Job status retrieved successfully
@@ -291,6 +310,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -303,7 +325,7 @@ components:
       type: object
       description: Request body for text-to-image generation
       required:
-        - prompt
+      - prompt
       properties:
         prompt:
           type: string
@@ -319,8 +341,8 @@ components:
           type: string
           description: Broad content category to guide the generation model
           enum:
-            - photo
-            - art
+          - photo
+          - art
           example: photo
         numVariations:
           type: integer
@@ -341,8 +363,8 @@ components:
           items:
             type: integer
           example:
-            - 42
-            - 1337
+          - 42
+          - 1337
         locale:
           type: string
           description: BCP 47 language locale for prompt interpretation
@@ -351,16 +373,18 @@ components:
       type: object
       description: Request body for generative image expansion
       required:
-        - image
+      - image
       properties:
         prompt:
           type: string
           description: Text prompt to guide what content fills the expanded areas
           maxLength: 1024
+          example: example_value
         negativePrompt:
           type: string
           description: Text describing what to avoid in the expanded areas
           maxLength: 1024
+          example: example_value
         image:
           $ref: '#/components/schemas/InputImageReference'
         size:
@@ -385,6 +409,7 @@ components:
           minimum: 1
           maximum: 4
           default: 1
+          example: 1920
         seeds:
           type: array
           items:
@@ -393,17 +418,19 @@ components:
       type: object
       description: Request body for generative fill operation
       required:
-        - image
-        - mask
+      - image
+      - mask
       properties:
         prompt:
           type: string
           description: Text prompt describing what to fill in the masked area
           maxLength: 1024
+          example: example_value
         negativePrompt:
           type: string
           description: Text describing what to avoid in the filled area
           maxLength: 1024
+          example: example_value
         image:
           $ref: '#/components/schemas/InputImageReference'
         mask:
@@ -413,6 +440,7 @@ components:
           minimum: 1
           maximum: 4
           default: 1
+          example: 1920
         seeds:
           type: array
           items:
@@ -421,12 +449,13 @@ components:
       type: object
       description: Request body for generating images similar to a reference image
       required:
-        - image
+      - image
       properties:
         prompt:
           type: string
           description: Optional text prompt to further guide the style or content
           maxLength: 1024
+          example: example_value
         image:
           $ref: '#/components/schemas/InputImageReference'
         numVariations:
@@ -434,6 +463,7 @@ components:
           minimum: 1
           maximum: 4
           default: 1
+          example: 1920
         size:
           $ref: '#/components/schemas/ImageSize'
         seeds:
@@ -444,23 +474,26 @@ components:
       type: object
       description: Request body for generating an object composite in a scene
       required:
-        - prompt
-        - image
-        - mask
+      - prompt
+      - image
+      - mask
       properties:
         prompt:
           type: string
           description: Text description of the object to generate and composite
           maxLength: 1024
+          example: example_value
         negativePrompt:
           type: string
           description: Text describing what to avoid in the generated object
           maxLength: 1024
+          example: example_value
         contentClass:
           type: string
           enum:
-            - photo
-            - art
+          - photo
+          - art
+          example: photo
         image:
           $ref: '#/components/schemas/InputImageReference'
         mask:
@@ -470,6 +503,7 @@ components:
           minimum: 1
           maximum: 4
           default: 1
+          example: 1920
         seeds:
           type: array
           items:
@@ -478,7 +512,7 @@ components:
       type: object
       description: Request body for text-to-video generation
       required:
-        - prompt
+      - prompt
       properties:
         prompt:
           type: string
@@ -489,6 +523,7 @@ components:
           type: string
           description: Text describing what to avoid in the generated video
           maxLength: 1024
+          example: example_value
         size:
           type: object
           description: Output video dimensions
@@ -527,19 +562,21 @@ components:
           type: string
           description: Current status of the generation job
           enum:
-            - pending
-            - running
-            - succeeded
-            - failed
+          - pending
+          - running
+          - succeeded
+          - failed
           example: succeeded
         created:
           type: string
           format: date-time
           description: ISO 8601 timestamp when the job was created
+          example: example_value
         modified:
           type: string
           format: date-time
           description: ISO 8601 timestamp when the job was last modified
+          example: example_value
         outputs:
           type: array
           description: Generated output images or videos (present on success)
@@ -575,13 +612,14 @@ components:
           type: string
           description: Content class detected or applied during generation
           enum:
-            - photo
-            - art
+          - photo
+          - art
+          example: photo
     InputImageReference:
       type: object
       description: Reference to an input image for generative operations
       required:
-        - source
+      - source
       properties:
         source:
           type: object
@@ -616,23 +654,23 @@ components:
           items:
             type: string
             enum:
-              - photo
-              - art
-              - graphic
-              - bw
-              - cool_colors
-              - warm_tone
-              - muted_color
-              - vibrant_color
-              - pastel_color
-              - golden_hour
-              - closeup_portrait
-              - wide_angle
-              - aerial_view
-              - landscape_photography
-          example:
             - photo
+            - art
+            - graphic
+            - bw
+            - cool_colors
+            - warm_tone
+            - muted_color
+            - vibrant_color
+            - pastel_color
             - golden_hour
+            - closeup_portrait
+            - wide_angle
+            - aerial_view
+            - landscape_photography
+          example:
+          - photo
+          - golden_hour
         strength:
           type: integer
           description: Style influence strength from 1 (subtle) to 100 (strong)
@@ -645,16 +683,16 @@ components:
       type: string
       description: Available style preset identifiers for Firefly generation
       enum:
-        - photo
-        - art
-        - graphic
-        - bw
-        - cool_colors
-        - warm_tone
-        - muted_color
-        - vibrant_color
-        - pastel_color
-        - golden_hour
+      - photo
+      - art
+      - graphic
+      - bw
+      - cool_colors
+      - warm_tone
+      - muted_color
+      - vibrant_color
+      - pastel_color
+      - golden_hour
     ErrorResponse:
       type: object
       description: Standard error response body
@@ -662,9 +700,12 @@ components:
         code:
           type: string
           description: Machine-readable error code
+          example: example_value
         message:
           type: string
           description: Human-readable description of the error
+          example: example_value
         requestId:
           type: string
           description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123

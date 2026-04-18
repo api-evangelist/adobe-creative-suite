@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-schema/adobe-creative-suite-pdf-services-asset-schema.json",
+  "title": "Asset",
+  "description": "Metadata and download reference for an uploaded asset",
+  "type": "object",
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "Unique identifier for the asset",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    },
+    "mediaType": {
+      "type": "string",
+      "description": "MIME type of the asset",
+      "example": "application/pdf"
+    },
+    "downloadUri": {
+      "type": "string",
+      "description": "Temporary signed URL to download the asset",
+      "example": "https://dcplatformstorageservice-us-east-1.s3-accelerate.amazonaws.com/..."
+    },
+    "size": {
+      "type": "integer",
+      "description": "File size in bytes",
+      "example": 204800
+    }
+  }
+}

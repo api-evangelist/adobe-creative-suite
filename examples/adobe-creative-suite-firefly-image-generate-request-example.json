@@ -1,0 +1,13 @@
+{
+  "prompt": "A serene mountain lake at golden hour with reflections of pine trees",
+  "negativePrompt": "blurry, low quality, distorted",
+  "contentClass": "photo",
+  "numVariations": 2,
+  "size": "example_value",
+  "style": "example_value",
+  "seeds": [
+    42,
+    1337
+  ],
+  "locale": "en-US"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-firefly-image-size-structure.json",
+  "name": "ImageSize",
+  "description": "Dimensions for the output image",
+  "type": "object",
+  "properties": {
+    "width": {
+      "type": "int32",
+      "description": "Output image width in pixels",
+      "example": 1024
+    },
+    "height": {
+      "type": "int32",
+      "description": "Output image height in pixels",
+      "example": 1024
+    }
+  }
+}

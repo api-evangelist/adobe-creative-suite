@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/json-structure/adobe-creative-suite-pdf-services-create-pdf-request-structure.json",
+  "name": "CreatePDFRequest",
+  "description": "Request body for creating a PDF from another format",
+  "type": "object",
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "Asset ID of the source file to convert to PDF",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    },
+    "documentLanguage": {
+      "type": "string",
+      "description": "BCP 47 language code of the source document for better conversion",
+      "example": "en-US"
+    }
+  },
+  "required": [
+    "assetID"
+  ]
+}
