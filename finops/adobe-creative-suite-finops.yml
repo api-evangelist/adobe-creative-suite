@@ -1,0 +1,268 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: Adobe Creative Suite
+providerId: adobe-creative-suite
+publisherName: Adobe Creative Suite
+serviceCategory: API
+created: '2026-05-04'
+modified: '2026-05-04'
+tags:
+  - Creative
+  - Design
+  - Graphics
+  - Photography
+  - Video
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: FinOps framework definition for the Adobe Creative Suite API surface. Provides a FOCUS-aligned
+  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+principles:
+  - name: Visibility
+    description: Make API consumption costs visible to engineering, product, and finance teams in near
+      real-time.
+  - name: Allocation
+    description: Tag every chargeable API call with the consuming team, environment, application, and
+      feature so cost can be allocated.
+  - name: Optimization
+    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
+      cost per useful unit of work.
+  - name: Accountability
+    description: Establish budget owners and chargeback or showback flows for each consuming team.
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - Data Ingestion
+      - Allocation
+      - Reporting and Analytics
+      - Anomaly Management
+  - name: Quantify Business Value
+    capabilities:
+      - Planning and Estimating
+      - Forecasting
+      - Budgeting
+      - Benchmarking
+      - Unit Economics
+  - name: Optimize Usage and Cost
+    capabilities:
+      - Architecting for Cloud
+      - Rate Optimization
+      - Workload Optimization
+      - Cloud Sustainability
+      - Licensing and SaaS
+  - name: Manage the FinOps Practice
+    capabilities:
+      - FinOps Practice Operations
+      - FinOps Education and Enablement
+      - Invoicing and Chargeback
+      - Onboarding Workloads
+      - Intersecting Disciplines
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Credit
+    - Adjustment
+  chargeFrequency: Recurring
+focusColumns:
+  ServiceName: Adobe Creative Suite
+  ServiceCategory: Developer Tools / API
+  ProviderName: Adobe Creative Suite
+  PublisherName: Adobe Creative Suite
+  InvoiceIssuerName: Adobe Creative Suite
+  PricingCategory: Usage-Based
+  PricingUnit: request
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: api_requests
+    description: Count of billable API requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+      - region
+      - consumer
+  - name: data_egress
+    description: Bytes returned over the network in API responses
+    unit: GB
+    aggregation: sum
+    dimensions:
+      - api
+      - region
+      - consumer
+  - name: compute_seconds
+    description: Server-side compute consumed by the request, where applicable
+    unit: second
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+apis:
+  - name: Adobe Photoshop API
+    baseURL: https://image.adobe.io
+    tags:
+      - Automation
+      - Graphics
+      - Image Editing
+      - Photoshop
+    serviceName: Adobe Photoshop API
+    serviceCategory: API
+  - name: Adobe Lightroom API
+    baseURL: https://lr.adobe.io
+    tags:
+      - Editing
+      - Lightroom
+      - Photo Management
+      - Photography
+    serviceName: Adobe Lightroom API
+    serviceCategory: API
+  - name: Adobe Illustrator API
+    baseURL: https://image.adobe.io
+    tags:
+      - Automation
+      - Design
+      - Illustrator
+      - Vector Graphics
+    serviceName: Adobe Illustrator API
+    serviceCategory: API
+  - name: Adobe InDesign API
+    baseURL: https://indesign-api.adobe.io
+    tags:
+      - Documents
+      - InDesign
+      - Layout
+      - Publishing
+    serviceName: Adobe InDesign API
+    serviceCategory: API
+  - name: Adobe Premiere Pro API
+    baseURL: https://premiere-api.adobe.io
+    tags:
+      - Automation
+      - Media
+      - Premiere Pro
+      - Video Editing
+    serviceName: Adobe Premiere Pro API
+    serviceCategory: API
+  - name: Adobe After Effects API
+    baseURL: https://aftereffects-api.adobe.io
+    tags:
+      - After Effects
+      - Animation
+      - Motion Graphics
+      - Visual Effects
+    serviceName: Adobe After Effects API
+    serviceCategory: API
+  - name: Adobe Creative Cloud Libraries API
+    baseURL: https://cc-libraries.adobe.io
+    tags:
+      - Assets
+      - Collaboration
+      - Creative Cloud
+      - Libraries
+    serviceName: Adobe Creative Cloud Libraries API
+    serviceCategory: API
+  - name: Adobe Stock API
+    baseURL: https://stock.adobe.io
+    tags:
+      - Images
+      - Licensing
+      - Stock
+      - Video
+    serviceName: Adobe Stock API
+    serviceCategory: API
+  - name: Adobe Firefly API
+    baseURL: https://firefly-api.adobe.io/v3
+    tags:
+      - Creative AI
+      - Firefly
+      - Generative AI
+      - Image Generation
+    serviceName: Adobe Firefly API
+    serviceCategory: API
+  - name: Adobe PDF Services API
+    baseURL: https://pdf-services.adobe.io
+    tags:
+      - Acrobat
+      - Document Conversion
+      - Document Services
+      - PDF
+    serviceName: Adobe PDF Services API
+    serviceCategory: API
+  - name: Adobe Analytics API
+    baseURL: https://analytics.adobe.io/api
+    tags:
+      - Analytics
+      - Data
+      - Experience Cloud
+      - Reporting
+    serviceName: Adobe Analytics API
+    serviceCategory: API
+  - name: Adobe Experience Manager Assets API
+    baseURL: https://author-{program}-{environment}.adobeaemcloud.com/api
+    tags:
+      - AEM
+      - Content Management
+      - Digital Asset Management
+      - Experience Manager
+    serviceName: Adobe Experience Manager Assets API
+    serviceCategory: API
+  - name: Adobe Acrobat Sign API
+    baseURL: https://api.na1.adobesign.com/api/rest/v6
+    tags:
+      - Acrobat Sign
+      - Agreements
+      - Documents
+      - Electronic Signatures
+    serviceName: Adobe Acrobat Sign API
+    serviceCategory: API
+  - name: Adobe Fonts API
+    baseURL: https://fonts.adobe.io
+    tags:
+      - Design
+      - Fonts
+      - Typography
+      - Web Fonts
+    serviceName: Adobe Fonts API
+    serviceCategory: API
+  - name: Adobe Express Embed SDK
+    baseURL: https://express-api.adobe.io
+    tags:
+      - Design
+      - Embed SDK
+      - Express
+      - Templates
+    serviceName: Adobe Express Embed SDK
+    serviceCategory: API
+  - name: Adobe UXP
+    baseURL: https://developer.adobe.com/uxp/
+    tags:
+      - Creative Cloud
+      - Extensibility
+      - Plugins
+      - UXP
+    serviceName: Adobe UXP
+    serviceCategory: API
+unitEconomics:
+  - name: Cost per 1K Requests
+    metric: billed_cost / (api_requests / 1000)
+    target: TBD
+  - name: Cost per Active Consumer
+    metric: billed_cost / active_consumers
+    target: TBD
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
