@@ -445,7 +445,7 @@ apis:
     url: https://developer.adobe.com/support/
   aid: adobe-creative-suite:uxp
 common:
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/adobe-creative-suite-context.jsonld
 - type: JSONSchema
   url: json-schema/adobe-creative-suite-image-job-schema.json
@@ -463,11 +463,11 @@ common:
   url: https://developer.adobe.com/developer-console/docs/
 - type: Blog
   url: https://blog.developer.adobe.com/
-- type: GitHub Organization
+- type: GitHubOrganization
   url: https://github.com/adobe
 - type: Community
   url: https://community.adobe.com/t5/developers/ct-p/developers
-- type: Stack Overflow
+- type: StackOverflow
   url: https://stackoverflow.com/questions/tagged/adobe
 - type: Console
   url: https://developer.adobe.com/console/
