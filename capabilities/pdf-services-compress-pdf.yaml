@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Creative Suite Adobe PDF Services API — Compress PDF
+  description: 'Adobe Creative Suite Adobe PDF Services API — Compress PDF. 1 operations. Lead operation: Adobe Creative Suite
+    Compress PDF. Self-contained Naftiko capability covering one Adobe Creative Suite business surface.'
+  tags:
+  - Adobe Creative Suite
+  - Compress PDF
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CREATIVE_SUITE_API_KEY: ADOBE_CREATIVE_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pdf-services-compress-pdf
+    baseUri: https://pdf-services.adobe.io
+    description: Adobe Creative Suite Adobe PDF Services API — Compress PDF business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: operation-compressPDF
+      path: /operation/compressPDF
+      operations:
+      - name: compresspdf
+        method: POST
+        description: Adobe Creative Suite Compress PDF
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CREATIVE_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: pdf-services-compress-pdf-rest
+    port: 8080
+    description: REST adapter for Adobe Creative Suite Adobe PDF Services API — Compress PDF. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/operation/compresspdf
+      name: operation-compresspdf
+      description: REST surface for operation-compressPDF.
+      operations:
+      - method: POST
+        name: compresspdf
+        description: Adobe Creative Suite Compress PDF
+        call: pdf-services-compress-pdf.compresspdf
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pdf-services-compress-pdf-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Creative Suite Adobe PDF Services API — Compress PDF. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-creative-suite-compress-pdf
+      description: Adobe Creative Suite Compress PDF
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pdf-services-compress-pdf.compresspdf
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

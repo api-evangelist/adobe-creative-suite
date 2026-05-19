@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Creative Suite Adobe PDF Services API — Accessibility
+  description: 'Adobe Creative Suite Adobe PDF Services API — Accessibility. 1 operations. Lead operation: Adobe Creative
+    Suite Auto-tag PDF for Accessibility. Self-contained Naftiko capability covering one Adobe Creative Suite business surface.'
+  tags:
+  - Adobe Creative Suite
+  - Accessibility
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CREATIVE_SUITE_API_KEY: ADOBE_CREATIVE_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pdf-services-accessibility
+    baseUri: https://pdf-services.adobe.io
+    description: Adobe Creative Suite Adobe PDF Services API — Accessibility business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: operation-autotagpdf
+      path: /operation/autotagpdf
+      operations:
+      - name: autotagpdf
+        method: POST
+        description: Adobe Creative Suite Auto-tag PDF for Accessibility
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CREATIVE_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: pdf-services-accessibility-rest
+    port: 8080
+    description: REST adapter for Adobe Creative Suite Adobe PDF Services API — Accessibility. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/operation/autotagpdf
+      name: operation-autotagpdf
+      description: REST surface for operation-autotagpdf.
+      operations:
+      - method: POST
+        name: autotagpdf
+        description: Adobe Creative Suite Auto-tag PDF for Accessibility
+        call: pdf-services-accessibility.autotagpdf
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pdf-services-accessibility-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Creative Suite Adobe PDF Services API — Accessibility. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-creative-suite-auto-tag
+      description: Adobe Creative Suite Auto-tag PDF for Accessibility
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pdf-services-accessibility.autotagpdf
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

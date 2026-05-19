@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Creative Suite Adobe PDF Services API — Linearize PDF
+  description: 'Adobe Creative Suite Adobe PDF Services API — Linearize PDF. 1 operations. Lead operation: Adobe Creative
+    Suite Linearize PDF. Self-contained Naftiko capability covering one Adobe Creative Suite business surface.'
+  tags:
+  - Adobe Creative Suite
+  - Linearize PDF
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CREATIVE_SUITE_API_KEY: ADOBE_CREATIVE_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pdf-services-linearize-pdf
+    baseUri: https://pdf-services.adobe.io
+    description: Adobe Creative Suite Adobe PDF Services API — Linearize PDF business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: operation-linearizePDF
+      path: /operation/linearizePDF
+      operations:
+      - name: linearizepdf
+        method: POST
+        description: Adobe Creative Suite Linearize PDF
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CREATIVE_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: pdf-services-linearize-pdf-rest
+    port: 8080
+    description: REST adapter for Adobe Creative Suite Adobe PDF Services API — Linearize PDF. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/operation/linearizepdf
+      name: operation-linearizepdf
+      description: REST surface for operation-linearizePDF.
+      operations:
+      - method: POST
+        name: linearizepdf
+        description: Adobe Creative Suite Linearize PDF
+        call: pdf-services-linearize-pdf.linearizepdf
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pdf-services-linearize-pdf-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Creative Suite Adobe PDF Services API — Linearize PDF. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-creative-suite-linearize-pdf
+      description: Adobe Creative Suite Linearize PDF
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pdf-services-linearize-pdf.linearizepdf
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Creative Suite Adobe PDF Services API — Document Generation
+  description: 'Adobe Creative Suite Adobe PDF Services API — Document Generation. 1 operations. Lead operation: Adobe Creative
+    Suite Generate Document from Template. Self-contained Naftiko capability covering one Adobe Creative Suite business surface.'
+  tags:
+  - Adobe Creative Suite
+  - Document Generation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CREATIVE_SUITE_API_KEY: ADOBE_CREATIVE_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pdf-services-document-generation
+    baseUri: https://pdf-services.adobe.io
+    description: Adobe Creative Suite Adobe PDF Services API — Document Generation business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: operation-documentgeneration
+      path: /operation/documentgeneration
+      operations:
+      - name: generatedocument
+        method: POST
+        description: Adobe Creative Suite Generate Document from Template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CREATIVE_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: pdf-services-document-generation-rest
+    port: 8080
+    description: REST adapter for Adobe Creative Suite Adobe PDF Services API — Document Generation. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/operation/documentgeneration
+      name: operation-documentgeneration
+      description: REST surface for operation-documentgeneration.
+      operations:
+      - method: POST
+        name: generatedocument
+        description: Adobe Creative Suite Generate Document from Template
+        call: pdf-services-document-generation.generatedocument
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pdf-services-document-generation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Creative Suite Adobe PDF Services API — Document Generation. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-creative-suite-generate-document
+      description: Adobe Creative Suite Generate Document from Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pdf-services-document-generation.generatedocument
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

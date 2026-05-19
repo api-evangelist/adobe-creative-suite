@@ -1,0 +1,86 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Creative Suite Adobe Stock API — Member
+  description: 'Adobe Creative Suite Adobe Stock API — Member. 1 operations. Lead operation: Adobe Creative Suite Get Member
+    Profile. Self-contained Naftiko capability covering one Adobe Creative Suite business surface.'
+  tags:
+  - Adobe Creative Suite
+  - Member
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CREATIVE_SUITE_API_KEY: ADOBE_CREATIVE_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stock-member
+    baseUri: https://stock.adobe.io/Rest
+    description: Adobe Creative Suite Adobe Stock API — Member business capability. Self-contained, no shared references.
+    resources:
+    - name: Member-1-Profile
+      path: /Member/1/Profile
+      operations:
+      - name: getmemberprofile
+        method: GET
+        description: Adobe Creative Suite Get Member Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: locale
+          in: query
+          type: string
+          description: BCP 47 locale for localized profile data
+        - name: x-api-key
+          in: header
+          type: string
+          description: Adobe Stock API key (client ID)
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CREATIVE_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: stock-member-rest
+    port: 8080
+    description: REST adapter for Adobe Creative Suite Adobe Stock API — Member. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/member/1/profile
+      name: member-1-profile
+      description: REST surface for Member-1-Profile.
+      operations:
+      - method: GET
+        name: getmemberprofile
+        description: Adobe Creative Suite Get Member Profile
+        call: stock-member.getmemberprofile
+        with:
+          locale: rest.locale
+          x-api-key: rest.x-api-key
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stock-member-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Creative Suite Adobe Stock API — Member. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: adobe-creative-suite-get-member
+      description: Adobe Creative Suite Get Member Profile
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stock-member.getmemberprofile
+      with:
+        locale: tools.locale
+        x-api-key: tools.x-api-key
+      outputParameters:
+      - type: object
+        mapping: $.

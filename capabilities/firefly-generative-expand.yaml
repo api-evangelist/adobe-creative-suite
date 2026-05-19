@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Creative Suite Adobe Firefly API — Generative Expand
+  description: 'Adobe Creative Suite Adobe Firefly API — Generative Expand. 1 operations. Lead operation: Adobe Creative Suite
+    Generative Expand Image. Self-contained Naftiko capability covering one Adobe Creative Suite business surface.'
+  tags:
+  - Adobe Creative Suite
+  - Generative Expand
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CREATIVE_SUITE_API_KEY: ADOBE_CREATIVE_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: firefly-generative-expand
+    baseUri: https://firefly-api.adobe.io/v3
+    description: Adobe Creative Suite Adobe Firefly API — Generative Expand business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: images-expand-async
+      path: /images/expand-async
+      operations:
+      - name: expandimageasync
+        method: POST
+        description: Adobe Creative Suite Generative Expand Image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CREATIVE_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: firefly-generative-expand-rest
+    port: 8080
+    description: REST adapter for Adobe Creative Suite Adobe Firefly API — Generative Expand. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/images/expand-async
+      name: images-expand-async
+      description: REST surface for images-expand-async.
+      operations:
+      - method: POST
+        name: expandimageasync
+        description: Adobe Creative Suite Generative Expand Image
+        call: firefly-generative-expand.expandimageasync
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: firefly-generative-expand-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Creative Suite Adobe Firefly API — Generative Expand. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-creative-suite-generative-expand
+      description: Adobe Creative Suite Generative Expand Image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: firefly-generative-expand.expandimageasync
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

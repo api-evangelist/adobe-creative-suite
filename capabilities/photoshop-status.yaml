@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Creative Suite Adobe Photoshop API — Status
+  description: 'Adobe Creative Suite Adobe Photoshop API — Status. 1 operations. Lead operation: Adobe Creative Suite Get
+    Job Status. Self-contained Naftiko capability covering one Adobe Creative Suite business surface.'
+  tags:
+  - Adobe Creative Suite
+  - Status
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CREATIVE_SUITE_API_KEY: ADOBE_CREATIVE_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: photoshop-status
+    baseUri: https://image.adobe.io
+    description: Adobe Creative Suite Adobe Photoshop API — Status business capability. Self-contained, no shared references.
+    resources:
+    - name: pie-psdService-status-jobId
+      path: /pie/psdService/status/{jobId}
+      operations:
+      - name: getjobstatus
+        method: GET
+        description: Adobe Creative Suite Get Job Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The unique identifier of the job to check
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CREATIVE_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: photoshop-status-rest
+    port: 8080
+    description: REST adapter for Adobe Creative Suite Adobe Photoshop API — Status. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/pie/psdservice/status/{jobid}
+      name: pie-psdservice-status-jobid
+      description: REST surface for pie-psdService-status-jobId.
+      operations:
+      - method: GET
+        name: getjobstatus
+        description: Adobe Creative Suite Get Job Status
+        call: photoshop-status.getjobstatus
+        with:
+          jobId: rest.jobId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: photoshop-status-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Creative Suite Adobe Photoshop API — Status. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: adobe-creative-suite-get-job
+      description: Adobe Creative Suite Get Job Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: photoshop-status.getjobstatus
+      with:
+        jobId: tools.jobId
+      outputParameters:
+      - type: object
+        mapping: $.
