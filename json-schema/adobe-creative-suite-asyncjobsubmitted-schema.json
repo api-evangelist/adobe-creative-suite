@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AsyncJobSubmitted",
+  "title": "AsyncJobSubmitted",
+  "type": "object",
+  "description": "Response returned immediately after an async generation job is submitted",
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "description": "Unique identifier for the generation job",
+      "example": "urn:firefly:jobs:abc123def456"
+    },
+    "statusUrl": {
+      "type": "string",
+      "description": "URL to poll for job status updates",
+      "example": "https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456"
+    }
+  }
+}

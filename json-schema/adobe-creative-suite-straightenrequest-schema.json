@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StraightenRequest",
+  "title": "StraightenRequest",
+  "type": "object",
+  "description": "Request to automatically straighten an image",
+  "required": [
+    "input",
+    "output"
+  ],
+  "properties": {
+    "input": {
+      "$ref": "#/components/schemas/JobInput"
+    },
+    "output": {
+      "$ref": "#/components/schemas/JobOutput"
+    }
+  }
+}

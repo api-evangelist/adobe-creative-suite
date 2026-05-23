@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ImageSize",
+  "title": "ImageSize",
+  "type": "object",
+  "description": "Dimensions for the output image",
+  "properties": {
+    "width": {
+      "type": "integer",
+      "description": "Output image width in pixels",
+      "example": 1024
+    },
+    "height": {
+      "type": "integer",
+      "description": "Output image height in pixels",
+      "example": 1024
+    }
+  }
+}

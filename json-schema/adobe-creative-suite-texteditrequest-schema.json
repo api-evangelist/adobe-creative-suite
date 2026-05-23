@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TextEditRequest",
+  "title": "TextEditRequest",
+  "type": "object",
+  "description": "Request to edit text layer content and properties in a PSD",
+  "required": [
+    "inputs",
+    "outputs",
+    "options"
+  ],
+  "properties": {
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobInput"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobOutput"
+      }
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "layers": {
+          "type": "array",
+          "description": "List of text layer edits to apply",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the text layer to edit"
+              },
+              "text": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "New text content for the layer"
+                  },
+                  "characterStyles": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fontSize": {
+                          "type": "number"
+                        },
+                        "fontName": {
+                          "type": "string"
+                        },
+                        "color": {
+                          "type": "object",
+                          "properties": {
+                            "red": {
+                              "type": "integer"
+                            },
+                            "green": {
+                              "type": "integer"
+                            },
+                            "blue": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

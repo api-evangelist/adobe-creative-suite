@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Category",
+  "title": "Category",
+  "type": "object",
+  "description": "A stock content category",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique category identifier",
+      "example": 1043
+    },
+    "name": {
+      "type": "string",
+      "description": "Localized category name",
+      "example": "Nature"
+    },
+    "link": {
+      "type": "string",
+      "description": "URL to browse this category on the Adobe Stock website",
+      "example": "example_value"
+    },
+    "children": {
+      "type": "array",
+      "description": "Child subcategories (present in category tree responses)",
+      "items": {
+        "$ref": "#/components/schemas/Category"
+      }
+    }
+  }
+}

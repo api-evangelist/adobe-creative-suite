@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DocumentOperations",
+  "title": "DocumentOperations",
+  "type": "object",
+  "description": "Operations to apply to a PSD document",
+  "properties": {
+    "resize": {
+      "type": "object",
+      "description": "Resize the document canvas or image",
+      "properties": {
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "pixel",
+            "percent"
+          ]
+        },
+        "resampleMethod": {
+          "type": "string",
+          "enum": [
+            "bicubic",
+            "bilinear",
+            "nearestNeighbor",
+            "preserve"
+          ]
+        }
+      }
+    },
+    "flatten": {
+      "type": "boolean",
+      "description": "Whether to flatten all layers into a single layer",
+      "example": true
+    },
+    "trim": {
+      "type": "object",
+      "description": "Trim transparent borders from the image",
+      "properties": {
+        "basedOn": {
+          "type": "string",
+          "enum": [
+            "transparentPixels",
+            "topLeftPixelColor",
+            "bottomRightPixelColor"
+          ]
+        }
+      }
+    }
+  }
+}

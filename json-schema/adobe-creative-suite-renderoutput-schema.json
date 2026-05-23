@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RenderOutput",
+  "title": "RenderOutput",
+  "type": "object",
+  "description": "Details of a rendered output file",
+  "properties": {
+    "input": {
+      "type": "string",
+      "description": "Reference to the input file used to produce this output",
+      "example": "example_value"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of this specific output",
+      "enum": [
+        "pending",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "example": "pending"
+    },
+    "details": {
+      "type": "string",
+      "description": "Additional detail message for this output",
+      "example": "example_value"
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "renditions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string",
+                "description": "URL of the rendered output file"
+              },
+              "storage": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

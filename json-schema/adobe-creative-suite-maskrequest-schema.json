@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MaskRequest",
+  "title": "MaskRequest",
+  "type": "object",
+  "description": "Request to create an alpha mask for an image",
+  "required": [
+    "input",
+    "output"
+  ],
+  "properties": {
+    "input": {
+      "$ref": "#/components/schemas/JobInput"
+    },
+    "output": {
+      "$ref": "#/components/schemas/JobOutput"
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "optimize": {
+          "type": "string",
+          "description": "Optimization mode for mask generation",
+          "enum": [
+            "performance",
+            "batch"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AssetReference",
+  "title": "AssetReference",
+  "type": "object",
+  "description": "Reference to an existing uploaded asset",
+  "required": [
+    "assetID"
+  ],
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "ID of the asset returned by the upload endpoint",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    }
+  }
+}

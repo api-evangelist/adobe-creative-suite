@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ImageFillRequest",
+  "title": "ImageFillRequest",
+  "type": "object",
+  "description": "Request body for generative fill operation",
+  "required": [
+    "image",
+    "mask"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Text prompt describing what to fill in the masked area",
+      "maxLength": 1024,
+      "example": "example_value"
+    },
+    "negativePrompt": {
+      "type": "string",
+      "description": "Text describing what to avoid in the filled area",
+      "maxLength": 1024,
+      "example": "example_value"
+    },
+    "image": {
+      "$ref": "#/components/schemas/InputImageReference"
+    },
+    "mask": {
+      "$ref": "#/components/schemas/InputImageReference"
+    },
+    "numVariations": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 1,
+      "example": 1920
+    },
+    "seeds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    }
+  }
+}

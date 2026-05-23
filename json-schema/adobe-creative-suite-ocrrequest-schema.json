@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OCRRequest",
+  "title": "OCRRequest",
+  "type": "object",
+  "description": "Request body for applying OCR to a PDF",
+  "required": [
+    "assetID"
+  ],
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "Asset ID of the scanned PDF to OCR",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    },
+    "ocrLang": {
+      "type": "string",
+      "description": "BCP 47 locale for OCR language model selection",
+      "example": "en-US"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/JobOutput",
+  "title": "JobOutput",
+  "type": "object",
+  "description": "Reference to an output file location in cloud storage",
+  "required": [
+    "href",
+    "storage",
+    "type"
+  ],
+  "properties": {
+    "href": {
+      "type": "string",
+      "description": "URL or path where the output file will be stored",
+      "example": "https://my-storage.blob.core.windows.net/images/output.png"
+    },
+    "storage": {
+      "type": "string",
+      "description": "Cloud storage provider type",
+      "enum": [
+        "adobe",
+        "external",
+        "azure",
+        "dropbox"
+      ],
+      "example": "external"
+    },
+    "type": {
+      "type": "string",
+      "description": "MIME type of the output file",
+      "example": "image/png"
+    },
+    "width": {
+      "type": "integer",
+      "description": "Output width in pixels",
+      "example": 1920
+    },
+    "height": {
+      "type": "integer",
+      "description": "Output height in pixels",
+      "example": 1080
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Whether to overwrite the output file if it already exists",
+      "default": true,
+      "example": true
+    }
+  }
+}

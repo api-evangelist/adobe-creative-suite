@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OperationSubmitted",
+  "title": "OperationSubmitted",
+  "type": "object",
+  "description": "Response returned when an operation has been accepted",
+  "properties": {
+    "jobID": {
+      "type": "string",
+      "description": "Unique identifier for the submitted operation job",
+      "example": "urn:aaid:AS:UE1:operation:abc123"
+    }
+  }
+}

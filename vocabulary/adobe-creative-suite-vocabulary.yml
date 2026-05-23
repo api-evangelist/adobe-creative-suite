@@ -1,0 +1,23 @@
+name: Adobe Creative Suite Domain Vocabulary
+provider: Adobe Creative Suite
+providerId: adobe-creative-suite
+description: Tag-derived vocabulary for the Adobe Creative Suite API surface; sourced from openapi/ tags.
+terms:
+- term: Artboard
+  description: Artboard creation and management
+- term: Cutout
+  description: Background removal and masking operations
+- term: Document
+  description: Document-level operations
+- term: Layers
+  description: PSD layer management operations
+- term: Mask
+  description: Alpha mask creation operations
+- term: Rendition
+  description: Rendition and export operations
+- term: Smart Object
+  description: Smart object editing operations
+- term: Status
+  description: Asynchronous job status operations
+- term: Text
+  description: Text layer editing operations

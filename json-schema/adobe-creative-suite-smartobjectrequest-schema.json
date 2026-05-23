@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SmartObjectRequest",
+  "title": "SmartObjectRequest",
+  "type": "object",
+  "description": "Request to replace smart object content within a PSD",
+  "required": [
+    "inputs",
+    "outputs",
+    "options"
+  ],
+  "properties": {
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobInput"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobOutput"
+      }
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "layers": {
+          "type": "array",
+          "description": "Smart object layers to replace",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the smart object layer"
+              },
+              "input": {
+                "$ref": "#/components/schemas/JobInput"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

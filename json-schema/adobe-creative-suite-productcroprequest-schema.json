@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ProductCropRequest",
+  "title": "ProductCropRequest",
+  "type": "object",
+  "description": "Request to automatically crop an image to the primary product",
+  "required": [
+    "input",
+    "output"
+  ],
+  "properties": {
+    "input": {
+      "$ref": "#/components/schemas/JobInput"
+    },
+    "output": {
+      "$ref": "#/components/schemas/JobOutput"
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "pixel",
+            "percent"
+          ]
+        },
+        "padding": {
+          "type": "number",
+          "description": "Padding to add around the product crop"
+        }
+      }
+    }
+  }
+}

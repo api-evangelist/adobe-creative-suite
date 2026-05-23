@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AssetUploadRequest",
+  "title": "AssetUploadRequest",
+  "type": "object",
+  "description": "Request to initiate an asset upload",
+  "required": [
+    "mediaType"
+  ],
+  "properties": {
+    "mediaType": {
+      "type": "string",
+      "description": "MIME type of the file to be uploaded",
+      "example": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    }
+  }
+}

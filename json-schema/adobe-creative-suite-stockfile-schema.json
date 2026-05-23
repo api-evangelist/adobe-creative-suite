@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StockFile",
+  "title": "StockFile",
+  "type": "object",
+  "description": "Metadata for an Adobe Stock file",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique Adobe Stock content identifier",
+      "example": 123456789
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the stock file as provided by the contributor",
+      "example": "Beautiful mountain landscape at sunrise"
+    },
+    "creator_name": {
+      "type": "string",
+      "description": "Display name of the file's creator/contributor",
+      "example": "PhotoContributor123"
+    },
+    "creator_id": {
+      "type": "integer",
+      "description": "Unique identifier of the creator on Adobe Stock",
+      "example": 987654
+    },
+    "country_name": {
+      "type": "string",
+      "description": "Country of origin of the creator",
+      "example": "United States"
+    },
+    "width": {
+      "type": "integer",
+      "description": "Original width of the file in pixels",
+      "example": 6000
+    },
+    "height": {
+      "type": "integer",
+      "description": "Original height of the file in pixels",
+      "example": 4000
+    },
+    "media_type_id": {
+      "type": "integer",
+      "description": "Numeric identifier for the media type (1=photo, 2=illustration, 3=vector, 4=video, 6=3D, 7=template)",
+      "example": 1
+    },
+    "content_type": {
+      "type": "string",
+      "description": "MIME type of the stock file",
+      "example": "image/jpeg"
+    },
+    "keywords": {
+      "type": "array",
+      "description": "List of keywords describing the file content",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Keyword text"
+          }
+        }
+      },
+      "example": [
+        {
+          "name": "mountain"
+        },
+        {
+          "name": "landscape"
+        },
+        {
+          "name": "sunrise"
+        }
+      ]
+    },
+    "comp_url": {
+      "type": "string",
+      "description": "URL of the watermarked comp image for preview purposes",
+      "example": "https://t3.ftcdn.net/jpg/01/23/45/67/240_F_123456789_abc.jpg"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "URL of the thumbnail image",
+      "example": "https://t3.ftcdn.net/jpg/01/23/45/67/160_F_123456789_abc.jpg"
+    },
+    "thumbnail_width": {
+      "type": "integer",
+      "description": "Width of the thumbnail image in pixels",
+      "example": 160
+    },
+    "thumbnail_height": {
+      "type": "integer",
+      "description": "Height of the thumbnail image in pixels",
+      "example": 107
+    },
+    "is_licensed": {
+      "type": "string",
+      "description": "Licensing status of the file for the authenticated user",
+      "enum": [
+        "Standard",
+        "Extended",
+        "Video_HD",
+        "Video_4K",
+        ""
+      ],
+      "example": ""
+    },
+    "vector_type": {
+      "type": "string",
+      "description": "Vector file subtype (svg or zip) if applicable",
+      "enum": [
+        "svg",
+        "zip",
+        ""
+      ],
+      "example": "svg"
+    },
+    "category": {
+      "$ref": "#/components/schemas/Category"
+    },
+    "nb_results": {
+      "type": "integer",
+      "description": "Total number of results matching the search query (on first item only)",
+      "example": 4521
+    }
+  }
+}

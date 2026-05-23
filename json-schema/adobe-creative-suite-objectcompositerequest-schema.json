@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ObjectCompositeRequest",
+  "title": "ObjectCompositeRequest",
+  "type": "object",
+  "description": "Request body for generating an object composite in a scene",
+  "required": [
+    "prompt",
+    "image",
+    "mask"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Text description of the object to generate and composite",
+      "maxLength": 1024,
+      "example": "example_value"
+    },
+    "negativePrompt": {
+      "type": "string",
+      "description": "Text describing what to avoid in the generated object",
+      "maxLength": 1024,
+      "example": "example_value"
+    },
+    "contentClass": {
+      "type": "string",
+      "enum": [
+        "photo",
+        "art"
+      ],
+      "example": "photo"
+    },
+    "image": {
+      "$ref": "#/components/schemas/InputImageReference"
+    },
+    "mask": {
+      "$ref": "#/components/schemas/InputImageReference"
+    },
+    "numVariations": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 1,
+      "example": 1920
+    },
+    "seeds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    }
+  }
+}

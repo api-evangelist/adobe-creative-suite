@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AutoTagRequest",
+  "title": "AutoTagRequest",
+  "type": "object",
+  "description": "Request body for auto-tagging a PDF for accessibility",
+  "required": [
+    "assetID"
+  ],
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "Asset ID of the PDF to auto-tag",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    },
+    "generateReport": {
+      "type": "boolean",
+      "description": "Whether to generate an accessibility report alongside the tagged PDF",
+      "default": false,
+      "example": true
+    },
+    "shiftHeadings": {
+      "type": "boolean",
+      "description": "Whether to shift heading levels in the output for better document structure",
+      "default": false,
+      "example": true
+    }
+  }
+}

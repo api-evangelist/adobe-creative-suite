@@ -1,0 +1,265 @@
+{
+  "provider": "Adobe Creative Suite",
+  "providerId": "adobe-creative-suite",
+  "kind": "json-structure",
+  "description": "Structural overview of the Adobe Creative Suite API surface; extracted from openapi/.",
+  "schemaCount": 19,
+  "operationCount": 11,
+  "schemas": [
+    {
+      "name": "JobInput",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "href",
+        "storage"
+      ]
+    },
+    {
+      "name": "JobOutput",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "href",
+        "storage",
+        "type"
+      ]
+    },
+    {
+      "name": "JobSubmitted",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "JobStatus",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "RenderOutput",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Layer",
+      "type": "object",
+      "propertyCount": 10,
+      "required": []
+    },
+    {
+      "name": "DocumentOperations",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "CutoutRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "input",
+        "output"
+      ]
+    },
+    {
+      "name": "MaskRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "input",
+        "output"
+      ]
+    },
+    {
+      "name": "ProductCropRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "input",
+        "output"
+      ]
+    },
+    {
+      "name": "StraightenRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "input",
+        "output"
+      ]
+    },
+    {
+      "name": "TextEditRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "inputs",
+        "outputs",
+        "options"
+      ]
+    },
+    {
+      "name": "LayerManageRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "inputs",
+        "outputs"
+      ]
+    },
+    {
+      "name": "DocumentOperationsRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "inputs",
+        "outputs"
+      ]
+    },
+    {
+      "name": "RenditionCreateRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "inputs",
+        "outputs"
+      ]
+    },
+    {
+      "name": "SmartObjectRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "inputs",
+        "outputs",
+        "options"
+      ]
+    },
+    {
+      "name": "ArtboardRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "inputs",
+        "outputs",
+        "options"
+      ]
+    },
+    {
+      "name": "JobError",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ErrorResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/sensei/cutout",
+      "operationId": "removeBackground",
+      "summary": "Adobe Creative Suite Remove Background",
+      "tags": [
+        "Cutout"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/sensei/mask",
+      "operationId": "createMask",
+      "summary": "Adobe Creative Suite Create Alpha Mask",
+      "tags": [
+        "Mask"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/sensei/product_crop",
+      "operationId": "productCrop",
+      "summary": "Adobe Creative Suite Product Crop",
+      "tags": [
+        "Cutout"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/sensei/straighten",
+      "operationId": "straightenImage",
+      "summary": "Adobe Creative Suite Straighten Image",
+      "tags": [
+        "Cutout"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/pie/psdService/text",
+      "operationId": "editTextLayers",
+      "summary": "Adobe Creative Suite Edit Text Layers",
+      "tags": [
+        "Text"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/pie/psdService/layers",
+      "operationId": "manageLayers",
+      "summary": "Adobe Creative Suite Manage Layers",
+      "tags": [
+        "Layers"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/pie/psdService/documentOperations",
+      "operationId": "applyDocumentOperations",
+      "summary": "Adobe Creative Suite Apply Document Operations",
+      "tags": [
+        "Document"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/pie/psdService/renditionCreate",
+      "operationId": "createRendition",
+      "summary": "Adobe Creative Suite Create Rendition",
+      "tags": [
+        "Rendition"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/pie/psdService/smartObject",
+      "operationId": "editSmartObject",
+      "summary": "Adobe Creative Suite Edit Smart Objects",
+      "tags": [
+        "Smart Object"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/pie/psdService/artboard",
+      "operationId": "createArtboard",
+      "summary": "Adobe Creative Suite Create Artboards",
+      "tags": [
+        "Artboard"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/pie/psdService/status/{jobId}",
+      "operationId": "getJobStatus",
+      "summary": "Adobe Creative Suite Get Job Status",
+      "tags": [
+        "Status"
+      ]
+    }
+  ]
+}

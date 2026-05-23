@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GenerateSimilarRequest",
+  "title": "GenerateSimilarRequest",
+  "type": "object",
+  "description": "Request body for generating images similar to a reference image",
+  "required": [
+    "image"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Optional text prompt to further guide the style or content",
+      "maxLength": 1024,
+      "example": "example_value"
+    },
+    "image": {
+      "$ref": "#/components/schemas/InputImageReference"
+    },
+    "numVariations": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 1,
+      "example": 1920
+    },
+    "size": {
+      "$ref": "#/components/schemas/ImageSize"
+    },
+    "seeds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    }
+  }
+}

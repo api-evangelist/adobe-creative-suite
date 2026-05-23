@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StylePreset",
+  "title": "StylePreset",
+  "type": "string",
+  "description": "Available style preset identifiers for Firefly generation",
+  "enum": [
+    "photo",
+    "art",
+    "graphic",
+    "bw",
+    "cool_colors",
+    "warm_tone",
+    "muted_color",
+    "vibrant_color",
+    "pastel_color",
+    "golden_hour"
+  ]
+}

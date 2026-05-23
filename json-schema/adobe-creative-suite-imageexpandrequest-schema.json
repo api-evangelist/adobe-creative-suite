@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ImageExpandRequest",
+  "title": "ImageExpandRequest",
+  "type": "object",
+  "description": "Request body for generative image expansion",
+  "required": [
+    "image"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Text prompt to guide what content fills the expanded areas",
+      "maxLength": 1024,
+      "example": "example_value"
+    },
+    "negativePrompt": {
+      "type": "string",
+      "description": "Text describing what to avoid in the expanded areas",
+      "maxLength": 1024,
+      "example": "example_value"
+    },
+    "image": {
+      "$ref": "#/components/schemas/InputImageReference"
+    },
+    "size": {
+      "$ref": "#/components/schemas/ImageSize"
+    },
+    "placement": {
+      "type": "object",
+      "description": "Placement and inset parameters for the source image within the expanded canvas",
+      "properties": {
+        "inset": {
+          "type": "object",
+          "properties": {
+            "left": {
+              "type": "integer"
+            },
+            "top": {
+              "type": "integer"
+            },
+            "right": {
+              "type": "integer"
+            },
+            "bottom": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "numVariations": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 1,
+      "example": 1920
+    },
+    "seeds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    }
+  }
+}

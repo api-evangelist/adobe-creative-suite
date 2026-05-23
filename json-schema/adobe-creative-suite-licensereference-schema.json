@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LicenseReference",
+  "title": "LicenseReference",
+  "type": "object",
+  "description": "Optional purchase reference metadata for a license transaction",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Reference ID provided by the API caller for tracking",
+      "example": 1001
+    },
+    "value": {
+      "type": "string",
+      "description": "Reference value such as a project name or purchase order number",
+      "example": "Project Alpha"
+    }
+  }
+}

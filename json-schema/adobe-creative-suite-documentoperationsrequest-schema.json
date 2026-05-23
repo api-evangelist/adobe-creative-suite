@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DocumentOperationsRequest",
+  "title": "DocumentOperationsRequest",
+  "type": "object",
+  "description": "Request to apply document-level operations to a PSD",
+  "required": [
+    "inputs",
+    "outputs"
+  ],
+  "properties": {
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobInput"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobOutput"
+      }
+    },
+    "options": {
+      "$ref": "#/components/schemas/DocumentOperations"
+    }
+  }
+}

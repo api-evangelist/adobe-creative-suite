@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreatePDFRequest",
+  "title": "CreatePDFRequest",
+  "type": "object",
+  "description": "Request body for creating a PDF from another format",
+  "required": [
+    "assetID"
+  ],
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "Asset ID of the source file to convert to PDF",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    },
+    "documentLanguage": {
+      "type": "string",
+      "description": "BCP 47 language code of the source document for better conversion",
+      "example": "en-US"
+    }
+  }
+}

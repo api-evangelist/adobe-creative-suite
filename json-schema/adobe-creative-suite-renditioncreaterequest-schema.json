@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RenditionCreateRequest",
+  "title": "RenditionCreateRequest",
+  "type": "object",
+  "description": "Request to create one or more renditions from a PSD or image",
+  "required": [
+    "inputs",
+    "outputs"
+  ],
+  "properties": {
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobInput"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "description": "List of rendition outputs to generate",
+      "items": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobOutput"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "quality": {
+                "type": "integer",
+                "description": "JPEG quality (1-100)",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "compression": {
+                "type": "string",
+                "description": "PNG compression level",
+                "enum": [
+                  "small",
+                  "medium",
+                  "large"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LinearizePDFRequest",
+  "title": "LinearizePDFRequest",
+  "type": "object",
+  "description": "Request body for linearizing a PDF for fast web view",
+  "required": [
+    "assetID"
+  ],
+  "properties": {
+    "assetID": {
+      "type": "string",
+      "description": "Asset ID of the PDF to linearize",
+      "example": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718"
+    }
+  }
+}
