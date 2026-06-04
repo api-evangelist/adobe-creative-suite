@@ -1,0 +1,121 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Stock Search and License Image
+  summary: Search Adobe Stock for photos, inspect the top match metadata, and license it for download.
+  description: >-
+    A complete Adobe Stock photo acquisition flow. The workflow searches the
+    stock library for photos matching a keyword, takes the content id of the
+    first result, retrieves its full metadata for confirmation, and then
+    licenses that image to obtain a full-resolution download URL. Every request
+    inlines the required x-api-key header, and every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: stockApi
+  url: ../openapi/adobe-creative-suite-stock-openapi.yml
+  type: openapi
+workflows:
+- workflowId: search-and-license-image
+  summary: Search for a photo, confirm its metadata, and license it for download.
+  description: >-
+    Searches Adobe Stock photos by keyword, retrieves metadata for the top
+    result, and licenses that image, returning the full-resolution download URL.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - words
+    properties:
+      apiKey:
+        type: string
+        description: Adobe Stock API key (client ID) sent as the x-api-key header.
+      words:
+        type: string
+        description: Keywords to search the stock library for.
+      locale:
+        type: string
+        description: BCP 47 locale code for localized results (e.g. en_US).
+      license:
+        type: string
+        description: License type to apply (Standard or Extended).
+  steps:
+  - stepId: searchPhotos
+    description: >-
+      Search the stock library for photos matching the keyword, limited to the
+      single top result and requesting the id, title, and licensing fields.
+    operationId: searchStockFiles
+    parameters:
+    - name: locale
+      in: query
+      value: $inputs.locale
+    - name: search_parameters[words]
+      in: query
+      value: $inputs.words
+    - name: search_parameters[limit]
+      in: query
+      value: 1
+    - name: search_parameters[filters][content_type:photo]
+      in: query
+      value: 1
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      contentId: $response.body#/files/0/id
+      nbResults: $response.body#/nb_results
+    onSuccess:
+    - name: hasMatch
+      type: goto
+      stepId: getMetadata
+      criteria:
+      - context: $response.body
+        condition: $.nb_results > 0
+        type: jsonpath
+  - stepId: getMetadata
+    description: >-
+      Retrieve the full metadata for the top matching stock file to confirm its
+      title, dimensions, and licensing status before licensing it.
+    operationId: getStockFileMetadata
+    parameters:
+    - name: content_id
+      in: path
+      value: $steps.searchPhotos.outputs.contentId
+    - name: locale
+      in: query
+      value: $inputs.locale
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      title: $response.body#/files/0/title
+      isLicensed: $response.body#/files/0/is_licensed
+  - stepId: licenseImage
+    description: >-
+      License the confirmed stock image, returning a download URL for the
+      full-resolution file and the purchase state.
+    operationId: licenseImage
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        content_id: $steps.searchPhotos.outputs.contentId
+        license: $inputs.license
+        locale: $inputs.locale
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      downloadUrl: $response.body#/download_url
+      purchaseState: $response.body#/purchase_details/state
+  outputs:
+    contentId: $steps.searchPhotos.outputs.contentId
+    title: $steps.getMetadata.outputs.title
+    downloadUrl: $steps.licenseImage.outputs.downloadUrl
+    purchaseState: $steps.licenseImage.outputs.purchaseState

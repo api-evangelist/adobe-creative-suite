@@ -1,0 +1,136 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Firefly Generative Expand Image
+  summary: Expand an image beyond its original boundaries with AI and poll the job to completion.
+  description: >-
+    Runs an Adobe Firefly generative expand operation, growing a source image
+    beyond its original canvas and filling the new regions with AI-generated
+    content guided by an optional prompt. The workflow submits the asynchronous
+    expand job, polls the status endpoint until it reaches a terminal state, and
+    branches on the result to return either the expanded output image URLs or
+    the error details. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fireflyApi
+  url: ../openapi/adobe-creative-suite-firefly-openapi.yml
+  type: openapi
+workflows:
+- workflowId: firefly-expand-image
+  summary: Submit a generative expand job and poll until it succeeds or fails.
+  description: >-
+    Submits a generative expand request for a source image at a target size,
+    polls the job status to completion, and returns the expanded output image
+    URLs on success.
+  inputs:
+    type: object
+    required:
+    - imageUrl
+    properties:
+      imageUrl:
+        type: string
+        description: Publicly accessible URL of the source image to expand.
+      prompt:
+        type: string
+        description: Text prompt to guide what content fills the expanded areas.
+      width:
+        type: integer
+        description: Target expanded canvas width in pixels.
+      height:
+        type: integer
+        description: Target expanded canvas height in pixels.
+      numVariations:
+        type: integer
+        description: Number of variations to generate (1 to 4).
+  steps:
+  - stepId: submitExpand
+    description: >-
+      Submit the generative expand request referencing the source image by URL
+      and the target canvas size. The API queues the job and returns a job id.
+    operationId: expandImageAsync
+    requestBody:
+      contentType: application/json
+      payload:
+        prompt: $inputs.prompt
+        image:
+          source:
+            url: $inputs.imageUrl
+        size:
+          width: $inputs.width
+          height: $inputs.height
+        numVariations: $inputs.numVariations
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      jobId: $response.body#/jobId
+  - stepId: pollStatus
+    description: >-
+      Poll the expand job status, repeating while it is pending or running and
+      branching once it succeeds or fails.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitExpand.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: jobSucceeded
+      type: goto
+      stepId: reportSuccess
+      criteria:
+      - context: $response.body
+        condition: $.status == "succeeded"
+        type: jsonpath
+    - name: jobFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollStatus
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending" || $.status == "running"
+        type: jsonpath
+  - stepId: reportSuccess
+    description: Surface the expanded output image URLs from the succeeded job.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitExpand.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "succeeded"
+      type: jsonpath
+    outputs:
+      firstImageUrl: $response.body#/outputs/0/image/url
+      outputs: $response.body#/outputs
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed expand job.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitExpand.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    jobId: $steps.submitExpand.outputs.jobId
+    firstImageUrl: $steps.reportSuccess.outputs.firstImageUrl
+    outputs: $steps.reportSuccess.outputs.outputs
+    errors: $steps.reportFailure.outputs.errors

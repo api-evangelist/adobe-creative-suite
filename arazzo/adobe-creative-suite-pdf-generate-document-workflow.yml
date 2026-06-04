@@ -1,0 +1,156 @@
+arazzo: 1.0.1
+info:
+  title: Adobe PDF Services Generate Document from Template
+  summary: Upload a Word template, merge JSON data into it, poll the job, get the output, and delete the template.
+  description: >-
+    Generates a PDF or Word document by merging a JSON data object into a Word
+    document template, using the Adobe PDF Services asynchronous job model. The
+    workflow registers the template by requesting an upload asset, submits a
+    document-generation operation with the merge data and chosen output format,
+    polls the operation status until it is done or failed, resolves a temporary
+    download URI for the generated document, and finally deletes the uploaded
+    template asset to release storage early. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pdfServicesApi
+  url: ../openapi/adobe-creative-suite-pdf-services-openapi.yml
+  type: openapi
+workflows:
+- workflowId: generate-document-from-template
+  summary: Upload a template, merge data, resolve the output, and clean up the template asset.
+  description: >-
+    Registers a Word template asset, submits a document-generation operation
+    with the supplied JSON merge data, polls the job to a terminal state,
+    returns the download URI of the generated document on success, and deletes
+    the template asset.
+  inputs:
+    type: object
+    required:
+    - outputFormat
+    - jsonDataForMerge
+    properties:
+      outputFormat:
+        type: string
+        description: Output format of the generated document (pdf or docx).
+      jsonDataForMerge:
+        type: object
+        description: JSON data whose keys map to template tags in the document.
+      notTaggedAdds:
+        type: boolean
+        description: Whether to include non-tagged content as plain text additions.
+  steps:
+  - stepId: createUpload
+    description: >-
+      Request an upload asset for the Word document template, receiving an asset
+      id and a pre-signed upload URI.
+    operationId: uploadAsset
+    requestBody:
+      contentType: application/json
+      payload:
+        mediaType: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assetID: $response.body#/assetID
+      uploadUri: $response.body#/uploadUri
+  - stepId: submitGeneration
+    description: >-
+      Submit a document-generation operation merging the supplied JSON data into
+      the uploaded template. The API returns a job id for polling.
+    operationId: generateDocument
+    requestBody:
+      contentType: application/json
+      payload:
+        assetID: $steps.createUpload.outputs.assetID
+        outputFormat: $inputs.outputFormat
+        jsonDataForMerge: $inputs.jsonDataForMerge
+        notTaggedAdds: $inputs.notTaggedAdds
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobID: $response.body#/jobID
+  - stepId: pollOperation
+    description: >-
+      Poll the document-generation operation status, repeating while it is in
+      progress and branching once it is done or failed.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitGeneration.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      assetID: $response.body#/asset/assetID
+    onSuccess:
+    - name: operationDone
+      type: goto
+      stepId: getOutput
+      criteria:
+      - context: $response.body
+        condition: $.status == "done"
+        type: jsonpath
+    - name: operationFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollOperation
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "in progress"
+        type: jsonpath
+  - stepId: getOutput
+    description: >-
+      Retrieve the generated document asset metadata and a fresh temporary
+      download URI for the output file.
+    operationId: getAsset
+    parameters:
+    - name: assetID
+      in: path
+      value: $steps.pollOperation.outputs.assetID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      downloadUri: $response.body#/downloadUri
+      mediaType: $response.body#/mediaType
+      size: $response.body#/size
+  - stepId: deleteTemplate
+    description: >-
+      Delete the uploaded template asset now that the generated document has been
+      retrieved, releasing storage before the automatic 24 hour expiry.
+    operationId: deleteAsset
+    parameters:
+    - name: assetID
+      in: path
+      value: $steps.createUpload.outputs.assetID
+    successCriteria:
+    - condition: $statusCode == 200
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed document-generation operation.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitGeneration.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    templateAssetID: $steps.createUpload.outputs.assetID
+    jobID: $steps.submitGeneration.outputs.jobID
+    outputDownloadUri: $steps.getOutput.outputs.downloadUri
+    errors: $steps.reportFailure.outputs.errors

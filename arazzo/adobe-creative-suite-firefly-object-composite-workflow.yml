@@ -1,0 +1,143 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Firefly Object Composite
+  summary: Composite an AI-generated object into a scene image and poll the async job to completion.
+  description: >-
+    Generates an AI-rendered object described by a prompt and composites it into
+    an existing scene image at the location defined by a mask, using the
+    asynchronous Adobe Firefly model. The workflow submits the object composite
+    job, polls the status endpoint until it reaches a terminal state, and
+    branches on the result to return either the composited output image URLs or
+    the error details. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fireflyApi
+  url: ../openapi/adobe-creative-suite-firefly-openapi.yml
+  type: openapi
+workflows:
+- workflowId: firefly-object-composite
+  summary: Submit an object composite job and poll until it succeeds or fails.
+  description: >-
+    Submits an object composite request using a scene image, a mask, and a
+    prompt describing the object, polls the job status to completion, and
+    returns the composited output image URLs on success.
+  inputs:
+    type: object
+    required:
+    - prompt
+    - imageUrl
+    - maskUrl
+    properties:
+      prompt:
+        type: string
+        description: Text description of the object to generate and composite.
+      negativePrompt:
+        type: string
+        description: Text describing what to avoid in the generated object.
+      contentClass:
+        type: string
+        description: Broad content category to guide generation (photo or art).
+      imageUrl:
+        type: string
+        description: Publicly accessible URL of the scene image.
+      maskUrl:
+        type: string
+        description: Publicly accessible URL of the mask defining the placement region.
+      numVariations:
+        type: integer
+        description: Number of variations to generate (1 to 4).
+  steps:
+  - stepId: submitComposite
+    description: >-
+      Submit the object composite request referencing the scene image and mask
+      by URL. The API queues the job and returns a job id.
+    operationId: generateObjectCompositeAsync
+    requestBody:
+      contentType: application/json
+      payload:
+        prompt: $inputs.prompt
+        negativePrompt: $inputs.negativePrompt
+        contentClass: $inputs.contentClass
+        image:
+          source:
+            url: $inputs.imageUrl
+        mask:
+          source:
+            url: $inputs.maskUrl
+        numVariations: $inputs.numVariations
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      jobId: $response.body#/jobId
+  - stepId: pollStatus
+    description: >-
+      Poll the object composite job status, repeating while it is pending or
+      running and branching once it succeeds or fails.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitComposite.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: jobSucceeded
+      type: goto
+      stepId: reportSuccess
+      criteria:
+      - context: $response.body
+        condition: $.status == "succeeded"
+        type: jsonpath
+    - name: jobFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollStatus
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending" || $.status == "running"
+        type: jsonpath
+  - stepId: reportSuccess
+    description: Surface the composited output image URLs from the succeeded job.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitComposite.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "succeeded"
+      type: jsonpath
+    outputs:
+      firstImageUrl: $response.body#/outputs/0/image/url
+      outputs: $response.body#/outputs
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed object composite job.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitComposite.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    jobId: $steps.submitComposite.outputs.jobId
+    firstImageUrl: $steps.reportSuccess.outputs.firstImageUrl
+    outputs: $steps.reportSuccess.outputs.outputs
+    errors: $steps.reportFailure.outputs.errors

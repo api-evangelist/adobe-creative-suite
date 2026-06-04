@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Stock Search and License Video
+  summary: Search Adobe Stock for video clips and license the top match for download.
+  description: >-
+    An Adobe Stock video acquisition flow. The workflow searches the stock
+    library for video clips matching a keyword, takes the content id of the
+    first result, and licenses that video at the requested resolution to obtain
+    a download URL. Every request inlines the required x-api-key header, and
+    every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: stockApi
+  url: ../openapi/adobe-creative-suite-stock-openapi.yml
+  type: openapi
+workflows:
+- workflowId: search-and-license-video
+  summary: Search for a video clip and license the top match for download.
+  description: >-
+    Searches Adobe Stock videos by keyword and licenses the top result,
+    returning the download URL for the licensed clip.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - words
+    - license
+    properties:
+      apiKey:
+        type: string
+        description: Adobe Stock API key (client ID) sent as the x-api-key header.
+      words:
+        type: string
+        description: Keywords to search the stock video library for.
+      locale:
+        type: string
+        description: BCP 47 locale code for localized results (e.g. en_US).
+      license:
+        type: string
+        description: Video license type to apply (Video_HD or Video_4K).
+  steps:
+  - stepId: searchVideos
+    description: >-
+      Search the stock library for videos matching the keyword, limited to the
+      single top result.
+    operationId: searchStockFiles
+    parameters:
+    - name: locale
+      in: query
+      value: $inputs.locale
+    - name: search_parameters[words]
+      in: query
+      value: $inputs.words
+    - name: search_parameters[limit]
+      in: query
+      value: 1
+    - name: search_parameters[filters][content_type:video]
+      in: query
+      value: 1
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      contentId: $response.body#/files/0/id
+      nbResults: $response.body#/nb_results
+    onSuccess:
+    - name: hasMatch
+      type: goto
+      stepId: licenseVideo
+      criteria:
+      - context: $response.body
+        condition: $.nb_results > 0
+        type: jsonpath
+  - stepId: licenseVideo
+    description: >-
+      License the top matching stock video at the requested resolution,
+      returning a download URL for the licensed clip.
+    operationId: licenseVideo
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        content_id: $steps.searchVideos.outputs.contentId
+        license: $inputs.license
+        locale: $inputs.locale
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      downloadUrl: $response.body#/download_url
+      purchaseState: $response.body#/purchase_details/state
+  outputs:
+    contentId: $steps.searchVideos.outputs.contentId
+    downloadUrl: $steps.licenseVideo.outputs.downloadUrl
+    purchaseState: $steps.licenseVideo.outputs.purchaseState

@@ -1,0 +1,145 @@
+arazzo: 1.0.1
+info:
+  title: Adobe PDF Services Combine PDFs
+  summary: Upload two PDFs, combine them into one, poll the job, and get the merged output download URI.
+  description: >-
+    Combines two source PDFs into a single merged PDF using the Adobe PDF
+    Services asynchronous job model. The workflow registers each source PDF by
+    requesting an upload asset, submits a combine operation referencing both
+    asset ids in order, polls the operation status until it is done or failed,
+    and resolves a temporary download URI for the merged output. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pdfServicesApi
+  url: ../openapi/adobe-creative-suite-pdf-services-openapi.yml
+  type: openapi
+workflows:
+- workflowId: combine-pdfs
+  summary: Upload two PDFs, merge them in order, and resolve the merged download URI.
+  description: >-
+    Registers two source PDF assets, submits a combine operation merging them in
+    order, polls the job to a terminal state, and returns the download URI of the
+    merged PDF on success.
+  inputs:
+    type: object
+    properties:
+      firstMediaType:
+        type: string
+        description: MIME type of the first source PDF (defaults to application/pdf).
+      secondMediaType:
+        type: string
+        description: MIME type of the second source PDF (defaults to application/pdf).
+  steps:
+  - stepId: uploadFirst
+    description: Request an upload asset for the first source PDF.
+    operationId: uploadAsset
+    requestBody:
+      contentType: application/json
+      payload:
+        mediaType: application/pdf
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assetID: $response.body#/assetID
+      uploadUri: $response.body#/uploadUri
+  - stepId: uploadSecond
+    description: Request an upload asset for the second source PDF.
+    operationId: uploadAsset
+    requestBody:
+      contentType: application/json
+      payload:
+        mediaType: application/pdf
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assetID: $response.body#/assetID
+      uploadUri: $response.body#/uploadUri
+  - stepId: submitCombine
+    description: >-
+      Submit a combine operation merging the two uploaded PDFs in order. The API
+      returns a job id for polling.
+    operationId: combinePDFs
+    requestBody:
+      contentType: application/json
+      payload:
+        assets:
+        - assetID: $steps.uploadFirst.outputs.assetID
+        - assetID: $steps.uploadSecond.outputs.assetID
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobID: $response.body#/jobID
+  - stepId: pollOperation
+    description: >-
+      Poll the combine operation status, repeating while it is in progress and
+      branching once it is done or failed.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitCombine.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      assetID: $response.body#/asset/assetID
+    onSuccess:
+    - name: operationDone
+      type: goto
+      stepId: getOutput
+      criteria:
+      - context: $response.body
+        condition: $.status == "done"
+        type: jsonpath
+    - name: operationFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollOperation
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "in progress"
+        type: jsonpath
+  - stepId: getOutput
+    description: >-
+      Retrieve the merged PDF asset metadata and a fresh temporary download URI
+      for the output file.
+    operationId: getAsset
+    parameters:
+    - name: assetID
+      in: path
+      value: $steps.pollOperation.outputs.assetID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      downloadUri: $response.body#/downloadUri
+      size: $response.body#/size
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed combine operation.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitCombine.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    firstAssetID: $steps.uploadFirst.outputs.assetID
+    secondAssetID: $steps.uploadSecond.outputs.assetID
+    jobID: $steps.submitCombine.outputs.jobID
+    outputDownloadUri: $steps.getOutput.outputs.downloadUri
+    errors: $steps.reportFailure.outputs.errors

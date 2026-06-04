@@ -1,0 +1,150 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Photoshop Create Rendition
+  summary: Submit a rendition job from a PSD, poll until it finishes, and return the rendered output URL.
+  description: >-
+    Generates a flattened image rendition (such as JPEG or PNG) from a PSD or
+    image file using the Adobe Photoshop API. The workflow submits a rendition
+    job referencing one input file and one output rendition target in cloud
+    storage, polls the job status endpoint until the job reaches a terminal
+    state, and branches on the result to return either the rendered output URL
+    or the error details. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: photoshopApi
+  url: ../openapi/adobe-creative-suite-photoshop-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-rendition
+  summary: Submit a rendition job and poll until it succeeds or fails.
+  description: >-
+    Submits a rendition job converting a PSD or image into a target format and
+    size, polls the job status to completion, and returns the rendered output URL
+    on success.
+  inputs:
+    type: object
+    required:
+    - inputHref
+    - inputStorage
+    - outputHref
+    - outputStorage
+    - outputType
+    properties:
+      inputHref:
+        type: string
+        description: URL or path of the input PSD or image in cloud storage.
+      inputStorage:
+        type: string
+        description: Cloud storage provider of the input (adobe, external, azure, or dropbox).
+      outputHref:
+        type: string
+        description: URL or path where the rendition should be written.
+      outputStorage:
+        type: string
+        description: Cloud storage provider of the output.
+      outputType:
+        type: string
+        description: MIME type of the rendition output (e.g. image/jpeg or image/png).
+      width:
+        type: integer
+        description: Rendition output width in pixels.
+      height:
+        type: integer
+        description: Rendition output height in pixels.
+      quality:
+        type: integer
+        description: JPEG quality from 1 to 100.
+  steps:
+  - stepId: submitRendition
+    description: >-
+      Submit the rendition job referencing the input file and the rendition
+      output target. The API queues the job and returns a job id.
+    operationId: createRendition
+    requestBody:
+      contentType: application/json
+      payload:
+        inputs:
+        - href: $inputs.inputHref
+          storage: $inputs.inputStorage
+        outputs:
+        - href: $inputs.outputHref
+          storage: $inputs.outputStorage
+          type: $inputs.outputType
+          width: $inputs.width
+          height: $inputs.height
+          quality: $inputs.quality
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      jobId: $response.body#/jobId
+  - stepId: pollStatus
+    description: >-
+      Poll the job status, repeating while it is pending or running and branching
+      once it succeeds or fails.
+    operationId: getJobStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitRendition.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: jobSucceeded
+      type: goto
+      stepId: reportSuccess
+      criteria:
+      - context: $response.body
+        condition: $.status == "succeeded"
+        type: jsonpath
+    - name: jobFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollStatus
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending" || $.status == "running"
+        type: jsonpath
+  - stepId: reportSuccess
+    description: Surface the rendered output URL from the succeeded job.
+    operationId: getJobStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitRendition.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "succeeded"
+      type: jsonpath
+    outputs:
+      outputUrl: $response.body#/outputs/0/_links/renditions/0/href
+      outputs: $response.body#/outputs
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed rendition job.
+    operationId: getJobStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitRendition.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    jobId: $steps.submitRendition.outputs.jobId
+    outputUrl: $steps.reportSuccess.outputs.outputUrl
+    errors: $steps.reportFailure.outputs.errors

@@ -1,0 +1,143 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Photoshop Product Crop
+  summary: Submit a Sensei product-crop job, poll until it finishes, and return the cropped output URL.
+  description: >-
+    Automatically crops an image to focus on the primary product subject using
+    the Adobe Photoshop API and Adobe Sensei AI, a common e-commerce
+    normalization step. The workflow submits a product-crop job referencing an
+    input image and an output location in cloud storage, polls the job status
+    endpoint until the job reaches a terminal state, and branches on the result
+    to return either the cropped rendition URL or the error details. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: photoshopApi
+  url: ../openapi/adobe-creative-suite-photoshop-openapi.yml
+  type: openapi
+workflows:
+- workflowId: product-crop
+  summary: Submit a product-crop job and poll until it succeeds or fails.
+  description: >-
+    Submits a product-crop job for an input image, polls the job status to
+    completion, and returns the cropped output rendition URL on success.
+  inputs:
+    type: object
+    required:
+    - inputHref
+    - inputStorage
+    - outputHref
+    - outputStorage
+    - outputType
+    properties:
+      inputHref:
+        type: string
+        description: URL or path of the input image in cloud storage.
+      inputStorage:
+        type: string
+        description: Cloud storage provider of the input (adobe, external, azure, or dropbox).
+      outputHref:
+        type: string
+        description: URL or path where the cropped output should be written.
+      outputStorage:
+        type: string
+        description: Cloud storage provider of the output.
+      outputType:
+        type: string
+        description: MIME type of the output file (e.g. image/jpeg).
+      padding:
+        type: number
+        description: Padding to add around the product crop.
+  steps:
+  - stepId: submitCrop
+    description: >-
+      Submit the product-crop job referencing the input image and the output
+      destination. The API queues the job and returns a job id.
+    operationId: productCrop
+    requestBody:
+      contentType: application/json
+      payload:
+        input:
+          href: $inputs.inputHref
+          storage: $inputs.inputStorage
+        output:
+          href: $inputs.outputHref
+          storage: $inputs.outputStorage
+          type: $inputs.outputType
+        options:
+          padding: $inputs.padding
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      jobId: $response.body#/jobId
+  - stepId: pollStatus
+    description: >-
+      Poll the job status, repeating while it is pending or running and branching
+      once it succeeds or fails.
+    operationId: getJobStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitCrop.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: jobSucceeded
+      type: goto
+      stepId: reportSuccess
+      criteria:
+      - context: $response.body
+        condition: $.status == "succeeded"
+        type: jsonpath
+    - name: jobFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollStatus
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending" || $.status == "running"
+        type: jsonpath
+  - stepId: reportSuccess
+    description: Surface the cropped output rendition URL from the succeeded job.
+    operationId: getJobStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitCrop.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "succeeded"
+      type: jsonpath
+    outputs:
+      outputUrl: $response.body#/outputs/0/_links/renditions/0/href
+      outputs: $response.body#/outputs
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed product-crop job.
+    operationId: getJobStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitCrop.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    jobId: $steps.submitCrop.outputs.jobId
+    outputUrl: $steps.reportSuccess.outputs.outputUrl
+    errors: $steps.reportFailure.outputs.errors

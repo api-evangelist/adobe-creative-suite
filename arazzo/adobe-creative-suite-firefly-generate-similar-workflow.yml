@@ -1,0 +1,136 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Firefly Generate Similar Images
+  summary: Generate variations similar to a reference image and poll the async job to completion.
+  description: >-
+    Generates images that are visually similar to a provided reference image
+    using the asynchronous Adobe Firefly model, optionally guided by a prompt.
+    The workflow submits the generate-similar job, polls the status endpoint
+    until the job reaches a terminal state, and branches on the result to return
+    either the variation output image URLs or the error details. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fireflyApi
+  url: ../openapi/adobe-creative-suite-firefly-openapi.yml
+  type: openapi
+workflows:
+- workflowId: firefly-generate-similar
+  summary: Submit a generate-similar job and poll until it succeeds or fails.
+  description: >-
+    Submits a request to generate images similar to a reference image, polls the
+    job status to completion, and returns the variation output image URLs on
+    success.
+  inputs:
+    type: object
+    required:
+    - imageUrl
+    properties:
+      imageUrl:
+        type: string
+        description: Publicly accessible URL of the reference image.
+      prompt:
+        type: string
+        description: Optional text prompt to further guide the style or content.
+      numVariations:
+        type: integer
+        description: Number of similar variations to generate (1 to 4).
+      width:
+        type: integer
+        description: Output image width in pixels.
+      height:
+        type: integer
+        description: Output image height in pixels.
+  steps:
+  - stepId: submitSimilar
+    description: >-
+      Submit the generate-similar request referencing the reference image by
+      URL. The API queues the job and returns a job id.
+    operationId: generateSimilarImagesAsync
+    requestBody:
+      contentType: application/json
+      payload:
+        prompt: $inputs.prompt
+        image:
+          source:
+            url: $inputs.imageUrl
+        numVariations: $inputs.numVariations
+        size:
+          width: $inputs.width
+          height: $inputs.height
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      jobId: $response.body#/jobId
+  - stepId: pollStatus
+    description: >-
+      Poll the generate-similar job status, repeating while it is pending or
+      running and branching once it succeeds or fails.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitSimilar.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: jobSucceeded
+      type: goto
+      stepId: reportSuccess
+      criteria:
+      - context: $response.body
+        condition: $.status == "succeeded"
+        type: jsonpath
+    - name: jobFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollStatus
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending" || $.status == "running"
+        type: jsonpath
+  - stepId: reportSuccess
+    description: Surface the variation output image URLs from the succeeded job.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitSimilar.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "succeeded"
+      type: jsonpath
+    outputs:
+      firstImageUrl: $response.body#/outputs/0/image/url
+      outputs: $response.body#/outputs
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed generate-similar job.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitSimilar.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    jobId: $steps.submitSimilar.outputs.jobId
+    firstImageUrl: $steps.reportSuccess.outputs.firstImageUrl
+    outputs: $steps.reportSuccess.outputs.outputs
+    errors: $steps.reportFailure.outputs.errors

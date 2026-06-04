@@ -1,0 +1,142 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Photoshop Create Alpha Mask
+  summary: Submit a Sensei alpha-mask job, poll until it finishes, and return the mask output URL.
+  description: >-
+    Creates an alpha mask isolating the foreground subject of an image using the
+    Adobe Photoshop API and Adobe Sensei AI. The workflow submits a mask job
+    referencing an input image and an output location in cloud storage, polls
+    the job status endpoint until the job reaches a terminal state, and branches
+    on the result to return either the mask rendition URL or the error details.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: photoshopApi
+  url: ../openapi/adobe-creative-suite-photoshop-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-mask
+  summary: Submit an alpha-mask job and poll until it succeeds or fails.
+  description: >-
+    Submits a mask job for an input image, polls the job status to completion,
+    and returns the mask output rendition URL on success.
+  inputs:
+    type: object
+    required:
+    - inputHref
+    - inputStorage
+    - outputHref
+    - outputStorage
+    - outputType
+    properties:
+      inputHref:
+        type: string
+        description: URL or path of the input image in cloud storage.
+      inputStorage:
+        type: string
+        description: Cloud storage provider of the input (adobe, external, azure, or dropbox).
+      outputHref:
+        type: string
+        description: URL or path where the mask output should be written.
+      outputStorage:
+        type: string
+        description: Cloud storage provider of the output.
+      outputType:
+        type: string
+        description: MIME type of the output file (e.g. image/png).
+      optimize:
+        type: string
+        description: Optimization mode for mask generation (performance or batch).
+  steps:
+  - stepId: submitMask
+    description: >-
+      Submit the alpha-mask job referencing the input image and the output
+      destination. The API queues the job and returns a job id.
+    operationId: createMask
+    requestBody:
+      contentType: application/json
+      payload:
+        input:
+          href: $inputs.inputHref
+          storage: $inputs.inputStorage
+        output:
+          href: $inputs.outputHref
+          storage: $inputs.outputStorage
+          type: $inputs.outputType
+        options:
+          optimize: $inputs.optimize
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      jobId: $response.body#/jobId
+  - stepId: pollStatus
+    description: >-
+      Poll the job status, repeating while it is pending or running and branching
+      once it succeeds or fails.
+    operationId: getJobStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitMask.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: jobSucceeded
+      type: goto
+      stepId: reportSuccess
+      criteria:
+      - context: $response.body
+        condition: $.status == "succeeded"
+        type: jsonpath
+    - name: jobFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollStatus
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending" || $.status == "running"
+        type: jsonpath
+  - stepId: reportSuccess
+    description: Surface the mask output rendition URL from the succeeded job.
+    operationId: getJobStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitMask.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "succeeded"
+      type: jsonpath
+    outputs:
+      outputUrl: $response.body#/outputs/0/_links/renditions/0/href
+      outputs: $response.body#/outputs
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed mask job.
+    operationId: getJobStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitMask.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    jobId: $steps.submitMask.outputs.jobId
+    outputUrl: $steps.reportSuccess.outputs.outputUrl
+    errors: $steps.reportFailure.outputs.errors

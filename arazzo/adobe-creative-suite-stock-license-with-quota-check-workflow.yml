@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Stock License Image with Quota Check
+  summary: Check the member download quota, license an image only when quota remains, and record the license history.
+  description: >-
+    Licenses a known Adobe Stock image while respecting the member's download
+    quota. The workflow first reads the authenticated member profile to inspect
+    the remaining standard download quota, branches so the license is only
+    attempted when quota remains, licenses the image to obtain a download URL,
+    and finally reads back the license history to confirm the new entry. Every
+    request inlines the required x-api-key header, and every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: stockApi
+  url: ../openapi/adobe-creative-suite-stock-openapi.yml
+  type: openapi
+workflows:
+- workflowId: license-with-quota-check
+  summary: Verify remaining quota, license the image when quota remains, and confirm via history.
+  description: >-
+    Reads the member profile to check remaining download quota, licenses the
+    given content id only when quota remains, and then retrieves license history
+    to confirm the transaction.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - contentId
+    - license
+    properties:
+      apiKey:
+        type: string
+        description: Adobe Stock API key (client ID) sent as the x-api-key header.
+      contentId:
+        type: integer
+        description: Adobe Stock content ID of the image to license.
+      license:
+        type: string
+        description: License type to apply (Standard or Extended).
+      locale:
+        type: string
+        description: BCP 47 locale code for localized results (e.g. en_US).
+  steps:
+  - stepId: getProfile
+    description: >-
+      Read the authenticated member profile to inspect remaining standard
+      download quota before attempting to license.
+    operationId: getMemberProfile
+    parameters:
+    - name: locale
+      in: query
+      value: $inputs.locale
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      remaining: $response.body#/stock_user/nb_standard_downloads_remaining
+    onSuccess:
+    - name: quotaAvailable
+      type: goto
+      stepId: licenseImage
+      criteria:
+      - context: $response.body
+        condition: $.stock_user.nb_standard_downloads_remaining > 0
+        type: jsonpath
+  - stepId: licenseImage
+    description: >-
+      License the image now that quota is confirmed available, returning a
+      full-resolution download URL.
+    operationId: licenseImage
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        content_id: $inputs.contentId
+        license: $inputs.license
+        locale: $inputs.locale
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      downloadUrl: $response.body#/download_url
+      purchaseState: $response.body#/purchase_details/state
+  - stepId: confirmHistory
+    description: >-
+      Retrieve the most recent license history entry to confirm the new license
+      was recorded against the member account.
+    operationId: getLicenseHistory
+    parameters:
+    - name: locale
+      in: query
+      value: $inputs.locale
+    - name: search_parameters[limit]
+      in: query
+      value: 1
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestContentId: $response.body#/files/0/id
+      nbResults: $response.body#/nb_results
+  outputs:
+    remaining: $steps.getProfile.outputs.remaining
+    downloadUrl: $steps.licenseImage.outputs.downloadUrl
+    purchaseState: $steps.licenseImage.outputs.purchaseState
+    latestContentId: $steps.confirmHistory.outputs.latestContentId

@@ -1,0 +1,128 @@
+arazzo: 1.0.1
+info:
+  title: Adobe PDF Services Compress PDF
+  summary: Upload a PDF, compress it at a chosen level, poll the job, and get the compressed download URI.
+  description: >-
+    Reduces the file size of a PDF using the Adobe PDF Services asynchronous job
+    model. The workflow registers the source PDF by requesting an upload asset,
+    submits a compress operation at the chosen compression level, polls the
+    operation status until it is done or failed, and resolves a temporary
+    download URI for the compressed output. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pdfServicesApi
+  url: ../openapi/adobe-creative-suite-pdf-services-openapi.yml
+  type: openapi
+workflows:
+- workflowId: compress-pdf
+  summary: Upload a PDF, compress it, and resolve the compressed download URI.
+  description: >-
+    Registers a source PDF asset, submits a compress operation at the requested
+    level, polls the job to a terminal state, and returns the download URI of the
+    compressed PDF on success.
+  inputs:
+    type: object
+    properties:
+      compressionLevel:
+        type: string
+        description: Compression level to apply (LOW, MEDIUM, or HIGH).
+  steps:
+  - stepId: createUpload
+    description: Request an upload asset for the source PDF to compress.
+    operationId: uploadAsset
+    requestBody:
+      contentType: application/json
+      payload:
+        mediaType: application/pdf
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assetID: $response.body#/assetID
+      uploadUri: $response.body#/uploadUri
+  - stepId: submitCompress
+    description: >-
+      Submit a compress operation against the uploaded PDF asset at the requested
+      level. The API returns a job id for polling.
+    operationId: compressPDF
+    requestBody:
+      contentType: application/json
+      payload:
+        assetID: $steps.createUpload.outputs.assetID
+        compressionLevel: $inputs.compressionLevel
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobID: $response.body#/jobID
+  - stepId: pollOperation
+    description: >-
+      Poll the compress operation status, repeating while it is in progress and
+      branching once it is done or failed.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitCompress.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      assetID: $response.body#/asset/assetID
+    onSuccess:
+    - name: operationDone
+      type: goto
+      stepId: getOutput
+      criteria:
+      - context: $response.body
+        condition: $.status == "done"
+        type: jsonpath
+    - name: operationFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollOperation
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "in progress"
+        type: jsonpath
+  - stepId: getOutput
+    description: >-
+      Retrieve the compressed PDF asset metadata and a fresh temporary download
+      URI for the output file.
+    operationId: getAsset
+    parameters:
+    - name: assetID
+      in: path
+      value: $steps.pollOperation.outputs.assetID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      downloadUri: $response.body#/downloadUri
+      size: $response.body#/size
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed compress operation.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitCompress.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    sourceAssetID: $steps.createUpload.outputs.assetID
+    jobID: $steps.submitCompress.outputs.jobID
+    outputDownloadUri: $steps.getOutput.outputs.downloadUri
+    errors: $steps.reportFailure.outputs.errors

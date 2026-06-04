@@ -1,0 +1,138 @@
+arazzo: 1.0.1
+info:
+  title: Adobe PDF Services Export PDF to Word
+  summary: Upload a PDF, export it to a target Office format, poll the job, and get the output download URI.
+  description: >-
+    Exports an existing PDF to a target format such as Word, Excel, PowerPoint,
+    RTF, or plain text using the Adobe PDF Services asynchronous job model. The
+    workflow registers the source PDF by requesting an upload asset, submits an
+    export-PDF operation against that asset with the requested target format,
+    polls the operation status until it is done or failed, and resolves a
+    temporary download URI for the exported file. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pdfServicesApi
+  url: ../openapi/adobe-creative-suite-pdf-services-openapi.yml
+  type: openapi
+workflows:
+- workflowId: export-pdf-to-word
+  summary: Upload a PDF, export it to a target format, and resolve the output download URI.
+  description: >-
+    Registers a source PDF asset, submits an export-PDF operation to the chosen
+    target format, polls the job to a terminal state, and returns the download
+    URI of the exported file on success.
+  inputs:
+    type: object
+    required:
+    - targetFormat
+    properties:
+      targetFormat:
+        type: string
+        description: Target output format (docx, xlsx, pptx, rtf, or txt).
+      exportOCRLocale:
+        type: string
+        description: Locale for OCR during export if the PDF contains scanned text.
+  steps:
+  - stepId: createUpload
+    description: >-
+      Request an upload asset for the source PDF, receiving an asset id and a
+      pre-signed upload URI to PUT the PDF content to.
+    operationId: uploadAsset
+    requestBody:
+      contentType: application/json
+      payload:
+        mediaType: application/pdf
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assetID: $response.body#/assetID
+      uploadUri: $response.body#/uploadUri
+  - stepId: submitExport
+    description: >-
+      Submit an export-PDF operation against the uploaded PDF asset to the chosen
+      target format. The API returns a job id for polling.
+    operationId: exportPDF
+    requestBody:
+      contentType: application/json
+      payload:
+        assetID: $steps.createUpload.outputs.assetID
+        targetFormat: $inputs.targetFormat
+        exportOCRLocale: $inputs.exportOCRLocale
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobID: $response.body#/jobID
+  - stepId: pollOperation
+    description: >-
+      Poll the export operation status, repeating while it is in progress and
+      branching once it is done or failed.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitExport.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      assetID: $response.body#/asset/assetID
+    onSuccess:
+    - name: operationDone
+      type: goto
+      stepId: getOutput
+      criteria:
+      - context: $response.body
+        condition: $.status == "done"
+        type: jsonpath
+    - name: operationFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollOperation
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "in progress"
+        type: jsonpath
+  - stepId: getOutput
+    description: >-
+      Retrieve the exported asset metadata and a fresh temporary download URI for
+      the output file.
+    operationId: getAsset
+    parameters:
+    - name: assetID
+      in: path
+      value: $steps.pollOperation.outputs.assetID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      downloadUri: $response.body#/downloadUri
+      mediaType: $response.body#/mediaType
+      size: $response.body#/size
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed export operation.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitExport.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    sourceAssetID: $steps.createUpload.outputs.assetID
+    jobID: $steps.submitExport.outputs.jobID
+    outputDownloadUri: $steps.getOutput.outputs.downloadUri
+    errors: $steps.reportFailure.outputs.errors

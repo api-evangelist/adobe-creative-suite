@@ -1,0 +1,129 @@
+arazzo: 1.0.1
+info:
+  title: Adobe PDF Services OCR PDF
+  summary: Upload a scanned PDF, apply OCR, poll the job, and get the searchable output download URI.
+  description: >-
+    Applies optical character recognition to a scanned or image-based PDF to
+    make its text searchable and selectable, using the Adobe PDF Services
+    asynchronous job model. The workflow registers the source PDF by requesting
+    an upload asset, submits an OCR operation with the chosen recognition
+    locale, polls the operation status until it is done or failed, and resolves
+    a temporary download URI for the searchable output. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pdfServicesApi
+  url: ../openapi/adobe-creative-suite-pdf-services-openapi.yml
+  type: openapi
+workflows:
+- workflowId: ocr-pdf
+  summary: Upload a scanned PDF, apply OCR, and resolve the searchable download URI.
+  description: >-
+    Registers a source PDF asset, submits an OCR operation in the chosen locale,
+    polls the job to a terminal state, and returns the download URI of the
+    searchable PDF on success.
+  inputs:
+    type: object
+    properties:
+      ocrLang:
+        type: string
+        description: BCP 47 locale for OCR language model selection (e.g. en-US).
+  steps:
+  - stepId: createUpload
+    description: Request an upload asset for the scanned source PDF.
+    operationId: uploadAsset
+    requestBody:
+      contentType: application/json
+      payload:
+        mediaType: application/pdf
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assetID: $response.body#/assetID
+      uploadUri: $response.body#/uploadUri
+  - stepId: submitOCR
+    description: >-
+      Submit an OCR operation against the uploaded PDF asset in the chosen
+      locale. The API returns a job id for polling.
+    operationId: ocrPDF
+    requestBody:
+      contentType: application/json
+      payload:
+        assetID: $steps.createUpload.outputs.assetID
+        ocrLang: $inputs.ocrLang
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobID: $response.body#/jobID
+  - stepId: pollOperation
+    description: >-
+      Poll the OCR operation status, repeating while it is in progress and
+      branching once it is done or failed.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitOCR.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      assetID: $response.body#/asset/assetID
+    onSuccess:
+    - name: operationDone
+      type: goto
+      stepId: getOutput
+      criteria:
+      - context: $response.body
+        condition: $.status == "done"
+        type: jsonpath
+    - name: operationFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollOperation
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "in progress"
+        type: jsonpath
+  - stepId: getOutput
+    description: >-
+      Retrieve the searchable PDF asset metadata and a fresh temporary download
+      URI for the output file.
+    operationId: getAsset
+    parameters:
+    - name: assetID
+      in: path
+      value: $steps.pollOperation.outputs.assetID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      downloadUri: $response.body#/downloadUri
+      size: $response.body#/size
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed OCR operation.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitOCR.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    sourceAssetID: $steps.createUpload.outputs.assetID
+    jobID: $steps.submitOCR.outputs.jobID
+    outputDownloadUri: $steps.getOutput.outputs.downloadUri
+    errors: $steps.reportFailure.outputs.errors

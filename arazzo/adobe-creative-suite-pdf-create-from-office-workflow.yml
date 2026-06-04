@@ -1,0 +1,137 @@
+arazzo: 1.0.1
+info:
+  title: Adobe PDF Services Create PDF from Office
+  summary: Upload an Office or HTML source, convert it to PDF, poll the job, and get the output download URI.
+  description: >-
+    Converts a Microsoft Office or HTML source file into a PDF using the Adobe
+    PDF Services asynchronous job model. The workflow first registers the source
+    file by requesting an upload asset, then submits a create-PDF operation
+    against that asset, polls the operation status until it is done or failed,
+    and finally resolves a temporary download URI for the produced PDF asset.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pdfServicesApi
+  url: ../openapi/adobe-creative-suite-pdf-services-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-pdf-from-office
+  summary: Upload a source file, convert it to PDF, and resolve the output download URI.
+  description: >-
+    Registers a source asset, submits a create-PDF operation, polls the job to a
+    terminal state, and returns the download URI of the generated PDF on
+    success.
+  inputs:
+    type: object
+    required:
+    - mediaType
+    properties:
+      mediaType:
+        type: string
+        description: MIME type of the source file to upload (e.g. a Word document or HTML).
+      documentLanguage:
+        type: string
+        description: BCP 47 language code of the source document for better conversion.
+  steps:
+  - stepId: createUpload
+    description: >-
+      Request an upload asset for the source file, receiving an asset id and a
+      pre-signed upload URI to PUT the file content to.
+    operationId: uploadAsset
+    requestBody:
+      contentType: application/json
+      payload:
+        mediaType: $inputs.mediaType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assetID: $response.body#/assetID
+      uploadUri: $response.body#/uploadUri
+  - stepId: submitCreatePDF
+    description: >-
+      Submit a create-PDF operation against the uploaded source asset. The API
+      accepts the operation and returns a job id for polling.
+    operationId: createPDF
+    requestBody:
+      contentType: application/json
+      payload:
+        assetID: $steps.createUpload.outputs.assetID
+        documentLanguage: $inputs.documentLanguage
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobID: $response.body#/jobID
+  - stepId: pollOperation
+    description: >-
+      Poll the operation status, repeating while it is in progress and branching
+      once it is done or failed.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitCreatePDF.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      assetID: $response.body#/asset/assetID
+      downloadUri: $response.body#/asset/downloadUri
+    onSuccess:
+    - name: operationDone
+      type: goto
+      stepId: getOutput
+      criteria:
+      - context: $response.body
+        condition: $.status == "done"
+        type: jsonpath
+    - name: operationFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollOperation
+      retryAfter: 5
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.status == "in progress"
+        type: jsonpath
+  - stepId: getOutput
+    description: >-
+      Retrieve the produced PDF asset metadata and a fresh temporary download
+      URI for the output file.
+    operationId: getAsset
+    parameters:
+    - name: assetID
+      in: path
+      value: $steps.pollOperation.outputs.assetID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      downloadUri: $response.body#/downloadUri
+      mediaType: $response.body#/mediaType
+      size: $response.body#/size
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed create-PDF operation.
+    operationId: getOperationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitCreatePDF.outputs.jobID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    sourceAssetID: $steps.createUpload.outputs.assetID
+    jobID: $steps.submitCreatePDF.outputs.jobID
+    outputDownloadUri: $steps.getOutput.outputs.downloadUri
+    errors: $steps.reportFailure.outputs.errors

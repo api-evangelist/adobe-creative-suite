@@ -1,0 +1,136 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Firefly Text-to-Video Generation
+  summary: Submit a text-to-video Firefly job, poll until it finishes, and return the generated video URLs.
+  description: >-
+    Generates a short video clip from a natural-language prompt using the
+    asynchronous Adobe Firefly video generation model. Because video generation
+    can take several minutes, the workflow submits the request, takes the
+    returned job id, and polls the status endpoint patiently until the job
+    reaches a terminal state, branching on the result to return either the
+    generated output URLs or the error details. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fireflyApi
+  url: ../openapi/adobe-creative-suite-firefly-openapi.yml
+  type: openapi
+workflows:
+- workflowId: firefly-text-to-video
+  summary: Generate a video from a text prompt and poll the async job to completion.
+  description: >-
+    Submits a text-to-video generation request to Adobe Firefly, polls the job
+    status until it succeeds or fails, and returns the generated output URLs on
+    success.
+  inputs:
+    type: object
+    required:
+    - prompt
+    properties:
+      prompt:
+        type: string
+        description: Text description of the video to generate.
+      negativePrompt:
+        type: string
+        description: Text describing what to avoid in the generated video.
+      width:
+        type: integer
+        description: Output video width in pixels.
+      height:
+        type: integer
+        description: Output video height in pixels.
+      duration:
+        type: number
+        description: Requested video duration in seconds.
+  steps:
+  - stepId: submitVideo
+    description: >-
+      Submit the text-to-video generation request. The API accepts the job and
+      returns a job id used for polling.
+    operationId: generateVideoAsync
+    requestBody:
+      contentType: application/json
+      payload:
+        prompt: $inputs.prompt
+        negativePrompt: $inputs.negativePrompt
+        size:
+          width: $inputs.width
+          height: $inputs.height
+        duration: $inputs.duration
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      jobId: $response.body#/jobId
+  - stepId: pollStatus
+    description: >-
+      Poll the video generation job status, repeating while it is pending or
+      running and branching once it succeeds or fails. Video jobs may take
+      several minutes, so polling uses a longer total budget.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitVideo.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: jobSucceeded
+      type: goto
+      stepId: reportSuccess
+      criteria:
+      - context: $response.body
+        condition: $.status == "succeeded"
+        type: jsonpath
+    - name: jobFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "failed"
+        type: jsonpath
+    - name: stillRunning
+      type: retry
+      stepId: pollStatus
+      retryAfter: 15
+      retryLimit: 40
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending" || $.status == "running"
+        type: jsonpath
+  - stepId: reportSuccess
+    description: Surface the generated video output URLs from the succeeded job.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitVideo.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "succeeded"
+      type: jsonpath
+    outputs:
+      firstOutputUrl: $response.body#/outputs/0/image/url
+      outputs: $response.body#/outputs
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: Surface the error details from the failed video generation job.
+    operationId: getGenerationStatus
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.submitVideo.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      errors: $response.body#/errors
+  outputs:
+    jobId: $steps.submitVideo.outputs.jobId
+    firstOutputUrl: $steps.reportSuccess.outputs.firstOutputUrl
+    outputs: $steps.reportSuccess.outputs.outputs
+    errors: $steps.reportFailure.outputs.errors
