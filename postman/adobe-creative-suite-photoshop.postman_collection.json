@@ -1,0 +1,2608 @@
+{
+  "info": {
+    "_postman_id": "074f36e2-6627-4e62-b678-497ea1610461",
+    "name": "Adobe Creative Suite Adobe Photoshop API",
+    "description": "The Adobe Photoshop API provides programmatic access to Photoshop image manipulation capabilities including automated editing, masking, compositing, layer management, and document operations. It enables developers to integrate Photoshop processing into workflows and applications without requiring a desktop installation. Operations are performed asynchronously and return a job ID for status polling.\n\nContact Support:\n Name: Adobe Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:42.000Z",
+    "updatedAt": "2026-06-05T15:02:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-074f36e2-6627-4e62-b678-497ea1610461"
+  },
+  "item": [
+    {
+      "name": "sensei",
+      "item": [
+        {
+          "name": "cutout",
+          "item": [
+            {
+              "name": "Adobe Creative Suite Remove Background",
+              "id": "155ff43d-02aa-4395-8ada-a108267a0934",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"external\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sensei/cutout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sensei",
+                    "cutout"
+                  ]
+                },
+                "description": "Removes the background from an image using Adobe Sensei AI. Accepts an input image stored in cloud storage and produces a cutout image with the background removed. The operation is asynchronous; poll the returned job URL for completion."
+              },
+              "response": [
+                {
+                  "id": "f889ef8f-657d-4e24-9720-fdf3cc9c6506",
+                  "name": "Job accepted and queued for processing",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"external\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/cutout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "cutout"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<string>\",\n  \"statusUrl\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-f889ef8f-657d-4e24-9720-fdf3cc9c6506"
+                },
+                {
+                  "id": "8969c5d9-5763-4bf3-8f59-d14ef12c2d78",
+                  "name": "Bad request - invalid input parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"external\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/cutout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "cutout"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-8969c5d9-5763-4bf3-8f59-d14ef12c2d78"
+                },
+                {
+                  "id": "9ecd62ee-ad58-4d2b-b1be-5e2c848a3ebd",
+                  "name": "Unauthorized - invalid or missing bearer token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"external\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/cutout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "cutout"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-9ecd62ee-ad58-4d2b-b1be-5e2c848a3ebd"
+                },
+                {
+                  "id": "24f67852-0e9c-4092-b8c2-5ada23827e4e",
+                  "name": "Forbidden - insufficient permissions",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"external\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/cutout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "cutout"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-24f67852-0e9c-4092-b8c2-5ada23827e4e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:43.000Z",
+              "updatedAt": "2026-06-05T15:02:43.000Z",
+              "uid": "35240-155ff43d-02aa-4395-8ada-a108267a0934"
+            }
+          ],
+          "id": "87096ddc-8bf4-4b43-8ab0-d0d740a68ee5",
+          "createdAt": "2026-06-05T15:02:42.000Z",
+          "updatedAt": "2026-06-05T15:02:42.000Z",
+          "uid": "35240-87096ddc-8bf4-4b43-8ab0-d0d740a68ee5"
+        },
+        {
+          "name": "mask",
+          "item": [
+            {
+              "name": "Adobe Creative Suite Create Alpha Mask",
+              "id": "473c06c0-1da7-4f01-84bf-8f99d80fb569",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"azure\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"optimize\": \"performance\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sensei/mask",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sensei",
+                    "mask"
+                  ]
+                },
+                "description": "Creates an alpha mask for an image using Adobe Sensei AI. The mask isolates the foreground subject from the background and is returned as a separate grayscale image that can be applied as a layer mask in compositing workflows."
+              },
+              "response": [
+                {
+                  "id": "5fee8fe8-77d0-4fbd-ba3a-b9dce537827b",
+                  "name": "Job accepted and queued for processing",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"azure\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"optimize\": \"performance\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/mask",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "mask"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<string>\",\n  \"statusUrl\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-5fee8fe8-77d0-4fbd-ba3a-b9dce537827b"
+                },
+                {
+                  "id": "96d90c13-84ed-4e0b-b867-887248a5200c",
+                  "name": "Bad request - invalid input parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"azure\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"optimize\": \"performance\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/mask",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "mask"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-96d90c13-84ed-4e0b-b867-887248a5200c"
+                },
+                {
+                  "id": "42dc1b67-ec29-402d-af46-f58549235078",
+                  "name": "Unauthorized - invalid or missing bearer token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"azure\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"optimize\": \"performance\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/mask",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "mask"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-42dc1b67-ec29-402d-af46-f58549235078"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:43.000Z",
+              "updatedAt": "2026-06-05T15:02:43.000Z",
+              "uid": "35240-473c06c0-1da7-4f01-84bf-8f99d80fb569"
+            }
+          ],
+          "id": "e9d78778-a493-4bcd-9d25-79927bf4727b",
+          "createdAt": "2026-06-05T15:02:42.000Z",
+          "updatedAt": "2026-06-05T15:02:42.000Z",
+          "uid": "35240-e9d78778-a493-4bcd-9d25-79927bf4727b"
+        },
+        {
+          "name": "product_crop",
+          "item": [
+            {
+              "name": "Adobe Creative Suite Product Crop",
+              "id": "e7dbd280-d7a8-4dfb-bab2-6522f546cbc0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"unit\": \"percent\",\n    \"padding\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sensei/product_crop",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sensei",
+                    "product_crop"
+                  ]
+                },
+                "description": "Automatically crops an image to focus on the primary product subject using Adobe Sensei AI. Useful for e-commerce workflows where product images need to be consistently cropped and centered."
+              },
+              "response": [
+                {
+                  "id": "c946f63a-4ed0-4d58-9b24-d0f24bfb6bbf",
+                  "name": "Job accepted and queued for processing",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"unit\": \"percent\",\n    \"padding\": \"<number>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/product_crop",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "product_crop"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<string>\",\n  \"statusUrl\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-c946f63a-4ed0-4d58-9b24-d0f24bfb6bbf"
+                },
+                {
+                  "id": "fbcad199-4fc9-468b-9c11-5b231e3f1a22",
+                  "name": "Bad request - invalid input parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"unit\": \"percent\",\n    \"padding\": \"<number>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/product_crop",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "product_crop"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-fbcad199-4fc9-468b-9c11-5b231e3f1a22"
+                },
+                {
+                  "id": "1a4cb941-9998-486b-860a-d827637a3a38",
+                  "name": "Unauthorized - invalid or missing bearer token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"unit\": \"percent\",\n    \"padding\": \"<number>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/product_crop",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "product_crop"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-1a4cb941-9998-486b-860a-d827637a3a38"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:43.000Z",
+              "updatedAt": "2026-06-05T15:02:43.000Z",
+              "uid": "35240-e7dbd280-d7a8-4dfb-bab2-6522f546cbc0"
+            }
+          ],
+          "id": "d53784d3-d0de-458d-8336-00f812f3f2f9",
+          "createdAt": "2026-06-05T15:02:42.000Z",
+          "updatedAt": "2026-06-05T15:02:42.000Z",
+          "uid": "35240-d53784d3-d0de-458d-8336-00f812f3f2f9"
+        },
+        {
+          "name": "straighten",
+          "item": [
+            {
+              "name": "Adobe Creative Suite Straighten Image",
+              "id": "e0d82b19-9289-4de5-bce6-05503672a46e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sensei/straighten",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sensei",
+                    "straighten"
+                  ]
+                },
+                "description": "Automatically detects and corrects the rotation of an image so that horizontal and vertical lines are properly aligned. Uses Adobe Sensei AI to analyze the image content and apply the appropriate rotation correction."
+              },
+              "response": [
+                {
+                  "id": "ebae7369-3c93-43f8-82a9-35c328d238ba",
+                  "name": "Job accepted and queued for processing",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/straighten",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "straighten"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<string>\",\n  \"statusUrl\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-ebae7369-3c93-43f8-82a9-35c328d238ba"
+                },
+                {
+                  "id": "9d2bbc89-2060-4223-a81f-7ce48672dc8a",
+                  "name": "Bad request - invalid input parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/straighten",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "straighten"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-9d2bbc89-2060-4223-a81f-7ce48672dc8a"
+                },
+                {
+                  "id": "7b8fe53e-d592-479d-a40d-742e171f494b",
+                  "name": "Unauthorized - invalid or missing bearer token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"adobe\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"dropbox\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sensei/straighten",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sensei",
+                        "straighten"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-7b8fe53e-d592-479d-a40d-742e171f494b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:43.000Z",
+              "updatedAt": "2026-06-05T15:02:43.000Z",
+              "uid": "35240-e0d82b19-9289-4de5-bce6-05503672a46e"
+            }
+          ],
+          "id": "979a109d-201c-45fb-b9a1-6c90b2eaaac9",
+          "createdAt": "2026-06-05T15:02:42.000Z",
+          "updatedAt": "2026-06-05T15:02:42.000Z",
+          "uid": "35240-979a109d-201c-45fb-b9a1-6c90b2eaaac9"
+        }
+      ],
+      "id": "ba3a72cd-5094-42e5-ba0a-c13a3a632238",
+      "createdAt": "2026-06-05T15:02:42.000Z",
+      "updatedAt": "2026-06-05T15:02:42.000Z",
+      "uid": "35240-ba3a72cd-5094-42e5-ba0a-c13a3a632238"
+    },
+    {
+      "name": "pie",
+      "item": [
+        {
+          "name": "psdService",
+          "item": [
+            {
+              "name": "text",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite Edit Text Layers",
+                  "id": "0185e0bd-2d42-450f-b140-7629b946cdee",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pie/psdService/text",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pie",
+                        "psdService",
+                        "text"
+                      ]
+                    },
+                    "description": "Edits text content, font properties, and styling of text layers within a PSD document. Supports changing text content, font family, size, color, alignment, and other text attributes across one or more named text layers."
+                  },
+                  "response": [
+                    {
+                      "id": "573a367d-9649-4aa7-8cb0-1273bda022a3",
+                      "name": "Job accepted and queued for processing",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/text",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "text"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jobId\": \"<string>\",\n  \"statusUrl\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-573a367d-9649-4aa7-8cb0-1273bda022a3"
+                    },
+                    {
+                      "id": "bd9872d7-281b-45f7-a2d5-9751c61f456a",
+                      "name": "Bad request - invalid input parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/text",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "text"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-bd9872d7-281b-45f7-a2d5-9751c61f456a"
+                    },
+                    {
+                      "id": "c0160cb5-f666-4110-9e42-8c3e6bc9c2aa",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/text",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "text"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-c0160cb5-f666-4110-9e42-8c3e6bc9c2aa"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-0185e0bd-2d42-450f-b140-7629b946cdee"
+                }
+              ],
+              "id": "c63fc892-a8e8-4772-8622-73f1f7d7f5cc",
+              "createdAt": "2026-06-05T15:02:42.000Z",
+              "updatedAt": "2026-06-05T15:02:42.000Z",
+              "uid": "35240-c63fc892-a8e8-4772-8622-73f1f7d7f5cc"
+            },
+            {
+              "name": "layers",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite Manage Layers",
+                  "id": "cb344fd8-282e-4ed0-962e-aab2e4add885",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"id\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"type\": \"groupLayer\",\n        \"visible\": \"<boolean>\",\n        \"locked\": \"<boolean>\",\n        \"opacity\": \"<integer>\",\n        \"blendMode\": \"<string>\",\n        \"bounds\": {\n          \"top\": \"<integer>\",\n          \"left\": \"<integer>\",\n          \"bottom\": \"<integer>\",\n          \"right\": \"<integer>\"\n        },\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"type\": \"backgroundLayer\",\n        \"visible\": \"<boolean>\",\n        \"locked\": \"<boolean>\",\n        \"opacity\": \"<integer>\",\n        \"blendMode\": \"<string>\",\n        \"bounds\": {\n          \"top\": \"<integer>\",\n          \"left\": \"<integer>\",\n          \"bottom\": \"<integer>\",\n          \"right\": \"<integer>\"\n        },\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pie/psdService/layers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pie",
+                        "psdService",
+                        "layers"
+                      ]
+                    },
+                    "description": "Reads, adds, modifies, or deletes layers within a PSD document. Supports pixel, adjustment, fill, shape, text, and group layer types. Layer operations include visibility changes, opacity adjustments, blend mode changes, and positional transformations."
+                  },
+                  "response": [
+                    {
+                      "id": "1fe787eb-40ee-436c-8ab5-82d04034a466",
+                      "name": "Job accepted and queued for processing",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"id\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"type\": \"groupLayer\",\n        \"visible\": \"<boolean>\",\n        \"locked\": \"<boolean>\",\n        \"opacity\": \"<integer>\",\n        \"blendMode\": \"<string>\",\n        \"bounds\": {\n          \"top\": \"<integer>\",\n          \"left\": \"<integer>\",\n          \"bottom\": \"<integer>\",\n          \"right\": \"<integer>\"\n        },\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"type\": \"backgroundLayer\",\n        \"visible\": \"<boolean>\",\n        \"locked\": \"<boolean>\",\n        \"opacity\": \"<integer>\",\n        \"blendMode\": \"<string>\",\n        \"bounds\": {\n          \"top\": \"<integer>\",\n          \"left\": \"<integer>\",\n          \"bottom\": \"<integer>\",\n          \"right\": \"<integer>\"\n        },\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/layers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "layers"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jobId\": \"<string>\",\n  \"statusUrl\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-1fe787eb-40ee-436c-8ab5-82d04034a466"
+                    },
+                    {
+                      "id": "ec5b2c9b-9b2f-4c16-b3bc-9f516dbea330",
+                      "name": "Bad request - invalid input parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"id\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"type\": \"groupLayer\",\n        \"visible\": \"<boolean>\",\n        \"locked\": \"<boolean>\",\n        \"opacity\": \"<integer>\",\n        \"blendMode\": \"<string>\",\n        \"bounds\": {\n          \"top\": \"<integer>\",\n          \"left\": \"<integer>\",\n          \"bottom\": \"<integer>\",\n          \"right\": \"<integer>\"\n        },\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"type\": \"backgroundLayer\",\n        \"visible\": \"<boolean>\",\n        \"locked\": \"<boolean>\",\n        \"opacity\": \"<integer>\",\n        \"blendMode\": \"<string>\",\n        \"bounds\": {\n          \"top\": \"<integer>\",\n          \"left\": \"<integer>\",\n          \"bottom\": \"<integer>\",\n          \"right\": \"<integer>\"\n        },\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/layers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "layers"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-ec5b2c9b-9b2f-4c16-b3bc-9f516dbea330"
+                    },
+                    {
+                      "id": "5c189c98-e7f0-4877-9fe9-53f421934e00",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"id\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"type\": \"groupLayer\",\n        \"visible\": \"<boolean>\",\n        \"locked\": \"<boolean>\",\n        \"opacity\": \"<integer>\",\n        \"blendMode\": \"<string>\",\n        \"bounds\": {\n          \"top\": \"<integer>\",\n          \"left\": \"<integer>\",\n          \"bottom\": \"<integer>\",\n          \"right\": \"<integer>\"\n        },\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"type\": \"backgroundLayer\",\n        \"visible\": \"<boolean>\",\n        \"locked\": \"<boolean>\",\n        \"opacity\": \"<integer>\",\n        \"blendMode\": \"<string>\",\n        \"bounds\": {\n          \"top\": \"<integer>\",\n          \"left\": \"<integer>\",\n          \"bottom\": \"<integer>\",\n          \"right\": \"<integer>\"\n        },\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Layer detected>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/layers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "layers"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-5c189c98-e7f0-4877-9fe9-53f421934e00"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-cb344fd8-282e-4ed0-962e-aab2e4add885"
+                }
+              ],
+              "id": "ab8ffb7f-31f2-4123-9f38-e7a7009a41f4",
+              "createdAt": "2026-06-05T15:02:42.000Z",
+              "updatedAt": "2026-06-05T15:02:42.000Z",
+              "uid": "35240-ab8ffb7f-31f2-4123-9f38-e7a7009a41f4"
+            },
+            {
+              "name": "documentOperations",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite Apply Document Operations",
+                  "id": "cbd60526-93ab-484b-ae91-cb5e73eecf22",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"resize\": {\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"unit\": \"percent\",\n      \"resampleMethod\": \"nearestNeighbor\"\n    },\n    \"flatten\": \"<boolean>\",\n    \"trim\": {\n      \"basedOn\": \"transparentPixels\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pie/psdService/documentOperations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pie",
+                        "psdService",
+                        "documentOperations"
+                      ]
+                    },
+                    "description": "Applies one or more operations to a PSD document such as image resizing, canvas size changes, image flattening, and color mode conversions. Multiple operations can be chained together in a single request to produce a modified output document."
+                  },
+                  "response": [
+                    {
+                      "id": "ad50fa49-eb81-4de5-9445-4c275d2bcab8",
+                      "name": "Job accepted and queued for processing",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"resize\": {\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"unit\": \"percent\",\n      \"resampleMethod\": \"nearestNeighbor\"\n    },\n    \"flatten\": \"<boolean>\",\n    \"trim\": {\n      \"basedOn\": \"transparentPixels\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/documentOperations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "documentOperations"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jobId\": \"<string>\",\n  \"statusUrl\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-ad50fa49-eb81-4de5-9445-4c275d2bcab8"
+                    },
+                    {
+                      "id": "2162884e-0f2d-4ca8-89cb-771c742a162f",
+                      "name": "Bad request - invalid input parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"resize\": {\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"unit\": \"percent\",\n      \"resampleMethod\": \"nearestNeighbor\"\n    },\n    \"flatten\": \"<boolean>\",\n    \"trim\": {\n      \"basedOn\": \"transparentPixels\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/documentOperations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "documentOperations"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-2162884e-0f2d-4ca8-89cb-771c742a162f"
+                    },
+                    {
+                      "id": "d0452fd4-29ea-41ea-8107-71b59c5a8a3f",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"resize\": {\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"unit\": \"percent\",\n      \"resampleMethod\": \"nearestNeighbor\"\n    },\n    \"flatten\": \"<boolean>\",\n    \"trim\": {\n      \"basedOn\": \"transparentPixels\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/documentOperations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "documentOperations"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-d0452fd4-29ea-41ea-8107-71b59c5a8a3f"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-cbd60526-93ab-484b-ae91-cb5e73eecf22"
+                }
+              ],
+              "id": "651fbbec-ffd7-4db8-9911-42ce27b34533",
+              "createdAt": "2026-06-05T15:02:42.000Z",
+              "updatedAt": "2026-06-05T15:02:42.000Z",
+              "uid": "35240-651fbbec-ffd7-4db8-9911-42ce27b34533"
+            },
+            {
+              "name": "renditionCreate",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite Create Rendition",
+                  "id": "6f5bbdf8-6235-4ff8-addd-2dc48b650fe6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\",\n      \"compression\": \"medium\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\",\n      \"compression\": \"small\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pie/psdService/renditionCreate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pie",
+                        "psdService",
+                        "renditionCreate"
+                      ]
+                    },
+                    "description": "Generates one or more renditions from a PSD or image file in formats such as JPEG, PNG, or TIFF at specified dimensions. Supports generating multiple renditions in a single request for different sizes or formats simultaneously."
+                  },
+                  "response": [
+                    {
+                      "id": "91c725a2-0c60-4469-b265-cd1bf1588528",
+                      "name": "Job accepted and queued for processing",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\",\n      \"compression\": \"medium\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\",\n      \"compression\": \"small\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/renditionCreate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "renditionCreate"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jobId\": \"<string>\",\n  \"statusUrl\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-91c725a2-0c60-4469-b265-cd1bf1588528"
+                    },
+                    {
+                      "id": "277c3c2f-4929-4bc7-9446-42d151866fac",
+                      "name": "Bad request - invalid input parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\",\n      \"compression\": \"medium\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\",\n      \"compression\": \"small\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/renditionCreate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "renditionCreate"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-277c3c2f-4929-4bc7-9446-42d151866fac"
+                    },
+                    {
+                      "id": "538e31fc-79b9-4094-80d8-4a4e3e9058d1",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\",\n      \"compression\": \"medium\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true,\n      \"quality\": \"<integer>\",\n      \"compression\": \"small\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/renditionCreate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "renditionCreate"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-538e31fc-79b9-4094-80d8-4a4e3e9058d1"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-6f5bbdf8-6235-4ff8-addd-2dc48b650fe6"
+                }
+              ],
+              "id": "3ea83d1c-e95f-48d4-98f3-f20583804e39",
+              "createdAt": "2026-06-05T15:02:42.000Z",
+              "updatedAt": "2026-06-05T15:02:42.000Z",
+              "uid": "35240-3ea83d1c-e95f-48d4-98f3-f20583804e39"
+            },
+            {
+              "name": "smartObject",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite Edit Smart Objects",
+                  "id": "c84b84fa-6318-4225-be1e-0f20324ab535",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"input\": {\n          \"href\": \"<string>\",\n          \"storage\": \"external\",\n          \"type\": \"<string>\"\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"input\": {\n          \"href\": \"<string>\",\n          \"storage\": \"external\",\n          \"type\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pie/psdService/smartObject",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pie",
+                        "psdService",
+                        "smartObject"
+                      ]
+                    },
+                    "description": "Replaces the content of a smart object layer within a PSD document with new image content. Smart object replacement preserves the layer's transform, blend mode, and effects while substituting the embedded image data."
+                  },
+                  "response": [
+                    {
+                      "id": "9b60e8d6-0782-43e1-8187-a9ad89bcbcde",
+                      "name": "Job accepted and queued for processing",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"input\": {\n          \"href\": \"<string>\",\n          \"storage\": \"external\",\n          \"type\": \"<string>\"\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"input\": {\n          \"href\": \"<string>\",\n          \"storage\": \"external\",\n          \"type\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/smartObject",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "smartObject"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jobId\": \"<string>\",\n  \"statusUrl\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-9b60e8d6-0782-43e1-8187-a9ad89bcbcde"
+                    },
+                    {
+                      "id": "96644e09-a59b-43ce-a84d-0b5044416e44",
+                      "name": "Bad request - invalid input parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"input\": {\n          \"href\": \"<string>\",\n          \"storage\": \"external\",\n          \"type\": \"<string>\"\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"input\": {\n          \"href\": \"<string>\",\n          \"storage\": \"external\",\n          \"type\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/smartObject",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "smartObject"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-96644e09-a59b-43ce-a84d-0b5044416e44"
+                    },
+                    {
+                      "id": "578e8df5-93cf-4519-b5aa-353070732ee4",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"input\": {\n          \"href\": \"<string>\",\n          \"storage\": \"external\",\n          \"type\": \"<string>\"\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"input\": {\n          \"href\": \"<string>\",\n          \"storage\": \"external\",\n          \"type\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/smartObject",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "smartObject"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-578e8df5-93cf-4519-b5aa-353070732ee4"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-c84b84fa-6318-4225-be1e-0f20324ab535"
+                }
+              ],
+              "id": "1fc9d1e2-3024-4d37-ac45-27316a3771b3",
+              "createdAt": "2026-06-05T15:02:42.000Z",
+              "updatedAt": "2026-06-05T15:02:42.000Z",
+              "uid": "35240-1fc9d1e2-3024-4d37-ac45-27316a3771b3"
+            },
+            {
+              "name": "artboard",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite Create Artboards",
+                  "id": "d33efd5a-54c7-4bc6-bffe-ed058bd27e96",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"artboards\": [\n      {\n        \"name\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pie/psdService/artboard",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pie",
+                        "psdService",
+                        "artboard"
+                      ]
+                    },
+                    "description": "Creates one or more artboards within a PSD document at specified sizes and positions. Artboards allow multiple design variations or screen sizes to be organized within a single PSD file."
+                  },
+                  "response": [
+                    {
+                      "id": "eb146c78-549c-41db-92a0-76b259ae579e",
+                      "name": "Job accepted and queued for processing",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"artboards\": [\n      {\n        \"name\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/artboard",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "artboard"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jobId\": \"<string>\",\n  \"statusUrl\": \"<string>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-eb146c78-549c-41db-92a0-76b259ae579e"
+                    },
+                    {
+                      "id": "be26d44b-a1e5-4c72-bf0f-3d355d0c225d",
+                      "name": "Bad request - invalid input parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"artboards\": [\n      {\n        \"name\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/artboard",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "artboard"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-be26d44b-a1e5-4c72-bf0f-3d355d0c225d"
+                    },
+                    {
+                      "id": "e60c0b05-f669-4411-b6b5-096cf7922377",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"azure\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"external\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"adobe\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"dropbox\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"artboards\": [\n      {\n        \"name\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/artboard",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "artboard"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-e60c0b05-f669-4411-b6b5-096cf7922377"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:43.000Z",
+                  "updatedAt": "2026-06-05T15:02:43.000Z",
+                  "uid": "35240-d33efd5a-54c7-4bc6-bffe-ed058bd27e96"
+                }
+              ],
+              "id": "c7ea6918-73e8-4f84-89f6-e16976e63001",
+              "createdAt": "2026-06-05T15:02:42.000Z",
+              "updatedAt": "2026-06-05T15:02:42.000Z",
+              "uid": "35240-c7ea6918-73e8-4f84-89f6-e16976e63001"
+            },
+            {
+              "name": "status",
+              "item": [
+                {
+                  "name": "{jobId}",
+                  "item": [
+                    {
+                      "name": "Adobe Creative Suite Get Job Status",
+                      "id": "e12d2689-2acf-4687-8d98-a563895e4ae4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/pie/psdService/status/:jobId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pie",
+                            "psdService",
+                            "status",
+                            ":jobId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3466dae6-bbf9-47b3-9ea2-9e5964f8fcaf",
+                              "key": "jobId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the job to check"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves the current status of an asynchronous Photoshop API job. Poll this endpoint after submitting an operation to check if the job is pending, running, succeeded, or failed. On success, the response includes output file locations."
+                      },
+                      "response": [
+                        {
+                          "id": "4dfc5eb5-8365-4c8e-ab0b-946aefc5a0cf",
+                          "name": "Job status retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/pie/psdService/status/:jobId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "pie",
+                                "psdService",
+                                "status",
+                                ":jobId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jobId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"jobId\": \"<string>\",\n  \"status\": \"running\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"outputs\": [\n    {\n      \"input\": \"<string>\",\n      \"status\": \"pending\",\n      \"details\": \"<string>\",\n      \"_links\": {\n        \"renditions\": [\n          {\n            \"href\": \"<string>\",\n            \"storage\": \"<string>\",\n            \"type\": \"<string>\",\n            \"width\": \"<integer>\",\n            \"height\": \"<integer>\"\n          },\n          {\n            \"href\": \"<string>\",\n            \"storage\": \"<string>\",\n            \"type\": \"<string>\",\n            \"width\": \"<integer>\",\n            \"height\": \"<integer>\"\n          }\n        ]\n      }\n    },\n    {\n      \"input\": \"<string>\",\n      \"status\": \"succeeded\",\n      \"details\": \"<string>\",\n      \"_links\": {\n        \"renditions\": [\n          {\n            \"href\": \"<string>\",\n            \"storage\": \"<string>\",\n            \"type\": \"<string>\",\n            \"width\": \"<integer>\",\n            \"height\": \"<integer>\"\n          },\n          {\n            \"href\": \"<string>\",\n            \"storage\": \"<string>\",\n            \"type\": \"<string>\",\n            \"width\": \"<integer>\",\n            \"height\": \"<integer>\"\n          }\n        ]\n      }\n    }\n  ],\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:02:43.000Z",
+                          "updatedAt": "2026-06-05T15:02:43.000Z",
+                          "uid": "35240-4dfc5eb5-8365-4c8e-ab0b-946aefc5a0cf"
+                        },
+                        {
+                          "id": "d65dc691-d6dd-4ed1-bda4-f45c7d8263b7",
+                          "name": "Unauthorized - invalid or missing bearer token",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/pie/psdService/status/:jobId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "pie",
+                                "psdService",
+                                "status",
+                                ":jobId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jobId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:02:43.000Z",
+                          "updatedAt": "2026-06-05T15:02:43.000Z",
+                          "uid": "35240-d65dc691-d6dd-4ed1-bda4-f45c7d8263b7"
+                        },
+                        {
+                          "id": "977fb932-abc0-466c-b6e0-44a051d74655",
+                          "name": "Job not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/pie/psdService/status/:jobId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "pie",
+                                "psdService",
+                                "status",
+                                ":jobId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jobId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:02:43.000Z",
+                          "updatedAt": "2026-06-05T15:02:43.000Z",
+                          "uid": "35240-977fb932-abc0-466c-b6e0-44a051d74655"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:43.000Z",
+                      "updatedAt": "2026-06-05T15:02:43.000Z",
+                      "uid": "35240-e12d2689-2acf-4687-8d98-a563895e4ae4"
+                    }
+                  ],
+                  "id": "11b07fb9-8fb3-477f-93ea-84bc45785ee9",
+                  "createdAt": "2026-06-05T15:02:42.000Z",
+                  "updatedAt": "2026-06-05T15:02:42.000Z",
+                  "uid": "35240-11b07fb9-8fb3-477f-93ea-84bc45785ee9"
+                }
+              ],
+              "id": "17f8890c-5ad7-4e1b-b02a-f87e9c214da5",
+              "createdAt": "2026-06-05T15:02:42.000Z",
+              "updatedAt": "2026-06-05T15:02:42.000Z",
+              "uid": "35240-17f8890c-5ad7-4e1b-b02a-f87e9c214da5"
+            }
+          ],
+          "id": "4078c7c0-473e-4661-96e2-fa3cdd7d872d",
+          "createdAt": "2026-06-05T15:02:42.000Z",
+          "updatedAt": "2026-06-05T15:02:42.000Z",
+          "uid": "35240-4078c7c0-473e-4661-96e2-fa3cdd7d872d"
+        }
+      ],
+      "id": "760cd9c5-a003-4b07-abd8-4bce3148b031",
+      "createdAt": "2026-06-05T15:02:42.000Z",
+      "updatedAt": "2026-06-05T15:02:42.000Z",
+      "uid": "35240-760cd9c5-a003-4b07-abd8-4bce3148b031"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://image.adobe.io"
+    }
+  ]
+}

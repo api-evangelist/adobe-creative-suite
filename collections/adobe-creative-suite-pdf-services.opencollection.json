@@ -1,0 +1,288 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe PDF Services API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Upload Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pdf-services.adobe.io/assets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates an asset upload by returning a pre-signed upload URI and an asset ID. The caller must then PUT the file content to the returned upload URI. Once the upload is complete, the asset ID can be referenced as input to PDF operations."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Get Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pdf-services.adobe.io/assets/:assetID",
+            "params": [
+              {
+                "name": "assetID",
+                "value": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718",
+                "type": "path",
+                "description": "Unique identifier of the asset to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves metadata and a temporary download URI for a previously uploaded asset. The download URI is time-limited and can be used to download the asset content directly."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Delete Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pdf-services.adobe.io/assets/:assetID",
+            "params": [
+              {
+                "name": "assetID",
+                "value": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718",
+                "type": "path",
+                "description": "Unique identifier of the asset to delete"
+              }
+            ]
+          },
+          "docs": "Permanently deletes an uploaded asset. Assets are automatically deleted after 24 hours, but this endpoint allows immediate deletion when the asset is no longer needed."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Create PDF",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Create PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pdf-services.adobe.io/operation/createpdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a PDF document from a source file in formats such as Microsoft Word, Excel, PowerPoint, or HTML. The source file must be uploaded first using the asset upload endpoint. Returns a job ID for polling the operation status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Export PDF",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Export PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pdf-services.adobe.io/operation/exportpdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exports a PDF document to a target format such as Microsoft Word (.docx), Excel (.xlsx), PowerPoint (.pptx), RTF, or plain text. The source PDF must be uploaded first. Returns a job ID for polling the operation status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Combine PDF",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Combine PDFs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pdf-services.adobe.io/operation/combinepdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Combines two or more PDF documents into a single output PDF. The source PDFs are specified in order and merged sequentially. Page ranges from each source can optionally be specified to include only specific pages."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Compress PDF",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Compress PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pdf-services.adobe.io/operation/compressPDF",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reduces the file size of a PDF document by applying compression to embedded images and removing redundant data. Compression level can be set to balance between file size and output quality."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Linearize PDF",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Linearize PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pdf-services.adobe.io/operation/linearizePDF",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Linearizes (web-optimizes) a PDF document so that the first page can be displayed in a browser before the entire file has downloaded. This is also known as fast web view optimization."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OCR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite OCR PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pdf-services.adobe.io/operation/ocr",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies optical character recognition (OCR) to a scanned or image-based PDF, making the text content searchable and selectable. Supports multiple locales for improved recognition accuracy with non-English documents."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Accessibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Auto-tag PDF for Accessibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pdf-services.adobe.io/operation/autotagpdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Automatically adds accessibility tags to a PDF document to make it compliant with PDF/UA and WCAG standards. Tags identify headings, paragraphs, tables, figures, and other document structure elements for screen readers and assistive technologies."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Document Generation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Generate Document from Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pdf-services.adobe.io/operation/documentgeneration",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a PDF or Word document by merging JSON data into a Word document template. Template tags in the document are replaced with corresponding data values. Supports tables, lists, conditional sections, and images in templates."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Get Operation Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pdf-services.adobe.io/operation/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "urn:aaid:AS:UE1:operation:abc123",
+                "type": "path",
+                "description": "Unique identifier of the operation job to check"
+              }
+            ]
+          },
+          "docs": "Retrieves the current status of a PDF Services operation job. Poll this endpoint after submitting any operation to check progress. On success, the response contains a reference to the output asset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,257 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Photoshop API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cutout",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Remove Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/sensei/cutout",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes the background from an image using Adobe Sensei AI. Accepts an input image stored in cloud storage and produces a cutout image with the background removed. The operation is asynchronous; poll the returned job URL for completion."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Product Crop",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/sensei/product_crop",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Automatically crops an image to focus on the primary product subject using Adobe Sensei AI. Useful for e-commerce workflows where product images need to be consistently cropped and centered."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Straighten Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/sensei/straighten",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Automatically detects and corrects the rotation of an image so that horizontal and vertical lines are properly aligned. Uses Adobe Sensei AI to analyze the image content and apply the appropriate rotation correction."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Mask",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Create Alpha Mask",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/sensei/mask",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an alpha mask for an image using Adobe Sensei AI. The mask isolates the foreground subject from the background and is returned as a separate grayscale image that can be applied as a layer mask in compositing workflows."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Text",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Edit Text Layers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/pie/psdService/text",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edits text content, font properties, and styling of text layers within a PSD document. Supports changing text content, font family, size, color, alignment, and other text attributes across one or more named text layers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Layers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Manage Layers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/pie/psdService/layers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reads, adds, modifies, or deletes layers within a PSD document. Supports pixel, adjustment, fill, shape, text, and group layer types. Layer operations include visibility changes, opacity adjustments, blend mode changes, and positional transformations."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Document",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Apply Document Operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/pie/psdService/documentOperations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies one or more operations to a PSD document such as image resizing, canvas size changes, image flattening, and color mode conversions. Multiple operations can be chained together in a single request to produce a modified output document."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rendition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Create Rendition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/pie/psdService/renditionCreate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates one or more renditions from a PSD or image file in formats such as JPEG, PNG, or TIFF at specified dimensions. Supports generating multiple renditions in a single request for different sizes or formats simultaneously."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Smart Object",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Edit Smart Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/pie/psdService/smartObject",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the content of a smart object layer within a PSD document with new image content. Smart object replacement preserves the layer's transform, blend mode, and effects while substituting the embedded image data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Artboard",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Create Artboards",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://image.adobe.io/pie/psdService/artboard",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates one or more artboards within a PSD document at specified sizes and positions. Artboards allow multiple design variations or screen sizes to be organized within a single PSD file."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Get Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://image.adobe.io/pie/psdService/status/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "asset_abc123",
+                "type": "path",
+                "description": "The unique identifier of the job to check"
+              }
+            ]
+          },
+          "docs": "Retrieves the current status of an asynchronous Photoshop API job. Poll this endpoint after submitting an operation to check if the job is pending, running, succeeded, or failed. On success, the response includes output file locations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

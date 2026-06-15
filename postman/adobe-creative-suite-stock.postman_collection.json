@@ -1,0 +1,2350 @@
+{
+  "info": {
+    "_postman_id": "e9d895b0-2fa6-4673-bd45-2859e8e49a83",
+    "name": "Adobe Creative Suite Adobe Stock API",
+    "description": "The Adobe Stock API enables search, licensing, and retrieval of stock photos, illustrations, vectors, videos, and templates from the Adobe Stock marketplace. It supports both editorial and commercial licensing workflows and can be integrated into creative applications and digital asset management systems. The API uses a combination of OAuth 2.0 bearer tokens and API key authentication depending on the operation being performed.\n\nContact Support:\n Name: Adobe Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:43.000Z",
+    "updatedAt": "2026-06-05T15:02:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e9d895b0-2fa6-4673-bd45-2859e8e49a83"
+  },
+  "item": [
+    {
+      "name": "Media",
+      "item": [
+        {
+          "name": "1",
+          "item": [
+            {
+              "name": "Search",
+              "item": [
+                {
+                  "name": "Files",
+                  "item": [
+                    {
+                      "name": "{content_id}",
+                      "item": [
+                        {
+                          "name": "Adobe Creative Suite Get Stock File Metadata",
+                          "id": "8d8d0ea0-2a88-44d4-b9d5-3e32aca96ada",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Adobe Stock API key (client ID)",
+                                "key": "x-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Media/1/Search/Files/:content_id?locale=<string>&result_columns[]=<string>&result_columns[]=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Media",
+                                "1",
+                                "Search",
+                                "Files",
+                                ":content_id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "BCP 47 locale for localized response data",
+                                  "key": "locale",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Fields to include in the response",
+                                  "key": "result_columns[]",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Fields to include in the response",
+                                  "key": "result_columns[]",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b2d5b7c1-ce73-4bfa-99cc-7a5c91340fed",
+                                  "key": "content_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) Adobe Stock unique content identifier"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves detailed metadata for a specific stock file by its content ID. Returns full file information including title, creator, dimensions, keywords, licensing status, and thumbnail URLs."
+                          },
+                          "response": [
+                            {
+                              "id": "409d63fe-cee5-4e6a-aada-a9ed7452c2e3",
+                              "name": "File metadata returned successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) Adobe Stock API key (client ID)",
+                                    "key": "x-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/Media/1/Search/Files/:content_id?locale=<string>&result_columns[]=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "Media",
+                                    "1",
+                                    "Search",
+                                    "Files",
+                                    ":content_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "BCP 47 locale for localized response data",
+                                      "key": "locale",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Fields to include in the response",
+                                      "key": "result_columns[]",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "content_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"files\": [\n    {\n      \"id\": \"<integer>\",\n      \"title\": \"<string>\",\n      \"creator_name\": \"<string>\",\n      \"creator_id\": \"<integer>\",\n      \"country_name\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"media_type_id\": \"<integer>\",\n      \"content_type\": \"<string>\",\n      \"keywords\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"comp_url\": \"<string>\",\n      \"thumbnail_url\": \"<string>\",\n      \"thumbnail_width\": \"<integer>\",\n      \"thumbnail_height\": \"<integer>\",\n      \"is_licensed\": \"Extended\",\n      \"vector_type\": \"zip\",\n      \"category\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"link\": \"<string>\",\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          }\n        ]\n      },\n      \"nb_results\": \"<integer>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"title\": \"<string>\",\n      \"creator_name\": \"<string>\",\n      \"creator_id\": \"<integer>\",\n      \"country_name\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"media_type_id\": \"<integer>\",\n      \"content_type\": \"<string>\",\n      \"keywords\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"comp_url\": \"<string>\",\n      \"thumbnail_url\": \"<string>\",\n      \"thumbnail_width\": \"<integer>\",\n      \"thumbnail_height\": \"<integer>\",\n      \"is_licensed\": \"\",\n      \"vector_type\": \"zip\",\n      \"category\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"link\": \"<string>\",\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          }\n        ]\n      },\n      \"nb_results\": \"<integer>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:02:44.000Z",
+                              "updatedAt": "2026-06-05T15:02:44.000Z",
+                              "uid": "35240-409d63fe-cee5-4e6a-aada-a9ed7452c2e3"
+                            },
+                            {
+                              "id": "638b9dc1-3474-4107-b059-eef75b32a128",
+                              "name": "Unauthorized - invalid or missing credentials",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) Adobe Stock API key (client ID)",
+                                    "key": "x-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/Media/1/Search/Files/:content_id?locale=<string>&result_columns[]=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "Media",
+                                    "1",
+                                    "Search",
+                                    "Files",
+                                    ":content_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "BCP 47 locale for localized response data",
+                                      "key": "locale",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Fields to include in the response",
+                                      "key": "result_columns[]",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "content_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:02:44.000Z",
+                              "updatedAt": "2026-06-05T15:02:44.000Z",
+                              "uid": "35240-638b9dc1-3474-4107-b059-eef75b32a128"
+                            },
+                            {
+                              "id": "78ca59ce-ad8a-4535-8dc3-72fee2be9645",
+                              "name": "Stock file not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) Adobe Stock API key (client ID)",
+                                    "key": "x-api-key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/Media/1/Search/Files/:content_id?locale=<string>&result_columns[]=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "Media",
+                                    "1",
+                                    "Search",
+                                    "Files",
+                                    ":content_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "BCP 47 locale for localized response data",
+                                      "key": "locale",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Fields to include in the response",
+                                      "key": "result_columns[]",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "content_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:02:44.000Z",
+                              "updatedAt": "2026-06-05T15:02:44.000Z",
+                              "uid": "35240-78ca59ce-ad8a-4535-8dc3-72fee2be9645"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:02:44.000Z",
+                          "updatedAt": "2026-06-05T15:02:44.000Z",
+                          "uid": "35240-8d8d0ea0-2a88-44d4-b9d5-3e32aca96ada"
+                        }
+                      ],
+                      "id": "8ff2c39d-7268-4b4b-9cdb-f7cf7c03b700",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-8ff2c39d-7268-4b4b-9cdb-f7cf7c03b700"
+                    },
+                    {
+                      "name": "Adobe Creative Suite Search Stock Files",
+                      "id": "7298b703-b2a3-4727-b749-9fbe1f061c58",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Media/1/Search/Files?locale=<string>&search_parameters[words]=<string>&search_parameters[limit]=32&search_parameters[offset]=0&search_parameters[filters][content_type:photo]=0&search_parameters[filters][content_type:illustration]=1&search_parameters[filters][content_type:vector]=1&search_parameters[filters][content_type:video]=1&search_parameters[filters][orientation]=all&search_parameters[filters][premium]=all&result_columns[]=media_type_id&result_columns[]=content_type",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Media",
+                            "1",
+                            "Search",
+                            "Files"
+                          ],
+                          "query": [
+                            {
+                              "description": "BCP 47 locale code for localized search results",
+                              "key": "locale",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Keywords to search for in the stock library",
+                              "key": "search_parameters[words]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of results to return per page (1-64)",
+                              "key": "search_parameters[limit]",
+                              "value": "32"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "search_parameters[offset]",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Include photos in results (1 = include, 0 = exclude)",
+                              "key": "search_parameters[filters][content_type:photo]",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Include illustrations in results (1 = include, 0 = exclude)",
+                              "key": "search_parameters[filters][content_type:illustration]",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Include vector files in results (1 = include, 0 = exclude)",
+                              "key": "search_parameters[filters][content_type:vector]",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Include video files in results (1 = include, 0 = exclude)",
+                              "key": "search_parameters[filters][content_type:video]",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Filter by image orientation",
+                              "key": "search_parameters[filters][orientation]",
+                              "value": "all"
+                            },
+                            {
+                              "description": "Filter by premium status",
+                              "key": "search_parameters[filters][premium]",
+                              "value": "all"
+                            },
+                            {
+                              "description": "Fields to include in the response for each result",
+                              "key": "result_columns[]",
+                              "value": "media_type_id"
+                            },
+                            {
+                              "description": "Fields to include in the response for each result",
+                              "key": "result_columns[]",
+                              "value": "content_type"
+                            }
+                          ]
+                        },
+                        "description": "Searches the Adobe Stock library for files matching specified criteria such as keywords, content type, orientation, and color. Returns a paginated list of matching stock files with metadata including thumbnails, dimensions, and licensing status. Requires an API key header in addition to authentication."
+                      },
+                      "response": [
+                        {
+                          "id": "5b2e62a3-c817-46d6-9b91-e9edd6fddc91",
+                          "name": "Search results returned successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Adobe Stock API key (client ID)",
+                                "key": "x-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Media/1/Search/Files?locale=<string>&search_parameters[words]=<string>&search_parameters[limit]=32&search_parameters[offset]=0&search_parameters[filters][content_type:photo]=0&search_parameters[filters][content_type:illustration]=1&search_parameters[filters][content_type:vector]=1&search_parameters[filters][content_type:video]=1&search_parameters[filters][orientation]=all&search_parameters[filters][premium]=all&result_columns[]=content_type",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Media",
+                                "1",
+                                "Search",
+                                "Files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "BCP 47 locale code for localized search results",
+                                  "key": "locale",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Keywords to search for in the stock library",
+                                  "key": "search_parameters[words]",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page (1-64)",
+                                  "key": "search_parameters[limit]",
+                                  "value": "32"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "search_parameters[offset]",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "Include photos in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:photo]",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "Include illustrations in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:illustration]",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Include vector files in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:vector]",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Include video files in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:video]",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Filter by image orientation",
+                                  "key": "search_parameters[filters][orientation]",
+                                  "value": "all"
+                                },
+                                {
+                                  "description": "Filter by premium status",
+                                  "key": "search_parameters[filters][premium]",
+                                  "value": "all"
+                                },
+                                {
+                                  "description": "Fields to include in the response for each result",
+                                  "key": "result_columns[]",
+                                  "value": "content_type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"nb_results\": \"<integer>\",\n  \"files\": [\n    {\n      \"id\": \"<integer>\",\n      \"title\": \"<string>\",\n      \"creator_name\": \"<string>\",\n      \"creator_id\": \"<integer>\",\n      \"country_name\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"media_type_id\": \"<integer>\",\n      \"content_type\": \"<string>\",\n      \"keywords\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"comp_url\": \"<string>\",\n      \"thumbnail_url\": \"<string>\",\n      \"thumbnail_width\": \"<integer>\",\n      \"thumbnail_height\": \"<integer>\",\n      \"is_licensed\": \"Video_4K\",\n      \"vector_type\": \"\",\n      \"category\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"link\": \"<string>\",\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          }\n        ]\n      },\n      \"nb_results\": \"<integer>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"title\": \"<string>\",\n      \"creator_name\": \"<string>\",\n      \"creator_id\": \"<integer>\",\n      \"country_name\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"media_type_id\": \"<integer>\",\n      \"content_type\": \"<string>\",\n      \"keywords\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"comp_url\": \"<string>\",\n      \"thumbnail_url\": \"<string>\",\n      \"thumbnail_width\": \"<integer>\",\n      \"thumbnail_height\": \"<integer>\",\n      \"is_licensed\": \"Standard\",\n      \"vector_type\": \"zip\",\n      \"category\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"link\": \"<string>\",\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          }\n        ]\n      },\n      \"nb_results\": \"<integer>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:02:44.000Z",
+                          "updatedAt": "2026-06-05T15:02:44.000Z",
+                          "uid": "35240-5b2e62a3-c817-46d6-9b91-e9edd6fddc91"
+                        },
+                        {
+                          "id": "f702e5cc-f326-47cb-bbdc-511d37d773bc",
+                          "name": "Bad request - invalid search parameters",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Adobe Stock API key (client ID)",
+                                "key": "x-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Media/1/Search/Files?locale=<string>&search_parameters[words]=<string>&search_parameters[limit]=32&search_parameters[offset]=0&search_parameters[filters][content_type:photo]=0&search_parameters[filters][content_type:illustration]=1&search_parameters[filters][content_type:vector]=1&search_parameters[filters][content_type:video]=1&search_parameters[filters][orientation]=all&search_parameters[filters][premium]=all&result_columns[]=content_type",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Media",
+                                "1",
+                                "Search",
+                                "Files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "BCP 47 locale code for localized search results",
+                                  "key": "locale",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Keywords to search for in the stock library",
+                                  "key": "search_parameters[words]",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page (1-64)",
+                                  "key": "search_parameters[limit]",
+                                  "value": "32"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "search_parameters[offset]",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "Include photos in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:photo]",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "Include illustrations in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:illustration]",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Include vector files in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:vector]",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Include video files in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:video]",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Filter by image orientation",
+                                  "key": "search_parameters[filters][orientation]",
+                                  "value": "all"
+                                },
+                                {
+                                  "description": "Filter by premium status",
+                                  "key": "search_parameters[filters][premium]",
+                                  "value": "all"
+                                },
+                                {
+                                  "description": "Fields to include in the response for each result",
+                                  "key": "result_columns[]",
+                                  "value": "content_type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:02:44.000Z",
+                          "updatedAt": "2026-06-05T15:02:44.000Z",
+                          "uid": "35240-f702e5cc-f326-47cb-bbdc-511d37d773bc"
+                        },
+                        {
+                          "id": "13637312-3142-45e4-b644-be69f8561d3f",
+                          "name": "Unauthorized - invalid or missing API key or bearer token",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Adobe Stock API key (client ID)",
+                                "key": "x-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Media/1/Search/Files?locale=<string>&search_parameters[words]=<string>&search_parameters[limit]=32&search_parameters[offset]=0&search_parameters[filters][content_type:photo]=0&search_parameters[filters][content_type:illustration]=1&search_parameters[filters][content_type:vector]=1&search_parameters[filters][content_type:video]=1&search_parameters[filters][orientation]=all&search_parameters[filters][premium]=all&result_columns[]=content_type",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Media",
+                                "1",
+                                "Search",
+                                "Files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "BCP 47 locale code for localized search results",
+                                  "key": "locale",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Keywords to search for in the stock library",
+                                  "key": "search_parameters[words]",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page (1-64)",
+                                  "key": "search_parameters[limit]",
+                                  "value": "32"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "search_parameters[offset]",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "Include photos in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:photo]",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "Include illustrations in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:illustration]",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Include vector files in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:vector]",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Include video files in results (1 = include, 0 = exclude)",
+                                  "key": "search_parameters[filters][content_type:video]",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Filter by image orientation",
+                                  "key": "search_parameters[filters][orientation]",
+                                  "value": "all"
+                                },
+                                {
+                                  "description": "Filter by premium status",
+                                  "key": "search_parameters[filters][premium]",
+                                  "value": "all"
+                                },
+                                {
+                                  "description": "Fields to include in the response for each result",
+                                  "key": "result_columns[]",
+                                  "value": "content_type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:02:44.000Z",
+                          "updatedAt": "2026-06-05T15:02:44.000Z",
+                          "uid": "35240-13637312-3142-45e4-b644-be69f8561d3f"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-7298b703-b2a3-4727-b749-9fbe1f061c58"
+                    }
+                  ],
+                  "id": "df0d70d5-1111-44de-82fa-8204d5eff880",
+                  "createdAt": "2026-06-05T15:02:44.000Z",
+                  "updatedAt": "2026-06-05T15:02:44.000Z",
+                  "uid": "35240-df0d70d5-1111-44de-82fa-8204d5eff880"
+                },
+                {
+                  "name": "CategoryTree",
+                  "item": [
+                    {
+                      "name": "Adobe Creative Suite Get Category Tree",
+                      "id": "84dca807-7757-41f6-9dc7-05e1fc8ea85f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Media/1/Search/CategoryTree?locale=<string>&category_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Media",
+                            "1",
+                            "Search",
+                            "CategoryTree"
+                          ],
+                          "query": [
+                            {
+                              "description": "BCP 47 locale for localized category names",
+                              "key": "locale",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Root category ID to retrieve subtree from (omit for full tree)",
+                              "key": "category_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves the hierarchical category tree used to organize Adobe Stock content. Categories can be used as filters in search queries to narrow results to specific content categories such as Animals, Business, or Technology."
+                      },
+                      "response": [
+                        {
+                          "id": "6f889070-5bc9-47b8-8e99-a3a5d2dd966b",
+                          "name": "Category tree returned successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Adobe Stock API key (client ID)",
+                                "key": "x-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Media/1/Search/CategoryTree?locale=<string>&category_id=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Media",
+                                "1",
+                                "Search",
+                                "CategoryTree"
+                              ],
+                              "query": [
+                                {
+                                  "description": "BCP 47 locale for localized category names",
+                                  "key": "locale",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Root category ID to retrieve subtree from (omit for full tree)",
+                                  "key": "category_id",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"link\": \"<string>\",\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"link\": \"<string>\",\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n      }\n    ]\n  }\n]",
+                          "createdAt": "2026-06-05T15:02:44.000Z",
+                          "updatedAt": "2026-06-05T15:02:44.000Z",
+                          "uid": "35240-6f889070-5bc9-47b8-8e99-a3a5d2dd966b"
+                        },
+                        {
+                          "id": "4adba65b-fff6-4fd2-af12-0a9455969bab",
+                          "name": "Unauthorized - invalid or missing credentials",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Adobe Stock API key (client ID)",
+                                "key": "x-api-key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Media/1/Search/CategoryTree?locale=<string>&category_id=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Media",
+                                "1",
+                                "Search",
+                                "CategoryTree"
+                              ],
+                              "query": [
+                                {
+                                  "description": "BCP 47 locale for localized category names",
+                                  "key": "locale",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Root category ID to retrieve subtree from (omit for full tree)",
+                                  "key": "category_id",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:02:44.000Z",
+                          "updatedAt": "2026-06-05T15:02:44.000Z",
+                          "uid": "35240-4adba65b-fff6-4fd2-af12-0a9455969bab"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-84dca807-7757-41f6-9dc7-05e1fc8ea85f"
+                    }
+                  ],
+                  "id": "969adc8e-e663-499e-8184-3d6b3e526320",
+                  "createdAt": "2026-06-05T15:02:44.000Z",
+                  "updatedAt": "2026-06-05T15:02:44.000Z",
+                  "uid": "35240-969adc8e-e663-499e-8184-3d6b3e526320"
+                }
+              ],
+              "id": "a2cdedf0-920f-4edd-bba4-e3698edecd36",
+              "createdAt": "2026-06-05T15:02:44.000Z",
+              "updatedAt": "2026-06-05T15:02:44.000Z",
+              "uid": "35240-a2cdedf0-920f-4edd-bba4-e3698edecd36"
+            }
+          ],
+          "id": "c8c91115-f435-4a98-8cb4-426a67480407",
+          "createdAt": "2026-06-05T15:02:44.000Z",
+          "updatedAt": "2026-06-05T15:02:44.000Z",
+          "uid": "35240-c8c91115-f435-4a98-8cb4-426a67480407"
+        }
+      ],
+      "id": "6ae70e09-eb83-4142-a22f-83df30f88158",
+      "createdAt": "2026-06-05T15:02:44.000Z",
+      "updatedAt": "2026-06-05T15:02:44.000Z",
+      "uid": "35240-6ae70e09-eb83-4142-a22f-83df30f88158"
+    },
+    {
+      "name": "Member",
+      "item": [
+        {
+          "name": "1",
+          "item": [
+            {
+              "name": "Profile",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite Get Member Profile",
+                  "id": "a6941f64-3986-40b0-b44d-f46bd6b53f0a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Adobe Stock API key (client ID)",
+                        "key": "x-api-key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Member/1/Profile?locale=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Member",
+                        "1",
+                        "Profile"
+                      ],
+                      "query": [
+                        {
+                          "description": "BCP 47 locale for localized profile data",
+                          "key": "locale",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the profile of the authenticated Adobe Stock member including account details, quota information, and available license credits. Requires a valid OAuth 2.0 user token."
+                  },
+                  "response": [
+                    {
+                      "id": "7a00cfb8-d70b-493f-bad6-e11cad4c3fe9",
+                      "name": "Member profile returned successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/Profile?locale=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "Profile"
+                          ],
+                          "query": [
+                            {
+                              "description": "BCP 47 locale for localized profile data",
+                              "key": "locale",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"stock_user\": {\n    \"nb_downloads\": \"<integer>\",\n    \"nb_standard_downloads\": \"<integer>\",\n    \"nb_standard_downloads_remaining\": \"<integer>\",\n    \"nb_standard_downloads_limit\": \"<integer>\",\n    \"purchase_options\": {}\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-7a00cfb8-d70b-493f-bad6-e11cad4c3fe9"
+                    },
+                    {
+                      "id": "2f011d9a-ef88-420a-87d8-d74e1703b3a6",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/Profile?locale=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "Profile"
+                          ],
+                          "query": [
+                            {
+                              "description": "BCP 47 locale for localized profile data",
+                              "key": "locale",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-2f011d9a-ef88-420a-87d8-d74e1703b3a6"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:44.000Z",
+                  "updatedAt": "2026-06-05T15:02:44.000Z",
+                  "uid": "35240-a6941f64-3986-40b0-b44d-f46bd6b53f0a"
+                }
+              ],
+              "id": "b0990cde-f95e-4e23-a0eb-44611de2aaaf",
+              "createdAt": "2026-06-05T15:02:44.000Z",
+              "updatedAt": "2026-06-05T15:02:44.000Z",
+              "uid": "35240-b0990cde-f95e-4e23-a0eb-44611de2aaaf"
+            },
+            {
+              "name": "License",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite Get License History",
+                  "id": "2679fd9c-7d27-4794-a50f-4f87e9de9626",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Adobe Stock API key (client ID)",
+                        "key": "x-api-key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Member/1/License?locale=<string>&search_parameters[limit]=32&search_parameters[offset]=0&result_columns[]=<string>&result_columns[]=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Member",
+                        "1",
+                        "License"
+                      ],
+                      "query": [
+                        {
+                          "description": "BCP 47 locale for localized response data",
+                          "key": "locale",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "search_parameters[limit]",
+                          "value": "32"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "search_parameters[offset]",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Fields to include in the license history response",
+                          "key": "result_columns[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Fields to include in the license history response",
+                          "key": "result_columns[]",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the license history for the authenticated member, showing previously licensed stock assets. Results can be filtered by date range or asset type and are returned in reverse chronological order."
+                  },
+                  "response": [
+                    {
+                      "id": "15a81358-1d3b-4ace-ace8-a43022917ea1",
+                      "name": "License history returned successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/License?locale=<string>&search_parameters[limit]=32&search_parameters[offset]=0&result_columns[]=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "License"
+                          ],
+                          "query": [
+                            {
+                              "description": "BCP 47 locale for localized response data",
+                              "key": "locale",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "search_parameters[limit]",
+                              "value": "32"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "search_parameters[offset]",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Fields to include in the license history response",
+                              "key": "result_columns[]",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"nb_results\": \"<integer>\",\n  \"files\": [\n    {\n      \"id\": \"<integer>\",\n      \"title\": \"<string>\",\n      \"creator_name\": \"<string>\",\n      \"creator_id\": \"<integer>\",\n      \"country_name\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"media_type_id\": \"<integer>\",\n      \"content_type\": \"<string>\",\n      \"keywords\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"comp_url\": \"<string>\",\n      \"thumbnail_url\": \"<string>\",\n      \"thumbnail_width\": \"<integer>\",\n      \"thumbnail_height\": \"<integer>\",\n      \"is_licensed\": \"Video_4K\",\n      \"vector_type\": \"\",\n      \"category\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"link\": \"<string>\",\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          }\n        ]\n      },\n      \"nb_results\": \"<integer>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"title\": \"<string>\",\n      \"creator_name\": \"<string>\",\n      \"creator_id\": \"<integer>\",\n      \"country_name\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"media_type_id\": \"<integer>\",\n      \"content_type\": \"<string>\",\n      \"keywords\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"comp_url\": \"<string>\",\n      \"thumbnail_url\": \"<string>\",\n      \"thumbnail_width\": \"<integer>\",\n      \"thumbnail_height\": \"<integer>\",\n      \"is_licensed\": \"Video_HD\",\n      \"vector_type\": \"\",\n      \"category\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"link\": \"<string>\",\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          }\n        ]\n      },\n      \"nb_results\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-15a81358-1d3b-4ace-ace8-a43022917ea1"
+                    },
+                    {
+                      "id": "c157c78d-813a-446a-aa15-63085c24c239",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/License?locale=<string>&search_parameters[limit]=32&search_parameters[offset]=0&result_columns[]=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "License"
+                          ],
+                          "query": [
+                            {
+                              "description": "BCP 47 locale for localized response data",
+                              "key": "locale",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "search_parameters[limit]",
+                              "value": "32"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "search_parameters[offset]",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Fields to include in the license history response",
+                              "key": "result_columns[]",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-c157c78d-813a-446a-aa15-63085c24c239"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:44.000Z",
+                  "updatedAt": "2026-06-05T15:02:44.000Z",
+                  "uid": "35240-2679fd9c-7d27-4794-a50f-4f87e9de9626"
+                }
+              ],
+              "id": "49bea988-b500-4cf2-b06e-0c4c8d629827",
+              "createdAt": "2026-06-05T15:02:44.000Z",
+              "updatedAt": "2026-06-05T15:02:44.000Z",
+              "uid": "35240-49bea988-b500-4cf2-b06e-0c4c8d629827"
+            },
+            {
+              "name": "LicenseImage",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite License a Stock Image",
+                  "id": "819fd5bf-1129-406f-a5c3-1f8874deeb4c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) Adobe Stock API key (client ID)",
+                        "key": "x-api-key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Member/1/LicenseImage",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Member",
+                        "1",
+                        "LicenseImage"
+                      ]
+                    },
+                    "description": "Licenses a stock photo for use in a project. The request specifies the content ID, license type, and optional purchase reference information. On success, returns a download URL for the licensed full-resolution image."
+                  },
+                  "response": [
+                    {
+                      "id": "c1aea7f4-b239-4957-b395-3192794fa5a5",
+                      "name": "Image licensed successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseImage",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseImage"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"content_id\": \"<integer>\",\n  \"purchase_details\": {\n    \"state\": \"just_purchased\",\n    \"license\": \"<string>\",\n    \"nb_downloads\": \"<integer>\"\n  },\n  \"download_url\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-c1aea7f4-b239-4957-b395-3192794fa5a5"
+                    },
+                    {
+                      "id": "217e5e33-15f9-47e3-8f16-9c1dbbd2c196",
+                      "name": "Bad request - invalid content ID or license type",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseImage",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseImage"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-217e5e33-15f9-47e3-8f16-9c1dbbd2c196"
+                    },
+                    {
+                      "id": "fd5e6814-9246-4812-a2ba-869ccec8ea32",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseImage",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseImage"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-fd5e6814-9246-4812-a2ba-869ccec8ea32"
+                    },
+                    {
+                      "id": "86f8bf22-a200-4b4f-8eca-8d5aef858cb9",
+                      "name": "Forbidden - insufficient quota or license credits",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseImage",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseImage"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-86f8bf22-a200-4b4f-8eca-8d5aef858cb9"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:44.000Z",
+                  "updatedAt": "2026-06-05T15:02:44.000Z",
+                  "uid": "35240-819fd5bf-1129-406f-a5c3-1f8874deeb4c"
+                }
+              ],
+              "id": "8b5ff399-97ef-4c1d-a609-735b29ae3a52",
+              "createdAt": "2026-06-05T15:02:44.000Z",
+              "updatedAt": "2026-06-05T15:02:44.000Z",
+              "uid": "35240-8b5ff399-97ef-4c1d-a609-735b29ae3a52"
+            },
+            {
+              "name": "LicenseVectorOrIllustration",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite License a Vector or Illustration",
+                  "id": "4bccdc76-8a90-44ae-8441-325f269431d5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) Adobe Stock API key (client ID)",
+                        "key": "x-api-key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Member/1/LicenseVectorOrIllustration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Member",
+                        "1",
+                        "LicenseVectorOrIllustration"
+                      ]
+                    },
+                    "description": "Licenses a vector or illustration stock file for use in a project. Returns a download URL for the licensed file in the original vector format (AI, EPS, or SVG) where available."
+                  },
+                  "response": [
+                    {
+                      "id": "d8cbe70f-581e-4408-a6af-3aa346884309",
+                      "name": "Vector or illustration licensed successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseVectorOrIllustration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseVectorOrIllustration"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"content_id\": \"<integer>\",\n  \"purchase_details\": {\n    \"state\": \"just_purchased\",\n    \"license\": \"<string>\",\n    \"nb_downloads\": \"<integer>\"\n  },\n  \"download_url\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-d8cbe70f-581e-4408-a6af-3aa346884309"
+                    },
+                    {
+                      "id": "325b32fd-bdff-4bf1-8a3c-dffc1b1ba9d7",
+                      "name": "Bad request - invalid content ID or license type",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseVectorOrIllustration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseVectorOrIllustration"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-325b32fd-bdff-4bf1-8a3c-dffc1b1ba9d7"
+                    },
+                    {
+                      "id": "0ebf09ea-2229-456e-9056-a5cb5f3dc438",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseVectorOrIllustration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseVectorOrIllustration"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-0ebf09ea-2229-456e-9056-a5cb5f3dc438"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:44.000Z",
+                  "updatedAt": "2026-06-05T15:02:44.000Z",
+                  "uid": "35240-4bccdc76-8a90-44ae-8441-325f269431d5"
+                }
+              ],
+              "id": "ebf2822a-05e6-4a6d-9ca3-8825693666b7",
+              "createdAt": "2026-06-05T15:02:44.000Z",
+              "updatedAt": "2026-06-05T15:02:44.000Z",
+              "uid": "35240-ebf2822a-05e6-4a6d-9ca3-8825693666b7"
+            },
+            {
+              "name": "LicenseVideo",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite License a Stock Video",
+                  "id": "083eb298-9b4a-4a92-9e5b-0edef78550c4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) Adobe Stock API key (client ID)",
+                        "key": "x-api-key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Member/1/LicenseVideo",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Member",
+                        "1",
+                        "LicenseVideo"
+                      ]
+                    },
+                    "description": "Licenses a stock video clip for use in a project. Returns a download URL for the licensed video at the requested resolution. Video licenses consume credits from the member's stock subscription or account balance."
+                  },
+                  "response": [
+                    {
+                      "id": "f06e2fed-c37e-4b23-aff8-9c798a8afed6",
+                      "name": "Video licensed successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseVideo",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseVideo"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"content_id\": \"<integer>\",\n  \"purchase_details\": {\n    \"state\": \"just_purchased\",\n    \"license\": \"<string>\",\n    \"nb_downloads\": \"<integer>\"\n  },\n  \"download_url\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-f06e2fed-c37e-4b23-aff8-9c798a8afed6"
+                    },
+                    {
+                      "id": "87ad8ab9-ebfb-4455-8c34-682701be1b37",
+                      "name": "Bad request - invalid content ID or license type",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseVideo",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseVideo"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-87ad8ab9-ebfb-4455-8c34-682701be1b37"
+                    },
+                    {
+                      "id": "92acae6d-0876-4c5d-add1-c297ecff5300",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"Video_4K\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseVideo",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseVideo"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-92acae6d-0876-4c5d-add1-c297ecff5300"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:44.000Z",
+                  "updatedAt": "2026-06-05T15:02:44.000Z",
+                  "uid": "35240-083eb298-9b4a-4a92-9e5b-0edef78550c4"
+                }
+              ],
+              "id": "a0dc3bf9-688d-4141-bd41-05b03ba70927",
+              "createdAt": "2026-06-05T15:02:44.000Z",
+              "updatedAt": "2026-06-05T15:02:44.000Z",
+              "uid": "35240-a0dc3bf9-688d-4141-bd41-05b03ba70927"
+            },
+            {
+              "name": "LicenseStats",
+              "item": [
+                {
+                  "name": "Adobe Creative Suite Get Licensing Stats",
+                  "id": "f1e5ff0e-4881-4762-8ff7-24b9433ec79d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) Adobe Stock API key (client ID)",
+                        "key": "x-api-key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"locale\": \"<string>\",\n  \"result_columns\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Member/1/LicenseStats",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Member",
+                        "1",
+                        "LicenseStats"
+                      ]
+                    },
+                    "description": "Retrieves licensing statistics for the authenticated member including the number of assets licensed within a specified time period and a breakdown by content type."
+                  },
+                  "response": [
+                    {
+                      "id": "920241fb-06ba-4454-afff-ac81fee1d855",
+                      "name": "Licensing stats returned successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"locale\": \"<string>\",\n  \"result_columns\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseStats",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseStats"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"nb_results\": \"<integer>\",\n  \"stock_user\": {}\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-920241fb-06ba-4454-afff-ac81fee1d855"
+                    },
+                    {
+                      "id": "2d4a94bf-22e9-490d-8935-57e5104cbfbe",
+                      "name": "Unauthorized - invalid or missing bearer token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) Adobe Stock API key (client ID)",
+                            "key": "x-api-key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"locale\": \"<string>\",\n  \"result_columns\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Member/1/LicenseStats",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Member",
+                            "1",
+                            "LicenseStats"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:44.000Z",
+                      "updatedAt": "2026-06-05T15:02:44.000Z",
+                      "uid": "35240-2d4a94bf-22e9-490d-8935-57e5104cbfbe"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:44.000Z",
+                  "updatedAt": "2026-06-05T15:02:44.000Z",
+                  "uid": "35240-f1e5ff0e-4881-4762-8ff7-24b9433ec79d"
+                }
+              ],
+              "id": "22995176-9258-48b3-a701-0441bb36b409",
+              "createdAt": "2026-06-05T15:02:44.000Z",
+              "updatedAt": "2026-06-05T15:02:44.000Z",
+              "uid": "35240-22995176-9258-48b3-a701-0441bb36b409"
+            }
+          ],
+          "id": "7644d538-d6fc-4bf7-94ac-9b765844f346",
+          "createdAt": "2026-06-05T15:02:44.000Z",
+          "updatedAt": "2026-06-05T15:02:44.000Z",
+          "uid": "35240-7644d538-d6fc-4bf7-94ac-9b765844f346"
+        }
+      ],
+      "id": "3b994f09-5983-4490-8855-702627025a70",
+      "createdAt": "2026-06-05T15:02:44.000Z",
+      "updatedAt": "2026-06-05T15:02:44.000Z",
+      "uid": "35240-3b994f09-5983-4490-8855-702627025a70"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://stock.adobe.io/Rest"
+    }
+  ]
+}

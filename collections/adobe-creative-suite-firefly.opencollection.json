@@ -1,0 +1,173 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Image Generation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Generate Images from Text Prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/images/generate-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates one or more images from a text prompt using the Adobe Firefly generative AI model. Supports optional style presets, content class selection, negative prompts, and seed values for reproducibility. The operation is asynchronous; use the returned job ID to poll for completion and retrieve output image URLs."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Generate Similar Images",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/images/generate-similar-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates images that are visually similar to a provided reference image while optionally being guided by a text prompt. Useful for producing variations of an existing image or exploring stylistic alternatives based on a visual reference."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Generative Expand",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Generative Expand Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/images/expand-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Expands an existing image beyond its original boundaries using generative AI to fill in the new regions. The expansion can be directional and supports specifying a prompt to guide the content generated in the expanded areas."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Generative Fill",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Generative Fill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/images/fill-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fills a masked region of an existing image with AI-generated content based on a text prompt. A mask image defines the area to be filled. The generative fill respects the surrounding context to produce seamlessly blended results."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Object Composite",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Generate Object Composite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/images/generate-object-composite-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates an AI-rendered object and composites it into an existing scene image. The object is described via a text prompt and is placed into the scene with appropriate lighting, shadows, and perspective to appear naturally integrated."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Video Generation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Generate Video from Text Prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/videos/generate-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a short video clip from a text prompt using the Adobe Firefly video generation model. Generally Available as of June 2025. Supports specifying duration, aspect ratio, and motion style through the request parameters. The operation is asynchronous and may take several minutes to complete."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Get Async Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://firefly-api.adobe.io/v3/status/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "urn:firefly:jobs:abc123def456",
+                "type": "path",
+                "description": "Unique identifier of the generation job to check"
+              }
+            ]
+          },
+          "docs": "Retrieves the current status of an asynchronous Firefly generation job. Poll this endpoint after submitting a generation request to determine if the job is pending, running, succeeded, or failed. On success, the response includes URLs to the generated output images or video."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
