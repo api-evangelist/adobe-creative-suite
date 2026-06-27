@@ -446,75 +446,72 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/adobe-creative-suite/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/adobe-creative-suite-firefly-expand-image-workflow.yml
-        name: Adobe Firefly Generative Expand Image
-        summary: Expand an image beyond its original boundaries with AI and poll the job to completion.
-      - url: arazzo/adobe-creative-suite-firefly-generate-similar-workflow.yml
-        name: Adobe Firefly Generate Similar Images
-        summary: Generate variations similar to a reference image and poll the async job to completion.
-      - url: arazzo/adobe-creative-suite-firefly-generative-fill-workflow.yml
-        name: Adobe Firefly Generative Fill
-        summary: Fill a masked region of an image with AI-generated content and poll the job to completion.
-      - url: arazzo/adobe-creative-suite-firefly-object-composite-workflow.yml
-        name: Adobe Firefly Object Composite
-        summary: Composite an AI-generated object into a scene image and poll the async job to completion.
-      - url: arazzo/adobe-creative-suite-firefly-text-to-image-workflow.yml
-        name: Adobe Firefly Text-to-Image Generation
-        summary: Submit a text-to-image Firefly job, poll until it finishes, and return the generated image URLs.
-      - url: arazzo/adobe-creative-suite-firefly-text-to-video-workflow.yml
-        name: Adobe Firefly Text-to-Video Generation
-        summary: Submit a text-to-video Firefly job, poll until it finishes, and return the generated video URLs.
-      - url: arazzo/adobe-creative-suite-pdf-autotag-accessibility-workflow.yml
-        name: Adobe PDF Services Auto-tag PDF for Accessibility
-        summary: Upload a PDF, auto-tag it for accessibility, poll the job, and get the tagged output download URI.
-      - url: arazzo/adobe-creative-suite-pdf-combine-workflow.yml
-        name: Adobe PDF Services Combine PDFs
-        summary: Upload two PDFs, combine them into one, poll the job, and get the merged output download URI.
-      - url: arazzo/adobe-creative-suite-pdf-compress-workflow.yml
-        name: Adobe PDF Services Compress PDF
-        summary: Upload a PDF, compress it at a chosen level, poll the job, and get the compressed download URI.
-      - url: arazzo/adobe-creative-suite-pdf-create-from-office-workflow.yml
-        name: Adobe PDF Services Create PDF from Office
-        summary: Upload an Office or HTML source, convert it to PDF, poll the job, and get the output download URI.
-      - url: arazzo/adobe-creative-suite-pdf-export-to-word-workflow.yml
-        name: Adobe PDF Services Export PDF to Word
-        summary: Upload a PDF, export it to a target Office format, poll the job, and get the output download URI.
-      - url: arazzo/adobe-creative-suite-pdf-generate-document-workflow.yml
-        name: Adobe PDF Services Generate Document from Template
-        summary: Upload a Word template, merge JSON data into it, poll the job, get the output, and delete the template.
-      - url: arazzo/adobe-creative-suite-pdf-linearize-workflow.yml
-        name: Adobe PDF Services Linearize PDF
-        summary: Upload a PDF, linearize it for fast web view, poll the job, and get the optimized download URI.
-      - url: arazzo/adobe-creative-suite-pdf-ocr-workflow.yml
-        name: Adobe PDF Services OCR PDF
-        summary: Upload a scanned PDF, apply OCR, poll the job, and get the searchable output download URI.
-      - url: arazzo/adobe-creative-suite-photoshop-create-mask-workflow.yml
-        name: Adobe Photoshop Create Alpha Mask
-        summary: Submit a Sensei alpha-mask job, poll until it finishes, and return the mask output URL.
-      - url: arazzo/adobe-creative-suite-photoshop-create-rendition-workflow.yml
-        name: Adobe Photoshop Create Rendition
-        summary: Submit a rendition job from a PSD, poll until it finishes, and return the rendered output URL.
-      - url: arazzo/adobe-creative-suite-photoshop-edit-text-layers-workflow.yml
-        name: Adobe Photoshop Edit Text Layers
-        summary: Submit a PSD text-layer edit job, poll until it finishes, and return the edited output URL.
-      - url: arazzo/adobe-creative-suite-photoshop-product-crop-workflow.yml
-        name: Adobe Photoshop Product Crop
-        summary: Submit a Sensei product-crop job, poll until it finishes, and return the cropped output URL.
-      - url: arazzo/adobe-creative-suite-photoshop-remove-background-workflow.yml
-        name: Adobe Photoshop Remove Background
-        summary: Submit a Sensei background-removal job, poll until it finishes, and return the cutout output URL.
-      - url: arazzo/adobe-creative-suite-stock-license-with-quota-check-workflow.yml
-        name: Adobe Stock License Image with Quota Check
-        summary: Check the member download quota, license an image only when quota remains, and record the license history.
-      - url: arazzo/adobe-creative-suite-stock-search-and-license-image-workflow.yml
-        name: Adobe Stock Search and License Image
-        summary: Search Adobe Stock for photos, inspect the top match metadata, and license it for download.
-      - url: arazzo/adobe-creative-suite-stock-search-and-license-video-workflow.yml
-        name: Adobe Stock Search and License Video
-        summary: Search Adobe Stock for video clips and license the top match for download.
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-firefly-expand-image-workflow.yml
+    name: Adobe Firefly Generative Expand Image
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-firefly-generate-similar-workflow.yml
+    name: Adobe Firefly Generate Similar Images
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-firefly-generative-fill-workflow.yml
+    name: Adobe Firefly Generative Fill
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-firefly-object-composite-workflow.yml
+    name: Adobe Firefly Object Composite
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-firefly-text-to-image-workflow.yml
+    name: Adobe Firefly Text-to-Image Generation
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-firefly-text-to-video-workflow.yml
+    name: Adobe Firefly Text-to-Video Generation
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-pdf-autotag-accessibility-workflow.yml
+    name: Adobe PDF Services Auto-tag PDF for Accessibility
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-pdf-combine-workflow.yml
+    name: Adobe PDF Services Combine PDFs
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-pdf-compress-workflow.yml
+    name: Adobe PDF Services Compress PDF
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-pdf-create-from-office-workflow.yml
+    name: Adobe PDF Services Create PDF from Office
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-pdf-export-to-word-workflow.yml
+    name: Adobe PDF Services Export PDF to Word
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-pdf-generate-document-workflow.yml
+    name: Adobe PDF Services Generate Document from Template
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-pdf-linearize-workflow.yml
+    name: Adobe PDF Services Linearize PDF
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-pdf-ocr-workflow.yml
+    name: Adobe PDF Services OCR PDF
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-photoshop-create-mask-workflow.yml
+    name: Adobe Photoshop Create Alpha Mask
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-photoshop-create-rendition-workflow.yml
+    name: Adobe Photoshop Create Rendition
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-photoshop-edit-text-layers-workflow.yml
+    name: Adobe Photoshop Edit Text Layers
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-photoshop-product-crop-workflow.yml
+    name: Adobe Photoshop Product Crop
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-photoshop-remove-background-workflow.yml
+    name: Adobe Photoshop Remove Background
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-stock-license-with-quota-check-workflow.yml
+    name: Adobe Stock License Image with Quota Check
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-stock-search-and-license-image-workflow.yml
+    name: Adobe Stock Search and License Image
+  - type: Arazzo
+    url: arazzo/adobe-creative-suite-stock-search-and-license-video-workflow.yml
+    name: Adobe Stock Search and License Video
   - type: JSONLD
     url: json-ld/adobe-creative-suite-context.jsonld
   - type: JSONSchema
@@ -525,7 +522,7 @@ common:
     url: json-schema/adobe-creative-suite-stock-file-schema.json
   - type: Portal
     url: https://developer.adobe.com/
-  - type: SignUp
+  - type: Signup
     url: https://developer.adobe.com/console/home
   - type: GettingStarted
     url: https://developer.adobe.com/developer-console/docs/guides/getting-started/
