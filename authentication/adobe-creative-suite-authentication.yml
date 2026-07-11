@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/adobe-creative-suite-firefly-openapi.yml, openapi/adobe-creative-suite-pdf-services-openapi.yml,
+  openapi/adobe-creative-suite-photoshop-openapi.yml, openapi/adobe-creative-suite-stock-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth 2.0 access token obtained from Adobe IMS
+  sources:
+  - openapi/adobe-creative-suite-firefly-openapi.yml
+  - openapi/adobe-creative-suite-pdf-services-openapi.yml
+  - openapi/adobe-creative-suite-photoshop-openapi.yml
+  - openapi/adobe-creative-suite-stock-openapi.yml
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: Adobe Stock API key (client ID) required for all operations
+  sources:
+  - openapi/adobe-creative-suite-stock-openapi.yml

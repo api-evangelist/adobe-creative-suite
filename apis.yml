@@ -444,6 +444,12 @@ apis:
         url: https://developer.adobe.com/support/
     aid: adobe-creative-suite:uxp
 common:
+  - type: VulnerabilityDisclosure
+    url: security/adobe-creative-suite-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/adobe-creative-suite-domain-security.yml
+  - type: Authentication
+    url: authentication/adobe-creative-suite-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/adobe-creative-suite/overview
   - type: Arazzo
