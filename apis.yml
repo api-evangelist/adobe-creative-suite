@@ -444,6 +444,8 @@ apis:
         url: https://developer.adobe.com/support/
     aid: adobe-creative-suite:uxp
 common:
+  - type: AgenticAccess
+    url: agentic-access/adobe-creative-suite-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/adobe-creative-suite-vulnerability-disclosure.yml
   - type: DomainSecurity
