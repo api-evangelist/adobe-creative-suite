@@ -1,0 +1,140 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Generative Fill API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Generative Fill
+  description: Fill selected regions of images with AI-generated content
+paths:
+  /images/fill-async:
+    post:
+      operationId: fillImageAsync
+      summary: Adobe Creative Suite Generative Fill
+      description: Fills a masked region of an existing image with AI-generated content based on a text prompt. A mask image defines the area to be filled. The generative fill respects the surrounding context to produce seamlessly blended results.
+      tags:
+      - Generative Fill
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageFillRequest'
+      responses:
+        '202':
+          description: Fill job accepted and queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncJobSubmitted'
+        '400':
+          description: Bad request - invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AsyncJobSubmitted:
+      type: object
+      description: Response returned immediately after an async generation job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
+          type: string
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
+    ImageFillRequest:
+      type: object
+      description: Request body for generative fill operation
+      required:
+      - image
+      - mask
+      properties:
+        prompt:
+          type: string
+          description: Text prompt describing what to fill in the masked area
+          maxLength: 1024
+          example: example_value
+        negativePrompt:
+          type: string
+          description: Text describing what to avoid in the filled area
+          maxLength: 1024
+          example: example_value
+        image:
+          $ref: '#/components/schemas/InputImageReference'
+        mask:
+          $ref: '#/components/schemas/InputImageReference'
+        numVariations:
+          type: integer
+          minimum: 1
+          maximum: 4
+          default: 1
+          example: 1920
+        seeds:
+          type: array
+          items:
+            type: integer
+    InputImageReference:
+      type: object
+      description: Reference to an input image for generative operations
+      required:
+      - source
+      properties:
+        source:
+          type: object
+          description: Source of the input image
+          properties:
+            url:
+              type: string
+              description: Publicly accessible URL of the input image
+              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
+            uploadId:
+              type: string
+              description: Upload ID for a previously uploaded image via the Firefly upload API
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

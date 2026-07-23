@@ -1,0 +1,290 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Status API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Status
+  description: Asynchronous job status polling
+paths:
+  /status/{jobId}:
+    get:
+      operationId: getGenerationStatus
+      summary: Adobe Creative Suite Get Async Job Status
+      description: Retrieves the current status of an asynchronous Firefly generation job. Poll this endpoint after submitting a generation request to determine if the job is pending, running, succeeded, or failed. On success, the response includes URLs to the generated output images or video.
+      tags:
+      - Status
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: Unique identifier of the generation job to check
+        schema:
+          type: string
+          example: urn:firefly:jobs:abc123def456
+        example: urn:firefly:jobs:abc123def456
+      responses:
+        '200':
+          description: Job status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationStatus'
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /pie/psdService/status/{jobId}:
+    get:
+      operationId: getJobStatus
+      summary: Adobe Creative Suite Get Job Status
+      description: Retrieves the current status of an asynchronous Photoshop API job. Poll this endpoint after submitting an operation to check if the job is pending, running, succeeded, or failed. On success, the response includes output file locations.
+      tags:
+      - Status
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The unique identifier of the job to check
+        schema:
+          type: string
+        example: asset_abc123
+      responses:
+        '200':
+          description: Job status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse_2'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse_2'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    GenerationStatus:
+      type: object
+      description: Current status and results of a Firefly generation job
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier of the generation job
+          example: urn:firefly:jobs:abc123def456
+        status:
+          type: string
+          description: Current status of the generation job
+          enum:
+          - pending
+          - running
+          - succeeded
+          - failed
+          example: succeeded
+        created:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the job was created
+          example: example_value
+        modified:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the job was last modified
+          example: example_value
+        outputs:
+          type: array
+          description: Generated output images or videos (present on success)
+          items:
+            $ref: '#/components/schemas/OutputImage'
+        errors:
+          type: array
+          description: Errors encountered during generation (present on failure)
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+    RenderOutput:
+      type: object
+      description: Details of a rendered output file
+      properties:
+        input:
+          type: string
+          description: Reference to the input file used to produce this output
+          example: example_value
+        status:
+          type: string
+          description: Status of this specific output
+          enum:
+          - pending
+          - running
+          - succeeded
+          - failed
+          example: pending
+        details:
+          type: string
+          description: Additional detail message for this output
+          example: example_value
+        _links:
+          type: object
+          properties:
+            renditions:
+              type: array
+              items:
+                type: object
+                properties:
+                  href:
+                    type: string
+                    description: URL of the rendered output file
+                  storage:
+                    type: string
+                  type:
+                    type: string
+                  width:
+                    type: integer
+                  height:
+                    type: integer
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
+    JobStatus:
+      type: object
+      description: Current status and result of an asynchronous job
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier of the job
+          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        status:
+          type: string
+          description: Current job status
+          enum:
+          - pending
+          - running
+          - succeeded
+          - failed
+          example: succeeded
+        created:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the job was created
+          example: example_value
+        modified:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the job was last modified
+          example: example_value
+        outputs:
+          type: array
+          description: List of output files produced by a successful job
+          items:
+            $ref: '#/components/schemas/RenderOutput'
+        errors:
+          type: array
+          description: List of errors if the job failed
+          items:
+            $ref: '#/components/schemas/JobError'
+    JobError:
+      type: object
+      description: Error detail from a failed job or output
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        title:
+          type: string
+          description: Short error title
+          example: example_value
+        description:
+          type: string
+          description: Detailed error description
+          example: example_value
+    ErrorResponse_2:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+    OutputImage:
+      type: object
+      description: A single generated image output from a Firefly generation job
+      properties:
+        image:
+          type: object
+          description: Generated image reference
+          properties:
+            url:
+              type: string
+              description: Temporary signed URL to download the generated image
+              example: https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123
+        seed:
+          type: integer
+          description: Seed value used to produce this particular output
+          example: 42
+        contentClass:
+          type: string
+          description: Content class detected or applied during generation
+          enum:
+          - photo
+          - art
+          example: photo
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

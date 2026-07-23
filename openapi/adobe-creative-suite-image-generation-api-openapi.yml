@@ -1,0 +1,268 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Image Generation API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Image Generation
+  description: Text-to-image and image variation generation operations
+paths:
+  /images/generate-async:
+    post:
+      operationId: generateImagesAsync
+      summary: Adobe Creative Suite Generate Images from Text Prompt
+      description: Generates one or more images from a text prompt using the Adobe Firefly generative AI model. Supports optional style presets, content class selection, negative prompts, and seed values for reproducibility. The operation is asynchronous; use the returned job ID to poll for completion and retrieve output image URLs.
+      tags:
+      - Image Generation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageGenerateRequest'
+      responses:
+        '202':
+          description: Generation job accepted and queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncJobSubmitted'
+        '400':
+          description: Bad request - invalid prompt or parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden - insufficient permissions or quota exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /images/generate-similar-async:
+    post:
+      operationId: generateSimilarImagesAsync
+      summary: Adobe Creative Suite Generate Similar Images
+      description: Generates images that are visually similar to a provided reference image while optionally being guided by a text prompt. Useful for producing variations of an existing image or exploring stylistic alternatives based on a visual reference.
+      tags:
+      - Image Generation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateSimilarRequest'
+      responses:
+        '202':
+          description: Generate similar job accepted and queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncJobSubmitted'
+        '400':
+          description: Bad request - invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AsyncJobSubmitted:
+      type: object
+      description: Response returned immediately after an async generation job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
+          type: string
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
+    StyleOptions:
+      type: object
+      description: Style guidance for image generation
+      properties:
+        presets:
+          type: array
+          description: List of style preset identifiers to apply
+          items:
+            type: string
+            enum:
+            - photo
+            - art
+            - graphic
+            - bw
+            - cool_colors
+            - warm_tone
+            - muted_color
+            - vibrant_color
+            - pastel_color
+            - golden_hour
+            - closeup_portrait
+            - wide_angle
+            - aerial_view
+            - landscape_photography
+          example:
+          - photo
+          - golden_hour
+        strength:
+          type: integer
+          description: Style influence strength from 1 (subtle) to 100 (strong)
+          minimum: 1
+          maximum: 100
+          example: 60
+        referenceImage:
+          $ref: '#/components/schemas/InputImageReference'
+    InputImageReference:
+      type: object
+      description: Reference to an input image for generative operations
+      required:
+      - source
+      properties:
+        source:
+          type: object
+          description: Source of the input image
+          properties:
+            url:
+              type: string
+              description: Publicly accessible URL of the input image
+              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
+            uploadId:
+              type: string
+              description: Upload ID for a previously uploaded image via the Firefly upload API
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
+    ImageSize:
+      type: object
+      description: Dimensions for the output image
+      properties:
+        width:
+          type: integer
+          description: Output image width in pixels
+          example: 1024
+        height:
+          type: integer
+          description: Output image height in pixels
+          example: 1024
+    ImageGenerateRequest:
+      type: object
+      description: Request body for text-to-image generation
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+          description: Text description of the image to generate
+          maxLength: 1024
+          example: A serene mountain lake at golden hour with reflections of pine trees
+        negativePrompt:
+          type: string
+          description: Text description of elements to avoid in the generated image
+          maxLength: 1024
+          example: blurry, low quality, distorted
+        contentClass:
+          type: string
+          description: Broad content category to guide the generation model
+          enum:
+          - photo
+          - art
+          example: photo
+        numVariations:
+          type: integer
+          description: Number of image variations to generate (1 to 4)
+          minimum: 1
+          maximum: 4
+          default: 1
+          example: 2
+        size:
+          $ref: '#/components/schemas/ImageSize'
+        style:
+          $ref: '#/components/schemas/StyleOptions'
+        seeds:
+          type: array
+          description: Array of integer seed values for reproducible generation. Providing the same seed with the same prompt produces the same output.
+          items:
+            type: integer
+          example:
+          - 42
+          - 1337
+        locale:
+          type: string
+          description: BCP 47 language locale for prompt interpretation
+          example: en-US
+    GenerateSimilarRequest:
+      type: object
+      description: Request body for generating images similar to a reference image
+      required:
+      - image
+      properties:
+        prompt:
+          type: string
+          description: Optional text prompt to further guide the style or content
+          maxLength: 1024
+          example: example_value
+        image:
+          $ref: '#/components/schemas/InputImageReference'
+        numVariations:
+          type: integer
+          minimum: 1
+          maximum: 4
+          default: 1
+          example: 1920
+        size:
+          $ref: '#/components/schemas/ImageSize'
+        seeds:
+          type: array
+          items:
+            type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

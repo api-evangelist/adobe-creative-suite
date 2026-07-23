@@ -1,0 +1,128 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Combine PDF API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Combine PDF
+  description: Combine multiple PDFs into one
+paths:
+  /operation/combinepdf:
+    post:
+      operationId: combinePDFs
+      summary: Adobe Creative Suite Combine PDFs
+      description: Combines two or more PDF documents into a single output PDF. The source PDFs are specified in order and merged sequentially. Page ranges from each source can optionally be specified to include only specific pages.
+      tags:
+      - Combine PDF
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CombinePDFRequest'
+      responses:
+        '201':
+          description: Combine PDF operation accepted
+          headers:
+            Location:
+              description: URL to poll for operation status
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationSubmitted'
+        '400':
+          description: Bad request - invalid asset references or parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PageRange:
+      type: object
+      description: Specifies a range of pages from a PDF document
+      properties:
+        start:
+          type: integer
+          description: Starting page number (1-indexed)
+          example: 1
+        end:
+          type: integer
+          description: Ending page number (1-indexed, inclusive)
+          example: 5
+    CombinePDFRequest:
+      type: object
+      description: Request body for combining multiple PDFs
+      required:
+      - assets
+      properties:
+        assets:
+          type: array
+          description: Ordered list of PDF assets to combine
+          minItems: 2
+          items:
+            type: object
+            required:
+            - assetID
+            properties:
+              assetID:
+                type: string
+                description: Asset ID of the PDF to include
+              pageRanges:
+                type: array
+                description: Optional page ranges to extract from this PDF
+                items:
+                  $ref: '#/components/schemas/PageRange'
+    OperationSubmitted:
+      type: object
+      description: Response returned when an operation has been accepted
+      properties:
+        jobID:
+          type: string
+          description: Unique identifier for the submitted operation job
+          example: urn:aaid:AS:UE1:operation:abc123
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request
+          example: asset_abc123
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Video Generation API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Video Generation
+  description: Generate video from text prompts
+paths:
+  /videos/generate-async:
+    post:
+      operationId: generateVideoAsync
+      summary: Adobe Creative Suite Generate Video from Text Prompt
+      description: Generates a short video clip from a text prompt using the Adobe Firefly video generation model. Generally Available as of June 2025. Supports specifying duration, aspect ratio, and motion style through the request parameters. The operation is asynchronous and may take several minutes to complete.
+      tags:
+      - Video Generation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoGenerateRequest'
+      responses:
+        '202':
+          description: Video generation job accepted and queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncJobSubmitted'
+        '400':
+          description: Bad request - invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AsyncJobSubmitted:
+      type: object
+      description: Response returned immediately after an async generation job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
+          type: string
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
+    VideoGenerateRequest:
+      type: object
+      description: Request body for text-to-video generation
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+          description: Text description of the video to generate
+          maxLength: 1024
+          example: A slow camera pan over a misty forest at dawn
+        negativePrompt:
+          type: string
+          description: Text describing what to avoid in the generated video
+          maxLength: 1024
+          example: example_value
+        size:
+          type: object
+          description: Output video dimensions
+          properties:
+            width:
+              type: integer
+              example: 1920
+            height:
+              type: integer
+              example: 1080
+        duration:
+          type: number
+          description: Requested video duration in seconds
+          example: 5.0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

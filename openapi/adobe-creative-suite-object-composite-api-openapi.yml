@@ -1,0 +1,147 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Object Composite API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Object Composite
+  description: Composite AI-generated objects into existing images
+paths:
+  /images/generate-object-composite-async:
+    post:
+      operationId: generateObjectCompositeAsync
+      summary: Adobe Creative Suite Generate Object Composite
+      description: Generates an AI-rendered object and composites it into an existing scene image. The object is described via a text prompt and is placed into the scene with appropriate lighting, shadows, and perspective to appear naturally integrated.
+      tags:
+      - Object Composite
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectCompositeRequest'
+      responses:
+        '202':
+          description: Object composite job accepted and queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncJobSubmitted'
+        '400':
+          description: Bad request - invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AsyncJobSubmitted:
+      type: object
+      description: Response returned immediately after an async generation job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
+          type: string
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
+    InputImageReference:
+      type: object
+      description: Reference to an input image for generative operations
+      required:
+      - source
+      properties:
+        source:
+          type: object
+          description: Source of the input image
+          properties:
+            url:
+              type: string
+              description: Publicly accessible URL of the input image
+              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
+            uploadId:
+              type: string
+              description: Upload ID for a previously uploaded image via the Firefly upload API
+    ObjectCompositeRequest:
+      type: object
+      description: Request body for generating an object composite in a scene
+      required:
+      - prompt
+      - image
+      - mask
+      properties:
+        prompt:
+          type: string
+          description: Text description of the object to generate and composite
+          maxLength: 1024
+          example: example_value
+        negativePrompt:
+          type: string
+          description: Text describing what to avoid in the generated object
+          maxLength: 1024
+          example: example_value
+        contentClass:
+          type: string
+          enum:
+          - photo
+          - art
+          example: photo
+        image:
+          $ref: '#/components/schemas/InputImageReference'
+        mask:
+          $ref: '#/components/schemas/InputImageReference'
+        numVariations:
+          type: integer
+          minimum: 1
+          maximum: 4
+          default: 1
+          example: 1920
+        seeds:
+          type: array
+          items:
+            type: integer
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

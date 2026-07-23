@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Export PDF API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Export PDF
+  description: Export PDF documents to other formats
+paths:
+  /operation/exportpdf:
+    post:
+      operationId: exportPDF
+      summary: Adobe Creative Suite Export PDF
+      description: Exports a PDF document to a target format such as Microsoft Word (.docx), Excel (.xlsx), PowerPoint (.pptx), RTF, or plain text. The source PDF must be uploaded first. Returns a job ID for polling the operation status.
+      tags:
+      - Export PDF
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportPDFRequest'
+      responses:
+        '201':
+          description: Export PDF operation accepted
+          headers:
+            Location:
+              description: URL to poll for operation status
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationSubmitted'
+        '400':
+          description: Bad request - unsupported export format or parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    OperationSubmitted:
+      type: object
+      description: Response returned when an operation has been accepted
+      properties:
+        jobID:
+          type: string
+          description: Unique identifier for the submitted operation job
+          example: urn:aaid:AS:UE1:operation:abc123
+    ExportPDFRequest:
+      type: object
+      description: Request body for exporting a PDF to another format
+      required:
+      - assetID
+      - targetFormat
+      properties:
+        assetID:
+          type: string
+          description: Asset ID of the PDF to export
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        targetFormat:
+          type: string
+          description: Target output format for the exported file
+          enum:
+          - docx
+          - xlsx
+          - pptx
+          - rtf
+          - txt
+          example: docx
+        exportOCRLocale:
+          type: string
+          description: Locale for OCR during export, if the PDF contains scanned text
+          example: en-US
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request
+          example: asset_abc123
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

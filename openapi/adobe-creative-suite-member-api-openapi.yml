@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Member API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Member
+  description: Member profile and licensing operations
+paths:
+  /Member/1/Profile:
+    get:
+      operationId: getMemberProfile
+      summary: Adobe Creative Suite Get Member Profile
+      description: Retrieves the profile of the authenticated Adobe Stock member including account details, quota information, and available license credits. Requires a valid OAuth 2.0 user token.
+      tags:
+      - Member
+      parameters:
+      - name: locale
+        in: query
+        description: BCP 47 locale for localized profile data
+        schema:
+          type: string
+          example: en_US
+        example: en_US
+      - name: x-api-key
+        in: header
+        required: true
+        description: Adobe Stock API key (client ID)
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Member profile returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberProfile'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    MemberProfile:
+      type: object
+      description: Adobe Stock member profile and account details
+      properties:
+        stock_user:
+          type: object
+          description: Core user account information
+          properties:
+            nb_downloads:
+              type: integer
+              description: Total number of downloads by this member
+            nb_standard_downloads:
+              type: integer
+              description: Number of standard license downloads
+            nb_standard_downloads_remaining:
+              type: integer
+              description: Remaining standard download quota
+            nb_standard_downloads_limit:
+              type: integer
+              description: Total standard download limit for the current period
+            purchase_options:
+              type: object
+              description: Available purchase and licensing options for the member
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: integer
+          description: Numeric error code
+          example: 1920
+        message:
+          type: string
+          description: Human-readable error description
+          example: example_value
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

@@ -1,0 +1,193 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Assets API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Assets
+  description: Upload and manage input/output assets for PDF operations
+paths:
+  /assets:
+    post:
+      operationId: uploadAsset
+      summary: Adobe Creative Suite Upload Asset
+      description: Initiates an asset upload by returning a pre-signed upload URI and an asset ID. The caller must then PUT the file content to the returned upload URI. Once the upload is complete, the asset ID can be referenced as input to PDF operations.
+      tags:
+      - Assets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetUploadRequest'
+      responses:
+        '200':
+          description: Asset upload URI and ID returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetUploadResponse'
+        '400':
+          description: Bad request - invalid media type or parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /assets/{assetID}:
+    get:
+      operationId: getAsset
+      summary: Adobe Creative Suite Get Asset
+      description: Retrieves metadata and a temporary download URI for a previously uploaded asset. The download URI is time-limited and can be used to download the asset content directly.
+      tags:
+      - Assets
+      parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Unique identifier of the asset to retrieve
+        schema:
+          type: string
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+      responses:
+        '200':
+          description: Asset metadata and download URI retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+        '404':
+          description: Asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteAsset
+      summary: Adobe Creative Suite Delete Asset
+      description: Permanently deletes an uploaded asset. Assets are automatically deleted after 24 hours, but this endpoint allows immediate deletion when the asset is no longer needed.
+      tags:
+      - Assets
+      parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Unique identifier of the asset to delete
+        schema:
+          type: string
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+      responses:
+        '200':
+          description: Asset deleted successfully
+        '404':
+          description: Asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AssetUploadRequest:
+      type: object
+      description: Request to initiate an asset upload
+      required:
+      - mediaType
+      properties:
+        mediaType:
+          type: string
+          description: MIME type of the file to be uploaded
+          example: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    AssetUploadResponse:
+      type: object
+      description: Response containing the upload URI and asset ID
+      properties:
+        assetID:
+          type: string
+          description: Asset ID to reference in subsequent operations
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        uploadUri:
+          type: string
+          description: Pre-signed URI to PUT the file content to
+          example: https://dcplatformstorageservice-us-east-1.s3-accelerate.amazonaws.com/...
+    Asset:
+      type: object
+      description: Metadata and download reference for an uploaded asset
+      properties:
+        assetID:
+          type: string
+          description: Unique identifier for the asset
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        mediaType:
+          type: string
+          description: MIME type of the asset
+          example: application/pdf
+        downloadUri:
+          type: string
+          description: Temporary signed URL to download the asset
+          example: https://dcplatformstorageservice-us-east-1.s3-accelerate.amazonaws.com/...
+        size:
+          type: integer
+          description: File size in bytes
+          example: 204800
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request
+          example: asset_abc123
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

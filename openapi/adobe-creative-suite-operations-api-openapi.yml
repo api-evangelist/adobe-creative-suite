@@ -1,0 +1,127 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Operations API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Operations
+  description: Check operation job status
+paths:
+  /operation/{jobId}:
+    get:
+      operationId: getOperationStatus
+      summary: Adobe Creative Suite Get Operation Status
+      description: Retrieves the current status of a PDF Services operation job. Poll this endpoint after submitting any operation to check progress. On success, the response contains a reference to the output asset.
+      tags:
+      - Operations
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: Unique identifier of the operation job to check
+        schema:
+          type: string
+          example: urn:aaid:AS:UE1:operation:abc123
+        example: urn:aaid:AS:UE1:operation:abc123
+      responses:
+        '200':
+          description: Operation status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationStatus'
+        '404':
+          description: Operation job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Asset:
+      type: object
+      description: Metadata and download reference for an uploaded asset
+      properties:
+        assetID:
+          type: string
+          description: Unique identifier for the asset
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        mediaType:
+          type: string
+          description: MIME type of the asset
+          example: application/pdf
+        downloadUri:
+          type: string
+          description: Temporary signed URL to download the asset
+          example: https://dcplatformstorageservice-us-east-1.s3-accelerate.amazonaws.com/...
+        size:
+          type: integer
+          description: File size in bytes
+          example: 204800
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request
+          example: asset_abc123
+    OperationStatus:
+      type: object
+      description: Current status and result of a PDF Services operation
+      properties:
+        status:
+          type: string
+          description: Current status of the operation
+          enum:
+          - in progress
+          - done
+          - failed
+          example: done
+        asset:
+          $ref: '#/components/schemas/Asset'
+        errors:
+          type: array
+          description: Error details if the operation failed
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

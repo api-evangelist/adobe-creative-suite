@@ -1,0 +1,103 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility Linearize PDF API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: Linearize PDF
+  description: Optimize PDFs for fast web viewing
+paths:
+  /operation/linearizePDF:
+    post:
+      operationId: linearizePDF
+      summary: Adobe Creative Suite Linearize PDF
+      description: Linearizes (web-optimizes) a PDF document so that the first page can be displayed in a browser before the entire file has downloaded. This is also known as fast web view optimization.
+      tags:
+      - Linearize PDF
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinearizePDFRequest'
+      responses:
+        '201':
+          description: Linearize PDF operation accepted
+          headers:
+            Location:
+              description: URL to poll for operation status
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationSubmitted'
+        '400':
+          description: Bad request - invalid asset reference
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    OperationSubmitted:
+      type: object
+      description: Response returned when an operation has been accepted
+      properties:
+        jobID:
+          type: string
+          description: Unique identifier for the submitted operation job
+          example: urn:aaid:AS:UE1:operation:abc123
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request
+          example: asset_abc123
+    LinearizePDFRequest:
+      type: object
+      description: Request body for linearizing a PDF for fast web view
+      required:
+      - assetID
+      properties:
+        assetID:
+          type: string
+          description: Asset ID of the PDF to linearize
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS

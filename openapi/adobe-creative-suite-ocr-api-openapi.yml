@@ -1,0 +1,107 @@
+openapi: 3.1.0
+info:
+  title: Adobe Creative Suite Adobe Firefly Accessibility OCR API
+  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
+  version: 3.0.0
+  termsOfService: https://www.adobe.com/legal/terms.html
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/support/
+  license:
+    name: Adobe Developer Terms
+    url: https://www.adobe.com/legal/developer-terms.html
+servers:
+- url: https://firefly-api.adobe.io/v3
+  description: Adobe Firefly API v3 production server
+security:
+- bearerAuth: []
+tags:
+- name: OCR
+  description: Apply optical character recognition to scanned PDFs
+paths:
+  /operation/ocr:
+    post:
+      operationId: ocrPDF
+      summary: Adobe Creative Suite OCR PDF
+      description: Applies optical character recognition (OCR) to a scanned or image-based PDF, making the text content searchable and selectable. Supports multiple locales for improved recognition accuracy with non-English documents.
+      tags:
+      - OCR
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OCRRequest'
+      responses:
+        '201':
+          description: OCR operation accepted
+          headers:
+            Location:
+              description: URL to poll for operation status
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationSubmitted'
+        '400':
+          description: Bad request - invalid asset reference or locale
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    OperationSubmitted:
+      type: object
+      description: Response returned when an operation has been accepted
+      properties:
+        jobID:
+          type: string
+          description: Unique identifier for the submitted operation job
+          example: urn:aaid:AS:UE1:operation:abc123
+    OCRRequest:
+      type: object
+      description: Request body for applying OCR to a PDF
+      required:
+      - assetID
+      properties:
+        assetID:
+          type: string
+          description: Asset ID of the scanned PDF to OCR
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        ocrLang:
+          type: string
+          description: BCP 47 locale for OCR language model selection
+          example: en-US
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request
+          example: asset_abc123
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained from Adobe IMS
