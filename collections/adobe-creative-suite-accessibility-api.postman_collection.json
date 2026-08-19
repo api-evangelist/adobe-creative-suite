@@ -1,0 +1,252 @@
+{
+  "item": [
+    {
+      "id": "6db06f3d-ddc8-4cf0-a43c-c56fd53c7d56",
+      "name": "Accessibility",
+      "description": {
+        "content": "Auto-tag PDFs for accessibility compliance",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9df21660-c99b-47c7-958d-2033457d603f",
+          "name": "Adobe Creative Suite Auto-tag PDF for Accessibility",
+          "request": {
+            "name": "Adobe Creative Suite Auto-tag PDF for Accessibility",
+            "description": {
+              "content": "Automatically adds accessibility tags to a PDF document to make it compliant with PDF/UA and WCAG standards. Tags identify headings, paragraphs, tables, figures, and other document structure elements for screen readers and assistive technologies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "operation",
+                "autotagpdf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assetID\": \"<string>\",\n  \"generateReport\": false,\n  \"shiftHeadings\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b8aef3b1-4981-4d3b-904a-b688d8204c3a",
+              "name": "Auto-tag operation accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operation",
+                    "autotagpdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetID\": \"urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718\",\n  \"generateReport\": true,\n  \"shiftHeadings\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL to poll for operation status",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobID\": \"urn:aaid:AS:UE1:operation:abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e278db37-d0ed-412a-b574-f9a6c58b2915",
+              "name": "Bad request - invalid asset reference or parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operation",
+                    "autotagpdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetID\": \"urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718\",\n  \"generateReport\": true,\n  \"shiftHeadings\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e986c29-f516-45a6-bc9e-350148430978",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operation",
+                    "autotagpdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetID\": \"urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718\",\n  \"generateReport\": true,\n  \"shiftHeadings\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "64c1fd4f-ea81-46af-aa15-5ae670c29b7d",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

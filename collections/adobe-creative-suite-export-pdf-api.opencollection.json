@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Export PDF API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Export PDF",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Export PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/operation/exportpdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exports a PDF document to a target format such as Microsoft Word (.docx), Excel (.xlsx), PowerPoint (.pptx), RTF, or plain text. The source PDF must be uploaded first. Returns a job ID for polling the operation status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

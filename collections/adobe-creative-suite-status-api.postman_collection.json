@@ -1,0 +1,449 @@
+{
+  "item": [
+    {
+      "id": "c2a5f8f6-6edb-4848-a20b-393d9ff36daf",
+      "name": "Status",
+      "description": {
+        "content": "Asynchronous job status polling",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a82161d-f814-486b-9681-3759507355cf",
+          "name": "Adobe Creative Suite Get Async Job Status",
+          "request": {
+            "name": "Adobe Creative Suite Get Async Job Status",
+            "description": {
+              "content": "Retrieves the current status of an asynchronous Firefly generation job. Poll this endpoint after submitting a generation request to determine if the job is pending, running, succeeded, or failed. On success, the response includes URLs to the generated output images or video.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "status",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) Unique identifier of the generation job to check"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46f7f07e-8eb4-4760-8346-0180ee7c003d",
+              "name": "Job status retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) Unique identifier of the generation job to check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"urn:firefly:jobs:abc123def456\",\n  \"status\": \"succeeded\",\n  \"created\": \"1996-08-07T23:29:30.263Z\",\n  \"modified\": \"2020-01-28T04:15:12.593Z\",\n  \"outputs\": [\n    {\n      \"image\": {\n        \"url\": \"https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123\"\n      },\n      \"seed\": 42,\n      \"contentClass\": \"photo\"\n    },\n    {\n      \"image\": {\n        \"url\": \"https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123\"\n      },\n      \"seed\": 42,\n      \"contentClass\": \"photo\"\n    }\n  ],\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ff8b8aa-8e31-4f80-b337-49cf5c5867d1",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) Unique identifier of the generation job to check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e8e6e71-deca-42f1-b03b-7b2a188b9d3a",
+              "name": "Job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) Unique identifier of the generation job to check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca58c10f-4fe8-4e3e-a047-68717f2149f4",
+          "name": "Adobe Creative Suite Get Job Status",
+          "request": {
+            "name": "Adobe Creative Suite Get Job Status",
+            "description": {
+              "content": "Retrieves the current status of an asynchronous Photoshop API job. Poll this endpoint after submitting an operation to check if the job is pending, running, succeeded, or failed. On success, the response includes output file locations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pie",
+                "psdService",
+                "status",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) The unique identifier of the job to check"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d3d65bf-b9e0-4020-8186-dcb81634a5e8",
+              "name": "Job status retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pie",
+                    "psdService",
+                    "status",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The unique identifier of the job to check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"f54e0fcb-260b-47c3-b520-de0d17dc2b67\",\n  \"status\": \"succeeded\",\n  \"created\": \"1985-09-06T00:58:27.497Z\",\n  \"modified\": \"1955-02-17T16:43:26.663Z\",\n  \"outputs\": [\n    {\n      \"input\": \"example_value\",\n      \"status\": \"pending\",\n      \"details\": \"example_value\",\n      \"_links\": {\n        \"renditions\": [\n          {\n            \"href\": \"string\",\n            \"storage\": \"string\",\n            \"type\": \"string\",\n            \"width\": 5832,\n            \"height\": 9616\n          },\n          {\n            \"href\": \"string\",\n            \"storage\": \"string\",\n            \"type\": \"string\",\n            \"width\": 5334,\n            \"height\": 4890\n          }\n        ]\n      }\n    },\n    {\n      \"input\": \"example_value\",\n      \"status\": \"pending\",\n      \"details\": \"example_value\",\n      \"_links\": {\n        \"renditions\": [\n          {\n            \"href\": \"string\",\n            \"storage\": \"string\",\n            \"type\": \"string\",\n            \"width\": 274,\n            \"height\": 309\n          },\n          {\n            \"href\": \"string\",\n            \"storage\": \"string\",\n            \"type\": \"string\",\n            \"width\": 6703,\n            \"height\": 7433\n          }\n        ]\n      }\n    }\n  ],\n  \"errors\": [\n    {\n      \"code\": \"example_value\",\n      \"title\": \"example_value\",\n      \"description\": \"example_value\"\n    },\n    {\n      \"code\": \"example_value\",\n      \"title\": \"example_value\",\n      \"description\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f4b3f24-b486-4b1c-bbdb-8a4b83cb263f",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pie",
+                    "psdService",
+                    "status",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The unique identifier of the job to check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77043098-fe01-4a58-840e-4555545da499",
+              "name": "Job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pie",
+                    "psdService",
+                    "status",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The unique identifier of the job to check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ebebe862-849d-42ab-b38c-2d47b62b03e8",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Status API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Get Async Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://firefly-api.adobe.io/v3/status/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "urn:firefly:jobs:abc123def456",
+                "type": "path",
+                "description": "Unique identifier of the generation job to check"
+              }
+            ]
+          },
+          "docs": "Retrieves the current status of an asynchronous Firefly generation job. Poll this endpoint after submitting a generation request to determine if the job is pending, running, succeeded, or failed. On success, the response includes URLs to the generated output images or video."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Get Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://firefly-api.adobe.io/v3/pie/psdService/status/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "asset_abc123",
+                "type": "path",
+                "description": "The unique identifier of the job to check"
+              }
+            ]
+          },
+          "docs": "Retrieves the current status of an asynchronous Photoshop API job. Poll this endpoint after submitting an operation to check if the job is pending, running, succeeded, or failed. On success, the response includes output file locations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

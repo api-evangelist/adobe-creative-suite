@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Rendition API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rendition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Create Rendition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/pie/psdService/renditionCreate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates one or more renditions from a PSD or image file in formats such as JPEG, PNG, or TIFF at specified dimensions. Supports generating multiple renditions in a single request for different sizes or formats simultaneously."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

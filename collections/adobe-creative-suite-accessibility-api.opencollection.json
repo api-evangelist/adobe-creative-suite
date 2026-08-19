@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accessibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Auto-tag PDF for Accessibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/operation/autotagpdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Automatically adds accessibility tags to a PDF document to make it compliant with PDF/UA and WCAG standards. Tags identify headings, paragraphs, tables, figures, and other document structure elements for screen readers and assistive technologies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

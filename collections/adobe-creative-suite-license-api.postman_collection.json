@@ -1,0 +1,1191 @@
+{
+  "item": [
+    {
+      "id": "9599fac5-3179-42d0-8bcf-39974ccae4d8",
+      "name": "License",
+      "description": {
+        "content": "License stock assets for use in projects",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1175b49b-22dd-43b0-9f39-a76df15cb41a",
+          "name": "Adobe Creative Suite Get License History",
+          "request": {
+            "name": "Adobe Creative Suite Get License History",
+            "description": {
+              "content": "Retrieves the license history for the authenticated member, showing previously licensed stock assets. Results can be filtered by date range or asset type and are returned in reverse chronological order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Member",
+                "1",
+                "License"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "BCP 47 locale for localized response data"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_parameters[limit]",
+                  "value": "32",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_parameters[offset]",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "result_columns[]",
+                  "value": "<string>",
+                  "description": "Fields to include in the license history response"
+                },
+                {
+                  "disabled": false,
+                  "key": "result_columns[]",
+                  "value": "<string>",
+                  "description": "Fields to include in the license history response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Adobe Stock API key (client ID)",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc84bfc6-9458-4498-9fa3-687cef5b1cfc",
+              "name": "License history returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "License"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "search_parameters[limit]",
+                      "value": "32"
+                    },
+                    {
+                      "key": "search_parameters[offset]",
+                      "value": "1920"
+                    },
+                    {
+                      "key": "result_columns[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "result_columns[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nb_results\": 87,\n  \"files\": [\n    {\n      \"id\": 123456789,\n      \"title\": \"Beautiful mountain landscape at sunrise\",\n      \"creator_name\": \"PhotoContributor123\",\n      \"creator_id\": 987654,\n      \"country_name\": \"United States\",\n      \"width\": 6000,\n      \"height\": 4000,\n      \"media_type_id\": 1,\n      \"content_type\": \"image/jpeg\",\n      \"keywords\": [\n        {\n          \"name\": \"mountain\"\n        },\n        {\n          \"name\": \"landscape\"\n        },\n        {\n          \"name\": \"sunrise\"\n        }\n      ],\n      \"comp_url\": \"https://t3.ftcdn.net/jpg/01/23/45/67/240_F_123456789_abc.jpg\",\n      \"thumbnail_url\": \"https://t3.ftcdn.net/jpg/01/23/45/67/160_F_123456789_abc.jpg\",\n      \"thumbnail_width\": 160,\n      \"thumbnail_height\": 107,\n      \"is_licensed\": \"\",\n      \"vector_type\": \"svg\",\n      \"category\": {\n        \"id\": 1043,\n        \"name\": \"Nature\",\n        \"link\": \"example_value\",\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          }\n        ]\n      },\n      \"nb_results\": 4521\n    },\n    {\n      \"id\": 123456789,\n      \"title\": \"Beautiful mountain landscape at sunrise\",\n      \"creator_name\": \"PhotoContributor123\",\n      \"creator_id\": 987654,\n      \"country_name\": \"United States\",\n      \"width\": 6000,\n      \"height\": 4000,\n      \"media_type_id\": 1,\n      \"content_type\": \"image/jpeg\",\n      \"keywords\": [\n        {\n          \"name\": \"mountain\"\n        },\n        {\n          \"name\": \"landscape\"\n        },\n        {\n          \"name\": \"sunrise\"\n        }\n      ],\n      \"comp_url\": \"https://t3.ftcdn.net/jpg/01/23/45/67/240_F_123456789_abc.jpg\",\n      \"thumbnail_url\": \"https://t3.ftcdn.net/jpg/01/23/45/67/160_F_123456789_abc.jpg\",\n      \"thumbnail_width\": 160,\n      \"thumbnail_height\": 107,\n      \"is_licensed\": \"\",\n      \"vector_type\": \"svg\",\n      \"category\": {\n        \"id\": 1043,\n        \"name\": \"Nature\",\n        \"link\": \"example_value\",\n        \"children\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Category detected>\"\n          }\n        ]\n      },\n      \"nb_results\": 4521\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5203c23b-092c-495c-a88d-b5006757e6d9",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "License"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "search_parameters[limit]",
+                      "value": "32"
+                    },
+                    {
+                      "key": "search_parameters[offset]",
+                      "value": "1920"
+                    },
+                    {
+                      "key": "result_columns[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "result_columns[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1920,\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d12a1031-52c8-4c79-b486-64f2e16f0b4f",
+          "name": "Adobe Creative Suite License a Stock Image",
+          "request": {
+            "name": "Adobe Creative Suite License a Stock Image",
+            "description": {
+              "content": "Licenses a stock photo for use in a project. The request specifies the content ID, license type, and optional purchase reference information. On success, returns a download URL for the licensed full-resolution image.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Member",
+                "1",
+                "LicenseImage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Adobe Stock API key (client ID)",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "685ff0ad-a9aa-419e-9644-af3c02da6138",
+              "name": "Image licensed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseImage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content_id\": 123456789,\n  \"license\": \"Standard\",\n  \"locale\": \"en_US\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      },\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content_id\": 123456789,\n  \"purchase_details\": {\n    \"state\": \"overage\",\n    \"license\": \"string\",\n    \"nb_downloads\": 7096\n  },\n  \"download_url\": \"https://stock.adobe.com/Rest/Libraries/Download/123456789/1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55110e10-6138-4929-ae8b-53aa731f6ac1",
+              "name": "Bad request - invalid content ID or license type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseImage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content_id\": 123456789,\n  \"license\": \"Standard\",\n  \"locale\": \"en_US\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      },\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1920,\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6541630b-e5cb-4614-8590-f5b35826aa03",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseImage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content_id\": 123456789,\n  \"license\": \"Standard\",\n  \"locale\": \"en_US\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      },\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1920,\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbbe62c0-1fa4-4119-995e-656d1ac0698a",
+              "name": "Forbidden - insufficient quota or license credits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseImage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content_id\": 123456789,\n  \"license\": \"Standard\",\n  \"locale\": \"en_US\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      },\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1920,\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb11d208-6e6c-4707-afae-244a68ed6286",
+          "name": "Adobe Creative Suite License a Vector or Illustration",
+          "request": {
+            "name": "Adobe Creative Suite License a Vector or Illustration",
+            "description": {
+              "content": "Licenses a vector or illustration stock file for use in a project. Returns a download URL for the licensed file in the original vector format (AI, EPS, or SVG) where available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Member",
+                "1",
+                "LicenseVectorOrIllustration"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Adobe Stock API key (client ID)",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1bef9816-f3f4-479a-a123-4b6496f954f3",
+              "name": "Vector or illustration licensed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseVectorOrIllustration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content_id\": 123456789,\n  \"license\": \"Standard\",\n  \"locale\": \"en_US\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      },\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content_id\": 123456789,\n  \"purchase_details\": {\n    \"state\": \"overage\",\n    \"license\": \"string\",\n    \"nb_downloads\": 7096\n  },\n  \"download_url\": \"https://stock.adobe.com/Rest/Libraries/Download/123456789/1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ac2b8d8-c663-4ca2-a532-f6cf1683c1cf",
+              "name": "Bad request - invalid content ID or license type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseVectorOrIllustration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content_id\": 123456789,\n  \"license\": \"Standard\",\n  \"locale\": \"en_US\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      },\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1920,\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b5ba6b8-a35a-4c52-ae40-7e0f42b3033e",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseVectorOrIllustration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content_id\": 123456789,\n  \"license\": \"Standard\",\n  \"locale\": \"en_US\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      },\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1920,\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac9e0508-c81b-4dc6-a4cb-a9da5304f8c8",
+          "name": "Adobe Creative Suite License a Stock Video",
+          "request": {
+            "name": "Adobe Creative Suite License a Stock Video",
+            "description": {
+              "content": "Licenses a stock video clip for use in a project. Returns a download URL for the licensed video at the requested resolution. Video licenses consume credits from the member's stock subscription or account balance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Member",
+                "1",
+                "LicenseVideo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Adobe Stock API key (client ID)",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content_id\": \"<integer>\",\n  \"license\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82cc98d7-9f9e-41d2-876f-cca9a0a4add1",
+              "name": "Video licensed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseVideo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content_id\": 123456789,\n  \"license\": \"Standard\",\n  \"locale\": \"en_US\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      },\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content_id\": 123456789,\n  \"purchase_details\": {\n    \"state\": \"overage\",\n    \"license\": \"string\",\n    \"nb_downloads\": 7096\n  },\n  \"download_url\": \"https://stock.adobe.com/Rest/Libraries/Download/123456789/1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20ed5069-5827-46c8-a0ac-b4aa117adb97",
+              "name": "Bad request - invalid content ID or license type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseVideo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content_id\": 123456789,\n  \"license\": \"Standard\",\n  \"locale\": \"en_US\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      },\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1920,\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb41ce96-a8d9-4c4b-b245-e3ef067090d1",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseVideo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content_id\": 123456789,\n  \"license\": \"Standard\",\n  \"locale\": \"en_US\",\n  \"purchase_params\": {\n    \"references\": [\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      },\n      {\n        \"id\": 1001,\n        \"value\": \"Project Alpha\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1920,\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7d42726-363d-40ef-8655-272104b422af",
+          "name": "Adobe Creative Suite Get Licensing Stats",
+          "request": {
+            "name": "Adobe Creative Suite Get Licensing Stats",
+            "description": {
+              "content": "Retrieves licensing statistics for the authenticated member including the number of assets licensed within a specified time period and a breakdown by content type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Member",
+                "1",
+                "LicenseStats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Adobe Stock API key (client ID)",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locale\": \"<string>\",\n  \"result_columns\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "265877e0-e004-4ec4-983d-7e2ff9403444",
+              "name": "Licensing stats returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseStats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locale\": \"<string>\",\n  \"result_columns\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nb_results\": 1920,\n  \"stock_user\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e0610c4-a198-415a-aa33-11a38a528285",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "LicenseStats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locale\": \"<string>\",\n  \"result_columns\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1920,\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "deaa616f-4fa5-4cda-8988-7ce0fa749ab3",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility License API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Combine PDF API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Combine PDF",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Combine PDFs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/operation/combinepdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Combines two or more PDF documents into a single output PDF. The source PDFs are specified in order and merged sequentially. Page ranges from each source can optionally be specified to include only specific pages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Smart Object API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Smart Object",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Edit Smart Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/pie/psdService/smartObject",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the content of a smart object layer within a PSD document with new image content. Smart object replacement preserves the layer's transform, blend mode, and effects while substituting the embedded image data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

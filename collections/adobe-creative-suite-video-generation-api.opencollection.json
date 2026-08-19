@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Video Generation API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Video Generation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Generate Video from Text Prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/videos/generate-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a short video clip from a text prompt using the Adobe Firefly video generation model. Generally Available as of June 2025. Supports specifying duration, aspect ratio, and motion style through the request parameters. The operation is asynchronous and may take several minutes to complete."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "ac567137-f14c-4dd4-89e6-a96d449dfed0",
+      "name": "Object Composite",
+      "description": {
+        "content": "Composite AI-generated objects into existing images",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "871e9dee-0117-4ff6-af8f-ec101d93bcd1",
+          "name": "Adobe Creative Suite Generate Object Composite",
+          "request": {
+            "name": "Adobe Creative Suite Generate Object Composite",
+            "description": {
+              "content": "Generates an AI-rendered object and composites it into an existing scene image. The object is described via a text prompt and is placed into the scene with appropriate lighting, shadows, and perspective to appear naturally integrated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "images",
+                "generate-object-composite-async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"image\": {\n    \"source\": {\n      \"url\": \"<string>\",\n      \"uploadId\": \"<string>\"\n    }\n  },\n  \"mask\": {\n    \"source\": {\n      \"url\": \"<string>\",\n      \"uploadId\": \"<string>\"\n    }\n  },\n  \"negativePrompt\": \"<string>\",\n  \"contentClass\": \"<string>\",\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1573242c-515f-4bcc-93ea-cfca48d7a3df",
+              "name": "Object composite job accepted and queued",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generate-object-composite-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"example_value\",\n  \"image\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"mask\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"negativePrompt\": \"example_value\",\n  \"contentClass\": \"photo\",\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"urn:firefly:jobs:abc123def456\",\n  \"statusUrl\": \"https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd283c08-c307-4cdc-a6ea-5365ea0e16ea",
+              "name": "Bad request - invalid input parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generate-object-composite-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"example_value\",\n  \"image\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"mask\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"negativePrompt\": \"example_value\",\n  \"contentClass\": \"photo\",\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4fdc676-07c7-446e-8a82-f2c222f1292c",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generate-object-composite-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"example_value\",\n  \"image\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"mask\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"negativePrompt\": \"example_value\",\n  \"contentClass\": \"photo\",\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a20bca29-d4f3-483e-a318-7dadcb04ce38",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Object Composite API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

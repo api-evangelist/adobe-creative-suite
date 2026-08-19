@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "7648cead-dd22-4302-904c-7397f623af08",
+      "name": "Mask",
+      "description": {
+        "content": "Alpha mask creation operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "93e390c8-8fe3-4ea6-aec0-6ece957306e6",
+          "name": "Adobe Creative Suite Create Alpha Mask",
+          "request": {
+            "name": "Adobe Creative Suite Create Alpha Mask",
+            "description": {
+              "content": "Creates an alpha mask for an image using Adobe Sensei AI. The mask isolates the foreground subject from the background and is returned as a separate grayscale image that can be applied as a layer mask in compositing workflows.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sensei",
+                "mask"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"input\": {\n    \"href\": \"<string>\",\n    \"storage\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"output\": {\n    \"href\": \"<string>\",\n    \"storage\": \"<string>\",\n    \"type\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"optimize\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "68b1aa16-477e-4548-af40-17ac726ef8a8",
+              "name": "Job accepted and queued for processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensei",
+                    "mask"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input\": {\n    \"href\": \"https://my-storage.blob.core.windows.net/images/input.psd\",\n    \"storage\": \"external\",\n    \"type\": \"image/vnd.adobe.photoshop\"\n  },\n  \"output\": {\n    \"href\": \"https://my-storage.blob.core.windows.net/images/output.png\",\n    \"storage\": \"external\",\n    \"type\": \"image/png\",\n    \"width\": 1920,\n    \"height\": 1080,\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"optimize\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"f54e0fcb-260b-47c3-b520-de0d17dc2b67\",\n  \"statusUrl\": \"https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2baec4bb-4c51-47b4-8f94-161d6a7ce2d3",
+              "name": "Bad request - invalid input parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensei",
+                    "mask"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input\": {\n    \"href\": \"https://my-storage.blob.core.windows.net/images/input.psd\",\n    \"storage\": \"external\",\n    \"type\": \"image/vnd.adobe.photoshop\"\n  },\n  \"output\": {\n    \"href\": \"https://my-storage.blob.core.windows.net/images/output.png\",\n    \"storage\": \"external\",\n    \"type\": \"image/png\",\n    \"width\": 1920,\n    \"height\": 1080,\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"optimize\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3da0b894-388a-4e50-8eb9-b948854ea573",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensei",
+                    "mask"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input\": {\n    \"href\": \"https://my-storage.blob.core.windows.net/images/input.psd\",\n    \"storage\": \"external\",\n    \"type\": \"image/vnd.adobe.photoshop\"\n  },\n  \"output\": {\n    \"href\": \"https://my-storage.blob.core.windows.net/images/output.png\",\n    \"storage\": \"external\",\n    \"type\": \"image/png\",\n    \"width\": 1920,\n    \"height\": 1080,\n    \"overwrite\": true\n  },\n  \"options\": {\n    \"optimize\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a05a068e-01dc-44ba-859f-1ffac056210e",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Mask API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Member API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Get Member Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://firefly-api.adobe.io/v3/Member/1/Profile",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "locale",
+                "value": "en_US",
+                "type": "query",
+                "description": "BCP 47 locale for localized profile data"
+              }
+            ]
+          },
+          "docs": "Retrieves the profile of the authenticated Adobe Stock member including account details, quota information, and available license credits. Requires a valid OAuth 2.0 user token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

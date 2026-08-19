@@ -1,0 +1,203 @@
+{
+  "item": [
+    {
+      "id": "236d192d-381c-4a98-b3cf-7a159f09bb60",
+      "name": "Member",
+      "description": {
+        "content": "Member profile and licensing operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c0bda767-0d91-4324-a856-046fc3bfb913",
+          "name": "Adobe Creative Suite Get Member Profile",
+          "request": {
+            "name": "Adobe Creative Suite Get Member Profile",
+            "description": {
+              "content": "Retrieves the profile of the authenticated Adobe Stock member including account details, quota information, and available license credits. Requires a valid OAuth 2.0 user token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Member",
+                "1",
+                "Profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "BCP 47 locale for localized profile data"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Adobe Stock API key (client ID)",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "663c3d1d-2420-4436-ab57-53fe9e9398ec",
+              "name": "Member profile returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "Profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "en_US"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"stock_user\": {\n    \"nb_downloads\": 5441,\n    \"nb_standard_downloads\": 9471,\n    \"nb_standard_downloads_remaining\": 8728,\n    \"nb_standard_downloads_limit\": 4523,\n    \"purchase_options\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35f86376-e3b5-4135-aa86-647790271a27",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Member",
+                    "1",
+                    "Profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "en_US"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Adobe Stock API key (client ID)",
+                    "key": "x-api-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1920,\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bad95c93-4b84-4c98-9522-2411aec4c958",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Member API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

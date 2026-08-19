@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Generative Fill API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Generative Fill",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Generative Fill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/images/fill-async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fills a masked region of an existing image with AI-generated content based on a text prompt. A mask image defines the area to be filled. The generative fill respects the surrounding context to produce seamlessly blended results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

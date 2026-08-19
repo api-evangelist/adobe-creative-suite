@@ -1,0 +1,252 @@
+{
+  "item": [
+    {
+      "id": "c24b9ec0-7763-4f9f-8fe3-305c7b0eca20",
+      "name": "Document Generation",
+      "description": {
+        "content": "Generate documents from templates and data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6f8e89d-6eb2-47ac-8afc-0ea5d2ce7f91",
+          "name": "Adobe Creative Suite Generate Document from Template",
+          "request": {
+            "name": "Adobe Creative Suite Generate Document from Template",
+            "description": {
+              "content": "Generates a PDF or Word document by merging JSON data into a Word document template. Template tags in the document are replaced with corresponding data values. Supports tables, lists, conditional sections, and images in templates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "operation",
+                "documentgeneration"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assetID\": \"<string>\",\n  \"outputFormat\": \"<string>\",\n  \"jsonDataForMerge\": {\n    \"key_0\": 9975,\n    \"key_1\": false\n  },\n  \"notTaggedAdds\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1afed8c2-97f2-4227-a26c-94e7fae67c1c",
+              "name": "Document generation operation accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operation",
+                    "documentgeneration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetID\": \"urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718\",\n  \"outputFormat\": \"pdf\",\n  \"jsonDataForMerge\": {\n    \"customerName\": \"John Doe\",\n    \"invoiceDate\": \"2026-03-02\",\n    \"totalAmount\": 1500\n  },\n  \"notTaggedAdds\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL to poll for operation status",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobID\": \"urn:aaid:AS:UE1:operation:abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38b50739-a7eb-401e-aa1d-21edb030ce88",
+              "name": "Bad request - invalid template or data parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operation",
+                    "documentgeneration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetID\": \"urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718\",\n  \"outputFormat\": \"pdf\",\n  \"jsonDataForMerge\": {\n    \"customerName\": \"John Doe\",\n    \"invoiceDate\": \"2026-03-02\",\n    \"totalAmount\": 1500\n  },\n  \"notTaggedAdds\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee2380ed-80bb-4620-9300-6bf77852df9c",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operation",
+                    "documentgeneration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetID\": \"urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718\",\n  \"outputFormat\": \"pdf\",\n  \"jsonDataForMerge\": {\n    \"customerName\": \"John Doe\",\n    \"invoiceDate\": \"2026-03-02\",\n    \"totalAmount\": 1500\n  },\n  \"notTaggedAdds\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1d588883-b7d0-41b3-8166-17f10206be2b",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Document Generation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

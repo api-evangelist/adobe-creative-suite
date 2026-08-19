@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "249788c4-8469-4d2d-b0d4-936bc361520e",
+      "name": "Generative Fill",
+      "description": {
+        "content": "Fill selected regions of images with AI-generated content",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e44216b-2e8d-43a6-b29a-4a1cdd4da129",
+          "name": "Adobe Creative Suite Generative Fill",
+          "request": {
+            "name": "Adobe Creative Suite Generative Fill",
+            "description": {
+              "content": "Fills a masked region of an existing image with AI-generated content based on a text prompt. A mask image defines the area to be filled. The generative fill respects the surrounding context to produce seamlessly blended results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "images",
+                "fill-async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": {\n    \"source\": {\n      \"url\": \"<string>\",\n      \"uploadId\": \"<string>\"\n    }\n  },\n  \"mask\": {\n    \"source\": {\n      \"url\": \"<string>\",\n      \"uploadId\": \"<string>\"\n    }\n  },\n  \"prompt\": \"<string>\",\n  \"negativePrompt\": \"<string>\",\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6b0f6f3d-8706-4b09-bda8-1027136033a9",
+              "name": "Fill job accepted and queued",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "fill-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"mask\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"prompt\": \"example_value\",\n  \"negativePrompt\": \"example_value\",\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"urn:firefly:jobs:abc123def456\",\n  \"statusUrl\": \"https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f2e9273-fea2-4274-8552-c4aee1d9d9f0",
+              "name": "Bad request - invalid input parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "fill-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"mask\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"prompt\": \"example_value\",\n  \"negativePrompt\": \"example_value\",\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ee89609-6b97-4200-a92e-bff82136e95e",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "fill-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"mask\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"prompt\": \"example_value\",\n  \"negativePrompt\": \"example_value\",\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8087afe3-f3b3-445e-a8ba-b7cd98764944",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Generative Fill API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

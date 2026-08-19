@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Linearize PDF API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Linearize PDF",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Linearize PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/operation/linearizePDF",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Linearizes (web-optimizes) a PDF document so that the first page can be displayed in a browser before the entire file has downloaded. This is also known as fast web view optimization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

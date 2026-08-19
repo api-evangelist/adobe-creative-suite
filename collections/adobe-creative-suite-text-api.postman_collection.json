@@ -1,0 +1,250 @@
+{
+  "item": [
+    {
+      "id": "5e1dff9d-ab53-45f4-8e38-bfccbb830472",
+      "name": "Text",
+      "description": {
+        "content": "Text layer editing operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "602d8be2-7f3b-4794-830e-a4edc77dcf50",
+          "name": "Adobe Creative Suite Edit Text Layers",
+          "request": {
+            "name": "Adobe Creative Suite Edit Text Layers",
+            "description": {
+              "content": "Edits text content, font properties, and styling of text layers within a PSD document. Supports changing text content, font family, size, color, alignment, and other text attributes across one or more named text layers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pie",
+                "psdService",
+                "text"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"<string>\",\n      \"storage\": \"<string>\",\n      \"type\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ab76c897-39dd-482e-aedf-f7ba5c449298",
+              "name": "Job accepted and queued for processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pie",
+                    "psdService",
+                    "text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/input.psd\",\n      \"storage\": \"external\",\n      \"type\": \"image/vnd.adobe.photoshop\"\n    },\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/input.psd\",\n      \"storage\": \"external\",\n      \"type\": \"image/vnd.adobe.photoshop\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/output.png\",\n      \"storage\": \"external\",\n      \"type\": \"image/png\",\n      \"width\": 1920,\n      \"height\": 1080,\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/output.png\",\n      \"storage\": \"external\",\n      \"type\": \"image/png\",\n      \"width\": 1920,\n      \"height\": 1080,\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"f54e0fcb-260b-47c3-b520-de0d17dc2b67\",\n  \"statusUrl\": \"https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28ea99d9-8358-47fe-ba09-2f11eb16af87",
+              "name": "Bad request - invalid input parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pie",
+                    "psdService",
+                    "text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/input.psd\",\n      \"storage\": \"external\",\n      \"type\": \"image/vnd.adobe.photoshop\"\n    },\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/input.psd\",\n      \"storage\": \"external\",\n      \"type\": \"image/vnd.adobe.photoshop\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/output.png\",\n      \"storage\": \"external\",\n      \"type\": \"image/png\",\n      \"width\": 1920,\n      \"height\": 1080,\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/output.png\",\n      \"storage\": \"external\",\n      \"type\": \"image/png\",\n      \"width\": 1920,\n      \"height\": 1080,\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4b12782-8abd-438d-b285-9e08a8ae6088",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pie",
+                    "psdService",
+                    "text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/input.psd\",\n      \"storage\": \"external\",\n      \"type\": \"image/vnd.adobe.photoshop\"\n    },\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/input.psd\",\n      \"storage\": \"external\",\n      \"type\": \"image/vnd.adobe.photoshop\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/output.png\",\n      \"storage\": \"external\",\n      \"type\": \"image/png\",\n      \"width\": 1920,\n      \"height\": 1080,\n      \"overwrite\": true\n    },\n    {\n      \"href\": \"https://my-storage.blob.core.windows.net/images/output.png\",\n      \"storage\": \"external\",\n      \"type\": \"image/png\",\n      \"width\": 1920,\n      \"height\": 1080,\n      \"overwrite\": true\n    }\n  ],\n  \"options\": {\n    \"layers\": [\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"text\": {\n          \"content\": \"<string>\",\n          \"characterStyles\": [\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            },\n            {\n              \"fontSize\": \"<number>\",\n              \"fontName\": \"<string>\",\n              \"color\": {\n                \"red\": \"<integer>\",\n                \"green\": \"<integer>\",\n                \"blue\": \"<integer>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "303fcd1a-5681-4a77-b5f9-db5a00b571f6",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Text API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

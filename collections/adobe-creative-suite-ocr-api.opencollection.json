@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility OCR API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OCR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite OCR PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/operation/ocr",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies optical character recognition (OCR) to a scanned or image-based PDF, making the text content searchable and selectable. Supports multiple locales for improved recognition accuracy with non-English documents."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

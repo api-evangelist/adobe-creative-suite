@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "b13a7a3d-0ab6-4a7d-83de-2175b4819f7d",
+      "name": "Generative Expand",
+      "description": {
+        "content": "Expand images beyond their original boundaries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b3a73e66-61cb-481e-87c1-aa74675d1d64",
+          "name": "Adobe Creative Suite Generative Expand Image",
+          "request": {
+            "name": "Adobe Creative Suite Generative Expand Image",
+            "description": {
+              "content": "Expands an existing image beyond its original boundaries using generative AI to fill in the new regions. The expansion can be directional and supports specifying a prompt to guide the content generated in the expanded areas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "images",
+                "expand-async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": {\n    \"source\": {\n      \"url\": \"<string>\",\n      \"uploadId\": \"<string>\"\n    }\n  },\n  \"prompt\": \"<string>\",\n  \"negativePrompt\": \"<string>\",\n  \"size\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  },\n  \"placement\": {\n    \"inset\": {\n      \"left\": \"<integer>\",\n      \"top\": \"<integer>\",\n      \"right\": \"<integer>\",\n      \"bottom\": \"<integer>\"\n    }\n  },\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "99178457-9925-4762-8d33-44b801875bcd",
+              "name": "Expand job accepted and queued",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "expand-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"prompt\": \"example_value\",\n  \"negativePrompt\": \"example_value\",\n  \"size\": {\n    \"width\": 1024,\n    \"height\": 1024\n  },\n  \"placement\": {\n    \"inset\": {\n      \"left\": \"<integer>\",\n      \"top\": \"<integer>\",\n      \"right\": \"<integer>\",\n      \"bottom\": \"<integer>\"\n    }\n  },\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"urn:firefly:jobs:abc123def456\",\n  \"statusUrl\": \"https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4295aaa-0ee5-4b94-9aea-a2f440ae4741",
+              "name": "Bad request - invalid input parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "expand-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"prompt\": \"example_value\",\n  \"negativePrompt\": \"example_value\",\n  \"size\": {\n    \"width\": 1024,\n    \"height\": 1024\n  },\n  \"placement\": {\n    \"inset\": {\n      \"left\": \"<integer>\",\n      \"top\": \"<integer>\",\n      \"right\": \"<integer>\",\n      \"bottom\": \"<integer>\"\n    }\n  },\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b241825-b7aa-4b3d-825e-7a1c72e3d4b1",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "expand-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": {\n    \"source\": {\n      \"url\": \"https://my-bucket.s3.amazonaws.com/source-image.jpg\",\n      \"uploadId\": \"string\"\n    }\n  },\n  \"prompt\": \"example_value\",\n  \"negativePrompt\": \"example_value\",\n  \"size\": {\n    \"width\": 1024,\n    \"height\": 1024\n  },\n  \"placement\": {\n    \"inset\": {\n      \"left\": \"<integer>\",\n      \"top\": \"<integer>\",\n      \"right\": \"<integer>\",\n      \"bottom\": \"<integer>\"\n    }\n  },\n  \"numVariations\": 1,\n  \"seeds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6b2e6e67-2a38-44a3-b926-a2c8029c6429",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Generative Expand API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

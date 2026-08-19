@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility License API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "License",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Get License History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://firefly-api.adobe.io/v3/Member/1/License",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "locale",
+                "value": "en_US",
+                "type": "query",
+                "description": "BCP 47 locale for localized response data"
+              },
+              {
+                "name": "search_parameters[limit]",
+                "value": "1920",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "search_parameters[offset]",
+                "value": "1920",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "result_columns[]",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include in the license history response"
+              }
+            ]
+          },
+          "docs": "Retrieves the license history for the authenticated member, showing previously licensed stock assets. Results can be filtered by date range or asset type and are returned in reverse chronological order."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite License a Stock Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/Member/1/LicenseImage",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": "example_value"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Licenses a stock photo for use in a project. The request specifies the content ID, license type, and optional purchase reference information. On success, returns a download URL for the licensed full-resolution image."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite License a Vector or Illustration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/Member/1/LicenseVectorOrIllustration",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": "example_value"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Licenses a vector or illustration stock file for use in a project. Returns a download URL for the licensed file in the original vector format (AI, EPS, or SVG) where available."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite License a Stock Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/Member/1/LicenseVideo",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": "example_value"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Licenses a stock video clip for use in a project. Returns a download URL for the licensed video at the requested resolution. Video licenses consume credits from the member's stock subscription or account balance."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Get Licensing Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/Member/1/LicenseStats",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": "example_value"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves licensing statistics for the authenticated member including the number of assets licensed within a specified time period and a breakdown by content type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

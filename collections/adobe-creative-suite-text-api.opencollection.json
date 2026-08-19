@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Text API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Text",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Edit Text Layers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/pie/psdService/text",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edits text content, font properties, and styling of text layers within a PSD document. Supports changing text content, font family, size, color, alignment, and other text attributes across one or more named text layers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

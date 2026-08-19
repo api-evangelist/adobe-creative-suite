@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Assets API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Upload Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/assets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates an asset upload by returning a pre-signed upload URI and an asset ID. The caller must then PUT the file content to the returned upload URI. Once the upload is complete, the asset ID can be referenced as input to PDF operations."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Get Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://firefly-api.adobe.io/v3/assets/:assetID",
+            "params": [
+              {
+                "name": "assetID",
+                "value": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718",
+                "type": "path",
+                "description": "Unique identifier of the asset to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves metadata and a temporary download URI for a previously uploaded asset. The download URI is time-limited and can be used to download the asset content directly."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Delete Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://firefly-api.adobe.io/v3/assets/:assetID",
+            "params": [
+              {
+                "name": "assetID",
+                "value": "urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718",
+                "type": "path",
+                "description": "Unique identifier of the asset to delete"
+              }
+            ]
+          },
+          "docs": "Permanently deletes an uploaded asset. Assets are automatically deleted after 24 hours, but this endpoint allows immediate deletion when the asset is no longer needed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

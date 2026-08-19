@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Compress PDF API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Compress PDF",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Compress PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/operation/compressPDF",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reduces the file size of a PDF document by applying compression to embedded images and removing redundant data. Compression level can be set to balance between file size and output quality."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

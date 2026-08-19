@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Cutout API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cutout",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Creative Suite Remove Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/sensei/cutout",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes the background from an image using Adobe Sensei AI. Accepts an input image stored in cloud storage and produces a cutout image with the background removed. The operation is asynchronous; poll the returned job URL for completion."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Product Crop",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/sensei/product_crop",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Automatically crops an image to focus on the primary product subject using Adobe Sensei AI. Useful for e-commerce workflows where product images need to be consistently cropped and centered."
+        },
+        {
+          "info": {
+            "name": "Adobe Creative Suite Straighten Image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://firefly-api.adobe.io/v3/sensei/straighten",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Automatically detects and corrects the rotation of an image so that horizontal and vertical lines are properly aligned. Uses Adobe Sensei AI to analyze the image content and apply the appropriate rotation correction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

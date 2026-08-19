@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "82e7de6c-20aa-476c-a3b7-b862a899c1bc",
+      "name": "Video Generation",
+      "description": {
+        "content": "Generate video from text prompts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "85d4a8fa-c954-4bfd-8911-836b7a8a4e5e",
+          "name": "Adobe Creative Suite Generate Video from Text Prompt",
+          "request": {
+            "name": "Adobe Creative Suite Generate Video from Text Prompt",
+            "description": {
+              "content": "Generates a short video clip from a text prompt using the Adobe Firefly video generation model. Generally Available as of June 2025. Supports specifying duration, aspect ratio, and motion style through the request parameters. The operation is asynchronous and may take several minutes to complete.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "videos",
+                "generate-async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"negativePrompt\": \"<string>\",\n  \"size\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  },\n  \"duration\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d1d27e0c-79b1-41da-884e-2804c6761172",
+              "name": "Video generation job accepted and queued",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "videos",
+                    "generate-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"A slow camera pan over a misty forest at dawn\",\n  \"negativePrompt\": \"example_value\",\n  \"size\": {\n    \"width\": 1920,\n    \"height\": 1080\n  },\n  \"duration\": 5\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"urn:firefly:jobs:abc123def456\",\n  \"statusUrl\": \"https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfbf6dbc-a0ad-407c-9776-fa26b02710b3",
+              "name": "Bad request - invalid input parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "videos",
+                    "generate-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"A slow camera pan over a misty forest at dawn\",\n  \"negativePrompt\": \"example_value\",\n  \"size\": {\n    \"width\": 1920,\n    \"height\": 1080\n  },\n  \"duration\": 5\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a3d8e81-e775-4956-96c4-1e812041c498",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "videos",
+                    "generate-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"A slow camera pan over a misty forest at dawn\",\n  \"negativePrompt\": \"example_value\",\n  \"size\": {\n    \"width\": 1920,\n    \"height\": 1080\n  },\n  \"duration\": 5\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"requestId\": \"asset_abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://firefly-api.adobe.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3a7b9167-1755-41a0-9d44-06663fdb5041",
+    "name": "Adobe Creative Suite Adobe Firefly Accessibility Video Generation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
