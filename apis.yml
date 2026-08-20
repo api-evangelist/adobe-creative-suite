@@ -810,6 +810,8 @@ apis:
   humanURL: https://developer.adobe.com/photoshop/
   baseURL: https://image.adobe.io
   tags:
+  - Image-Generation
+  tags_raw:
   - Image Generation
   properties:
   - type: OpenAPI
@@ -974,6 +976,8 @@ apis:
   humanURL: https://developer.adobe.com/photoshop/
   baseURL: https://image.adobe.io
   tags:
+  - MASK
+  tags_raw:
   - Mask
   properties:
   - type: OpenAPI
@@ -1137,7 +1141,8 @@ apis:
   description: Check operation job status
   humanURL: https://developer.adobe.com/photoshop/
   baseURL: https://image.adobe.io
-  tags:
+  tags: []
+  tags_raw:
   - Operations
   properties:
   - type: OpenAPI
