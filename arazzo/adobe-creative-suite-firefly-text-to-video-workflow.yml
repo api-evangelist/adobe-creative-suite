@@ -13,8 +13,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: fireflyApi
-  url: ../openapi/adobe-creative-suite-firefly-openapi.yml
+- name: statusApi
+  url: ../openapi/adobe-creative-suite-status-api-openapi.yml
+  type: openapi
+- name: videoGenerationApi
+  url: ../openapi/adobe-creative-suite-video-generation-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: firefly-text-to-video

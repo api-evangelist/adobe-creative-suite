@@ -13,8 +13,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: stockApi
-  url: ../openapi/adobe-creative-suite-stock-openapi.yml
+- name: licenseApi
+  url: ../openapi/adobe-creative-suite-license-api-openapi.yml
+  type: openapi
+- name: memberApi
+  url: ../openapi/adobe-creative-suite-member-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: license-with-quota-check

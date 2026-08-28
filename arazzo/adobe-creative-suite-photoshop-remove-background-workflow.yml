@@ -12,8 +12,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: photoshopApi
-  url: ../openapi/adobe-creative-suite-photoshop-openapi.yml
+- name: cutoutApi
+  url: ../openapi/adobe-creative-suite-cutout-api-openapi.yml
+  type: openapi
+- name: statusApi
+  url: ../openapi/adobe-creative-suite-status-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: remove-background

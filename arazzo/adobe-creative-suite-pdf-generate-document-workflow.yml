@@ -14,8 +14,14 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: pdfServicesApi
-  url: ../openapi/adobe-creative-suite-pdf-services-openapi.yml
+- name: assetsApi
+  url: ../openapi/adobe-creative-suite-assets-api-openapi.yml
+  type: openapi
+- name: documentGenerationApi
+  url: ../openapi/adobe-creative-suite-document-generation-api-openapi.yml
+  type: openapi
+- name: operationsApi
+  url: ../openapi/adobe-creative-suite-operations-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: generate-document-from-template

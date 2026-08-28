@@ -13,8 +13,14 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: pdfServicesApi
-  url: ../openapi/adobe-creative-suite-pdf-services-openapi.yml
+- name: assetsApi
+  url: ../openapi/adobe-creative-suite-assets-api-openapi.yml
+  type: openapi
+- name: exportPdfApi
+  url: ../openapi/adobe-creative-suite-export-pdf-api-openapi.yml
+  type: openapi
+- name: operationsApi
+  url: ../openapi/adobe-creative-suite-operations-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: export-pdf-to-word

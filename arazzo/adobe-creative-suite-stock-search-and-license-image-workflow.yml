@@ -12,8 +12,11 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: stockApi
-  url: ../openapi/adobe-creative-suite-stock-openapi.yml
+- name: licenseApi
+  url: ../openapi/adobe-creative-suite-license-api-openapi.yml
+  type: openapi
+- name: searchApi
+  url: ../openapi/adobe-creative-suite-search-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: search-and-license-image
