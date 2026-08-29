@@ -1,0 +1,26 @@
+slug: adobe-creative-suite
+provider: Adobe Creative Suite
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: License
+  spec_file: adobe-creative-suite-license-api-openapi.yml
+  capability_id: BC-3720.10
+  capability_id_l1: BC-3720
+  capability_name: Rights Acquisition Management
+  confidence: 0.7
+  evidence: POST /Member/1/LicenseImage  licenseImage  Adobe Creative Suite License a Stock Image ...
+    GET /Member/1/License  getLicenseHistory
+  reason: Operations license stock images, vectors and video from a marketplace and track licence history/stats
+    — inbound acquisition of content usage rights from rights holders. Some ambiguity with generic IP
+    in-licensing, hence 0.7.
