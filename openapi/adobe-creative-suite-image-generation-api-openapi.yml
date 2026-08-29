@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Creative Suite Adobe Firefly Accessibility Image Generation API
+  title: Adobe Creative Suite Adobe Firefly Image Generation API
   description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
   version: 3.0.0
   termsOfService: https://www.adobe.com/legal/terms.html
@@ -97,6 +97,34 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
+    ImageSize:
+      type: object
+      description: Dimensions for the output image
+      properties:
+        width:
+          type: integer
+          description: Output image width in pixels
+          example: 1024
+        height:
+          type: integer
+          description: Output image height in pixels
+          example: 1024
     AsyncJobSubmitted:
       type: object
       description: Response returned immediately after an async generation job is submitted
@@ -161,34 +189,31 @@ components:
             uploadId:
               type: string
               description: Upload ID for a previously uploaded image via the Firefly upload API
-    ErrorResponse:
+    GenerateSimilarRequest:
       type: object
-      description: Standard error response body
+      description: Request body for generating images similar to a reference image
+      required:
+      - image
       properties:
-        code:
+        prompt:
           type: string
-          description: Machine-readable error code
+          description: Optional text prompt to further guide the style or content
+          maxLength: 1024
           example: example_value
-        message:
-          type: string
-          description: Human-readable description of the error
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request, for support purposes
-          example: asset_abc123
-    ImageSize:
-      type: object
-      description: Dimensions for the output image
-      properties:
-        width:
+        image:
+          $ref: '#/components/schemas/InputImageReference'
+        numVariations:
           type: integer
-          description: Output image width in pixels
-          example: 1024
-        height:
-          type: integer
-          description: Output image height in pixels
-          example: 1024
+          minimum: 1
+          maximum: 4
+          default: 1
+          example: 1920
+        size:
+          $ref: '#/components/schemas/ImageSize'
+        seeds:
+          type: array
+          items:
+            type: integer
     ImageGenerateRequest:
       type: object
       description: Request body for text-to-image generation
@@ -235,31 +260,6 @@ components:
           type: string
           description: BCP 47 language locale for prompt interpretation
           example: en-US
-    GenerateSimilarRequest:
-      type: object
-      description: Request body for generating images similar to a reference image
-      required:
-      - image
-      properties:
-        prompt:
-          type: string
-          description: Optional text prompt to further guide the style or content
-          maxLength: 1024
-          example: example_value
-        image:
-          $ref: '#/components/schemas/InputImageReference'
-        numVariations:
-          type: integer
-          minimum: 1
-          maximum: 4
-          default: 1
-          example: 1920
-        size:
-          $ref: '#/components/schemas/ImageSize'
-        seeds:
-          type: array
-          items:
-            type: integer
   securitySchemes:
     bearerAuth:
       type: http

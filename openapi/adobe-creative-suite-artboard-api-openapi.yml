@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Creative Suite Adobe Firefly Accessibility Artboard API
-  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
-  version: 3.0.0
+  title: Adobe Creative Suite Adobe Photoshop Artboard API
+  description: The Adobe Photoshop API provides programmatic access to Photoshop image manipulation capabilities including automated editing, masking, compositing, layer management, and document operations. It enables developers to integrate Photoshop processing into workflows and applications without requiring a desktop installation. Operations are performed asynchronously and return a job ID for status polling.
+  version: 1.0.0
   termsOfService: https://www.adobe.com/legal/terms.html
   contact:
     name: Adobe Developer Support
@@ -11,8 +11,8 @@ info:
     name: Adobe Developer Terms
     url: https://www.adobe.com/legal/developer-terms.html
 servers:
-- url: https://firefly-api.adobe.io/v3
-  description: Adobe Firefly API v3 production server
+- url: https://image.adobe.io
+  description: Adobe Photoshop API production server
 security:
 - bearerAuth: []
 tags:
@@ -56,40 +56,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ArtboardRequest:
+    ErrorResponse:
       type: object
-      description: Request to create artboards within a PSD document
-      required:
-      - inputs
-      - outputs
-      - options
+      description: Standard error response
       properties:
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobInput'
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobOutput'
-        options:
-          type: object
-          properties:
-            artboards:
-              type: array
-              description: List of artboards to create
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    description: Artboard name
-                  width:
-                    type: integer
-                    description: Artboard width in pixels
-                  height:
-                    type: integer
-                    description: Artboard height in pixels
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
     JobOutput:
       type: object
       description: Reference to an output file location in cloud storage
@@ -128,18 +106,27 @@ components:
           description: Whether to overwrite the output file if it already exists
           default: true
           example: true
-    ErrorResponse:
+    JobSubmitted:
       type: object
-      description: Standard error response
+      description: Response returned immediately after a job is submitted
       properties:
-        code:
+        jobId:
           type: string
-          description: Error code
-          example: example_value
-        message:
+          description: Unique identifier for the submitted job
+          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        statusUrl:
           type: string
-          description: Human-readable error message
-          example: example_value
+          description: URL to poll for job status
+          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
     JobInput:
       type: object
       description: Reference to an input file stored in cloud storage
@@ -164,30 +151,43 @@ components:
           type: string
           description: MIME type of the input file
           example: image/vnd.adobe.photoshop
-    JobSubmitted:
+    ArtboardRequest:
       type: object
-      description: Response returned immediately after a job is submitted
+      description: Request to create artboards within a PSD document
+      required:
+      - inputs
+      - outputs
+      - options
       properties:
-        jobId:
-          type: string
-          description: Unique identifier for the submitted job
-          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        statusUrl:
-          type: string
-          description: URL to poll for job status
-          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        _links:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobOutput'
+        options:
           type: object
           properties:
-            self:
-              type: object
-              properties:
-                href:
-                  type: string
-                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+            artboards:
+              type: array
+              description: List of artboards to create
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Artboard name
+                  width:
+                    type: integer
+                    description: Artboard width in pixels
+                  height:
+                    type: integer
+                    description: Artboard height in pixels
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: OAuth 2.0 access token obtained from Adobe IMS
+      description: OAuth 2.0 Server-to-Server (S2S) access token from Adobe IMS

@@ -1,18 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Creative Suite Adobe Firefly Accessibility Status API
-  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
-  version: 3.0.0
-  termsOfService: https://www.adobe.com/legal/terms.html
+  title: Adobe Creative Suite Status API
   contact:
     name: Adobe Developer Support
     url: https://developer.adobe.com/support/
   license:
     name: Adobe Developer Terms
     url: https://www.adobe.com/legal/developer-terms.html
+  termsOfService: https://www.adobe.com/legal/terms.html
+  version: '1.0'
+  description: 'Operations tagged Status across 2 of this provider''s published API definitions: adobe-creative-suite-firefly-openapi.yml, adobe-creative-suite-photoshop-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://firefly-api.adobe.io/v3
   description: Adobe Firefly API v3 production server
+- url: https://image.adobe.io
+  description: Adobe Photoshop API production server
 security:
 - bearerAuth: []
 tags:
@@ -57,6 +59,9 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://firefly-api.adobe.io/v3
+      description: Adobe Firefly API v3 production server
   /pie/psdService/status/{jobId}:
     get:
       operationId: getJobStatus
@@ -94,8 +99,27 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://image.adobe.io
+      description: Adobe Photoshop API production server
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
     GenerationStatus:
       type: object
       description: Current status and results of a Firefly generation job
@@ -138,62 +162,29 @@ components:
                 type: string
               message:
                 type: string
-    RenderOutput:
+    OutputImage:
       type: object
-      description: Details of a rendered output file
+      description: A single generated image output from a Firefly generation job
       properties:
-        input:
-          type: string
-          description: Reference to the input file used to produce this output
-          example: example_value
-        status:
-          type: string
-          description: Status of this specific output
-          enum:
-          - pending
-          - running
-          - succeeded
-          - failed
-          example: pending
-        details:
-          type: string
-          description: Additional detail message for this output
-          example: example_value
-        _links:
+        image:
           type: object
+          description: Generated image reference
           properties:
-            renditions:
-              type: array
-              items:
-                type: object
-                properties:
-                  href:
-                    type: string
-                    description: URL of the rendered output file
-                  storage:
-                    type: string
-                  type:
-                    type: string
-                  width:
-                    type: integer
-                  height:
-                    type: integer
-    ErrorResponse:
-      type: object
-      description: Standard error response body
-      properties:
-        code:
+            url:
+              type: string
+              description: Temporary signed URL to download the generated image
+              example: https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123
+        seed:
+          type: integer
+          description: Seed value used to produce this particular output
+          example: 42
+        contentClass:
           type: string
-          description: Machine-readable error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable description of the error
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request, for support purposes
-          example: asset_abc123
+          description: Content class detected or applied during generation
+          enum:
+          - photo
+          - art
+          example: photo
     JobStatus:
       type: object
       description: Current status and result of an asynchronous job
@@ -259,32 +250,52 @@ components:
           type: string
           description: Human-readable error message
           example: example_value
-    OutputImage:
+    RenderOutput:
       type: object
-      description: A single generated image output from a Firefly generation job
+      description: Details of a rendered output file
       properties:
-        image:
-          type: object
-          description: Generated image reference
-          properties:
-            url:
-              type: string
-              description: Temporary signed URL to download the generated image
-              example: https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123
-        seed:
-          type: integer
-          description: Seed value used to produce this particular output
-          example: 42
-        contentClass:
+        input:
           type: string
-          description: Content class detected or applied during generation
+          description: Reference to the input file used to produce this output
+          example: example_value
+        status:
+          type: string
+          description: Status of this specific output
           enum:
-          - photo
-          - art
-          example: photo
+          - pending
+          - running
+          - succeeded
+          - failed
+          example: pending
+        details:
+          type: string
+          description: Additional detail message for this output
+          example: example_value
+        _links:
+          type: object
+          properties:
+            renditions:
+              type: array
+              items:
+                type: object
+                properties:
+                  href:
+                    type: string
+                    description: URL of the rendered output file
+                  storage:
+                    type: string
+                  type:
+                    type: string
+                  width:
+                    type: integer
+                  height:
+                    type: integer
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
       description: OAuth 2.0 access token obtained from Adobe IMS
+x-refined-from:
+- adobe-creative-suite-firefly-openapi.yml
+- adobe-creative-suite-photoshop-openapi.yml

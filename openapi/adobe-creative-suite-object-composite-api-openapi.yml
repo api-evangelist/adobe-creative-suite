@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Creative Suite Adobe Firefly Accessibility Object Composite API
+  title: Adobe Creative Suite Adobe Firefly Object Composite API
   description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
   version: 3.0.0
   termsOfService: https://www.adobe.com/legal/terms.html
@@ -56,35 +56,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AsyncJobSubmitted:
-      type: object
-      description: Response returned immediately after an async generation job is submitted
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the generation job
-          example: urn:firefly:jobs:abc123def456
-        statusUrl:
-          type: string
-          description: URL to poll for job status updates
-          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
-    InputImageReference:
-      type: object
-      description: Reference to an input image for generative operations
-      required:
-      - source
-      properties:
-        source:
-          type: object
-          description: Source of the input image
-          properties:
-            url:
-              type: string
-              description: Publicly accessible URL of the input image
-              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
-            uploadId:
-              type: string
-              description: Upload ID for a previously uploaded image via the Firefly upload API
     ObjectCompositeRequest:
       type: object
       description: Request body for generating an object composite in a scene
@@ -139,6 +110,35 @@ components:
           type: string
           description: Unique identifier for the failed request, for support purposes
           example: asset_abc123
+    AsyncJobSubmitted:
+      type: object
+      description: Response returned immediately after an async generation job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
+          type: string
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
+    InputImageReference:
+      type: object
+      description: Reference to an input image for generative operations
+      required:
+      - source
+      properties:
+        source:
+          type: object
+          description: Source of the input image
+          properties:
+            url:
+              type: string
+              description: Publicly accessible URL of the input image
+              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
+            uploadId:
+              type: string
+              description: Upload ID for a previously uploaded image via the Firefly upload API
   securitySchemes:
     bearerAuth:
       type: http

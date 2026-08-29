@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Creative Suite Adobe Firefly Accessibility Operations API
-  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
-  version: 3.0.0
+  title: Adobe Creative Suite Adobe PDF Services Operations API
+  description: The Adobe PDF Services API provides cloud-based tools for creating, converting, combining, compressing, and extracting content from PDF documents. Part of the Adobe Acrobat Services platform, it supports operations such as Office-to-PDF, HTML-to-PDF, PDF-to-Word, PDF-to-Excel, OCR, accessibility auto-tagging, document generation from templates, and PDF linearization. The API follows an asynchronous job model where operations are submitted and polled for completion.
+  version: 1.0.0
   termsOfService: https://www.adobe.com/legal/terms.html
   contact:
     name: Adobe Developer Support
@@ -11,8 +11,8 @@ info:
     name: Adobe Developer Terms
     url: https://www.adobe.com/legal/developer-terms.html
 servers:
-- url: https://firefly-api.adobe.io/v3
-  description: Adobe Firefly API v3 production server
+- url: https://pdf-services.adobe.io
+  description: Adobe PDF Services API production server
 security:
 - bearerAuth: []
 tags:
@@ -59,26 +59,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Asset:
-      type: object
-      description: Metadata and download reference for an uploaded asset
-      properties:
-        assetID:
-          type: string
-          description: Unique identifier for the asset
-          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
-        mediaType:
-          type: string
-          description: MIME type of the asset
-          example: application/pdf
-        downloadUri:
-          type: string
-          description: Temporary signed URL to download the asset
-          example: https://dcplatformstorageservice-us-east-1.s3-accelerate.amazonaws.com/...
-        size:
-          type: integer
-          description: File size in bytes
-          example: 204800
     ErrorResponse:
       type: object
       description: Standard error response
@@ -119,9 +99,29 @@ components:
                 type: string
               message:
                 type: string
+    Asset:
+      type: object
+      description: Metadata and download reference for an uploaded asset
+      properties:
+        assetID:
+          type: string
+          description: Unique identifier for the asset
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        mediaType:
+          type: string
+          description: MIME type of the asset
+          example: application/pdf
+        downloadUri:
+          type: string
+          description: Temporary signed URL to download the asset
+          example: https://dcplatformstorageservice-us-east-1.s3-accelerate.amazonaws.com/...
+        size:
+          type: integer
+          description: File size in bytes
+          example: 204800
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: OAuth 2.0 access token obtained from Adobe IMS
+      description: OAuth 2.0 access token from Adobe IMS

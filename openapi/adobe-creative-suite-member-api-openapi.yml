@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Creative Suite Adobe Firefly Accessibility Member API
-  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
-  version: 3.0.0
+  title: Adobe Creative Suite Adobe Stock Member API
+  description: The Adobe Stock API enables search, licensing, and retrieval of stock photos, illustrations, vectors, videos, and templates from the Adobe Stock marketplace. It supports both editorial and commercial licensing workflows and can be integrated into creative applications and digital asset management systems. The API uses a combination of OAuth 2.0 bearer tokens and API key authentication depending on the operation being performed.
+  version: 1.0.0
   termsOfService: https://www.adobe.com/legal/terms.html
   contact:
     name: Adobe Developer Support
@@ -11,10 +11,11 @@ info:
     name: Adobe Developer Terms
     url: https://www.adobe.com/legal/developer-terms.html
 servers:
-- url: https://firefly-api.adobe.io/v3
-  description: Adobe Firefly API v3 production server
+- url: https://stock.adobe.io/Rest
+  description: Adobe Stock API production server
 security:
 - bearerAuth: []
+- apiKeyAuth: []
 tags:
 - name: Member
   description: Member profile and licensing operations
@@ -99,4 +100,9 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: OAuth 2.0 access token obtained from Adobe IMS
+      description: OAuth 2.0 access token from Adobe IMS (required for licensing operations)
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe Stock API key (client ID) required for all operations

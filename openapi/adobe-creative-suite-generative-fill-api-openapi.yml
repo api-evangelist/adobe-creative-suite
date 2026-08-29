@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Creative Suite Adobe Firefly Accessibility Generative Fill API
+  title: Adobe Creative Suite Adobe Firefly Generative Fill API
   description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
   version: 3.0.0
   termsOfService: https://www.adobe.com/legal/terms.html
@@ -56,6 +56,39 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    InputImageReference:
+      type: object
+      description: Reference to an input image for generative operations
+      required:
+      - source
+      properties:
+        source:
+          type: object
+          description: Source of the input image
+          properties:
+            url:
+              type: string
+              description: Publicly accessible URL of the input image
+              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
+            uploadId:
+              type: string
+              description: Upload ID for a previously uploaded image via the Firefly upload API
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
     AsyncJobSubmitted:
       type: object
       description: Response returned immediately after an async generation job is submitted
@@ -99,39 +132,6 @@ components:
           type: array
           items:
             type: integer
-    InputImageReference:
-      type: object
-      description: Reference to an input image for generative operations
-      required:
-      - source
-      properties:
-        source:
-          type: object
-          description: Source of the input image
-          properties:
-            url:
-              type: string
-              description: Publicly accessible URL of the input image
-              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
-            uploadId:
-              type: string
-              description: Upload ID for a previously uploaded image via the Firefly upload API
-    ErrorResponse:
-      type: object
-      description: Standard error response body
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable description of the error
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request, for support purposes
-          example: asset_abc123
   securitySchemes:
     bearerAuth:
       type: http

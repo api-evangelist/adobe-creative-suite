@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Creative Suite Adobe Firefly Accessibility License API
-  description: The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and video from natural language prompts. Built on Adobe's Firefly family of creative generative models, which are trained on licensed and public domain content. Supports text-to-image generation, generative fill, generative expand, generating similar images, object compositing, and video generation. All generation operations are asynchronous.
-  version: 3.0.0
+  title: Adobe Creative Suite Adobe Stock License API
+  description: The Adobe Stock API enables search, licensing, and retrieval of stock photos, illustrations, vectors, videos, and templates from the Adobe Stock marketplace. It supports both editorial and commercial licensing workflows and can be integrated into creative applications and digital asset management systems. The API uses a combination of OAuth 2.0 bearer tokens and API key authentication depending on the operation being performed.
+  version: 1.0.0
   termsOfService: https://www.adobe.com/legal/terms.html
   contact:
     name: Adobe Developer Support
@@ -11,10 +11,11 @@ info:
     name: Adobe Developer Terms
     url: https://www.adobe.com/legal/developer-terms.html
 servers:
-- url: https://firefly-api.adobe.io/v3
-  description: Adobe Firefly API v3 production server
+- url: https://stock.adobe.io/Rest
+  description: Adobe Stock API production server
 security:
 - bearerAuth: []
+- apiKeyAuth: []
 tags:
 - name: License
   description: License stock assets for use in projects
@@ -262,52 +263,29 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LicenseHistoryResult:
+    LicenseStatsResponse:
       type: object
-      description: Paginated license history for the authenticated member
+      description: Licensing statistics summary for the authenticated member
       properties:
         nb_results:
           type: integer
-          description: Total number of licensing events in the history
-          example: 87
-        files:
-          type: array
-          description: List of previously licensed stock files
-          items:
-            $ref: '#/components/schemas/StockFile'
-    LicenseRequest:
-      type: object
-      description: Request body for licensing a stock asset
-      required:
-      - content_id
-      - license
-      properties:
-        content_id:
-          type: integer
-          description: Adobe Stock content ID of the asset to license
-          example: 123456789
-        license:
-          type: string
-          description: License type to apply
-          enum:
-          - Standard
-          - Extended
-          - Video_HD
-          - Video_4K
-          example: Standard
-        locale:
-          type: string
-          description: BCP 47 locale for localized response data
-          example: en_US
-        purchase_params:
+          description: Total number of licensing events in the requested period
+          example: 1920
+        stock_user:
           type: object
-          description: Optional purchase parameters and reference metadata
-          properties:
-            references:
-              type: array
-              description: List of reference key-value pairs for tracking the license
-              items:
-                $ref: '#/components/schemas/LicenseReference'
+          description: Aggregated licensing statistics by content type
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: integer
+          description: Numeric error code
+          example: 1920
+        message:
+          type: string
+          description: Human-readable error description
+          example: example_value
     StockFile:
       type: object
       description: Metadata for an Adobe Stock file
@@ -401,17 +379,68 @@ components:
           type: integer
           description: Total number of results matching the search query (on first item only)
           example: 4521
-    LicenseStatsResponse:
+    LicenseRequest:
       type: object
-      description: Licensing statistics summary for the authenticated member
+      description: Request body for licensing a stock asset
+      required:
+      - content_id
+      - license
       properties:
-        nb_results:
+        content_id:
           type: integer
-          description: Total number of licensing events in the requested period
-          example: 1920
-        stock_user:
+          description: Adobe Stock content ID of the asset to license
+          example: 123456789
+        license:
+          type: string
+          description: License type to apply
+          enum:
+          - Standard
+          - Extended
+          - Video_HD
+          - Video_4K
+          example: Standard
+        locale:
+          type: string
+          description: BCP 47 locale for localized response data
+          example: en_US
+        purchase_params:
           type: object
-          description: Aggregated licensing statistics by content type
+          description: Optional purchase parameters and reference metadata
+          properties:
+            references:
+              type: array
+              description: List of reference key-value pairs for tracking the license
+              items:
+                $ref: '#/components/schemas/LicenseReference'
+    LicenseResponse:
+      type: object
+      description: Response returned after successfully licensing a stock asset
+      properties:
+        content_id:
+          type: integer
+          description: Content ID of the licensed asset
+          example: 123456789
+        purchase_details:
+          type: object
+          description: Details of the license purchase transaction
+          properties:
+            state:
+              type: string
+              description: State of the license purchase
+              enum:
+              - just_purchased
+              - already_purchased
+              - overage
+            license:
+              type: string
+              description: License type applied
+            nb_downloads:
+              type: integer
+              description: Number of times this asset has been downloaded by the member
+        download_url:
+          type: string
+          description: URL to download the licensed full-resolution file
+          example: https://stock.adobe.com/Rest/Libraries/Download/123456789/1
     Category:
       type: object
       description: A stock content category
@@ -445,50 +474,27 @@ components:
           type: string
           description: Reference value such as a project name or purchase order number
           example: Project Alpha
-    ErrorResponse:
+    LicenseHistoryResult:
       type: object
-      description: Standard error response
+      description: Paginated license history for the authenticated member
       properties:
-        code:
+        nb_results:
           type: integer
-          description: Numeric error code
-          example: 1920
-        message:
-          type: string
-          description: Human-readable error description
-          example: example_value
-    LicenseResponse:
-      type: object
-      description: Response returned after successfully licensing a stock asset
-      properties:
-        content_id:
-          type: integer
-          description: Content ID of the licensed asset
-          example: 123456789
-        purchase_details:
-          type: object
-          description: Details of the license purchase transaction
-          properties:
-            state:
-              type: string
-              description: State of the license purchase
-              enum:
-              - just_purchased
-              - already_purchased
-              - overage
-            license:
-              type: string
-              description: License type applied
-            nb_downloads:
-              type: integer
-              description: Number of times this asset has been downloaded by the member
-        download_url:
-          type: string
-          description: URL to download the licensed full-resolution file
-          example: https://stock.adobe.com/Rest/Libraries/Download/123456789/1
+          description: Total number of licensing events in the history
+          example: 87
+        files:
+          type: array
+          description: List of previously licensed stock files
+          items:
+            $ref: '#/components/schemas/StockFile'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: OAuth 2.0 access token obtained from Adobe IMS
+      description: OAuth 2.0 access token from Adobe IMS (required for licensing operations)
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe Stock API key (client ID) required for all operations
