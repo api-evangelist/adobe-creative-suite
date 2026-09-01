@@ -989,7 +989,7 @@ apis:
   humanURL: https://developer.adobe.com/photoshop/
   baseURL: https://image.adobe.io
   tags:
-  - Mask
+  - MASK
   tags_raw:
   - Mask
   properties:
