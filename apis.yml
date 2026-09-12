@@ -1439,6 +1439,8 @@ apis:
   - type: Client Libraries
     url: https://developer.adobe.com/document-services/docs/overview/pdf-services-api/sdks/
 common:
+  - type: Website
+    url: https://www.adobe.com/
   - type: CapabilityMap
     url: capabilities/adobe-creative-suite-capability-edges.yml
     name: Adobe Creative Suite Business Capability Map
