@@ -230,6 +230,11 @@ apis:
   - Acrobat Sign
   - Agreements
   - Documents
+  - Electronic Signature
+  tags_raw:
+  - Acrobat Sign
+  - Agreements
+  - Documents
   - Electronic Signatures
   properties:
   - type: Documentation
@@ -619,6 +624,8 @@ apis:
   humanURL: https://developer.adobe.com/photoshop/
   baseURL: https://image.adobe.io
   tags:
+  - Documents
+  tags_raw:
   - Document
   properties:
   - type: OpenAPI
