@@ -132,40 +132,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ProductCropRequest:
-      type: object
-      description: Request to automatically crop an image to the primary product
-      required:
-      - input
-      - output
-      properties:
-        input:
-          $ref: '#/components/schemas/JobInput'
-        output:
-          $ref: '#/components/schemas/JobOutput'
-        options:
-          type: object
-          properties:
-            unit:
-              type: string
-              enum:
-              - pixel
-              - percent
-            padding:
-              type: number
-              description: Padding to add around the product crop
-    ErrorResponse:
-      type: object
-      description: Standard error response
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
     JobOutput:
       type: object
       description: Reference to an output file location in cloud storage
@@ -204,17 +170,6 @@ components:
           description: Whether to overwrite the output file if it already exists
           default: true
           example: true
-    CutoutRequest:
-      type: object
-      description: Request to remove the background from an image
-      required:
-      - input
-      - output
-      properties:
-        input:
-          $ref: '#/components/schemas/JobInput'
-        output:
-          $ref: '#/components/schemas/JobOutput'
     JobSubmitted:
       type: object
       description: Response returned immediately after a job is submitted
@@ -236,6 +191,28 @@ components:
                 href:
                   type: string
                   example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+    ProductCropRequest:
+      type: object
+      description: Request to automatically crop an image to the primary product
+      required:
+      - input
+      - output
+      properties:
+        input:
+          $ref: '#/components/schemas/JobInput'
+        output:
+          $ref: '#/components/schemas/JobOutput'
+        options:
+          type: object
+          properties:
+            unit:
+              type: string
+              enum:
+              - pixel
+              - percent
+            padding:
+              type: number
+              description: Padding to add around the product crop
     JobInput:
       type: object
       description: Reference to an input file stored in cloud storage
@@ -260,6 +237,29 @@ components:
           type: string
           description: MIME type of the input file
           example: image/vnd.adobe.photoshop
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+    CutoutRequest:
+      type: object
+      description: Request to remove the background from an image
+      required:
+      - input
+      - output
+      properties:
+        input:
+          $ref: '#/components/schemas/JobInput'
+        output:
+          $ref: '#/components/schemas/JobOutput'
     StraightenRequest:
       type: object
       description: Request to automatically straighten an image

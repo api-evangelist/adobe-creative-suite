@@ -56,18 +56,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
+    DocumentOperationsRequest:
       type: object
-      description: Standard error response
+      description: Request to apply document-level operations to a PSD
+      required:
+      - inputs
+      - outputs
       properties:
-        code:
-          type: string
-          description: Error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobOutput'
+        options:
+          $ref: '#/components/schemas/DocumentOperations'
     JobOutput:
       type: object
       description: Reference to an output file location in cloud storage
@@ -106,23 +111,6 @@ components:
           description: Whether to overwrite the output file if it already exists
           default: true
           example: true
-    DocumentOperationsRequest:
-      type: object
-      description: Request to apply document-level operations to a PSD
-      required:
-      - inputs
-      - outputs
-      properties:
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobInput'
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobOutput'
-        options:
-          $ref: '#/components/schemas/DocumentOperations'
     JobSubmitted:
       type: object
       description: Response returned immediately after a job is submitted
@@ -144,6 +132,18 @@ components:
                 href:
                   type: string
                   example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
     JobInput:
       type: object
       description: Reference to an input file stored in cloud storage

@@ -44,7 +44,8 @@
     "adobe-creative-suite-pdf-services-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "adobe-creative-suite-photoshop-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "adobe-creative-suite-stock-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Status' spans 2 source specs (adobe-creative-suite-firefly-openapi.yml, adobe-creative-suite-photoshop-openapi.yml): per-path servers applied"
+    "tag 'Status' spans 2 source specs (adobe-creative-suite-firefly-openapi.yml, adobe-creative-suite-photoshop-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "adobe-creative-suite-accessibility-api-openapi.yml: previously refined output, superseded by openapi/_original/",

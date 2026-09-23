@@ -56,46 +56,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Standard error response body
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable description of the error
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request, for support purposes
-          example: asset_abc123
-    ImageSize:
-      type: object
-      description: Dimensions for the output image
-      properties:
-        width:
-          type: integer
-          description: Output image width in pixels
-          example: 1024
-        height:
-          type: integer
-          description: Output image height in pixels
-          example: 1024
-    AsyncJobSubmitted:
-      type: object
-      description: Response returned immediately after an async generation job is submitted
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the generation job
-          example: urn:firefly:jobs:abc123def456
-        statusUrl:
-          type: string
-          description: URL to poll for job status updates
-          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
     InputImageReference:
       type: object
       description: Reference to an input image for generative operations
@@ -113,6 +73,46 @@ components:
             uploadId:
               type: string
               description: Upload ID for a previously uploaded image via the Firefly upload API
+    ImageSize:
+      type: object
+      description: Dimensions for the output image
+      properties:
+        width:
+          type: integer
+          description: Output image width in pixels
+          example: 1024
+        height:
+          type: integer
+          description: Output image height in pixels
+          example: 1024
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
+    AsyncJobSubmitted:
+      type: object
+      description: Response returned immediately after an async generation job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
+          type: string
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
     ImageExpandRequest:
       type: object
       description: Request body for generative image expansion

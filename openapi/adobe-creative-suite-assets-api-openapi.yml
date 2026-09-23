@@ -127,6 +127,28 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AssetUploadResponse:
+      type: object
+      description: Response containing the upload URI and asset ID
+      properties:
+        assetID:
+          type: string
+          description: Asset ID to reference in subsequent operations
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
+        uploadUri:
+          type: string
+          description: Pre-signed URI to PUT the file content to
+          example: https://dcplatformstorageservice-us-east-1.s3-accelerate.amazonaws.com/...
+    AssetUploadRequest:
+      type: object
+      description: Request to initiate an asset upload
+      required:
+      - mediaType
+      properties:
+        mediaType:
+          type: string
+          description: MIME type of the file to be uploaded
+          example: application/vnd.openxmlformats-officedocument.wordprocessingml.document
     ErrorResponse:
       type: object
       description: Standard error response
@@ -163,28 +185,6 @@ components:
           type: integer
           description: File size in bytes
           example: 204800
-    AssetUploadRequest:
-      type: object
-      description: Request to initiate an asset upload
-      required:
-      - mediaType
-      properties:
-        mediaType:
-          type: string
-          description: MIME type of the file to be uploaded
-          example: application/vnd.openxmlformats-officedocument.wordprocessingml.document
-    AssetUploadResponse:
-      type: object
-      description: Response containing the upload URI and asset ID
-      properties:
-        assetID:
-          type: string
-          description: Asset ID to reference in subsequent operations
-          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
-        uploadUri:
-          type: string
-          description: Pre-signed URI to PUT the file content to
-          example: https://dcplatformstorageservice-us-east-1.s3-accelerate.amazonaws.com/...
   securitySchemes:
     bearerAuth:
       type: http

@@ -56,41 +56,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LayerManageRequest:
-      type: object
-      description: Request to read or modify layers within a PSD document
-      required:
-      - inputs
-      - outputs
-      properties:
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobInput'
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobOutput'
-        options:
-          type: object
-          properties:
-            layers:
-              type: array
-              description: Layer operations to apply
-              items:
-                $ref: '#/components/schemas/Layer'
-    ErrorResponse:
-      type: object
-      description: Standard error response
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
     JobOutput:
       type: object
       description: Reference to an output file location in cloud storage
@@ -129,6 +94,27 @@ components:
           description: Whether to overwrite the output file if it already exists
           default: true
           example: true
+    JobSubmitted:
+      type: object
+      description: Response returned immediately after a job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the submitted job
+          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        statusUrl:
+          type: string
+          description: URL to poll for job status
+          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
     Layer:
       type: object
       description: Representation of a Photoshop document layer
@@ -192,27 +178,41 @@ components:
           description: Child layers for group layers
           items:
             $ref: '#/components/schemas/Layer'
-    JobSubmitted:
+    LayerManageRequest:
       type: object
-      description: Response returned immediately after a job is submitted
+      description: Request to read or modify layers within a PSD document
+      required:
+      - inputs
+      - outputs
       properties:
-        jobId:
-          type: string
-          description: Unique identifier for the submitted job
-          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        statusUrl:
-          type: string
-          description: URL to poll for job status
-          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        _links:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobOutput'
+        options:
           type: object
           properties:
-            self:
-              type: object
-              properties:
-                href:
-                  type: string
-                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+            layers:
+              type: array
+              description: Layer operations to apply
+              items:
+                $ref: '#/components/schemas/Layer'
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
     JobInput:
       type: object
       description: Reference to an input file stored in cloud storage

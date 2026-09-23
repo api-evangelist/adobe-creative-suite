@@ -274,18 +274,36 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
+    StockFileResponse:
       type: object
-      description: Standard error response
+      description: Response wrapper for a single stock file metadata request
       properties:
-        code:
+        files:
+          type: array
+          description: Array containing the requested file (always contains one item)
+          items:
+            $ref: '#/components/schemas/StockFile'
+    Category:
+      type: object
+      description: A stock content category
+      properties:
+        id:
           type: integer
-          description: Numeric error code
-          example: 1920
-        message:
+          description: Unique category identifier
+          example: 1043
+        name:
           type: string
-          description: Human-readable error description
+          description: Localized category name
+          example: Nature
+        link:
+          type: string
+          description: URL to browse this category on the Adobe Stock website
           example: example_value
+        children:
+          type: array
+          description: Child subcategories (present in category tree responses)
+          items:
+            $ref: '#/components/schemas/Category'
     StockFile:
       type: object
       description: Metadata for an Adobe Stock file
@@ -379,36 +397,6 @@ components:
           type: integer
           description: Total number of results matching the search query (on first item only)
           example: 4521
-    Category:
-      type: object
-      description: A stock content category
-      properties:
-        id:
-          type: integer
-          description: Unique category identifier
-          example: 1043
-        name:
-          type: string
-          description: Localized category name
-          example: Nature
-        link:
-          type: string
-          description: URL to browse this category on the Adobe Stock website
-          example: example_value
-        children:
-          type: array
-          description: Child subcategories (present in category tree responses)
-          items:
-            $ref: '#/components/schemas/Category'
-    StockFileResponse:
-      type: object
-      description: Response wrapper for a single stock file metadata request
-      properties:
-        files:
-          type: array
-          description: Array containing the requested file (always contains one item)
-          items:
-            $ref: '#/components/schemas/StockFile'
     SearchResult:
       type: object
       description: Paginated search results from the Adobe Stock library
@@ -422,6 +410,18 @@ components:
           description: List of matching stock files
           items:
             $ref: '#/components/schemas/StockFile'
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: integer
+          description: Numeric error code
+          example: 1920
+        message:
+          type: string
+          description: Human-readable error description
+          example: example_value
   securitySchemes:
     bearerAuth:
       type: http

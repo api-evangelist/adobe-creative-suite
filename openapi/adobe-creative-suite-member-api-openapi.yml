@@ -60,6 +60,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: integer
+          description: Numeric error code
+          example: 1920
+        message:
+          type: string
+          description: Human-readable error description
+          example: example_value
     MemberProfile:
       type: object
       description: Adobe Stock member profile and account details
@@ -83,18 +95,6 @@ components:
             purchase_options:
               type: object
               description: Available purchase and licensing options for the member
-    ErrorResponse:
-      type: object
-      description: Standard error response
-      properties:
-        code:
-          type: integer
-          description: Numeric error code
-          example: 1920
-        message:
-          type: string
-          description: Human-readable error description
-          example: example_value
   securitySchemes:
     bearerAuth:
       type: http

@@ -56,18 +56,40 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
+    ArtboardRequest:
       type: object
-      description: Standard error response
+      description: Request to create artboards within a PSD document
+      required:
+      - inputs
+      - outputs
+      - options
       properties:
-        code:
-          type: string
-          description: Error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobOutput'
+        options:
+          type: object
+          properties:
+            artboards:
+              type: array
+              description: List of artboards to create
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Artboard name
+                  width:
+                    type: integer
+                    description: Artboard width in pixels
+                  height:
+                    type: integer
+                    description: Artboard height in pixels
     JobOutput:
       type: object
       description: Reference to an output file location in cloud storage
@@ -127,6 +149,18 @@ components:
                 href:
                   type: string
                   example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
     JobInput:
       type: object
       description: Reference to an input file stored in cloud storage
@@ -151,40 +185,6 @@ components:
           type: string
           description: MIME type of the input file
           example: image/vnd.adobe.photoshop
-    ArtboardRequest:
-      type: object
-      description: Request to create artboards within a PSD document
-      required:
-      - inputs
-      - outputs
-      - options
-      properties:
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobInput'
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobOutput'
-        options:
-          type: object
-          properties:
-            artboards:
-              type: array
-              description: List of artboards to create
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    description: Artboard name
-                  width:
-                    type: integer
-                    description: Artboard width in pixels
-                  height:
-                    type: integer
-                    description: Artboard height in pixels
   securitySchemes:
     bearerAuth:
       type: http

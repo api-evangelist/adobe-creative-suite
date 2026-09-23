@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Adobe Creative Suite Adobe PDF Services Document Generation API
+  title: Adobe Creative Suite Adobe PDF Services Document Generation…
   description: The Adobe PDF Services API provides cloud-based tools for creating, converting, combining, compressing, and extracting content from PDF documents. Part of the Adobe Acrobat Services platform, it supports operations such as Office-to-PDF, HTML-to-PDF, PDF-to-Word, PDF-to-Excel, OCR, accessibility auto-tagging, document generation from templates, and PDF linearization. The API follows an asynchronous job model where operations are submitted and polled for completion.
   version: 1.0.0
   termsOfService: https://www.adobe.com/legal/terms.html
@@ -61,6 +61,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    OperationSubmitted:
+      type: object
+      description: Response returned when an operation has been accepted
+      properties:
+        jobID:
+          type: string
+          description: Unique identifier for the submitted operation job
+          example: urn:aaid:AS:UE1:operation:abc123
     ErrorResponse:
       type: object
       description: Standard error response
@@ -109,14 +117,6 @@ components:
           description: Whether to include non-tagged content as plain text additions
           default: false
           example: true
-    OperationSubmitted:
-      type: object
-      description: Response returned when an operation has been accepted
-      properties:
-        jobID:
-          type: string
-          description: Unique identifier for the submitted operation job
-          example: urn:aaid:AS:UE1:operation:abc123
   securitySchemes:
     bearerAuth:
       type: http

@@ -16,7 +16,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: Mask
+- name: MASK
   description: Alpha mask creation operations
 paths:
   /sensei/mask:
@@ -25,7 +25,7 @@ paths:
       summary: Adobe Creative Suite Create Alpha Mask
       description: Creates an alpha mask for an image using Adobe Sensei AI. The mask isolates the foreground subject from the background and is returned as a separate grayscale image that can be applied as a layer mask in compositing workflows.
       tags:
-      - Mask
+      - MASK
       requestBody:
         required: true
         content:
@@ -56,18 +56,26 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
+    MaskRequest:
       type: object
-      description: Standard error response
+      description: Request to create an alpha mask for an image
+      required:
+      - input
+      - output
       properties:
-        code:
-          type: string
-          description: Error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
+        input:
+          $ref: '#/components/schemas/JobInput'
+        output:
+          $ref: '#/components/schemas/JobOutput'
+        options:
+          type: object
+          properties:
+            optimize:
+              type: string
+              description: Optimization mode for mask generation
+              enum:
+              - performance
+              - batch
     JobOutput:
       type: object
       description: Reference to an output file location in cloud storage
@@ -127,6 +135,18 @@ components:
                 href:
                   type: string
                   example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
     JobInput:
       type: object
       description: Reference to an input file stored in cloud storage
@@ -151,26 +171,6 @@ components:
           type: string
           description: MIME type of the input file
           example: image/vnd.adobe.photoshop
-    MaskRequest:
-      type: object
-      description: Request to create an alpha mask for an image
-      required:
-      - input
-      - output
-      properties:
-        input:
-          $ref: '#/components/schemas/JobInput'
-        output:
-          $ref: '#/components/schemas/JobOutput'
-        options:
-          type: object
-          properties:
-            optimize:
-              type: string
-              description: Optimization mode for mask generation
-              enum:
-              - performance
-              - batch
   securitySchemes:
     bearerAuth:
       type: http

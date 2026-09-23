@@ -104,6 +104,29 @@ paths:
       description: Adobe Photoshop API production server
 components:
   schemas:
+    OutputImage:
+      type: object
+      description: A single generated image output from a Firefly generation job
+      properties:
+        image:
+          type: object
+          description: Generated image reference
+          properties:
+            url:
+              type: string
+              description: Temporary signed URL to download the generated image
+              example: https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123
+        seed:
+          type: integer
+          description: Seed value used to produce this particular output
+          example: 42
+        contentClass:
+          type: string
+          description: Content class detected or applied during generation
+          enum:
+          - photo
+          - art
+          example: photo
     ErrorResponse:
       type: object
       description: Standard error response body
@@ -162,29 +185,46 @@ components:
                 type: string
               message:
                 type: string
-    OutputImage:
+    RenderOutput:
       type: object
-      description: A single generated image output from a Firefly generation job
+      description: Details of a rendered output file
       properties:
-        image:
-          type: object
-          description: Generated image reference
-          properties:
-            url:
-              type: string
-              description: Temporary signed URL to download the generated image
-              example: https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123
-        seed:
-          type: integer
-          description: Seed value used to produce this particular output
-          example: 42
-        contentClass:
+        input:
           type: string
-          description: Content class detected or applied during generation
+          description: Reference to the input file used to produce this output
+          example: example_value
+        status:
+          type: string
+          description: Status of this specific output
           enum:
-          - photo
-          - art
-          example: photo
+          - pending
+          - running
+          - succeeded
+          - failed
+          example: pending
+        details:
+          type: string
+          description: Additional detail message for this output
+          example: example_value
+        _links:
+          type: object
+          properties:
+            renditions:
+              type: array
+              items:
+                type: object
+                properties:
+                  href:
+                    type: string
+                    description: URL of the rendered output file
+                  storage:
+                    type: string
+                  type:
+                    type: string
+                  width:
+                    type: integer
+                  height:
+                    type: integer
     JobStatus:
       type: object
       description: Current status and result of an asynchronous job
@@ -250,46 +290,6 @@ components:
           type: string
           description: Human-readable error message
           example: example_value
-    RenderOutput:
-      type: object
-      description: Details of a rendered output file
-      properties:
-        input:
-          type: string
-          description: Reference to the input file used to produce this output
-          example: example_value
-        status:
-          type: string
-          description: Status of this specific output
-          enum:
-          - pending
-          - running
-          - succeeded
-          - failed
-          example: pending
-        details:
-          type: string
-          description: Additional detail message for this output
-          example: example_value
-        _links:
-          type: object
-          properties:
-            renditions:
-              type: array
-              items:
-                type: object
-                properties:
-                  href:
-                    type: string
-                    description: URL of the rendered output file
-                  storage:
-                    type: string
-                  type:
-                    type: string
-                  width:
-                    type: integer
-                  height:
-                    type: integer
   securitySchemes:
     bearerAuth:
       type: http

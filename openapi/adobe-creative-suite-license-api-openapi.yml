@@ -263,29 +263,102 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LicenseStatsResponse:
+    LicenseHistoryResult:
       type: object
-      description: Licensing statistics summary for the authenticated member
+      description: Paginated license history for the authenticated member
       properties:
         nb_results:
           type: integer
-          description: Total number of licensing events in the requested period
-          example: 1920
-        stock_user:
-          type: object
-          description: Aggregated licensing statistics by content type
-    ErrorResponse:
+          description: Total number of licensing events in the history
+          example: 87
+        files:
+          type: array
+          description: List of previously licensed stock files
+          items:
+            $ref: '#/components/schemas/StockFile'
+    LicenseResponse:
       type: object
-      description: Standard error response
+      description: Response returned after successfully licensing a stock asset
       properties:
-        code:
+        content_id:
           type: integer
-          description: Numeric error code
-          example: 1920
-        message:
+          description: Content ID of the licensed asset
+          example: 123456789
+        purchase_details:
+          type: object
+          description: Details of the license purchase transaction
+          properties:
+            state:
+              type: string
+              description: State of the license purchase
+              enum:
+              - just_purchased
+              - already_purchased
+              - overage
+            license:
+              type: string
+              description: License type applied
+            nb_downloads:
+              type: integer
+              description: Number of times this asset has been downloaded by the member
+        download_url:
           type: string
-          description: Human-readable error description
+          description: URL to download the licensed full-resolution file
+          example: https://stock.adobe.com/Rest/Libraries/Download/123456789/1
+    Category:
+      type: object
+      description: A stock content category
+      properties:
+        id:
+          type: integer
+          description: Unique category identifier
+          example: 1043
+        name:
+          type: string
+          description: Localized category name
+          example: Nature
+        link:
+          type: string
+          description: URL to browse this category on the Adobe Stock website
           example: example_value
+        children:
+          type: array
+          description: Child subcategories (present in category tree responses)
+          items:
+            $ref: '#/components/schemas/Category'
+    LicenseRequest:
+      type: object
+      description: Request body for licensing a stock asset
+      required:
+      - content_id
+      - license
+      properties:
+        content_id:
+          type: integer
+          description: Adobe Stock content ID of the asset to license
+          example: 123456789
+        license:
+          type: string
+          description: License type to apply
+          enum:
+          - Standard
+          - Extended
+          - Video_HD
+          - Video_4K
+          example: Standard
+        locale:
+          type: string
+          description: BCP 47 locale for localized response data
+          example: en_US
+        purchase_params:
+          type: object
+          description: Optional purchase parameters and reference metadata
+          properties:
+            references:
+              type: array
+              description: List of reference key-value pairs for tracking the license
+              items:
+                $ref: '#/components/schemas/LicenseReference'
     StockFile:
       type: object
       description: Metadata for an Adobe Stock file
@@ -379,89 +452,18 @@ components:
           type: integer
           description: Total number of results matching the search query (on first item only)
           example: 4521
-    LicenseRequest:
+    ErrorResponse:
       type: object
-      description: Request body for licensing a stock asset
-      required:
-      - content_id
-      - license
+      description: Standard error response
       properties:
-        content_id:
+        code:
           type: integer
-          description: Adobe Stock content ID of the asset to license
-          example: 123456789
-        license:
+          description: Numeric error code
+          example: 1920
+        message:
           type: string
-          description: License type to apply
-          enum:
-          - Standard
-          - Extended
-          - Video_HD
-          - Video_4K
-          example: Standard
-        locale:
-          type: string
-          description: BCP 47 locale for localized response data
-          example: en_US
-        purchase_params:
-          type: object
-          description: Optional purchase parameters and reference metadata
-          properties:
-            references:
-              type: array
-              description: List of reference key-value pairs for tracking the license
-              items:
-                $ref: '#/components/schemas/LicenseReference'
-    LicenseResponse:
-      type: object
-      description: Response returned after successfully licensing a stock asset
-      properties:
-        content_id:
-          type: integer
-          description: Content ID of the licensed asset
-          example: 123456789
-        purchase_details:
-          type: object
-          description: Details of the license purchase transaction
-          properties:
-            state:
-              type: string
-              description: State of the license purchase
-              enum:
-              - just_purchased
-              - already_purchased
-              - overage
-            license:
-              type: string
-              description: License type applied
-            nb_downloads:
-              type: integer
-              description: Number of times this asset has been downloaded by the member
-        download_url:
-          type: string
-          description: URL to download the licensed full-resolution file
-          example: https://stock.adobe.com/Rest/Libraries/Download/123456789/1
-    Category:
-      type: object
-      description: A stock content category
-      properties:
-        id:
-          type: integer
-          description: Unique category identifier
-          example: 1043
-        name:
-          type: string
-          description: Localized category name
-          example: Nature
-        link:
-          type: string
-          description: URL to browse this category on the Adobe Stock website
+          description: Human-readable error description
           example: example_value
-        children:
-          type: array
-          description: Child subcategories (present in category tree responses)
-          items:
-            $ref: '#/components/schemas/Category'
     LicenseReference:
       type: object
       description: Optional purchase reference metadata for a license transaction
@@ -474,19 +476,17 @@ components:
           type: string
           description: Reference value such as a project name or purchase order number
           example: Project Alpha
-    LicenseHistoryResult:
+    LicenseStatsResponse:
       type: object
-      description: Paginated license history for the authenticated member
+      description: Licensing statistics summary for the authenticated member
       properties:
         nb_results:
           type: integer
-          description: Total number of licensing events in the history
-          example: 87
-        files:
-          type: array
-          description: List of previously licensed stock files
-          items:
-            $ref: '#/components/schemas/StockFile'
+          description: Total number of licensing events in the requested period
+          example: 1920
+        stock_user:
+          type: object
+          description: Aggregated licensing statistics by content type
   securitySchemes:
     bearerAuth:
       type: http

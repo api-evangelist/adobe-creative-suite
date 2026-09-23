@@ -56,6 +56,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AsyncJobSubmitted:
+      type: object
+      description: Response returned immediately after an async generation job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
+          type: string
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
     InputImageReference:
       type: object
       description: Reference to an input image for generative operations
@@ -73,34 +85,6 @@ components:
             uploadId:
               type: string
               description: Upload ID for a previously uploaded image via the Firefly upload API
-    ErrorResponse:
-      type: object
-      description: Standard error response body
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable description of the error
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request, for support purposes
-          example: asset_abc123
-    AsyncJobSubmitted:
-      type: object
-      description: Response returned immediately after an async generation job is submitted
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the generation job
-          example: urn:firefly:jobs:abc123def456
-        statusUrl:
-          type: string
-          description: URL to poll for job status updates
-          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
     ImageFillRequest:
       type: object
       description: Request body for generative fill operation
@@ -132,6 +116,22 @@ components:
           type: array
           items:
             type: integer
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
   securitySchemes:
     bearerAuth:
       type: http

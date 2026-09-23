@@ -61,22 +61,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Standard error response
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request
-          example: asset_abc123
     OperationSubmitted:
       type: object
       description: Response returned when an operation has been accepted
@@ -99,6 +83,22 @@ components:
           type: string
           description: BCP 47 language code of the source document for better conversion
           example: en-US
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request
+          example: asset_abc123
   securitySchemes:
     bearerAuth:
       type: http

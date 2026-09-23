@@ -61,6 +61,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    OperationSubmitted:
+      type: object
+      description: Response returned when an operation has been accepted
+      properties:
+        jobID:
+          type: string
+          description: Unique identifier for the submitted operation job
+          example: urn:aaid:AS:UE1:operation:abc123
     ErrorResponse:
       type: object
       description: Standard error response
@@ -91,14 +99,6 @@ components:
           type: string
           description: BCP 47 locale for OCR language model selection
           example: en-US
-    OperationSubmitted:
-      type: object
-      description: Response returned when an operation has been accepted
-      properties:
-        jobID:
-          type: string
-          description: Unique identifier for the submitted operation job
-          example: urn:aaid:AS:UE1:operation:abc123
   securitySchemes:
     bearerAuth:
       type: http

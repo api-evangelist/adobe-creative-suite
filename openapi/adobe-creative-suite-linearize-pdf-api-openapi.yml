@@ -61,6 +61,24 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    OperationSubmitted:
+      type: object
+      description: Response returned when an operation has been accepted
+      properties:
+        jobID:
+          type: string
+          description: Unique identifier for the submitted operation job
+          example: urn:aaid:AS:UE1:operation:abc123
+    LinearizePDFRequest:
+      type: object
+      description: Request body for linearizing a PDF for fast web view
+      required:
+      - assetID
+      properties:
+        assetID:
+          type: string
+          description: Asset ID of the PDF to linearize
+          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
     ErrorResponse:
       type: object
       description: Standard error response
@@ -77,24 +95,6 @@ components:
           type: string
           description: Unique identifier for the failed request
           example: asset_abc123
-    LinearizePDFRequest:
-      type: object
-      description: Request body for linearizing a PDF for fast web view
-      required:
-      - assetID
-      properties:
-        assetID:
-          type: string
-          description: Asset ID of the PDF to linearize
-          example: urn:aaid:AS:UE1:23c30ee0-2e4d-46d6-87f2-087832fca718
-    OperationSubmitted:
-      type: object
-      description: Response returned when an operation has been accepted
-      properties:
-        jobID:
-          type: string
-          description: Unique identifier for the submitted operation job
-          example: urn:aaid:AS:UE1:operation:abc123
   securitySchemes:
     bearerAuth:
       type: http
