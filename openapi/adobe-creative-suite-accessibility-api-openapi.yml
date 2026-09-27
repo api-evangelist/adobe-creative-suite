@@ -61,6 +61,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    OperationSubmitted:
+      type: object
+      description: Response returned when an operation has been accepted
+      properties:
+        jobID:
+          type: string
+          description: Unique identifier for the submitted operation job
+          example: urn:aaid:AS:UE1:operation:abc123
     AutoTagRequest:
       type: object
       description: Request body for auto-tagging a PDF for accessibility
@@ -81,14 +89,6 @@ components:
           description: Whether to shift heading levels in the output for better document structure
           default: false
           example: true
-    OperationSubmitted:
-      type: object
-      description: Response returned when an operation has been accepted
-      properties:
-        jobID:
-          type: string
-          description: Unique identifier for the submitted operation job
-          example: urn:aaid:AS:UE1:operation:abc123
     ErrorResponse:
       type: object
       description: Standard error response

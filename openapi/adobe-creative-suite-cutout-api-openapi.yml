@@ -132,65 +132,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    JobOutput:
-      type: object
-      description: Reference to an output file location in cloud storage
-      required:
-      - href
-      - storage
-      - type
-      properties:
-        href:
-          type: string
-          description: URL or path where the output file will be stored
-          example: https://my-storage.blob.core.windows.net/images/output.png
-        storage:
-          type: string
-          description: Cloud storage provider type
-          enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
-          example: external
-        type:
-          type: string
-          description: MIME type of the output file
-          example: image/png
-        width:
-          type: integer
-          description: Output width in pixels
-          example: 1920
-        height:
-          type: integer
-          description: Output height in pixels
-          example: 1080
-        overwrite:
-          type: boolean
-          description: Whether to overwrite the output file if it already exists
-          default: true
-          example: true
-    JobSubmitted:
-      type: object
-      description: Response returned immediately after a job is submitted
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the submitted job
-          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        statusUrl:
-          type: string
-          description: URL to poll for job status
-          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        _links:
-          type: object
-          properties:
-            self:
-              type: object
-              properties:
-                href:
-                  type: string
-                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
     ProductCropRequest:
       type: object
       description: Request to automatically crop an image to the primary product
@@ -237,6 +178,76 @@ components:
           type: string
           description: MIME type of the input file
           example: image/vnd.adobe.photoshop
+    JobSubmitted:
+      type: object
+      description: Response returned immediately after a job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the submitted job
+          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        statusUrl:
+          type: string
+          description: URL to poll for job status
+          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+    CutoutRequest:
+      type: object
+      description: Request to remove the background from an image
+      required:
+      - input
+      - output
+      properties:
+        input:
+          $ref: '#/components/schemas/JobInput'
+        output:
+          $ref: '#/components/schemas/JobOutput'
+    JobOutput:
+      type: object
+      description: Reference to an output file location in cloud storage
+      required:
+      - href
+      - storage
+      - type
+      properties:
+        href:
+          type: string
+          description: URL or path where the output file will be stored
+          example: https://my-storage.blob.core.windows.net/images/output.png
+        storage:
+          type: string
+          description: Cloud storage provider type
+          enum:
+          - adobe
+          - external
+          - azure
+          - dropbox
+          example: external
+        type:
+          type: string
+          description: MIME type of the output file
+          example: image/png
+        width:
+          type: integer
+          description: Output width in pixels
+          example: 1920
+        height:
+          type: integer
+          description: Output height in pixels
+          example: 1080
+        overwrite:
+          type: boolean
+          description: Whether to overwrite the output file if it already exists
+          default: true
+          example: true
     ErrorResponse:
       type: object
       description: Standard error response
@@ -249,17 +260,6 @@ components:
           type: string
           description: Human-readable error message
           example: example_value
-    CutoutRequest:
-      type: object
-      description: Request to remove the background from an image
-      required:
-      - input
-      - output
-      properties:
-        input:
-          $ref: '#/components/schemas/JobInput'
-        output:
-          $ref: '#/components/schemas/JobOutput'
     StraightenRequest:
       type: object
       description: Request to automatically straighten an image

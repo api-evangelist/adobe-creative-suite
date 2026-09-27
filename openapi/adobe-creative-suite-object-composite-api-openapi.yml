@@ -56,18 +56,39 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AsyncJobSubmitted:
+    ErrorResponse:
       type: object
-      description: Response returned immediately after an async generation job is submitted
+      description: Standard error response body
       properties:
-        jobId:
+        code:
           type: string
-          description: Unique identifier for the generation job
-          example: urn:firefly:jobs:abc123def456
-        statusUrl:
+          description: Machine-readable error code
+          example: example_value
+        message:
           type: string
-          description: URL to poll for job status updates
-          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
+    InputImageReference:
+      type: object
+      description: Reference to an input image for generative operations
+      required:
+      - source
+      properties:
+        source:
+          type: object
+          description: Source of the input image
+          properties:
+            url:
+              type: string
+              description: Publicly accessible URL of the input image
+              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
+            uploadId:
+              type: string
+              description: Upload ID for a previously uploaded image via the Firefly upload API
     ObjectCompositeRequest:
       type: object
       description: Request body for generating an object composite in a scene
@@ -106,39 +127,18 @@ components:
           type: array
           items:
             type: integer
-    InputImageReference:
+    AsyncJobSubmitted:
       type: object
-      description: Reference to an input image for generative operations
-      required:
-      - source
+      description: Response returned immediately after an async generation job is submitted
       properties:
-        source:
-          type: object
-          description: Source of the input image
-          properties:
-            url:
-              type: string
-              description: Publicly accessible URL of the input image
-              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
-            uploadId:
-              type: string
-              description: Upload ID for a previously uploaded image via the Firefly upload API
-    ErrorResponse:
-      type: object
-      description: Standard error response body
-      properties:
-        code:
+        jobId:
           type: string
-          description: Machine-readable error code
-          example: example_value
-        message:
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
           type: string
-          description: Human-readable description of the error
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request, for support purposes
-          example: asset_abc123
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
   securitySchemes:
     bearerAuth:
       type: http

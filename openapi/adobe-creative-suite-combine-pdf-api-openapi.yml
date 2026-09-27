@@ -61,6 +61,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request
+          example: asset_abc123
     OperationSubmitted:
       type: object
       description: Response returned when an operation has been accepted
@@ -69,18 +85,6 @@ components:
           type: string
           description: Unique identifier for the submitted operation job
           example: urn:aaid:AS:UE1:operation:abc123
-    PageRange:
-      type: object
-      description: Specifies a range of pages from a PDF document
-      properties:
-        start:
-          type: integer
-          description: Starting page number (1-indexed)
-          example: 1
-        end:
-          type: integer
-          description: Ending page number (1-indexed, inclusive)
-          example: 5
     CombinePDFRequest:
       type: object
       description: Request body for combining multiple PDFs
@@ -104,22 +108,18 @@ components:
                 description: Optional page ranges to extract from this PDF
                 items:
                   $ref: '#/components/schemas/PageRange'
-    ErrorResponse:
+    PageRange:
       type: object
-      description: Standard error response
+      description: Specifies a range of pages from a PDF document
       properties:
-        code:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request
-          example: asset_abc123
+        start:
+          type: integer
+          description: Starting page number (1-indexed)
+          example: 1
+        end:
+          type: integer
+          description: Ending page number (1-indexed, inclusive)
+          example: 5
   securitySchemes:
     bearerAuth:
       type: http

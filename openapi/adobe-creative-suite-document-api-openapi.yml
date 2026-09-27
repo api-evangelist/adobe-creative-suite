@@ -56,6 +56,89 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    JobInput:
+      type: object
+      description: Reference to an input file stored in cloud storage
+      required:
+      - href
+      - storage
+      properties:
+        href:
+          type: string
+          description: URL or path to the input file in cloud storage
+          example: https://my-storage.blob.core.windows.net/images/input.psd
+        storage:
+          type: string
+          description: Cloud storage provider type
+          enum:
+          - adobe
+          - external
+          - azure
+          - dropbox
+          example: external
+        type:
+          type: string
+          description: MIME type of the input file
+          example: image/vnd.adobe.photoshop
+    JobSubmitted:
+      type: object
+      description: Response returned immediately after a job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the submitted job
+          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        statusUrl:
+          type: string
+          description: URL to poll for job status
+          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+    DocumentOperations:
+      type: object
+      description: Operations to apply to a PSD document
+      properties:
+        resize:
+          type: object
+          description: Resize the document canvas or image
+          properties:
+            width:
+              type: integer
+            height:
+              type: integer
+            unit:
+              type: string
+              enum:
+              - pixel
+              - percent
+            resampleMethod:
+              type: string
+              enum:
+              - bicubic
+              - bilinear
+              - nearestNeighbor
+              - preserve
+        flatten:
+          type: boolean
+          description: Whether to flatten all layers into a single layer
+          example: true
+        trim:
+          type: object
+          description: Trim transparent borders from the image
+          properties:
+            basedOn:
+              type: string
+              enum:
+              - transparentPixels
+              - topLeftPixelColor
+              - bottomRightPixelColor
     DocumentOperationsRequest:
       type: object
       description: Request to apply document-level operations to a PSD
@@ -111,27 +194,6 @@ components:
           description: Whether to overwrite the output file if it already exists
           default: true
           example: true
-    JobSubmitted:
-      type: object
-      description: Response returned immediately after a job is submitted
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the submitted job
-          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        statusUrl:
-          type: string
-          description: URL to poll for job status
-          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        _links:
-          type: object
-          properties:
-            self:
-              type: object
-              properties:
-                href:
-                  type: string
-                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
     ErrorResponse:
       type: object
       description: Standard error response
@@ -144,68 +206,6 @@ components:
           type: string
           description: Human-readable error message
           example: example_value
-    JobInput:
-      type: object
-      description: Reference to an input file stored in cloud storage
-      required:
-      - href
-      - storage
-      properties:
-        href:
-          type: string
-          description: URL or path to the input file in cloud storage
-          example: https://my-storage.blob.core.windows.net/images/input.psd
-        storage:
-          type: string
-          description: Cloud storage provider type
-          enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
-          example: external
-        type:
-          type: string
-          description: MIME type of the input file
-          example: image/vnd.adobe.photoshop
-    DocumentOperations:
-      type: object
-      description: Operations to apply to a PSD document
-      properties:
-        resize:
-          type: object
-          description: Resize the document canvas or image
-          properties:
-            width:
-              type: integer
-            height:
-              type: integer
-            unit:
-              type: string
-              enum:
-              - pixel
-              - percent
-            resampleMethod:
-              type: string
-              enum:
-              - bicubic
-              - bilinear
-              - nearestNeighbor
-              - preserve
-        flatten:
-          type: boolean
-          description: Whether to flatten all layers into a single layer
-          example: true
-        trim:
-          type: object
-          description: Trim transparent borders from the image
-          properties:
-            basedOn:
-              type: string
-              enum:
-              - transparentPixels
-              - topLeftPixelColor
-              - bottomRightPixelColor
   securitySchemes:
     bearerAuth:
       type: http

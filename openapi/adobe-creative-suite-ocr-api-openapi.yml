@@ -61,14 +61,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    OperationSubmitted:
-      type: object
-      description: Response returned when an operation has been accepted
-      properties:
-        jobID:
-          type: string
-          description: Unique identifier for the submitted operation job
-          example: urn:aaid:AS:UE1:operation:abc123
     ErrorResponse:
       type: object
       description: Standard error response
@@ -85,6 +77,14 @@ components:
           type: string
           description: Unique identifier for the failed request
           example: asset_abc123
+    OperationSubmitted:
+      type: object
+      description: Response returned when an operation has been accepted
+      properties:
+        jobID:
+          type: string
+          description: Unique identifier for the submitted operation job
+          example: urn:aaid:AS:UE1:operation:abc123
     OCRRequest:
       type: object
       description: Request body for applying OCR to a PDF

@@ -263,19 +263,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LicenseHistoryResult:
+    LicenseReference:
       type: object
-      description: Paginated license history for the authenticated member
+      description: Optional purchase reference metadata for a license transaction
       properties:
-        nb_results:
+        id:
           type: integer
-          description: Total number of licensing events in the history
-          example: 87
-        files:
-          type: array
-          description: List of previously licensed stock files
-          items:
-            $ref: '#/components/schemas/StockFile'
+          description: Reference ID provided by the API caller for tracking
+          example: 1001
+        value:
+          type: string
+          description: Reference value such as a project name or purchase order number
+          example: Project Alpha
     LicenseResponse:
       type: object
       description: Response returned after successfully licensing a stock asset
@@ -305,27 +304,17 @@ components:
           type: string
           description: URL to download the licensed full-resolution file
           example: https://stock.adobe.com/Rest/Libraries/Download/123456789/1
-    Category:
+    LicenseStatsResponse:
       type: object
-      description: A stock content category
+      description: Licensing statistics summary for the authenticated member
       properties:
-        id:
+        nb_results:
           type: integer
-          description: Unique category identifier
-          example: 1043
-        name:
-          type: string
-          description: Localized category name
-          example: Nature
-        link:
-          type: string
-          description: URL to browse this category on the Adobe Stock website
-          example: example_value
-        children:
-          type: array
-          description: Child subcategories (present in category tree responses)
-          items:
-            $ref: '#/components/schemas/Category'
+          description: Total number of licensing events in the requested period
+          example: 1920
+        stock_user:
+          type: object
+          description: Aggregated licensing statistics by content type
     LicenseRequest:
       type: object
       description: Request body for licensing a stock asset
@@ -359,6 +348,27 @@ components:
               description: List of reference key-value pairs for tracking the license
               items:
                 $ref: '#/components/schemas/LicenseReference'
+    Category:
+      type: object
+      description: A stock content category
+      properties:
+        id:
+          type: integer
+          description: Unique category identifier
+          example: 1043
+        name:
+          type: string
+          description: Localized category name
+          example: Nature
+        link:
+          type: string
+          description: URL to browse this category on the Adobe Stock website
+          example: example_value
+        children:
+          type: array
+          description: Child subcategories (present in category tree responses)
+          items:
+            $ref: '#/components/schemas/Category'
     StockFile:
       type: object
       description: Metadata for an Adobe Stock file
@@ -464,29 +474,19 @@ components:
           type: string
           description: Human-readable error description
           example: example_value
-    LicenseReference:
+    LicenseHistoryResult:
       type: object
-      description: Optional purchase reference metadata for a license transaction
-      properties:
-        id:
-          type: integer
-          description: Reference ID provided by the API caller for tracking
-          example: 1001
-        value:
-          type: string
-          description: Reference value such as a project name or purchase order number
-          example: Project Alpha
-    LicenseStatsResponse:
-      type: object
-      description: Licensing statistics summary for the authenticated member
+      description: Paginated license history for the authenticated member
       properties:
         nb_results:
           type: integer
-          description: Total number of licensing events in the requested period
-          example: 1920
-        stock_user:
-          type: object
-          description: Aggregated licensing statistics by content type
+          description: Total number of licensing events in the history
+          example: 87
+        files:
+          type: array
+          description: List of previously licensed stock files
+          items:
+            $ref: '#/components/schemas/StockFile'
   securitySchemes:
     bearerAuth:
       type: http

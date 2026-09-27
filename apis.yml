@@ -5,17 +5,20 @@ description: >-
   Adobe Creative Suite is a collection of professional software applications for graphic design, video editing, web
   development, and photography.
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - adobe/uxp-photoshop
   open_source: unknown
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: unknown
@@ -147,6 +150,11 @@ apis:
   humanURL: https://developer.adobe.com/creative-cloud-libraries/
   baseURL: https://cc-libraries.adobe.io
   tags:
+  - Assets
+  - Collaboration
+  - Creative Cloud
+  - Library
+  tags_raw:
   - Assets
   - Collaboration
   - Creative Cloud
@@ -831,9 +839,10 @@ apis:
   humanURL: https://developer.adobe.com/photoshop/
   baseURL: https://image.adobe.io
   tags:
-  - Image-Generation
+  - Image Generation
   tags_raw:
   - Image Generation
+  - Image-Generation
   properties:
   - type: OpenAPI
     url: openapi/adobe-creative-suite-image-generation-api-openapi.yml
