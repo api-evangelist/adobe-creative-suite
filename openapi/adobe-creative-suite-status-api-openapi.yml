@@ -185,6 +185,59 @@ components:
           type: string
           description: Unique identifier for the failed request, for support purposes
           example: asset_abc123
+    JobError:
+      type: object
+      description: Error detail from a failed job or output
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        title:
+          type: string
+          description: Short error title
+          example: example_value
+        description:
+          type: string
+          description: Detailed error description
+          example: example_value
+    JobStatus:
+      type: object
+      description: Current status and result of an asynchronous job
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier of the job
+          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        status:
+          type: string
+          description: Current job status
+          enum:
+          - pending
+          - running
+          - succeeded
+          - failed
+          example: succeeded
+        created:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the job was created
+          example: example_value
+        modified:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the job was last modified
+          example: example_value
+        outputs:
+          type: array
+          description: List of output files produced by a successful job
+          items:
+            $ref: '#/components/schemas/RenderOutput'
+        errors:
+          type: array
+          description: List of errors if the job failed
+          items:
+            $ref: '#/components/schemas/JobError'
     RenderOutput:
       type: object
       description: Details of a rendered output file
@@ -225,22 +278,6 @@ components:
                     type: integer
                   height:
                     type: integer
-    JobError:
-      type: object
-      description: Error detail from a failed job or output
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: example_value
-        title:
-          type: string
-          description: Short error title
-          example: example_value
-        description:
-          type: string
-          description: Detailed error description
-          example: example_value
     ErrorResponse_2:
       type: object
       description: Standard error response
@@ -253,43 +290,6 @@ components:
           type: string
           description: Human-readable error message
           example: example_value
-    JobStatus:
-      type: object
-      description: Current status and result of an asynchronous job
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier of the job
-          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        status:
-          type: string
-          description: Current job status
-          enum:
-          - pending
-          - running
-          - succeeded
-          - failed
-          example: succeeded
-        created:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp when the job was created
-          example: example_value
-        modified:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp when the job was last modified
-          example: example_value
-        outputs:
-          type: array
-          description: List of output files produced by a successful job
-          items:
-            $ref: '#/components/schemas/RenderOutput'
-        errors:
-          type: array
-          description: List of errors if the job failed
-          items:
-            $ref: '#/components/schemas/JobError'
   securitySchemes:
     bearerAuth:
       type: http

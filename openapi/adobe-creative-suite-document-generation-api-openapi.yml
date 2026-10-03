@@ -61,6 +61,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request
+          example: asset_abc123
     OperationSubmitted:
       type: object
       description: Response returned when an operation has been accepted
@@ -101,22 +117,6 @@ components:
           description: Whether to include non-tagged content as plain text additions
           default: false
           example: true
-    ErrorResponse:
-      type: object
-      description: Standard error response
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request
-          example: asset_abc123
   securitySchemes:
     bearerAuth:
       type: http

@@ -97,31 +97,70 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GenerateSimilarRequest:
+    InputImageReference:
       type: object
-      description: Request body for generating images similar to a reference image
+      description: Reference to an input image for generative operations
       required:
-      - image
+      - source
       properties:
-        prompt:
-          type: string
-          description: Optional text prompt to further guide the style or content
-          maxLength: 1024
-          example: example_value
-        image:
-          $ref: '#/components/schemas/InputImageReference'
-        numVariations:
-          type: integer
-          minimum: 1
-          maximum: 4
-          default: 1
-          example: 1920
-        size:
-          $ref: '#/components/schemas/ImageSize'
-        seeds:
+        source:
+          type: object
+          description: Source of the input image
+          properties:
+            url:
+              type: string
+              description: Publicly accessible URL of the input image
+              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
+            uploadId:
+              type: string
+              description: Upload ID for a previously uploaded image via the Firefly upload API
+    StyleOptions:
+      type: object
+      description: Style guidance for image generation
+      properties:
+        presets:
           type: array
+          description: List of style preset identifiers to apply
           items:
-            type: integer
+            type: string
+            enum:
+            - photo
+            - art
+            - graphic
+            - bw
+            - cool_colors
+            - warm_tone
+            - muted_color
+            - vibrant_color
+            - pastel_color
+            - golden_hour
+            - closeup_portrait
+            - wide_angle
+            - aerial_view
+            - landscape_photography
+          example:
+          - photo
+          - golden_hour
+        strength:
+          type: integer
+          description: Style influence strength from 1 (subtle) to 100 (strong)
+          minimum: 1
+          maximum: 100
+          example: 60
+        referenceImage:
+          $ref: '#/components/schemas/InputImageReference'
+    AsyncJobSubmitted:
+      type: object
+      description: Response returned immediately after an async generation job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
+          type: string
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
     ImageGenerateRequest:
       type: object
       description: Request body for text-to-image generation
@@ -168,82 +207,31 @@ components:
           type: string
           description: BCP 47 language locale for prompt interpretation
           example: en-US
-    StyleOptions:
+    GenerateSimilarRequest:
       type: object
-      description: Style guidance for image generation
-      properties:
-        presets:
-          type: array
-          description: List of style preset identifiers to apply
-          items:
-            type: string
-            enum:
-            - photo
-            - art
-            - graphic
-            - bw
-            - cool_colors
-            - warm_tone
-            - muted_color
-            - vibrant_color
-            - pastel_color
-            - golden_hour
-            - closeup_portrait
-            - wide_angle
-            - aerial_view
-            - landscape_photography
-          example:
-          - photo
-          - golden_hour
-        strength:
-          type: integer
-          description: Style influence strength from 1 (subtle) to 100 (strong)
-          minimum: 1
-          maximum: 100
-          example: 60
-        referenceImage:
-          $ref: '#/components/schemas/InputImageReference'
-    InputImageReference:
-      type: object
-      description: Reference to an input image for generative operations
+      description: Request body for generating images similar to a reference image
       required:
-      - source
+      - image
       properties:
-        source:
-          type: object
-          description: Source of the input image
-          properties:
-            url:
-              type: string
-              description: Publicly accessible URL of the input image
-              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
-            uploadId:
-              type: string
-              description: Upload ID for a previously uploaded image via the Firefly upload API
-    AsyncJobSubmitted:
-      type: object
-      description: Response returned immediately after an async generation job is submitted
-      properties:
-        jobId:
+        prompt:
           type: string
-          description: Unique identifier for the generation job
-          example: urn:firefly:jobs:abc123def456
-        statusUrl:
-          type: string
-          description: URL to poll for job status updates
-          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
-    ImageSize:
-      type: object
-      description: Dimensions for the output image
-      properties:
-        width:
+          description: Optional text prompt to further guide the style or content
+          maxLength: 1024
+          example: example_value
+        image:
+          $ref: '#/components/schemas/InputImageReference'
+        numVariations:
           type: integer
-          description: Output image width in pixels
-          example: 1024
-        height:
-          type: integer
-          description: Output image height in pixels
-          example: 1024
+          minimum: 1
+          maximum: 4
+          default: 1
+          example: 1920
+        size:
+          $ref: '#/components/schemas/ImageSize'
+        seeds:
+          type: array
+          items:
+            type: integer
     ErrorResponse:
       type: object
       description: Standard error response body
@@ -260,6 +248,18 @@ components:
           type: string
           description: Unique identifier for the failed request, for support purposes
           example: asset_abc123
+    ImageSize:
+      type: object
+      description: Dimensions for the output image
+      properties:
+        width:
+          type: integer
+          description: Output image width in pixels
+          example: 1024
+        height:
+          type: integer
+          description: Output image height in pixels
+          example: 1024
   securitySchemes:
     bearerAuth:
       type: http

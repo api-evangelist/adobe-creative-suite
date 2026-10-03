@@ -73,6 +73,18 @@ components:
             uploadId:
               type: string
               description: Upload ID for a previously uploaded image via the Firefly upload API
+    AsyncJobSubmitted:
+      type: object
+      description: Response returned immediately after an async generation job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
+          type: string
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
     ImageExpandRequest:
       type: object
       description: Request body for generative image expansion
@@ -118,30 +130,6 @@ components:
           type: array
           items:
             type: integer
-    AsyncJobSubmitted:
-      type: object
-      description: Response returned immediately after an async generation job is submitted
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the generation job
-          example: urn:firefly:jobs:abc123def456
-        statusUrl:
-          type: string
-          description: URL to poll for job status updates
-          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
-    ImageSize:
-      type: object
-      description: Dimensions for the output image
-      properties:
-        width:
-          type: integer
-          description: Output image width in pixels
-          example: 1024
-        height:
-          type: integer
-          description: Output image height in pixels
-          example: 1024
     ErrorResponse:
       type: object
       description: Standard error response body
@@ -158,6 +146,18 @@ components:
           type: string
           description: Unique identifier for the failed request, for support purposes
           example: asset_abc123
+    ImageSize:
+      type: object
+      description: Dimensions for the output image
+      properties:
+        width:
+          type: integer
+          description: Output image width in pixels
+          example: 1024
+        height:
+          type: integer
+          description: Output image height in pixels
+          example: 1024
   securitySchemes:
     bearerAuth:
       type: http

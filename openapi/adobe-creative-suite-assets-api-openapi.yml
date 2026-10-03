@@ -159,16 +159,6 @@ components:
           type: string
           description: Pre-signed URI to PUT the file content to
           example: https://dcplatformstorageservice-us-east-1.s3-accelerate.amazonaws.com/...
-    AssetUploadRequest:
-      type: object
-      description: Request to initiate an asset upload
-      required:
-      - mediaType
-      properties:
-        mediaType:
-          type: string
-          description: MIME type of the file to be uploaded
-          example: application/vnd.openxmlformats-officedocument.wordprocessingml.document
     ErrorResponse:
       type: object
       description: Standard error response
@@ -185,6 +175,16 @@ components:
           type: string
           description: Unique identifier for the failed request
           example: asset_abc123
+    AssetUploadRequest:
+      type: object
+      description: Request to initiate an asset upload
+      required:
+      - mediaType
+      properties:
+        mediaType:
+          type: string
+          description: MIME type of the file to be uploaded
+          example: application/vnd.openxmlformats-officedocument.wordprocessingml.document
   securitySchemes:
     bearerAuth:
       type: http

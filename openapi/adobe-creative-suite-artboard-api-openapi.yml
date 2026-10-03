@@ -56,85 +56,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ArtboardRequest:
-      type: object
-      description: Request to create artboards within a PSD document
-      required:
-      - inputs
-      - outputs
-      - options
-      properties:
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobInput'
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobOutput'
-        options:
-          type: object
-          properties:
-            artboards:
-              type: array
-              description: List of artboards to create
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    description: Artboard name
-                  width:
-                    type: integer
-                    description: Artboard width in pixels
-                  height:
-                    type: integer
-                    description: Artboard height in pixels
-    JobInput:
-      type: object
-      description: Reference to an input file stored in cloud storage
-      required:
-      - href
-      - storage
-      properties:
-        href:
-          type: string
-          description: URL or path to the input file in cloud storage
-          example: https://my-storage.blob.core.windows.net/images/input.psd
-        storage:
-          type: string
-          description: Cloud storage provider type
-          enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
-          example: external
-        type:
-          type: string
-          description: MIME type of the input file
-          example: image/vnd.adobe.photoshop
-    JobSubmitted:
-      type: object
-      description: Response returned immediately after a job is submitted
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the submitted job
-          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        statusUrl:
-          type: string
-          description: URL to poll for job status
-          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        _links:
-          type: object
-          properties:
-            self:
-              type: object
-              properties:
-                href:
-                  type: string
-                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
     JobOutput:
       type: object
       description: Reference to an output file location in cloud storage
@@ -173,6 +94,85 @@ components:
           description: Whether to overwrite the output file if it already exists
           default: true
           example: true
+    JobSubmitted:
+      type: object
+      description: Response returned immediately after a job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the submitted job
+          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        statusUrl:
+          type: string
+          description: URL to poll for job status
+          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+    JobInput:
+      type: object
+      description: Reference to an input file stored in cloud storage
+      required:
+      - href
+      - storage
+      properties:
+        href:
+          type: string
+          description: URL or path to the input file in cloud storage
+          example: https://my-storage.blob.core.windows.net/images/input.psd
+        storage:
+          type: string
+          description: Cloud storage provider type
+          enum:
+          - adobe
+          - external
+          - azure
+          - dropbox
+          example: external
+        type:
+          type: string
+          description: MIME type of the input file
+          example: image/vnd.adobe.photoshop
+    ArtboardRequest:
+      type: object
+      description: Request to create artboards within a PSD document
+      required:
+      - inputs
+      - outputs
+      - options
+      properties:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobOutput'
+        options:
+          type: object
+          properties:
+            artboards:
+              type: array
+              description: List of artboards to create
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Artboard name
+                  width:
+                    type: integer
+                    description: Artboard width in pixels
+                  height:
+                    type: integer
+                    description: Artboard height in pixels
     ErrorResponse:
       type: object
       description: Standard error response
