@@ -263,6 +263,31 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    LicenseReference:
+      type: object
+      description: Optional purchase reference metadata for a license transaction
+      properties:
+        id:
+          type: integer
+          description: Reference ID provided by the API caller for tracking
+          example: 1001
+        value:
+          type: string
+          description: Reference value such as a project name or purchase order number
+          example: Project Alpha
+    LicenseHistoryResult:
+      type: object
+      description: Paginated license history for the authenticated member
+      properties:
+        nb_results:
+          type: integer
+          description: Total number of licensing events in the history
+          example: 87
+        files:
+          type: array
+          description: List of previously licensed stock files
+          items:
+            $ref: '#/components/schemas/StockFile'
     LicenseRequest:
       type: object
       description: Request body for licensing a stock asset
@@ -296,18 +321,27 @@ components:
               description: List of reference key-value pairs for tracking the license
               items:
                 $ref: '#/components/schemas/LicenseReference'
-    LicenseReference:
+    Category:
       type: object
-      description: Optional purchase reference metadata for a license transaction
+      description: A stock content category
       properties:
         id:
           type: integer
-          description: Reference ID provided by the API caller for tracking
-          example: 1001
-        value:
+          description: Unique category identifier
+          example: 1043
+        name:
           type: string
-          description: Reference value such as a project name or purchase order number
-          example: Project Alpha
+          description: Localized category name
+          example: Nature
+        link:
+          type: string
+          description: URL to browse this category on the Adobe Stock website
+          example: example_value
+        children:
+          type: array
+          description: Child subcategories (present in category tree responses)
+          items:
+            $ref: '#/components/schemas/Category'
     StockFile:
       type: object
       description: Metadata for an Adobe Stock file
@@ -412,19 +446,18 @@ components:
         stock_user:
           type: object
           description: Aggregated licensing statistics by content type
-    LicenseHistoryResult:
+    ErrorResponse:
       type: object
-      description: Paginated license history for the authenticated member
+      description: Standard error response
       properties:
-        nb_results:
+        code:
           type: integer
-          description: Total number of licensing events in the history
-          example: 87
-        files:
-          type: array
-          description: List of previously licensed stock files
-          items:
-            $ref: '#/components/schemas/StockFile'
+          description: Numeric error code
+          example: 1920
+        message:
+          type: string
+          description: Human-readable error description
+          example: example_value
     LicenseResponse:
       type: object
       description: Response returned after successfully licensing a stock asset
@@ -454,39 +487,6 @@ components:
           type: string
           description: URL to download the licensed full-resolution file
           example: https://stock.adobe.com/Rest/Libraries/Download/123456789/1
-    ErrorResponse:
-      type: object
-      description: Standard error response
-      properties:
-        code:
-          type: integer
-          description: Numeric error code
-          example: 1920
-        message:
-          type: string
-          description: Human-readable error description
-          example: example_value
-    Category:
-      type: object
-      description: A stock content category
-      properties:
-        id:
-          type: integer
-          description: Unique category identifier
-          example: 1043
-        name:
-          type: string
-          description: Localized category name
-          example: Nature
-        link:
-          type: string
-          description: URL to browse this category on the Adobe Stock website
-          example: example_value
-        children:
-          type: array
-          description: Child subcategories (present in category tree responses)
-          items:
-            $ref: '#/components/schemas/Category'
   securitySchemes:
     bearerAuth:
       type: http

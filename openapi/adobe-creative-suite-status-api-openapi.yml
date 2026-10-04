@@ -104,29 +104,6 @@ paths:
       description: Adobe Photoshop API production server
 components:
   schemas:
-    OutputImage:
-      type: object
-      description: A single generated image output from a Firefly generation job
-      properties:
-        image:
-          type: object
-          description: Generated image reference
-          properties:
-            url:
-              type: string
-              description: Temporary signed URL to download the generated image
-              example: https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123
-        seed:
-          type: integer
-          description: Seed value used to produce this particular output
-          example: 42
-        contentClass:
-          type: string
-          description: Content class detected or applied during generation
-          enum:
-          - photo
-          - art
-          example: photo
     GenerationStatus:
       type: object
       description: Current status and results of a Firefly generation job
@@ -169,6 +146,29 @@ components:
                 type: string
               message:
                 type: string
+    OutputImage:
+      type: object
+      description: A single generated image output from a Firefly generation job
+      properties:
+        image:
+          type: object
+          description: Generated image reference
+          properties:
+            url:
+              type: string
+              description: Temporary signed URL to download the generated image
+              example: https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123
+        seed:
+          type: integer
+          description: Seed value used to produce this particular output
+          example: 42
+        contentClass:
+          type: string
+          description: Content class detected or applied during generation
+          enum:
+          - photo
+          - art
+          example: photo
     ErrorResponse:
       type: object
       description: Standard error response body
@@ -185,22 +185,6 @@ components:
           type: string
           description: Unique identifier for the failed request, for support purposes
           example: asset_abc123
-    JobError:
-      type: object
-      description: Error detail from a failed job or output
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: example_value
-        title:
-          type: string
-          description: Short error title
-          example: example_value
-        description:
-          type: string
-          description: Detailed error description
-          example: example_value
     JobStatus:
       type: object
       description: Current status and result of an asynchronous job
@@ -278,6 +262,22 @@ components:
                     type: integer
                   height:
                     type: integer
+    JobError:
+      type: object
+      description: Error detail from a failed job or output
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        title:
+          type: string
+          description: Short error title
+          example: example_value
+        description:
+          type: string
+          description: Detailed error description
+          example: example_value
     ErrorResponse_2:
       type: object
       description: Standard error response

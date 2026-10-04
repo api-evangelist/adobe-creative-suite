@@ -73,18 +73,34 @@ components:
             uploadId:
               type: string
               description: Upload ID for a previously uploaded image via the Firefly upload API
-    AsyncJobSubmitted:
+    ErrorResponse:
       type: object
-      description: Response returned immediately after an async generation job is submitted
+      description: Standard error response body
       properties:
-        jobId:
+        code:
           type: string
-          description: Unique identifier for the generation job
-          example: urn:firefly:jobs:abc123def456
-        statusUrl:
+          description: Machine-readable error code
+          example: example_value
+        message:
           type: string
-          description: URL to poll for job status updates
-          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
+    ImageSize:
+      type: object
+      description: Dimensions for the output image
+      properties:
+        width:
+          type: integer
+          description: Output image width in pixels
+          example: 1024
+        height:
+          type: integer
+          description: Output image height in pixels
+          example: 1024
     ImageExpandRequest:
       type: object
       description: Request body for generative image expansion
@@ -130,34 +146,18 @@ components:
           type: array
           items:
             type: integer
-    ErrorResponse:
+    AsyncJobSubmitted:
       type: object
-      description: Standard error response body
+      description: Response returned immediately after an async generation job is submitted
       properties:
-        code:
+        jobId:
           type: string
-          description: Machine-readable error code
-          example: example_value
-        message:
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
           type: string
-          description: Human-readable description of the error
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request, for support purposes
-          example: asset_abc123
-    ImageSize:
-      type: object
-      description: Dimensions for the output image
-      properties:
-        width:
-          type: integer
-          description: Output image width in pixels
-          example: 1024
-        height:
-          type: integer
-          description: Output image height in pixels
-          example: 1024
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
   securitySchemes:
     bearerAuth:
       type: http

@@ -56,44 +56,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    JobOutput:
-      type: object
-      description: Reference to an output file location in cloud storage
-      required:
-      - href
-      - storage
-      - type
-      properties:
-        href:
-          type: string
-          description: URL or path where the output file will be stored
-          example: https://my-storage.blob.core.windows.net/images/output.png
-        storage:
-          type: string
-          description: Cloud storage provider type
-          enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
-          example: external
-        type:
-          type: string
-          description: MIME type of the output file
-          example: image/png
-        width:
-          type: integer
-          description: Output width in pixels
-          example: 1920
-        height:
-          type: integer
-          description: Output height in pixels
-          example: 1080
-        overwrite:
-          type: boolean
-          description: Whether to overwrite the output file if it already exists
-          default: true
-          example: true
     JobSubmitted:
       type: object
       description: Response returned immediately after a job is submitted
@@ -139,6 +101,18 @@ components:
           type: string
           description: MIME type of the input file
           example: image/vnd.adobe.photoshop
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
     ArtboardRequest:
       type: object
       description: Request to create artboards within a PSD document
@@ -173,18 +147,44 @@ components:
                   height:
                     type: integer
                     description: Artboard height in pixels
-    ErrorResponse:
+    JobOutput:
       type: object
-      description: Standard error response
+      description: Reference to an output file location in cloud storage
+      required:
+      - href
+      - storage
+      - type
       properties:
-        code:
+        href:
           type: string
-          description: Error code
-          example: example_value
-        message:
+          description: URL or path where the output file will be stored
+          example: https://my-storage.blob.core.windows.net/images/output.png
+        storage:
           type: string
-          description: Human-readable error message
-          example: example_value
+          description: Cloud storage provider type
+          enum:
+          - adobe
+          - external
+          - azure
+          - dropbox
+          example: external
+        type:
+          type: string
+          description: MIME type of the output file
+          example: image/png
+        width:
+          type: integer
+          description: Output width in pixels
+          example: 1920
+        height:
+          type: integer
+          description: Output height in pixels
+          example: 1080
+        overwrite:
+          type: boolean
+          description: Whether to overwrite the output file if it already exists
+          default: true
+          example: true
   securitySchemes:
     bearerAuth:
       type: http

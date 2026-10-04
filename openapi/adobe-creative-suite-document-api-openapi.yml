@@ -56,44 +56,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    JobOutput:
-      type: object
-      description: Reference to an output file location in cloud storage
-      required:
-      - href
-      - storage
-      - type
-      properties:
-        href:
-          type: string
-          description: URL or path where the output file will be stored
-          example: https://my-storage.blob.core.windows.net/images/output.png
-        storage:
-          type: string
-          description: Cloud storage provider type
-          enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
-          example: external
-        type:
-          type: string
-          description: MIME type of the output file
-          example: image/png
-        width:
-          type: integer
-          description: Output width in pixels
-          example: 1920
-        height:
-          type: integer
-          description: Output height in pixels
-          example: 1080
-        overwrite:
-          type: boolean
-          description: Whether to overwrite the output file if it already exists
-          default: true
-          example: true
     JobSubmitted:
       type: object
       description: Response returned immediately after a job is submitted
@@ -115,6 +77,23 @@ components:
                 href:
                   type: string
                   example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+    DocumentOperationsRequest:
+      type: object
+      description: Request to apply document-level operations to a PSD
+      required:
+      - inputs
+      - outputs
+      properties:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobOutput'
+        options:
+          $ref: '#/components/schemas/DocumentOperations'
     JobInput:
       type: object
       description: Reference to an input file stored in cloud storage
@@ -139,23 +118,6 @@ components:
           type: string
           description: MIME type of the input file
           example: image/vnd.adobe.photoshop
-    DocumentOperationsRequest:
-      type: object
-      description: Request to apply document-level operations to a PSD
-      required:
-      - inputs
-      - outputs
-      properties:
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobInput'
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobOutput'
-        options:
-          $ref: '#/components/schemas/DocumentOperations'
     ErrorResponse:
       type: object
       description: Standard error response
@@ -206,6 +168,44 @@ components:
               - transparentPixels
               - topLeftPixelColor
               - bottomRightPixelColor
+    JobOutput:
+      type: object
+      description: Reference to an output file location in cloud storage
+      required:
+      - href
+      - storage
+      - type
+      properties:
+        href:
+          type: string
+          description: URL or path where the output file will be stored
+          example: https://my-storage.blob.core.windows.net/images/output.png
+        storage:
+          type: string
+          description: Cloud storage provider type
+          enum:
+          - adobe
+          - external
+          - azure
+          - dropbox
+          example: external
+        type:
+          type: string
+          description: MIME type of the output file
+          example: image/png
+        width:
+          type: integer
+          description: Output width in pixels
+          example: 1920
+        height:
+          type: integer
+          description: Output height in pixels
+          example: 1080
+        overwrite:
+          type: boolean
+          description: Whether to overwrite the output file if it already exists
+          default: true
+          example: true
   securitySchemes:
     bearerAuth:
       type: http
