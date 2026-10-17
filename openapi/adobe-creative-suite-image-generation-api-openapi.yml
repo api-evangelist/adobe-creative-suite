@@ -97,6 +97,31 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    GenerateSimilarRequest:
+      type: object
+      description: Request body for generating images similar to a reference image
+      required:
+      - image
+      properties:
+        prompt:
+          type: string
+          description: Optional text prompt to further guide the style or content
+          maxLength: 1024
+          example: example_value
+        image:
+          $ref: '#/components/schemas/InputImageReference'
+        numVariations:
+          type: integer
+          minimum: 1
+          maximum: 4
+          default: 1
+          example: 1920
+        size:
+          $ref: '#/components/schemas/ImageSize'
+        seeds:
+          type: array
+          items:
+            type: integer
     StyleOptions:
       type: object
       description: Style guidance for image generation
@@ -132,51 +157,6 @@ components:
           example: 60
         referenceImage:
           $ref: '#/components/schemas/InputImageReference'
-    InputImageReference:
-      type: object
-      description: Reference to an input image for generative operations
-      required:
-      - source
-      properties:
-        source:
-          type: object
-          description: Source of the input image
-          properties:
-            url:
-              type: string
-              description: Publicly accessible URL of the input image
-              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
-            uploadId:
-              type: string
-              description: Upload ID for a previously uploaded image via the Firefly upload API
-    ErrorResponse:
-      type: object
-      description: Standard error response body
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable description of the error
-          example: example_value
-        requestId:
-          type: string
-          description: Unique identifier for the failed request, for support purposes
-          example: asset_abc123
-    ImageSize:
-      type: object
-      description: Dimensions for the output image
-      properties:
-        width:
-          type: integer
-          description: Output image width in pixels
-          example: 1024
-        height:
-          type: integer
-          description: Output image height in pixels
-          example: 1024
     ImageGenerateRequest:
       type: object
       description: Request body for text-to-image generation
@@ -223,31 +203,34 @@ components:
           type: string
           description: BCP 47 language locale for prompt interpretation
           example: en-US
-    GenerateSimilarRequest:
+    ImageSize:
       type: object
-      description: Request body for generating images similar to a reference image
-      required:
-      - image
+      description: Dimensions for the output image
       properties:
-        prompt:
-          type: string
-          description: Optional text prompt to further guide the style or content
-          maxLength: 1024
-          example: example_value
-        image:
-          $ref: '#/components/schemas/InputImageReference'
-        numVariations:
+        width:
           type: integer
-          minimum: 1
-          maximum: 4
-          default: 1
-          example: 1920
-        size:
-          $ref: '#/components/schemas/ImageSize'
-        seeds:
-          type: array
-          items:
-            type: integer
+          description: Output image width in pixels
+          example: 1024
+        height:
+          type: integer
+          description: Output image height in pixels
+          example: 1024
+    ErrorResponse:
+      type: object
+      description: Standard error response body
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable description of the error
+          example: example_value
+        requestId:
+          type: string
+          description: Unique identifier for the failed request, for support purposes
+          example: asset_abc123
     AsyncJobSubmitted:
       type: object
       description: Response returned immediately after an async generation job is submitted
@@ -260,6 +243,23 @@ components:
           type: string
           description: URL to poll for job status updates
           example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
+    InputImageReference:
+      type: object
+      description: Reference to an input image for generative operations
+      required:
+      - source
+      properties:
+        source:
+          type: object
+          description: Source of the input image
+          properties:
+            url:
+              type: string
+              description: Publicly accessible URL of the input image
+              example: https://my-bucket.s3.amazonaws.com/source-image.jpg
+            uploadId:
+              type: string
+              description: Upload ID for a previously uploaded image via the Firefly upload API
   securitySchemes:
     bearerAuth:
       type: http

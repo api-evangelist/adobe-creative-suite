@@ -56,37 +56,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ImageFillRequest:
+    AsyncJobSubmitted:
       type: object
-      description: Request body for generative fill operation
-      required:
-      - image
-      - mask
+      description: Response returned immediately after an async generation job is submitted
       properties:
-        prompt:
+        jobId:
           type: string
-          description: Text prompt describing what to fill in the masked area
-          maxLength: 1024
-          example: example_value
-        negativePrompt:
+          description: Unique identifier for the generation job
+          example: urn:firefly:jobs:abc123def456
+        statusUrl:
           type: string
-          description: Text describing what to avoid in the filled area
-          maxLength: 1024
-          example: example_value
-        image:
-          $ref: '#/components/schemas/InputImageReference'
-        mask:
-          $ref: '#/components/schemas/InputImageReference'
-        numVariations:
-          type: integer
-          minimum: 1
-          maximum: 4
-          default: 1
-          example: 1920
-        seeds:
-          type: array
-          items:
-            type: integer
+          description: URL to poll for job status updates
+          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
     InputImageReference:
       type: object
       description: Reference to an input image for generative operations
@@ -120,18 +101,37 @@ components:
           type: string
           description: Unique identifier for the failed request, for support purposes
           example: asset_abc123
-    AsyncJobSubmitted:
+    ImageFillRequest:
       type: object
-      description: Response returned immediately after an async generation job is submitted
+      description: Request body for generative fill operation
+      required:
+      - image
+      - mask
       properties:
-        jobId:
+        prompt:
           type: string
-          description: Unique identifier for the generation job
-          example: urn:firefly:jobs:abc123def456
-        statusUrl:
+          description: Text prompt describing what to fill in the masked area
+          maxLength: 1024
+          example: example_value
+        negativePrompt:
           type: string
-          description: URL to poll for job status updates
-          example: https://firefly-api.adobe.io/v3/status/urn:firefly:jobs:abc123def456
+          description: Text describing what to avoid in the filled area
+          maxLength: 1024
+          example: example_value
+        image:
+          $ref: '#/components/schemas/InputImageReference'
+        mask:
+          $ref: '#/components/schemas/InputImageReference'
+        numVariations:
+          type: integer
+          minimum: 1
+          maximum: 4
+          default: 1
+          example: 1920
+        seeds:
+          type: array
+          items:
+            type: integer
   securitySchemes:
     bearerAuth:
       type: http

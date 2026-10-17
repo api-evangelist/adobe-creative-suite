@@ -56,6 +56,30 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    JobInput:
+      type: object
+      description: Reference to an input file stored in cloud storage
+      required:
+      - href
+      - storage
+      properties:
+        href:
+          type: string
+          description: URL or path to the input file in cloud storage
+          example: https://my-storage.blob.core.windows.net/images/input.psd
+        storage:
+          type: string
+          description: Cloud storage provider type
+          enum:
+          - adobe
+          - external
+          - azure
+          - dropbox
+          example: external
+        type:
+          type: string
+          description: MIME type of the input file
+          example: image/vnd.adobe.photoshop
     SmartObjectRequest:
       type: object
       description: Request to replace smart object content within a PSD
@@ -107,30 +131,6 @@ components:
                 href:
                   type: string
                   example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
-    JobInput:
-      type: object
-      description: Reference to an input file stored in cloud storage
-      required:
-      - href
-      - storage
-      properties:
-        href:
-          type: string
-          description: URL or path to the input file in cloud storage
-          example: https://my-storage.blob.core.windows.net/images/input.psd
-        storage:
-          type: string
-          description: Cloud storage provider type
-          enum:
-          - adobe
-          - external
-          - azure
-          - dropbox
-          example: external
-        type:
-          type: string
-          description: MIME type of the input file
-          example: image/vnd.adobe.photoshop
     ErrorResponse:
       type: object
       description: Standard error response

@@ -56,44 +56,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    JobSubmitted:
-      type: object
-      description: Response returned immediately after a job is submitted
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the submitted job
-          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        statusUrl:
-          type: string
-          description: URL to poll for job status
-          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        _links:
-          type: object
-          properties:
-            self:
-              type: object
-              properties:
-                href:
-                  type: string
-                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
-    DocumentOperationsRequest:
-      type: object
-      description: Request to apply document-level operations to a PSD
-      required:
-      - inputs
-      - outputs
-      properties:
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobInput'
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobOutput'
-        options:
-          $ref: '#/components/schemas/DocumentOperations'
     JobInput:
       type: object
       description: Reference to an input file stored in cloud storage
@@ -118,18 +80,6 @@ components:
           type: string
           description: MIME type of the input file
           example: image/vnd.adobe.photoshop
-    ErrorResponse:
-      type: object
-      description: Standard error response
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message
-          example: example_value
     DocumentOperations:
       type: object
       description: Operations to apply to a PSD document
@@ -168,6 +118,56 @@ components:
               - transparentPixels
               - topLeftPixelColor
               - bottomRightPixelColor
+    DocumentOperationsRequest:
+      type: object
+      description: Request to apply document-level operations to a PSD
+      required:
+      - inputs
+      - outputs
+      properties:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobInput'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobOutput'
+        options:
+          $ref: '#/components/schemas/DocumentOperations'
+    JobSubmitted:
+      type: object
+      description: Response returned immediately after a job is submitted
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the submitted job
+          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        statusUrl:
+          type: string
+          description: URL to poll for job status
+          example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  example: https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67
+    ErrorResponse:
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message
+          example: example_value
     JobOutput:
       type: object
       description: Reference to an output file location in cloud storage

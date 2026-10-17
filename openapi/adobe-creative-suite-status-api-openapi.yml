@@ -104,6 +104,29 @@ paths:
       description: Adobe Photoshop API production server
 components:
   schemas:
+    OutputImage:
+      type: object
+      description: A single generated image output from a Firefly generation job
+      properties:
+        image:
+          type: object
+          description: Generated image reference
+          properties:
+            url:
+              type: string
+              description: Temporary signed URL to download the generated image
+              example: https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123
+        seed:
+          type: integer
+          description: Seed value used to produce this particular output
+          example: 42
+        contentClass:
+          type: string
+          description: Content class detected or applied during generation
+          enum:
+          - photo
+          - art
+          example: photo
     GenerationStatus:
       type: object
       description: Current status and results of a Firefly generation job
@@ -146,29 +169,6 @@ components:
                 type: string
               message:
                 type: string
-    OutputImage:
-      type: object
-      description: A single generated image output from a Firefly generation job
-      properties:
-        image:
-          type: object
-          description: Generated image reference
-          properties:
-            url:
-              type: string
-              description: Temporary signed URL to download the generated image
-              example: https://firefly-api-prod-origin.adobe.io/v2/assets/urn:firefly:image:abc123
-        seed:
-          type: integer
-          description: Seed value used to produce this particular output
-          example: 42
-        contentClass:
-          type: string
-          description: Content class detected or applied during generation
-          enum:
-          - photo
-          - art
-          example: photo
     ErrorResponse:
       type: object
       description: Standard error response body
@@ -185,43 +185,6 @@ components:
           type: string
           description: Unique identifier for the failed request, for support purposes
           example: asset_abc123
-    JobStatus:
-      type: object
-      description: Current status and result of an asynchronous job
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier of the job
-          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
-        status:
-          type: string
-          description: Current job status
-          enum:
-          - pending
-          - running
-          - succeeded
-          - failed
-          example: succeeded
-        created:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp when the job was created
-          example: example_value
-        modified:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp when the job was last modified
-          example: example_value
-        outputs:
-          type: array
-          description: List of output files produced by a successful job
-          items:
-            $ref: '#/components/schemas/RenderOutput'
-        errors:
-          type: array
-          description: List of errors if the job failed
-          items:
-            $ref: '#/components/schemas/JobError'
     RenderOutput:
       type: object
       description: Details of a rendered output file
@@ -262,6 +225,43 @@ components:
                     type: integer
                   height:
                     type: integer
+    JobStatus:
+      type: object
+      description: Current status and result of an asynchronous job
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier of the job
+          example: f54e0fcb-260b-47c3-b520-de0d17dc2b67
+        status:
+          type: string
+          description: Current job status
+          enum:
+          - pending
+          - running
+          - succeeded
+          - failed
+          example: succeeded
+        created:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the job was created
+          example: example_value
+        modified:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the job was last modified
+          example: example_value
+        outputs:
+          type: array
+          description: List of output files produced by a successful job
+          items:
+            $ref: '#/components/schemas/RenderOutput'
+        errors:
+          type: array
+          description: List of errors if the job failed
+          items:
+            $ref: '#/components/schemas/JobError'
     JobError:
       type: object
       description: Error detail from a failed job or output
