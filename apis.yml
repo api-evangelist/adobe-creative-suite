@@ -238,12 +238,13 @@ apis:
   - Acrobat Sign
   - Agreements
   - Documents
-  - Electronic Signature
+  - E-Signature
   tags_raw:
   - Acrobat Sign
   - Agreements
   - Documents
   - Electronic Signatures
+  - Electronic Signature
   properties:
   - type: Documentation
     url: https://developer.adobe.com/adobesign/docs/
