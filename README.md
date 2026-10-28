@@ -1,4 +1,4 @@
-# Adobe Creative Suite (adobe-creative-suite)
+# Adobe Creative Suite
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,492 +66,323 @@
 
 Adobe Creative Suite is a collection of professional software applications for graphic design, video editing, web development, and photography.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/adobe-creative-suite/refs/heads/main/apis.yml)
-
-## Scope
-
-- **Type:** Index
-
-## Tags
-
-- Creative
-- Design
-- Graphics
-- Photography
-- Video
-
-## Timestamps
-
-- **Created:** 2024-01-01
-- **Modified:** 2026-05-19
-
-## APIs
-
-### Adobe Photoshop API
-
-The Adobe Photoshop API provides programmatic access to Photoshop image manipulation capabilities including automated editing, masking, and compositing. It enables developers to integrate Photoshop processing into workflows and applications without requiring a desktop installation. The API supports common Photoshop operations such as layer manipulation, smart object editing, and image transformation.
-
-- **Human URL:** [https://developer.adobe.com/photoshop/](https://developer.adobe.com/photoshop/)
-- **Base URL:** `https://image.adobe.io`
-
-#### Tags
-
-- Automation
-- Graphics
-- Image Editing
-- Photoshop
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/photoshop/api/)
-- [OpenAPI](https://developer.adobe.com/photoshop/api/openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/adobe-creative-suite-photoshop-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/adobe-creative-suite-image-job-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-
-### Adobe Lightroom API
-
-The Adobe Lightroom API provides access to photo management features including albums, collections, and editing presets stored in the Lightroom cloud catalog. Developers can use it to build integrations that read, organize, and manage photos on behalf of Lightroom users. The API uses OAuth 2.0 for user authentication and follows RESTful conventions.
-
-- **Human URL:** [https://developer.adobe.com/lightroom/](https://developer.adobe.com/lightroom/)
-- **Base URL:** `https://lr.adobe.io`
-
-#### Tags
-
-- Editing
-- Lightroom
-- Photo Management
-- Photography
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/lightroom/api/)
-- [OpenAPI](https://developer.adobe.com/lightroom/api/openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe Illustrator API
-
-The Adobe Illustrator API enables programmatic creation and manipulation of vector graphics through scripting and plugin interfaces. It exposes the Illustrator object model so developers can automate repetitive design tasks, generate artwork, and integrate Illustrator into production pipelines. The API is available via UXP plugins and CEP extensions as well as scripting environments.
-
-- **Human URL:** [https://developer.adobe.com/illustrator/](https://developer.adobe.com/illustrator/)
-- **Base URL:** `https://image.adobe.io`
-
-#### Tags
-
-- Automation
-- Design
-- Illustrator
-- Vector Graphics
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/illustrator/api/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe InDesign API
-
-The Adobe InDesign API allows developers to automate document layout and publishing workflows through scripting and UXP plugins. It exposes InDesign's document model for tasks such as batch exporting, template population, and preflight automation. The API supports JavaScript, AppleScript, and VBScript as well as the newer UXP plugin architecture.
-
-- **Human URL:** [https://developer.adobe.com/indesign/](https://developer.adobe.com/indesign/)
-- **Base URL:** `https://indesign-api.adobe.io`
-
-#### Tags
-
-- Documents
-- InDesign
-- Layout
-- Publishing
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/indesign/uxp/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe Premiere Pro API
-
-The Adobe Premiere Pro API gives developers access to video editing automation through scripting and panel extensions. It allows integration with external media asset management systems, automated sequence assembly, and custom export workflows. The API is accessible through CEP extensions and the UXP plugin framework.
-
-- **Human URL:** [https://developer.adobe.com/premiere-pro/](https://developer.adobe.com/premiere-pro/)
-- **Base URL:** `https://premiere-api.adobe.io`
-
-#### Tags
-
-- Automation
-- Media
-- Premiere Pro
-- Video Editing
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/premiere-pro/docs/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe After Effects API
-
-The Adobe After Effects API enables scripting and plugin development for motion graphics and visual effects workflows. Developers can automate rendering, manipulate compositions programmatically, and build custom effects using the SDK. The API supports ExtendScript, CEP panels, and the newer UXP and plugin SDK approaches.
-
-- **Human URL:** [https://developer.adobe.com/after-effects/](https://developer.adobe.com/after-effects/)
-- **Base URL:** `https://aftereffects-api.adobe.io`
-
-#### Tags
-
-- After Effects
-- Animation
-- Motion Graphics
-- Visual Effects
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/after-effects/docs/)
-- [Reference](https://ae-scripting.docsforadobe.dev/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe Creative Cloud Libraries API
-
-The Adobe Creative Cloud Libraries API provides access to shared design assets stored in Creative Cloud Libraries, including colors, character styles, graphics, and components. It allows applications to read and write library elements on behalf of authenticated users. The API is commonly used to sync brand assets across design tools and third-party platforms.
-
-- **Human URL:** [https://developer.adobe.com/creative-cloud-libraries/](https://developer.adobe.com/creative-cloud-libraries/)
-- **Base URL:** `https://cc-libraries.adobe.io`
-
-#### Tags
-
-- Assets
-- Collaboration
-- Creative Cloud
-- Libraries
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/creative-cloud-libraries/docs/)
-- [Reference](https://developer.adobe.com/creative-cloud-libraries/api/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe Stock API
-
-The Adobe Stock API enables search, licensing, and retrieval of stock photos, illustrations, vectors, videos, and templates from the Adobe Stock marketplace. It supports both editorial and commercial licensing workflows and can be integrated into creative applications and DAM systems. The API uses OAuth 2.0 and API key authentication depending on the operation.
-
-- **Human URL:** [https://developer.adobe.com/stock/](https://developer.adobe.com/stock/)
-- **Base URL:** `https://stock.adobe.io`
-
-#### Tags
-
-- Images
-- Licensing
-- Stock
-- Video
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/stock/docs/)
-- [Reference](https://developer.adobe.com/stock/docs/api/)
-- [OpenAPI](https://developer.adobe.com/stock/docs/api/openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/adobe-creative-suite-stock-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/adobe-creative-suite-stock-file-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-
-### Adobe Firefly API
-
-The Adobe Firefly API provides access to Adobe's generative AI capabilities for creating and editing images, vectors, and text effects from natural language prompts. It is built on the Firefly family of creative generative models trained on licensed and public domain content. The API supports text-to-image generation, generative fill, generative expand, and style transfer operations.
-
-- **Human URL:** [https://developer.adobe.com/firefly-api/](https://developer.adobe.com/firefly-api/)
-- **Base URL:** `https://firefly-api.adobe.io/v3`
-
-#### Tags
-
-- Creative AI
-- Firefly
-- Generative AI
-- Image Generation
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/firefly-api/docs/)
-- [Getting Started](https://developer.adobe.com/firefly-api/docs/guides/get-started/)
-- [Reference](https://developer.adobe.com/firefly-api/docs/api/)
-- [OpenAPI](openapi/adobe-creative-suite-firefly-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/adobe-creative-suite-firefly-generation-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-
-### Adobe PDF Services API
-
-The Adobe PDF Services API provides cloud-based tools for creating, converting, combining, compressing, and extracting content from PDF documents. It is part of the Adobe Acrobat Services platform and supports operations such as HTML-to-PDF, PDF-to-Word, OCR, and PDF accessibility auto-tagging. The API offers SDKs for Java, Node.js, .NET, and Python.
-
-- **Human URL:** [https://developer.adobe.com/document-services/](https://developer.adobe.com/document-services/)
-- **Base URL:** `https://pdf-services.adobe.io`
-
-#### Tags
-
-- Acrobat
-- Document Conversion
-- Document Services
-- PDF
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/document-services/docs/overview/)
-- [Getting Started](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/gettingstarted/)
-- [Reference](https://developer.adobe.com/document-services/docs/apis/)
-- [Client  Libraries](https://developer.adobe.com/document-services/docs/overview/pdf-services-api/sdks/)
-- [OpenAPI](openapi/adobe-creative-suite-pdf-services-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-
-### Adobe Analytics API
-
-The Adobe Analytics API provides programmatic access to Adobe Analytics report suites for retrieving, segmenting, and analyzing web and app behavioral data. It supports both the Reporting API for querying metrics and dimensions and the Data Insertion API for sending custom event data. The API is used to automate reporting, build custom dashboards, and integrate analytics data into external systems.
-
-- **Human URL:** [https://developer.adobe.com/analytics-apis/docs/2.0/](https://developer.adobe.com/analytics-apis/docs/2.0/)
-- **Base URL:** `https://analytics.adobe.io/api`
-
-#### Tags
-
-- Analytics
-- Data
-- Experience Cloud
-- Reporting
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/analytics-apis/docs/2.0/)
-- [Getting Started](https://developer.adobe.com/analytics-apis/docs/2.0/guides/)
-- [Reference](https://developer.adobe.com/analytics-apis/docs/2.0/api/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe Experience Manager Assets API
-
-The Adobe Experience Manager Assets API provides access to the AEM digital asset management system for uploading, retrieving, and managing assets stored in AEM as a Cloud Service. It enables integration with external systems for asset ingestion, metadata management, and rendition retrieval. The API follows RESTful conventions and uses Adobe IMS for authentication.
-
-- **Human URL:** [https://developer.adobe.com/experience-manager/](https://developer.adobe.com/experience-manager/)
-- **Base URL:** `https://author-{program}-{environment}.adobeaemcloud.com/api`
-
-#### Tags
-
-- AEM
-- Content Management
-- Digital Asset Management
-- Experience Manager
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/experience-manager/reference-materials/cloud-service/javadoc/)
-- [Getting Started](https://developer.adobe.com/experience-manager/documentation/)
-- [Reference](https://developer.adobe.com/experience-manager/reference-materials/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe Acrobat Sign API
-
-The Adobe Acrobat Sign API enables sending, tracking, and managing electronic signature agreements programmatically. It supports creating agreements from documents or templates, managing signers and routing, and retrieving signed documents and audit trails. The API is available in region-specific deployments and uses OAuth 2.0 for authentication.
-
-- **Human URL:** [https://developer.adobe.com/adobesign/docs/](https://developer.adobe.com/adobesign/docs/)
-- **Base URL:** `https://api.na1.adobesign.com/api/rest/v6`
-
-#### Tags
-
-- Acrobat Sign
-- Agreements
-- Documents
-- Electronic Signatures
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/adobesign/docs/)
-- [Getting Started](https://developer.adobe.com/adobesign/docs/gstarted/)
-- [Reference](https://developer.adobe.com/adobesign/docs/apis/)
-- [Authentication](https://developer.adobe.com/adobesign/docs/gstarted/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe Fonts API
-
-The Adobe Fonts API provides access to the Adobe Fonts library for discovering and embedding web fonts in applications and websites. It allows querying font families, retrieving font metadata, and generating web font embed codes for use with Creative Cloud subscriptions. The API is commonly used by design tools and CMSs to expose the Adobe Fonts catalog to users.
-
-- **Human URL:** [https://fonts.adobe.com/](https://fonts.adobe.com/)
-- **Base URL:** `https://fonts.adobe.io`
-
-#### Tags
-
-- Design
-- Fonts
-- Typography
-- Web Fonts
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/fonts/docs/)
-- [Reference](https://developer.adobe.com/fonts/docs/api/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe Express Embed SDK
-
-The Adobe Express Embed SDK allows developers to embed Adobe Express editing capabilities directly into their own web applications. It provides a customizable in-app editing experience for images, videos, and templates powered by the Adobe Express platform. The SDK supports use cases such as branded template creation, social media asset editing, and document design within third-party products.
-
-- **Human URL:** [https://developer.adobe.com/express/embed-sdk/](https://developer.adobe.com/express/embed-sdk/)
-- **Base URL:** `https://express-api.adobe.io`
-
-#### Tags
-
-- Design
-- Embed SDK
-- Express
-- Templates
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/express/embed-sdk/docs/)
-- [Getting Started](https://developer.adobe.com/express/embed-sdk/docs/guides/getting_started/)
-- [Reference](https://developer.adobe.com/express/embed-sdk/docs/reference/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adobe UXP
-
-Adobe UXP (Unified Extensibility Platform) is the modern plugin and scripting platform used across Adobe creative applications including Photoshop, InDesign, Illustrator, and XD. It provides a JavaScript-based runtime with access to application APIs, a React-compatible UI framework, and a unified plugin distribution system via the Creative Cloud marketplace. UXP replaces the older CEP (Common Extensibility Platform) and ExtendScript plugin architectures.
-
-- **Human URL:** [https://developer.adobe.com/uxp/](https://developer.adobe.com/uxp/)
-- **Base URL:** `https://developer.adobe.com/uxp/`
-
-#### Tags
-
-- Creative Cloud
-- Extensibility
-- Plugins
-- UXP
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/uxp/docs/)
-- [Getting Started](https://developer.adobe.com/uxp/docs/guides/)
-- [Reference](https://developer.adobe.com/uxp/docs/reference/)
-- [GitHub Repository](https://github.com/adobe/uxp-photoshop)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Postman Collection](collections/adobe-creative-suite-firefly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-firefly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-pdf-services.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-pdf-services.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-photoshop.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-photoshop.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-creative-suite-stock.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-creative-suite-stock.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [JSON-LD](json-ld/adobe-creative-suite-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/adobe-creative-suite-image-job-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/adobe-creative-suite-firefly-generation-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/adobe-creative-suite-stock-file-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Portal](https://developer.adobe.com/)
-- [Sign Up](https://developer.adobe.com/console/home)
-- [Getting Started](https://developer.adobe.com/developer-console/docs/guides/getting-started/)
+**Areas:** Creative · Design · Graphics · Photography · Video
+
+## Adobe Creative Suite on APIs.io
+
+Everything profiled for Adobe Creative Suite is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/adobe-creative-suite/](https://apis.io/providers/adobe-creative-suite/)** — or go straight to one of the APIs or properties below.
+
+### APIs (38)
+
+- [Adobe Illustrator API](https://apis.io/apis/adobe-creative-suite/illustrator-api/) — The Adobe Illustrator API enables programmatic creation and manipulation of vector graphics through scripting and plugin interfaces. It exposes the…
+- [Adobe InDesign API](https://apis.io/apis/adobe-creative-suite/indesign-api/) — The Adobe InDesign API allows developers to automate document layout and publishing workflows through scripting and UXP plugins. It exposes InDesign's…
+- [Adobe Premiere Pro API](https://apis.io/apis/adobe-creative-suite/premiere-pro-api/) — The Adobe Premiere Pro API gives developers access to video editing automation through scripting and panel extensions. It allows integration with external…
+- [Adobe After Effects API](https://apis.io/apis/adobe-creative-suite/after-effects-api/) — The Adobe After Effects API enables scripting and plugin development for motion graphics and visual effects workflows. Developers can automate rendering,…
+- [Adobe Creative Cloud Libraries API](https://apis.io/apis/adobe-creative-suite/creative-cloud-libraries-api/) — The Adobe Creative Cloud Libraries API provides access to shared design assets stored in Creative Cloud Libraries, including colors, character styles,…
+- [Adobe Analytics API](https://apis.io/apis/adobe-creative-suite/analytics-api/) — The Adobe Analytics API provides programmatic access to Adobe Analytics report suites for retrieving, segmenting, and analyzing web and app behavioral data.…
+- [Adobe Experience Manager Assets API](https://apis.io/apis/adobe-creative-suite/experience-manager-assets-api/) — The Adobe Experience Manager Assets API provides access to the AEM digital asset management system for uploading, retrieving, and managing assets stored in…
+- [Adobe Acrobat Sign API](https://apis.io/apis/adobe-creative-suite/acrobat-sign-api/) — The Adobe Acrobat Sign API enables sending, tracking, and managing electronic signature agreements programmatically. It supports creating agreements from…
+- [Adobe Fonts API](https://apis.io/apis/adobe-creative-suite/fonts-api/) — The Adobe Fonts API provides access to the Adobe Fonts library for discovering and embedding web fonts in applications and websites. It allows querying font…
+- [Adobe Express Embed SDK](https://apis.io/apis/adobe-creative-suite/express-embed-sdk/) — The Adobe Express Embed SDK allows developers to embed Adobe Express editing capabilities directly into their own web applications. It provides a…
+- [Adobe UXP](https://apis.io/apis/adobe-creative-suite/uxp/) — Adobe UXP (Unified Extensibility Platform) is the modern plugin and scripting platform used across Adobe creative applications including Photoshop,…
+- [Adobe Creative Suite Accessibility API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-accessibility-api/) — Auto-tag PDFs for accessibility compliance
+- [Adobe Creative Suite Artboard API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-artboard-api/) — Artboard creation and management
+- [Adobe Creative Suite Assets API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-assets-api/) — Upload and manage input/output assets for PDF operations
+- [Adobe Creative Suite Combine PDF API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-combine-pdf-api/) — Combine multiple PDFs into one
+- [Adobe Creative Suite Compress PDF API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-compress-pdf-api/) — Reduce PDF file size
+- [Adobe Creative Suite Create PDF API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-create-pdf-api/) — Create PDF documents from other formats
+- [Adobe Creative Suite Cutout API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-cutout-api/) — Background removal and masking operations
+- [Adobe Creative Suite Document API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-document-api/) — Document-level operations
+- [Adobe Creative Suite Document Generation API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-document-generation-api/) — Generate documents from templates and data
+- [Adobe Creative Suite Export PDF API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-export-pdf-api/) — Export PDF documents to other formats
+- [Adobe Creative Suite Generative Expand API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-generative-expand-api/) — Expand images beyond their original boundaries
+- [Adobe Creative Suite Generative Fill API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-generative-fill-api/) — Fill selected regions of images with AI-generated content
+- [Adobe Creative Suite Image Generation API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-image-generation-api/) — Text-to-image and image variation generation operations
+- [Adobe Creative Suite Layers API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-layers-api/) — PSD layer management operations
+- [Adobe Creative Suite License API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-license-api/) — License stock assets for use in projects
+- [Adobe Creative Suite Linearize PDF API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-linearize-pdf-api/) — Optimize PDFs for fast web viewing
+- [Adobe Creative Suite Mask API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-mask-api/) — Alpha mask creation operations
+- [Adobe Creative Suite Member API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-member-api/) — Member profile and licensing operations
+- [Adobe Creative Suite Object Composite API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-object-composite-api/) — Composite AI-generated objects into existing images
+- [Adobe Creative Suite OCR API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-ocr-api/) — Apply optical character recognition to scanned PDFs
+- [Adobe Creative Suite Operations API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-operations-api/) — Check operation job status
+- [Adobe Creative Suite Rendition API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-rendition-api/) — Rendition and export operations
+- [Adobe Creative Suite Search API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-search-api/) — Search and discover stock content
+- [Adobe Creative Suite Smart Object API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-smart-object-api/) — Smart object editing operations
+- [Adobe Creative Suite Status API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-status-api/) — Asynchronous job status polling
+- [Adobe Creative Suite Text API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-text-api/) — Text layer editing operations
+- [Adobe Creative Suite Video Generation API](https://apis.io/apis/adobe-creative-suite/adobe-creative-suite-video-generation-api/) — Generate video from text prompts
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Arazzo workflows (22)
+
+Multi-step workflows that chain operations into a business task.
+
+- [Adobe Firefly Generative Expand Image](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-firefly-expand-image-workflow/)
+- [Adobe Firefly Generate Similar Images](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-firefly-generate-similar-workflow/)
+- [Adobe Firefly Generative Fill](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-firefly-generative-fill-workflow/)
+- [Adobe Firefly Object Composite](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-firefly-object-composite-workflow/)
+- [Adobe Firefly Text-to-Image Generation](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-firefly-text-to-image-workflow/)
+- [Adobe Firefly Text-to-Video Generation](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-firefly-text-to-video-workflow/)
+- [Adobe PDF Services Auto-tag PDF for Accessibility](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-pdf-autotag-accessibility-workflow/)
+- [Adobe PDF Services Combine PDFs](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-pdf-combine-workflow/)
+- [Adobe PDF Services Compress PDF](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-pdf-compress-workflow/)
+- [Adobe PDF Services Create PDF from Office](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-pdf-create-from-office-workflow/)
+- [Adobe PDF Services Export PDF to Word](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-pdf-export-to-word-workflow/)
+- [Adobe PDF Services Generate Document from Template](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-pdf-generate-document-workflow/)
+- [Adobe PDF Services Linearize PDF](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-pdf-linearize-workflow/)
+- [Adobe PDF Services OCR PDF](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-pdf-ocr-workflow/)
+- [Adobe Photoshop Create Alpha Mask](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-photoshop-create-mask-workflow/)
+- [Adobe Photoshop Create Rendition](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-photoshop-create-rendition-workflow/)
+- [Adobe Photoshop Edit Text Layers](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-photoshop-edit-text-layers-workflow/)
+- [Adobe Photoshop Product Crop](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-photoshop-product-crop-workflow/)
+- [Adobe Photoshop Remove Background](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-photoshop-remove-background-workflow/)
+- [Adobe Stock License Image with Quota Check](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-stock-license-with-quota-check-workflow/)
+- [Adobe Stock Search and License Image](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-stock-search-and-license-image-workflow/)
+- [Adobe Stock Search and License Video](https://apis.io/arazzos/adobe-creative-suite/adobe-creative-suite-stock-search-and-license-video-workflow/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Adobe Creative Suite Agentic Access](https://apis.io/agentic-access/adobe-creative-suite/adobe-creative-suite-agentic-access/)
+
+#### JSON Schema (114)
+
+The data models the API reads and writes.
+
+- [ArtboardRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-artboardrequest/)
+- [Asset](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-asset/)
+- [AssetReference](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-assetreference/)
+- [AssetUploadRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-assetuploadrequest/)
+- [AssetUploadResponse](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-assetuploadresponse/)
+- [AsyncJobSubmitted](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-asyncjobsubmitted/)
+- [AutoTagRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-autotagrequest/)
+- [Category](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-category/)
+- [CombinePDFRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-combinepdfrequest/)
+- [CompressPDFRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-compresspdfrequest/)
+- [CreatePDFRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-createpdfrequest/)
+- [CutoutRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-cutoutrequest/)
+- [DocumentGenerationRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-documentgenerationrequest/)
+- [DocumentOperations](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-documentoperations/)
+- [DocumentOperationsRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-documentoperationsrequest/)
+- [ErrorResponse](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-errorresponse/)
+- [ExportPDFRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-exportpdfrequest/)
+- [AsyncJobSubmitted](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-firefly-async-job-submitted/)
+- [ErrorResponse](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-firefly-error-response/)
+- [GenerateSimilarRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-firefly-generate-similar-request/)
+- [Adobe Firefly Generation Request and Response](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-firefly-generation/)
+- [GenerationStatus](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-firefly-generation-status/)
+- [ImageExpandRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-firefly-image-expand-request/)
+- [ImageFillRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-firefly-image-fill-request/)
+- [ImageGenerateRequest](https://apis.io/schemas/adobe-creative-suite/adobe-creative-suite-firefly-image-generate-request/)
+- …and 89 more published on APIs.io
+
+#### JSON Structure (58)
+
+Data models expressed in JSON Structure.
+
+- [Adobe Creative Suite Firefly Async Job Submitted Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-async-job-submitted-structure/)
+- [Adobe Creative Suite Firefly Error Response Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-error-response-structure/)
+- [Adobe Creative Suite Firefly Generate Similar Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-generate-similar-request-structure/)
+- [Adobe Creative Suite Firefly Generation Status Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-generation-status-structure/)
+- [Adobe Creative Suite Firefly Generation Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-generation-structure/)
+- [Adobe Creative Suite Firefly Image Expand Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-image-expand-request-structure/)
+- [Adobe Creative Suite Firefly Image Fill Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-image-fill-request-structure/)
+- [Adobe Creative Suite Firefly Image Generate Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-image-generate-request-structure/)
+- [Adobe Creative Suite Firefly Image Size Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-image-size-structure/)
+- [Adobe Creative Suite Firefly Input Image Reference Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-input-image-reference-structure/)
+- [Adobe Creative Suite Firefly Object Composite Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-object-composite-request-structure/)
+- [Adobe Creative Suite Firefly Output Image Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-output-image-structure/)
+- [Adobe Creative Suite Firefly Style Options Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-style-options-structure/)
+- [Adobe Creative Suite Firefly Video Generate Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-firefly-video-generate-request-structure/)
+- [Adobe Creative Suite Image Job Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-image-job-structure/)
+- [Adobe Creative Suite Pdf Services Asset Reference Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-pdf-services-asset-reference-structure/)
+- [Adobe Creative Suite Pdf Services Asset Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-pdf-services-asset-structure/)
+- [Adobe Creative Suite Pdf Services Asset Upload Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-pdf-services-asset-upload-request-structure/)
+- [Adobe Creative Suite Pdf Services Asset Upload Response Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-pdf-services-asset-upload-response-structure/)
+- [Adobe Creative Suite Pdf Services Auto Tag Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-pdf-services-auto-tag-request-structure/)
+- [Adobe Creative Suite Pdf Services Combine Pdf Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-pdf-services-combine-pdf-request-structure/)
+- [Adobe Creative Suite Pdf Services Compress Pdf Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-pdf-services-compress-pdf-request-structure/)
+- [Adobe Creative Suite Pdf Services Create Pdf Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-pdf-services-create-pdf-request-structure/)
+- [Adobe Creative Suite Pdf Services Document Generation Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-pdf-services-document-generation-request-structure/)
+- [Adobe Creative Suite Pdf Services Export Pdf Request Structure](https://apis.io/json-structure/adobe-creative-suite/adobe-creative-suite-pdf-services-export-pdf-request-structure/)
+- …and 33 more published on APIs.io
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Adobe Creative Suite Context](https://apis.io/jsonld/adobe-creative-suite/adobe-creative-suite-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Adobe Creative Suite Vocabulary](https://apis.io/vocabularies/adobe-creative-suite/adobe-creative-suite-vocabulary/)
+
+#### Examples (57)
+
+Example requests and responses.
+
+- [Adobe Creative Suite Firefly Async Job Submitted Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-async-job-submitted-example/)
+- [Adobe Creative Suite Firefly Error Response Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-error-response-example/)
+- [Adobe Creative Suite Firefly Generate Similar Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-generate-similar-request-example/)
+- [Adobe Creative Suite Firefly Generation Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-generation-example/)
+- [Adobe Creative Suite Firefly Generation Status Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-generation-status-example/)
+- [Adobe Creative Suite Firefly Image Expand Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-image-expand-request-example/)
+- [Adobe Creative Suite Firefly Image Fill Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-image-fill-request-example/)
+- [Adobe Creative Suite Firefly Image Generate Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-image-generate-request-example/)
+- [Adobe Creative Suite Firefly Image Size Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-image-size-example/)
+- [Adobe Creative Suite Firefly Input Image Reference Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-input-image-reference-example/)
+- [Adobe Creative Suite Firefly Object Composite Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-object-composite-request-example/)
+- [Adobe Creative Suite Firefly Output Image Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-output-image-example/)
+- [Adobe Creative Suite Firefly Style Options Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-style-options-example/)
+- [Adobe Creative Suite Firefly Video Generate Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-firefly-video-generate-request-example/)
+- [Adobe Creative Suite Image Job Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-image-job-example/)
+- [Adobe Creative Suite Pdf Services Asset Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-pdf-services-asset-example/)
+- [Adobe Creative Suite Pdf Services Asset Reference Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-pdf-services-asset-reference-example/)
+- [Adobe Creative Suite Pdf Services Asset Upload Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-pdf-services-asset-upload-request-example/)
+- [Adobe Creative Suite Pdf Services Asset Upload Response Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-pdf-services-asset-upload-response-example/)
+- [Adobe Creative Suite Pdf Services Auto Tag Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-pdf-services-auto-tag-request-example/)
+- [Adobe Creative Suite Pdf Services Combine Pdf Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-pdf-services-combine-pdf-request-example/)
+- [Adobe Creative Suite Pdf Services Compress Pdf Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-pdf-services-compress-pdf-request-example/)
+- [Adobe Creative Suite Pdf Services Create Pdf Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-pdf-services-create-pdf-request-example/)
+- [Adobe Creative Suite Pdf Services Document Generation Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-pdf-services-document-generation-request-example/)
+- [Adobe Creative Suite Pdf Services Export Pdf Request Example](https://apis.io/examples/adobe-creative-suite/adobe-creative-suite-pdf-services-export-pdf-request-example/)
+- …and 32 more published on APIs.io
+
+#### Collections (35)
+
+Postman and Open Collection request collections.
+
+- [Adobe Creative Suite Adobe Firefly Accessibility API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-accessibility-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Artboard API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-artboard-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Assets API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-assets-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Combine PDF API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-combine-pdf-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Compress PDF API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-compress-pdf-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Create PDF API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-create-pdf-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Cutout API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-cutout-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Document API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-document-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Document Generation API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-document-generation-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Export PDF API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-export-pdf-api/)
+- [Adobe Creative Suite Adobe Firefly API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-firefly/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Generative Expand API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-generative-expand-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Generative Fill API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-generative-fill-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Image Generation API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-image-generation-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Layers API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-layers-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility License API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-license-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Linearize PDF API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-linearize-pdf-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Mask API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-mask-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Member API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-member-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Object Composite API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-object-composite-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility OCR API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-ocr-api/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Operations API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-operations-api/)
+- [Adobe Creative Suite Adobe PDF Services API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-pdf-services/)
+- [Adobe Creative Suite Adobe Photoshop API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-photoshop/)
+- [Adobe Creative Suite Adobe Firefly Accessibility Rendition API](https://apis.io/collections/adobe-creative-suite/open-adobe-creative-suite-rendition-api/)
+- …and 10 more published on APIs.io
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Adobe Creative Suite — jsonschema rules](https://apis.io/rules/adobe-creative-suite/adobe-creative-suite-jsonschema-spectral-rules/)
+- [Adobe Creative Suite API Rules](https://apis.io/rules/adobe-creative-suite/adobe-creative-suite-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Adobe Creative Suite Authentication](https://apis.io/security/adobe-creative-suite/adobe-creative-suite-authentication/)
+- [Adobe Creative Suite Domain Security](https://apis.io/security/adobe-creative-suite/adobe-creative-suite-domain-security/)
+- [Adobe Creative Suite Vulnerability Disclosure](https://apis.io/security/adobe-creative-suite/adobe-creative-suite-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Adobe Creative Suite Plans Pricing](https://apis.io/plans/adobe-creative-suite/adobe-creative-suite-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Adobe Creative Suite Rate Limits](https://apis.io/rate-limits/adobe-creative-suite/adobe-creative-suite-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Adobe Creative Suite Finops](https://apis.io/finops/adobe-creative-suite/adobe-creative-suite-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.adobe.com/)
 - [Documentation](https://developer.adobe.com/developer-console/docs/)
-- [Blog](https://blog.developer.adobe.com/)
-- [GitHub Organization](https://github.com/adobe)
-- [Community](https://community.adobe.com/t5/developers/ct-p/developers)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/adobe)
-- [Console](https://developer.adobe.com/console/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Changelog](https://developer.adobe.com/developer-console/docs/release-notes/)
+- [Getting started](https://developer.adobe.com/developer-console/docs/guides/getting-started/)
 - [Support](https://developer.adobe.com/support/)
-- [Status Page](https://status.adobe.com/)
-- [Terms of Service](https://www.adobe.com/legal/terms.html)
-- [Privacy Policy](https://www.adobe.com/privacy.html)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Solutions](undefined)
+- [Changelog](https://developer.adobe.com/developer-console/docs/release-notes/)
+- [Blog](https://blog.developer.adobe.com/)
+- [Terms of service](https://www.adobe.com/legal/terms.html)
+- [Privacy policy](https://www.adobe.com/privacy.html)
+- [GitHub](https://github.com/adobe)
+- [Status](https://status.adobe.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 50.2** — developing · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 66.4 |
+| Contract governance | 13.6 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 65.5 |
+| Access clarity | 39.5 |
+
+**Agent readiness 26.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/adobe-creative-suite/](https://apis.io/providers/adobe-creative-suite/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Adobe Creative Suite: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/adobe-creative-suite/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
