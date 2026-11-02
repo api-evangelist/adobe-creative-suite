@@ -1,0 +1,73 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Adobe Creative Suite
+providerId: adobe-creative-suite
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+method: generated
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - Creative Suite
+  - Legacy
+  - Design
+  - Print
+notes: >-
+  Adobe Creative Suite (CS6 and earlier) was discontinued for new sales in
+  2013 and replaced by the subscription-based Adobe Creative Cloud. CS6
+  perpetual licenses are no longer commercially available; existing
+  installations are unsupported and lack ongoing security updates. There is
+  no current pricing to reconcile. This artifact is retained only for
+  historical / catalog completeness.
+description: >-
+  Adobe Creative Suite is a discontinued perpetual-license product family.
+  Customers who require equivalent functionality should use Adobe Creative
+  Cloud (subscription) instead.
+sources:
+  - https://en.wikipedia.org/wiki/Adobe_Creative_Suite
+  - https://helpx.adobe.com/creative-suite/kb/creative-suite-end-support.html
+plans:
+  - id: adobe-creative-suite-discontinued
+    name: Creative Suite (Discontinued)
+    type: enterprise
+    description: >-
+      Historical perpetual-license product. No longer sold or supported by
+      Adobe; included here for catalog completeness only.
+    entries:
+      - label: Perpetual license (discontinued)
+        name: cs_perpetual
+        type: flat
+        metric: license
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: discontinued - migrate to Adobe Creative Cloud
+        userMultiplied: true
+    elements:
+      - name: Photoshop CS6 (no longer available)
+      - name: Illustrator CS6 (no longer available)
+      - name: InDesign CS6 (no longer available)
+      - name: Premiere Pro CS6 (no longer available)
+      - name: After Effects CS6 (no longer available)
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - seat
+  units:
+  - seat
+  plans:
+  - name: Creative Suite (Discontinued)
+    access: enterprise
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - per-use
